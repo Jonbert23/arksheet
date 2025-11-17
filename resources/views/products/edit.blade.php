@@ -95,17 +95,19 @@
 
                 <!-- Quick Tips Card (Full Width) -->
                 <div class="col-12">
-                    <div class="card bg-primary-50 border border-primary-600">
+                    <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border-left: 4px solid #ec3737 !important;">
                         <div class="card-body">
-                            <div class="d-flex align-items-start gap-2">
-                                <iconify-icon icon="mdi:lightbulb-on-outline" class="text-primary-600 text-xl"></iconify-icon>
-                                <div>
-                                    <h6 class="text-primary-600 mb-8">Quick Tips</h6>
-                                    <ul class="text-sm text-secondary-light mb-0 ps-16">
-                                        <li class="mb-8">Fill in accurate cost prices for profit tracking</li>
-                                        <li class="mb-8">Set min stock alerts to prevent stockouts</li>
-                                        <li class="mb-8">Use descriptive SKUs for easy identification</li>
-                                        <li>Keep descriptions clear and detailed</li>
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; background-color: #ec3737; border-radius: 12px;">
+                                    <iconify-icon icon="mdi:lightbulb-on-outline" class="text-white" style="font-size: 24px;"></iconify-icon>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-12 fw-bold" style="color: #ec3737; font-size: 16px;">Quick Tips for Success</h6>
+                                    <ul class="text-sm text-secondary-light mb-0 ps-16" style="line-height: 1.8;">
+                                        <li class="mb-8">📊 Fill in accurate cost prices for profit tracking</li>
+                                        <li class="mb-8">⚠️ Set min stock alerts to prevent stockouts</li>
+                                        <li class="mb-8">🏷️ Use descriptive SKUs for easy identification</li>
+                                        <li>📝 Keep descriptions clear and detailed</li>
                                     </ul>
                                 </div>
                             </div>
@@ -116,11 +118,13 @@
                 <!-- Left Column -->
                 <div class="col-lg-12">
                     <!-- Basic Information Card -->
-                    <div class="card mb-24">
-                        <div class="card-header bg-neutral-50">
+                    <div class="card mb-24 border-0 shadow-sm">
+                        <div class="card-header bg-white border-bottom">
                             <div class="d-flex align-items-center gap-2">
-                                <iconify-icon icon="mdi:information-outline" class="text-primary-600 text-xl"></iconify-icon>
-                                <h6 class="card-title mb-0">Basic Information</h6>
+                                <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                    <iconify-icon icon="mdi:information-outline" class="text-white" style="font-size: 18px;"></iconify-icon>
+                                </div>
+                                <h6 class="card-title mb-0 fw-bold">Basic Information</h6>
                             </div>
                         </div>
                         <div class="card-body">
@@ -192,11 +196,13 @@
                     </div>
 
                     <!-- Pricing & Costs Card -->
-                    <div class="card mb-24">
-                        <div class="card-header bg-neutral-50">
+                    <div class="card mb-24 border-0 shadow-sm">
+                        <div class="card-header bg-white border-bottom">
                             <div class="d-flex align-items-center gap-2">
-                                <iconify-icon icon="mdi:currency-usd" class="text-success-600 text-xl"></iconify-icon>
-                                <h6 class="card-title mb-0">Pricing & Costs</h6>
+                                <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                    <iconify-icon icon="mdi:currency-usd" class="text-white" style="font-size: 18px;"></iconify-icon>
+                                </div>
+                                <h6 class="card-title mb-0 fw-bold">Pricing & Costs</h6>
                             </div>
                         </div>
                         <div class="card-body">
@@ -205,8 +211,8 @@
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Selling Price <span class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-primary-50 text-primary-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
-                                        <input type="number" name="price" step="0.01" class="form-control @error('price') is-invalid @enderror" placeholder="0.00" value="{{ old('price', $product->price) }}" required>
+                                        <span class="input-group-text fw-bold text-white" style="background-color: #ec3737;">{{ auth()->user()->business->currency }}</span>
+                                        <input type="number" name="price" step="0.01" class="form-control @error('price') is-invalid @enderror" placeholder="0.00" value="{{ old('price', $product->price) }}" required style="border-color: #ec3737;">
                                         @error('price')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -270,11 +276,13 @@
                     </div>
 
                     <!-- Inventory Management Card -->
-                    <div class="card">
-                        <div class="card-header bg-neutral-50">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-bottom">
                             <div class="d-flex align-items-center gap-2">
-                                <iconify-icon icon="mdi:warehouse" class="text-warning-600 text-xl"></iconify-icon>
-                                <h6 class="card-title mb-0">Inventory Management</h6>
+                                <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                    <iconify-icon icon="mdi:warehouse" class="text-white" style="font-size: 18px;"></iconify-icon>
+                                </div>
+                                <h6 class="card-title mb-0 fw-bold">Inventory Management</h6>
                             </div>
                         </div>
                         <div class="card-body">
@@ -331,15 +339,15 @@
                         <div class="card-body p-24">
                             <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
                                 <div class="text-secondary-light">
-                                    <iconify-icon icon="mdi:information-outline" class="text-lg"></iconify-icon>
-                                    <span class="ms-2">Fields marked with <span class="text-danger fw-semibold">*</span> are required</span>
+                                    <iconify-icon icon="mdi:information-outline" class="text-lg" style="color: #ec3737;"></iconify-icon>
+                                    <span class="ms-2">Fields marked with <span class="fw-bold" style="color: #ec3737;">*</span> are required</span>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
-                                    <a href="{{ route('products.index') }}" class="btn bg-neutral-200 text-neutral-900 hover-bg-neutral-300 radius-8 px-32 py-14 d-flex align-items-center gap-2 fw-semibold">
+                                    <a href="{{ route('products.index') }}" class="btn text-secondary-light border border-neutral-200 hover-bg-neutral-100 radius-8 px-32 py-14 d-flex align-items-center gap-2">
                                         <iconify-icon icon="mdi:arrow-left" class="text-xl"></iconify-icon>
                                         Cancel
                                     </a>
-                                    <button type="submit" class="btn btn-primary-600 hover-bg-primary-700 radius-8 px-32 py-14 d-flex align-items-center gap-2 fw-semibold shadow-sm">
+                                    <button type="submit" class="btn text-white radius-8 px-32 py-14 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
                                         <iconify-icon icon="mdi:check-circle" class="text-xl"></iconify-icon>
                                         Update Product
                                     </button>
@@ -353,6 +361,30 @@
     </div>
 
     <style>
+        /* Brand Color Focus States */
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #ec3737 !important;
+            box-shadow: 0 0 0 0.2rem rgba(236, 55, 55, 0.15) !important;
+        }
+        
+        /* Required asterisk styling */
+        .text-danger {
+            color: #ec3737 !important;
+        }
+        
+        /* Input group focus */
+        .input-group:focus-within {
+            box-shadow: 0 0 0 0.2rem rgba(236, 55, 55, 0.1);
+            border-radius: 0.5rem;
+        }
+        
+        /* Smooth transitions */
+        .form-control,
+        .form-select {
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
         /* Alert styling enhancements */
         .alert-warning-100 {
             background-color: #fffbeb;
