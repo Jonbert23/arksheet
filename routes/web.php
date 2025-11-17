@@ -25,6 +25,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProfileController;
 
 // ============================================
 // ARKSHEETS APPLICATION ROUTES
@@ -42,6 +43,15 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    
+    // User Profile (Available to all authenticated users)
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::put('/update', [ProfileController::class, 'update'])->name('update');
+        Route::put('/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+        Route::post('/avatar', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
+        Route::delete('/avatar', [ProfileController::class, 'deleteAvatar'])->name('avatar.delete');
+    });
     
     // Dashboard
     Route::middleware('module.permission:dashboard')->group(function () {
@@ -250,7 +260,59 @@ Route::prefix('settings')->group(function () {
         Route::get('/notification-alert', 'notificationAlert')->name('notificationAlert');
         Route::get('/payment-gateway', 'paymentGateway')->name('paymentGateway');
         Route::get('/theme', 'theme')->name('theme');
+        
+        // Business Settings (Admin only)
+        Route::middleware('auth')->group(function () {
+            Route::get('/business', 'business')->name('settings.business');
+            Route::put('/business', 'updateBusiness')->name('settings.business.update');
+        });
     });
+});
+
+// Business Configuration (Admin only)
+Route::middleware('auth')->prefix('settings/config')->name('settings.config.')->controller(App\Http\Controllers\BusinessConfigController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    
+    // Product Categories
+    Route::post('/product-categories', 'storeProductCategory')->name('product-categories.store');
+    Route::put('/product-categories/{id}', 'updateProductCategory')->name('product-categories.update');
+    Route::delete('/product-categories/{id}', 'destroyProductCategory')->name('product-categories.destroy');
+    
+    // Sales Channels
+    Route::post('/sales-channels', 'storeSalesChannel')->name('sales-channels.store');
+    Route::put('/sales-channels/{id}', 'updateSalesChannel')->name('sales-channels.update');
+    Route::delete('/sales-channels/{id}', 'destroySalesChannel')->name('sales-channels.destroy');
+    
+    // Expense Categories
+    Route::post('/expense-categories', 'storeExpenseCategory')->name('expense-categories.store');
+    Route::put('/expense-categories/{id}', 'updateExpenseCategory')->name('expense-categories.update');
+    Route::delete('/expense-categories/{id}', 'destroyExpenseCategory')->name('expense-categories.destroy');
+    
+    // Generic Settings
+    Route::post('/settings', 'storeSetting')->name('settings.store');
+    Route::put('/settings/{id}', 'updateSetting')->name('settings.update');
+    Route::delete('/settings/{id}', 'destroySetting')->name('settings.destroy');
+    
+    // Convenience routes for specific settings
+    Route::post('/product-types', 'storeSetting')->name('product-types.store');
+    Route::put('/product-types/{id}', 'updateSetting')->name('product-types.update');
+    Route::delete('/product-types/{id}', 'destroySetting')->name('product-types.destroy');
+    
+    Route::post('/units', 'storeSetting')->name('units.store');
+    Route::put('/units/{id}', 'updateSetting')->name('units.update');
+    Route::delete('/units/{id}', 'destroySetting')->name('units.destroy');
+    
+    Route::post('/payment-methods', 'storeSetting')->name('payment-methods.store');
+    Route::put('/payment-methods/{id}', 'updateSetting')->name('payment-methods.update');
+    Route::delete('/payment-methods/{id}', 'destroySetting')->name('payment-methods.destroy');
+    
+    Route::post('/payment-statuses', 'storeSetting')->name('payment-statuses.store');
+    Route::put('/payment-statuses/{id}', 'updateSetting')->name('payment-statuses.update');
+    Route::delete('/payment-statuses/{id}', 'destroySetting')->name('payment-statuses.destroy');
+    
+    Route::post('/expense-statuses', 'storeSetting')->name('expense-statuses.store');
+    Route::put('/expense-statuses/{id}', 'updateSetting')->name('expense-statuses.update');
+    Route::delete('/expense-statuses/{id}', 'destroySetting')->name('expense-statuses.destroy');
 });
 
 // Table

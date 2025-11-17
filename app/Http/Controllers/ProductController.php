@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\BusinessSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,8 +48,21 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = ProductCategory::active()->get();
-        return view('products.create', compact('categories'));
+        $businessId = auth()->user()->business_id;
+        
+        $categories = ProductCategory::where('business_id', $businessId)->active()->get();
+        $productTypes = BusinessSetting::where('business_id', $businessId)
+            ->where('setting_key', 'product_type')
+            ->active()
+            ->ordered()
+            ->get();
+        $units = BusinessSetting::where('business_id', $businessId)
+            ->where('setting_key', 'unit_of_measurement')
+            ->active()
+            ->ordered()
+            ->get();
+        
+        return view('products.create', compact('categories', 'productTypes', 'units'));
     }
 
     /**
@@ -62,7 +76,7 @@ class ProductController extends Controller
             'sku' => 'nullable|string|max:255|unique:products,sku',
             'description' => 'nullable|string',
             'additional_info' => 'nullable|string|max:255',
-            'type' => 'required|in:product,service',
+            'type' => 'required|string|max:50',
             'price' => 'required|numeric|min:0',
             'cost' => 'nullable|numeric|min:0',
             'tax_amount' => 'nullable|numeric|min:0',
@@ -93,8 +107,21 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = ProductCategory::active()->get();
-        return view('products.edit', compact('product', 'categories'));
+        $businessId = auth()->user()->business_id;
+        
+        $categories = ProductCategory::where('business_id', $businessId)->active()->get();
+        $productTypes = BusinessSetting::where('business_id', $businessId)
+            ->where('setting_key', 'product_type')
+            ->active()
+            ->ordered()
+            ->get();
+        $units = BusinessSetting::where('business_id', $businessId)
+            ->where('setting_key', 'unit_of_measurement')
+            ->active()
+            ->ordered()
+            ->get();
+        
+        return view('products.edit', compact('product', 'categories', 'productTypes', 'units'));
     }
 
     /**
@@ -108,7 +135,7 @@ class ProductController extends Controller
             'sku' => 'nullable|string|max:255|unique:products,sku,' . $product->id,
             'description' => 'nullable|string',
             'additional_info' => 'nullable|string|max:255',
-            'type' => 'required|in:product,service',
+            'type' => 'required|string|max:50',
             'price' => 'required|numeric|min:0',
             'cost' => 'nullable|numeric|min:0',
             'tax_amount' => 'nullable|numeric|min:0',

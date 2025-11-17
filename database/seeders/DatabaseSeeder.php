@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         
         $this->call([
             BusinessSeeder::class,
+            DefaultProductCategoriesSeeder::class,
+            DefaultBusinessSettingsSeeder::class,
             SalesChannelSeeder::class,
             ProductSeeder::class,
             StockSeeder::class,

@@ -29,6 +29,69 @@
             <input type="hidden" name="additional_info" value="">
             
             <div class="row gy-4">
+                <!-- Configuration Alerts -->
+                @if($categories->isEmpty() || $productTypes->isEmpty())
+                <div class="col-12">
+                    <div class="alert alert-warning-100 border-start border-warning-600 border-3 radius-8 px-24 py-20" role="alert">
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; background-color: #f59e0b; border-radius: 12px;">
+                                <iconify-icon icon="mdi:alert-circle-outline" class="text-white" style="font-size: 28px;"></iconify-icon>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-12 fw-bold text-warning-600" style="font-size: 16px;">
+                                    <iconify-icon icon="mdi:cog-outline" class="me-1"></iconify-icon>
+                                    Configuration Required
+                                </h6>
+                                <div class="text-sm text-secondary-light mb-12">
+                                    @if($categories->isEmpty() && $productTypes->isEmpty())
+                                        <p class="mb-8">⚠️ <strong>No Product Categories or Product Types configured.</strong></p>
+                                        <p class="mb-0">Please set up your product categories and types in Business Settings before adding products. This will help you organize and manage your inventory effectively.</p>
+                                    @elseif($categories->isEmpty())
+                                        <p class="mb-8">⚠️ <strong>No Product Categories configured.</strong></p>
+                                        <p class="mb-0">Please add product categories in Business Settings to better organize your products.</p>
+                                    @elseif($productTypes->isEmpty())
+                                        <p class="mb-8">⚠️ <strong>No Product Types configured.</strong></p>
+                                        <p class="mb-0">Please add product types in Business Settings to specify whether products are physical, digital, or services.</p>
+                                    @endif
+                                </div>
+                                @if(auth()->user()->isAdmin())
+                                <a href="{{ route('settings.config.index') }}" class="btn btn-warning-600 text-white radius-8 px-20 py-10 d-inline-flex align-items-center gap-2 hover-bg-warning-700 fw-semibold">
+                                    <iconify-icon icon="mdi:cog" class="text-lg"></iconify-icon>
+                                    Go to Business Settings
+                                    <iconify-icon icon="mdi:arrow-right" class="text-lg"></iconify-icon>
+                                </a>
+                                @else
+                                <div class="alert alert-info-100 border-info-600 px-16 py-12 radius-8 mt-12">
+                                    <iconify-icon icon="mdi:information-outline" class="me-2"></iconify-icon>
+                                    <small>Please contact your administrator to configure product settings.</small>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                @if($units->isEmpty())
+                <div class="col-12">
+                    <div class="alert alert-info-100 border-start border-info-600 border-3 radius-8 px-24 py-16" role="alert">
+                        <div class="d-flex align-items-center gap-3">
+                            <iconify-icon icon="mdi:information-outline" class="text-info-600" style="font-size: 24px;"></iconify-icon>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 text-sm text-secondary-light">
+                                    <strong class="text-info-600">Info:</strong> No units of measurement configured. Default units will be available, or 
+                                    @if(auth()->user()->isAdmin())
+                                        <a href="{{ route('settings.config.index') }}" class="text-info-600 fw-semibold text-decoration-underline">add custom units</a>.
+                                    @else
+                                        contact your administrator to add custom units.
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
                 <!-- Quick Tips Card (Full Width) -->
                 <div class="col-12">
                     <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border-left: 4px solid #ec3737 !important;">
@@ -103,8 +166,16 @@
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Product Type <span class="text-danger">*</span></label>
                                     <select name="type" class="form-select @error('type') is-invalid @enderror" required>
-                                        <option value="product" {{ old('type') == 'product' ? 'selected' : '' }}>Physical Product</option>
-                                        <option value="service" {{ old('type') == 'service' ? 'selected' : '' }}>Service</option>
+                                        <option value="">Select Product Type</option>
+                                        @forelse($productTypes as $type)
+                                            <option value="{{ $type->setting_value }}" {{ old('type') == $type->setting_value ? 'selected' : '' }}>
+                                                {{ $type->setting_label }}
+                                            </option>
+                                        @empty
+                                            <option value="physical">Physical Product</option>
+                                            <option value="digital">Digital Product</option>
+                                            <option value="service">Service</option>
+                                        @endforelse
                                     </select>
                                     @error('type')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -240,7 +311,18 @@
                                 <!-- Unit -->
                                 <div class="col-md-4">
                                     <label class="form-label fw-semibold">Unit of Measurement</label>
-                                    <input type="text" name="unit" class="form-control @error('unit') is-invalid @enderror" placeholder="pcs, kg, liter" value="{{ old('unit', 'pcs') }}">
+                                    <select name="unit" class="form-select @error('unit') is-invalid @enderror">
+                                        <option value="">Select Unit</option>
+                                        @forelse($units as $unit)
+                                            <option value="{{ $unit->setting_value }}" {{ old('unit') == $unit->setting_value || (old('unit') == null && $unit->setting_value == 'pcs') ? 'selected' : '' }}>
+                                                {{ $unit->setting_label }} ({{ $unit->setting_value }})
+                                            </option>
+                                        @empty
+                                            <option value="pcs" selected>Pieces (pcs)</option>
+                                            <option value="kg">Kilogram (kg)</option>
+                                            <option value="ltr">Liter (ltr)</option>
+                                        @endforelse
+                                    </select>
                                     @error('unit')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -300,6 +382,24 @@
         .form-control,
         .form-select {
             transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Alert styling enhancements */
+        .alert-warning-100 {
+            background-color: #fffbeb;
+        }
+        
+        .alert-info-100 {
+            background-color: #eff6ff;
+        }
+
+        .hover-bg-warning-700:hover {
+            background-color: #d97706 !important;
+        }
+
+        .btn-warning-600 {
+            background-color: #f59e0b;
+            transition: all 0.3s ease;
         }
     </style>
 

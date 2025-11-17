@@ -188,10 +188,9 @@
 
             @if(auth()->user()->isAdmin())
             <li>
-                <a href="javascript:void(0)">
+                <a href="{{ route('settings.config.index') }}" class="{{ request()->routeIs('settings.config.*') || request()->routeIs('settings.business') ? 'active-page' : '' }}">
                     <iconify-icon icon="tabler:settings" class="menu-icon"></iconify-icon>
                     <span>Business Settings</span>
-                    <span class="badge text-sm fw-semibold bg-warning-100 text-warning-600 px-12 py-4 radius-4 ms-auto">Soon</span>
                 </a>
             </li>
             @endif

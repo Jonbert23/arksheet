@@ -53,47 +53,74 @@
                 <!-- User Profile -->
                 <div class="dropdown" id="user-dropdown">
                     <button class="d-flex justify-content-center align-items-center rounded-circle border-2 border-primary-600 p-2 hover-shadow-lg transition" type="button" onclick="toggleUserDropdown(event)" id="user-dropdown-btn" aria-expanded="false">
-                        <img src="{{ auth()->user()->avatar ?? asset('assets/images/user.png') }}" alt="{{ auth()->user()->name }}" class="w-40-px h-40-px object-fit-cover rounded-circle">
+                        <img src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('assets/images/user.png') }}" alt="{{ auth()->user()->name }}" class="w-40-px h-40-px object-fit-cover rounded-circle" id="navbarAvatar">
                     </button>
                     <div class="dropdown-menu dropdown-menu-end to-top dropdown-menu-sm" id="user-dropdown-menu" style="display: none;">
-                        <div class="py-12 px-16 radius-8 bg-gradient-start-1 mb-16 d-flex align-items-center justify-content-between gap-2">
-                            <div>
-                                <h6 class="text-lg fw-semibold mb-1">{{ auth()->user()->name }}</h6>
-                                <span class="text-secondary-light fw-medium text-sm d-flex align-items-center gap-1">
-                                    <iconify-icon icon="mdi:shield-account" class="text-xs"></iconify-icon>
-                                    {{ ucfirst(auth()->user()->role) }}
-                                </span>
-                                @if(auth()->user()->email)
-                                <span class="text-secondary-light text-xs d-block mt-1">{{ auth()->user()->email }}</span>
-                                @endif
+                        <!-- User Info Header -->
+                        <div class="px-20 py-16 border-bottom">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="position-relative">
+                                    <img src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('assets/images/user.png') }}" 
+                                         alt="{{ auth()->user()->name }}" 
+                                         class="w-48-px h-48-px object-fit-cover rounded-circle border border-2 border-primary-100">
+                                    <span class="position-absolute bottom-0 end-0 w-12-px h-12-px bg-success-600 rounded-circle border border-2 border-white status-indicator"></span>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="text-md fw-bold mb-1 text-dark">{{ auth()->user()->name }}</h6>
+                                    <span class="badge bg-primary-50 text-primary-600 px-8 py-4 radius-4 text-xs fw-medium d-inline-flex align-items-center gap-1">
+                                        <iconify-icon icon="mdi:shield-account" class="text-sm"></iconify-icon>
+                                        {{ ucfirst(auth()->user()->role) }}
+                                    </span>
+                                </div>
                             </div>
+                            @if(auth()->user()->email)
+                            <div class="d-flex align-items-center gap-2 px-2">
+                                <iconify-icon icon="mdi:email-outline" class="text-secondary-light text-lg"></iconify-icon>
+                                <span class="text-secondary-light text-xs">{{ auth()->user()->email }}</span>
+                            </div>
+                            @endif
                         </div>
-                        <ul class="to-top-list">
-                            <li>
-                                <a class="dropdown-item text-black px-16 py-10 hover-bg-primary-50 hover-text-primary d-flex align-items-center gap-3 radius-8 transition" href="javascript:void(0)">
-                                    <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> 
-                                    <span>My Profile</span>
-                                    <span class="badge bg-info-100 text-info-600 text-xs ms-auto">Soon</span>
+
+                        <!-- Menu Items -->
+                        <ul class="to-top-list px-12 py-12">
+                            <li class="mb-4">
+                                <a class="dropdown-item text-dark px-12 py-10 hover-bg-primary-50 hover-text-primary d-flex align-items-center gap-3 radius-8 transition fw-medium" href="{{ route('profile.index') }}">
+                                    <div class="w-32-px h-32-px bg-primary-50 text-primary-600 rounded-circle d-flex align-items-center justify-content-center">
+                                        <iconify-icon icon="solar:user-bold" class="text-lg"></iconify-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <span class="text-sm d-block">My Profile</span>
+                                    </div>
+                                    <iconify-icon icon="solar:alt-arrow-right-linear" class="text-lg text-secondary-light"></iconify-icon>
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item text-black px-16 py-10 hover-bg-primary-50 hover-text-primary d-flex align-items-center gap-3 radius-8 transition" href="javascript:void(0)">
-                                    <iconify-icon icon="tabler:settings" class="icon text-xl"></iconify-icon> 
-                                    <span>Settings</span>
-                                    <span class="badge bg-info-100 text-info-600 text-xs ms-auto">Soon</span>
+                            @if(auth()->user()->isAdmin())
+                            <li class="mb-4">
+                                <a class="dropdown-item text-dark px-12 py-10 hover-bg-primary-50 hover-text-primary d-flex align-items-center gap-3 radius-8 transition fw-medium" href="{{ route('settings.config.index') }}">
+                                    <div class="w-32-px h-32-px bg-primary-50 text-primary-600 rounded-circle d-flex align-items-center justify-content-center">
+                                        <iconify-icon icon="solar:settings-bold" class="text-lg"></iconify-icon>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <span class="text-sm d-block">Settings</span>
+                                    </div>
+                                    <iconify-icon icon="solar:alt-arrow-right-linear" class="text-lg text-secondary-light"></iconify-icon>
                                 </a>
                             </li>
-                            <li><hr class="dropdown-divider my-8"></li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST" id="logout-form">
-                                    @csrf
-                                    <button type="button" onclick="confirmLogout()" class="dropdown-item text-danger-600 px-16 py-10 hover-bg-danger-50 d-flex align-items-center gap-3 radius-8 transition w-100 border-0 bg-transparent">
-                                        <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon> 
-                                        <span class="fw-semibold">Log Out</span>
-                                    </button>
-                                </form>
-                            </li>
+                            @endif
                         </ul>
+
+                        <!-- Logout Section -->
+                        <div class="border-top px-12 py-12">
+                            <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                @csrf
+                                <button type="button" onclick="confirmLogout()" class="dropdown-item text-danger-600 px-12 py-10 hover-bg-danger-50 d-flex align-items-center gap-3 radius-8 transition w-100 border-0 bg-transparent fw-semibold">
+                                    <div class="w-32-px h-32-px bg-danger-50 text-danger-600 rounded-circle d-flex align-items-center justify-content-center">
+                                        <iconify-icon icon="solar:logout-2-bold" class="text-lg"></iconify-icon>
+                                    </div>
+                                    <span class="text-sm">Log Out</span>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div><!-- Profile dropdown end -->
             </div>
@@ -112,15 +139,23 @@
         right: 0;
         top: calc(100% + 8px);
         z-index: 9999;
-        min-width: 280px;
+        min-width: 300px;
         background: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        padding: 16px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+        padding: 0;
+        border: 1px solid #e5e7eb;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        pointer-events: none;
     }
     
     #user-dropdown-menu[style*="display: block"] {
         display: block !important;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
     }
     
     #user-dropdown-menu[style*="display: none"] {
@@ -133,9 +168,27 @@
     }
     
     .hover-shadow-lg:hover {
-        box-shadow: 0 4px 12px rgba(72, 127, 255, 0.3);
-        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(72, 127, 255, 0.35);
+        transform: scale(1.08);
         cursor: pointer;
+    }
+    
+    #user-dropdown-btn {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    #user-dropdown-btn::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
+        width: 12px;
+        height: 12px;
+        background: #10b981;
+        border: 2px solid white;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     .transition {
@@ -143,13 +196,111 @@
     }
     
     .dropdown-item.hover-bg-danger-50:hover {
-        background-color: #fee;
+        background-color: #fef2f2;
         color: #dc3545;
     }
     
     .dropdown-item {
         cursor: pointer;
         text-decoration: none;
+        font-size: 14px;
+        transition: all 0.2s ease-in-out;
+    }
+    
+    .dropdown-item:hover {
+        transform: translateX(2px);
+    }
+    
+    .w-48-px {
+        width: 48px !important;
+    }
+    
+    .h-48-px {
+        height: 48px !important;
+    }
+    
+    .w-32-px {
+        width: 32px !important;
+    }
+    
+    .h-32-px {
+        height: 32px !important;
+    }
+    
+    .w-12-px {
+        width: 12px !important;
+    }
+    
+    .h-12-px {
+        height: 12px !important;
+    }
+    
+    /* Pulsing animation for online status */
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+    }
+    
+    .status-indicator {
+        animation: pulse 2s ease-in-out infinite;
+    }
+    
+    /* Staggered fade-in animation for menu items */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    #user-dropdown-menu[style*="display: block"] .to-top-list li {
+        animation: fadeInUp 0.3s ease-out backwards;
+    }
+    
+    #user-dropdown-menu[style*="display: block"] .to-top-list li:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+    
+    #user-dropdown-menu[style*="display: block"] .to-top-list li:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+    
+    #user-dropdown-menu[style*="display: block"] .to-top-list li:nth-child(3) {
+        animation-delay: 0.15s;
+    }
+    
+    /* Arrow icon animation on hover */
+    .dropdown-item:hover iconify-icon[icon*="arrow"] {
+        transform: translateX(4px);
+        transition: transform 0.2s ease;
+    }
+    
+    /* Improve avatar button active state */
+    #user-dropdown-btn:active {
+        transform: scale(0.95);
+    }
+    
+    #user-dropdown-btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(72, 127, 255, 0.2);
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 576px) {
+        #user-dropdown-menu {
+            min-width: 280px;
+            right: -10px;
+        }
     }
 </style>
 
@@ -157,15 +308,18 @@
 function toggleUserDropdown(event) {
     event.stopPropagation();
     const menu = document.getElementById('user-dropdown-menu');
+    const btn = document.getElementById('user-dropdown-btn');
     const isVisible = menu.style.display === 'block';
     
     console.log('🔧 User dropdown clicked, current state:', isVisible ? 'VISIBLE' : 'HIDDEN');
     
     if (isVisible) {
         menu.style.display = 'none';
+        btn.setAttribute('aria-expanded', 'false');
         console.log('❌ Hiding dropdown');
     } else {
         menu.style.display = 'block';
+        btn.setAttribute('aria-expanded', 'true');
         console.log('✅ Showing dropdown');
     }
 }
@@ -174,11 +328,27 @@ function toggleUserDropdown(event) {
 document.addEventListener('click', function(event) {
     const dropdown = document.getElementById('user-dropdown');
     const menu = document.getElementById('user-dropdown-menu');
+    const btn = document.getElementById('user-dropdown-btn');
     
     if (dropdown && !dropdown.contains(event.target)) {
         if (menu && menu.style.display === 'block') {
             menu.style.display = 'none';
+            btn.setAttribute('aria-expanded', 'false');
             console.log('🔒 Closed dropdown (clicked outside)');
+        }
+    }
+});
+
+// Close dropdown on Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const menu = document.getElementById('user-dropdown-menu');
+        const btn = document.getElementById('user-dropdown-btn');
+        if (menu && menu.style.display === 'block') {
+            menu.style.display = 'none';
+            btn.setAttribute('aria-expanded', 'false');
+            btn.focus();
+            console.log('⌨️ Closed dropdown (Escape key)');
         }
     }
 });
