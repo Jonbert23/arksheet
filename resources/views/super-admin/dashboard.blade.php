@@ -202,38 +202,6 @@
                         </div>
                     </div>
 
-                    <div class="mt-20 d-flex justify-content-center flex-wrap gap-3">
-                        <div class="d-inline-flex align-items-center gap-2 p-2 radius-8 border pe-36 br-hover-primary group-item">
-                            <span class="bg-neutral-100 w-44-px h-44-px text-xxl radius-8 d-flex justify-content-center align-items-center text-secondary-light group-hover:bg-primary-600 group-hover:text-white">
-                                <iconify-icon icon="solar:dollar-minimalistic-outline" class="icon"></iconify-icon>
-                            </span>
-                            <div>
-                                <span class="text-secondary-light text-sm fw-medium">Total Revenue</span>
-                                <h6 class="text-md fw-semibold mb-0">${{ number_format($totalRevenue, 2) }}</h6>
-                            </div>
-                        </div>
-
-                        <div class="d-inline-flex align-items-center gap-2 p-2 radius-8 border pe-36 br-hover-primary group-item">
-                            <span class="bg-neutral-100 w-44-px h-44-px text-xxl radius-8 d-flex justify-content-center align-items-center text-secondary-light group-hover:bg-primary-600 group-hover:text-white">
-                                <iconify-icon icon="uis:chart" class="icon"></iconify-icon>
-                            </span>
-                            <div>
-                                <span class="text-secondary-light text-sm fw-medium">Avg Daily</span>
-                                <h6 class="text-md fw-semibold mb-0">${{ $revenueTrend->count() > 0 ? number_format($revenueTrend->avg('revenue'), 2) : '0.00' }}</h6>
-                            </div>
-                        </div>
-
-                        <div class="d-inline-flex align-items-center gap-2 p-2 radius-8 border pe-36 br-hover-primary group-item">
-                            <span class="bg-neutral-100 w-44-px h-44-px text-xxl radius-8 d-flex justify-content-center align-items-center text-secondary-light group-hover:bg-primary-600 group-hover:text-white">
-                                <iconify-icon icon="solar:chart-square-outline" class="icon"></iconify-icon>
-                            </span>
-                            <div>
-                                <span class="text-secondary-light text-sm fw-medium">Peak Day</span>
-                                <h6 class="text-md fw-semibold mb-0">${{ $revenueTrend->count() > 0 ? number_format($revenueTrend->max('revenue'), 2) : '0.00' }}</h6>
-                            </div>
-                        </div>
-                    </div>
-
                     <div id="revenueTrendChart" class="mt-20"></div>
                 </div>
             </div>
