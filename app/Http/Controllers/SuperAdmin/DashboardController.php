@@ -90,6 +90,50 @@ class DashboardController extends Controller
             ->get()
             ->pluck('count', 'role');
 
+        // Revenue Trend (Last 30 days) - For Line Graph
+        $revenueTrend = Sale::select(
+                DB::raw('DATE(created_at) as date'),
+                DB::raw('SUM(total) as revenue'),
+                DB::raw('COUNT(*) as sales_count')
+            )
+            ->where('created_at', '>=', now()->subDays(30))
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderBy('date')
+            ->get();
+
+        // Business Status Distribution - For Pie Chart
+        $activeBusinesses = Business::where('is_active', true)
+            ->where('created_at', '<', now()->subDays(30))
+            ->count();
+        $inactiveBusinesses = Business::where('is_active', false)->count();
+        $newBusinesses = Business::where('created_at', '>=', now()->subDays(30))->count();
+        $dormantBusinesses = Business::where('is_active', true)
+            ->whereDoesntHave('sales', function($query) {
+                $query->where('created_at', '>=', now()->subDays(30));
+            })
+            ->where('created_at', '<', now()->subDays(30))
+            ->count();
+
+        $businessStatusDistribution = [
+            'active' => $activeBusinesses - $dormantBusinesses,
+            'inactive' => $inactiveBusinesses,
+            'new' => $newBusinesses,
+            'dormant' => $dormantBusinesses
+        ];
+
+        // User Role Distribution - For Pie Chart
+        $businessOwners = User::where('role', 'business_owner')->count();
+        $staffMembers = User::where('role', 'staff')->count();
+        $activeOwners = User::where('role', 'business_owner')->where('is_active', true)->count();
+        $activeStaff = User::where('role', 'staff')->where('is_active', true)->count();
+
+        $userRoleDistribution = [
+            'business_owners' => $businessOwners,
+            'staff' => $staffMembers,
+            'active_owners' => $activeOwners,
+            'active_staff' => $activeStaff
+        ];
+
         return view('super-admin.dashboard', compact(
             'stats',
             'totalRevenue',
@@ -97,7 +141,10 @@ class DashboardController extends Controller
             'recentBusinesses',
             'businessGrowth',
             'revenueByBusiness',
-            'usersByRole'
+            'usersByRole',
+            'revenueTrend',
+            'businessStatusDistribution',
+            'userRoleDistribution'
         ));
     }
 }

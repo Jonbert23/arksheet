@@ -186,6 +186,165 @@
             </div>
         </div>
 
+        <!-- Revenue Trend Line Graph -->
+        <div class="col-xxl-12">
+            <div class="card h-100 radius-8 border-0 shadow-sm" style="border-top: 3px solid #487FFF !important;">
+                <div class="card-body p-24">
+                    <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between mb-2">
+                        <div>
+                            <h6 class="mb-2 fw-bold text-lg" style="color: #487FFF;">Platform Revenue Trend</h6>
+                            <span class="text-sm fw-medium text-secondary-light">Last 30 days across all businesses</span>
+                        </div>
+                        <div class="">
+                            <a href="{{ route('super-admin.reports.revenue') }}" class="btn btn-sm text-white radius-8 px-16 py-8" style="background-color: #487FFF;" onmouseover="this.style.backgroundColor='#3a6fd9'" onmouseout="this.style.backgroundColor='#487FFF'">
+                                View Full Report
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mt-20 d-flex justify-content-center flex-wrap gap-3">
+                        <div class="d-inline-flex align-items-center gap-2 p-2 radius-8 border pe-36 br-hover-primary group-item">
+                            <span class="bg-neutral-100 w-44-px h-44-px text-xxl radius-8 d-flex justify-content-center align-items-center text-secondary-light group-hover:bg-primary-600 group-hover:text-white">
+                                <iconify-icon icon="solar:dollar-minimalistic-outline" class="icon"></iconify-icon>
+                            </span>
+                            <div>
+                                <span class="text-secondary-light text-sm fw-medium">Total Revenue</span>
+                                <h6 class="text-md fw-semibold mb-0">${{ number_format($totalRevenue, 2) }}</h6>
+                            </div>
+                        </div>
+
+                        <div class="d-inline-flex align-items-center gap-2 p-2 radius-8 border pe-36 br-hover-primary group-item">
+                            <span class="bg-neutral-100 w-44-px h-44-px text-xxl radius-8 d-flex justify-content-center align-items-center text-secondary-light group-hover:bg-primary-600 group-hover:text-white">
+                                <iconify-icon icon="uis:chart" class="icon"></iconify-icon>
+                            </span>
+                            <div>
+                                <span class="text-secondary-light text-sm fw-medium">Avg Daily</span>
+                                <h6 class="text-md fw-semibold mb-0">${{ $revenueTrend->count() > 0 ? number_format($revenueTrend->avg('revenue'), 2) : '0.00' }}</h6>
+                            </div>
+                        </div>
+
+                        <div class="d-inline-flex align-items-center gap-2 p-2 radius-8 border pe-36 br-hover-primary group-item">
+                            <span class="bg-neutral-100 w-44-px h-44-px text-xxl radius-8 d-flex justify-content-center align-items-center text-secondary-light group-hover:bg-primary-600 group-hover:text-white">
+                                <iconify-icon icon="solar:chart-square-outline" class="icon"></iconify-icon>
+                            </span>
+                            <div>
+                                <span class="text-secondary-light text-sm fw-medium">Peak Day</span>
+                                <h6 class="text-md fw-semibold mb-0">${{ $revenueTrend->count() > 0 ? number_format($revenueTrend->max('revenue'), 2) : '0.00' }}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="revenueTrendChart" class="mt-20"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Status Distribution Pie Chart -->
+        <div class="col-xxl-6">
+            <div class="card h-100 radius-8 border-0 shadow-sm">
+                <div class="card-body p-24">
+                    <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
+                        <h6 class="mb-2 fw-bold text-lg">Business Health Status</h6>
+                        <a href="{{ route('super-admin.businesses.index') }}" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                            View All
+                            <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                        </a>
+                    </div>
+                    @if(array_sum($businessStatusDistribution) > 0)
+                    <div id="businessStatusChart" class="mt-20"></div>
+                    <div class="mt-24">
+                        <div class="d-flex align-items-center justify-content-between mb-12">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="w-12-px h-12-px radius-2" style="background-color: #45B369"></span>
+                                <span class="text-sm">Active Businesses</span>
+                            </div>
+                            <span class="text-sm fw-bold">{{ $businessStatusDistribution['active'] }}</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-12">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="w-12-px h-12-px radius-2" style="background-color: #EA5455"></span>
+                                <span class="text-sm">Inactive Businesses</span>
+                            </div>
+                            <span class="text-sm fw-bold">{{ $businessStatusDistribution['inactive'] }}</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-12">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="w-12-px h-12-px radius-2" style="background-color: #487FFF"></span>
+                                <span class="text-sm">New Businesses (30d)</span>
+                            </div>
+                            <span class="text-sm fw-bold">{{ $businessStatusDistribution['new'] }}</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="w-12-px h-12-px radius-2" style="background-color: #FF9F43"></span>
+                                <span class="text-sm">Dormant (No Sales)</span>
+                            </div>
+                            <span class="text-sm fw-bold">{{ $businessStatusDistribution['dormant'] }}</span>
+                        </div>
+                    </div>
+                    @else
+                    <p class="text-center text-secondary-light mt-5">No business data available</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        <!-- User Role Distribution Pie Chart -->
+        <div class="col-xxl-6">
+            <div class="card h-100 radius-8 border-0 shadow-sm">
+                <div class="card-body p-24">
+                    <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
+                        <h6 class="mb-2 fw-bold text-lg">User Role Distribution</h6>
+                        <a href="{{ route('super-admin.users.index') }}" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                            View All
+                            <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                        </a>
+                    </div>
+                    @if(($userRoleDistribution['business_owners'] + $userRoleDistribution['staff']) > 0)
+                    <div id="userRoleChart" class="mt-20"></div>
+                    <div class="mt-24">
+                        <div class="d-flex align-items-center justify-content-between mb-12">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="w-12-px h-12-px radius-2" style="background-color: #487FFF"></span>
+                                <span class="text-sm">Business Owners</span>
+                            </div>
+                            <span class="text-sm fw-bold">{{ $userRoleDistribution['business_owners'] }}</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-12">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="w-12-px h-12-px radius-2" style="background-color: #45B369"></span>
+                                <span class="text-sm">Staff Members</span>
+                            </div>
+                            <span class="text-sm fw-bold">{{ $userRoleDistribution['staff'] }}</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-12">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="w-12-px h-12-px radius-2" style="background-color: #00CFE8"></span>
+                                <span class="text-sm">Active Owners</span>
+                            </div>
+                            <span class="text-sm fw-bold">{{ $userRoleDistribution['active_owners'] }}</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="w-12-px h-12-px radius-2" style="background-color: #7367F0"></span>
+                                <span class="text-sm">Active Staff</span>
+                            </div>
+                            <span class="text-sm fw-bold">{{ $userRoleDistribution['active_staff'] }}</span>
+                        </div>
+                        <div class="mt-3 pt-3 border-top">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="text-sm fw-medium text-secondary-light">Staff per Business Ratio</span>
+                                <span class="text-sm fw-bold" style="color: #487FFF;">{{ $stats['total_businesses'] > 0 ? number_format($userRoleDistribution['staff'] / $stats['total_businesses'], 2) : '0' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    <p class="text-center text-secondary-light mt-5">No user data available</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+
         <!-- Recent Businesses -->
         <div class="col-xxl-6">
             <div class="card h-100 border-0 shadow-sm">
@@ -393,6 +552,168 @@
         };
         var platformGrowthChart = new ApexCharts(document.querySelector("#platformGrowthChart"), platformGrowthOptions);
         platformGrowthChart.render();
+
+        // Revenue Trend Line Chart
+        var revenueTrendOptions = {
+            series: [{
+                name: "Revenue",
+                data: @json($revenueTrend->pluck('revenue')->values()->toArray())
+            }],
+            chart: {
+                type: "area",
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            stroke: {
+                curve: "smooth",
+                width: 3,
+                colors: ["#487FFF"]
+            },
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shade: "light",
+                    type: "vertical",
+                    shadeIntensity: 0.5,
+                    gradientToColors: ["#487FFF"],
+                    inverseColors: false,
+                    opacityFrom: 0.6,
+                    opacityTo: 0.1,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                categories: @json($revenueTrend->pluck('date')->map(function($date) {
+                    return \Carbon\Carbon::parse($date)->format('M d');
+                })->values()->toArray()),
+                labels: {
+                    style: {
+                        colors: "#A0AEC0",
+                        fontSize: "12px"
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: "#A0AEC0",
+                        fontSize: "12px"
+                    },
+                    formatter: function (val) {
+                        return "$" + val.toFixed(0)
+                    }
+                }
+            },
+            grid: {
+                borderColor: "#E2E8F0",
+                strokeDashArray: 3,
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return "$" + val.toFixed(2)
+                    }
+                }
+            }
+        };
+        var revenueTrendChart = new ApexCharts(document.querySelector("#revenueTrendChart"), revenueTrendOptions);
+        revenueTrendChart.render();
+
+        // Business Status Distribution Pie Chart
+        @if(array_sum($businessStatusDistribution) > 0)
+        if(document.querySelector("#businessStatusChart")) {
+            var businessStatusOptions = {
+                series: [
+                    {{ $businessStatusDistribution['active'] }},
+                    {{ $businessStatusDistribution['inactive'] }},
+                    {{ $businessStatusDistribution['new'] }},
+                    {{ $businessStatusDistribution['dormant'] }}
+                ],
+                chart: {
+                    height: 280,
+                    type: "pie",
+                },
+                labels: ["Active", "Inactive", "New (30d)", "Dormant"],
+                colors: ["#45B369", "#EA5455", "#487FFF", "#FF9F43"],
+                legend: {
+                    show: false
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return Math.round(val) + "%"
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: "0%"
+                        }
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        }
+                    }
+                }]
+            };
+            var businessStatusChart = new ApexCharts(document.querySelector("#businessStatusChart"), businessStatusOptions);
+            businessStatusChart.render();
+        }
+        @endif
+
+        // User Role Distribution Pie Chart
+        @if(($userRoleDistribution['business_owners'] + $userRoleDistribution['staff']) > 0)
+        if(document.querySelector("#userRoleChart")) {
+            var userRoleOptions = {
+                series: [
+                    {{ $userRoleDistribution['business_owners'] }},
+                    {{ $userRoleDistribution['staff'] }},
+                    {{ $userRoleDistribution['active_owners'] }},
+                    {{ $userRoleDistribution['active_staff'] }}
+                ],
+                chart: {
+                    height: 280,
+                    type: "pie",
+                },
+                labels: ["Business Owners", "Staff", "Active Owners", "Active Staff"],
+                colors: ["#487FFF", "#45B369", "#00CFE8", "#7367F0"],
+                legend: {
+                    show: false
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return Math.round(val) + "%"
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: "0%"
+                        }
+                    }
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        }
+                    }
+                }]
+            };
+            var userRoleChart = new ApexCharts(document.querySelector("#userRoleChart"), userRoleOptions);
+            userRoleChart.render();
+        }
+        @endif
     });
 </script>
 
