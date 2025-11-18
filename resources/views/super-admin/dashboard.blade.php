@@ -314,7 +314,7 @@
         </div>
 
         <!-- Recent Businesses -->
-        <div class="col-xxl-6">
+        <div class="col-xxl-12">
             <div class="card h-100 border-0 shadow-sm">
                 <div class="card-header bg-white py-16 px-24 d-flex align-items-center justify-content-between">
                     <h6 class="text-lg fw-bold mb-0" style="color: #487FFF;">Recent Businesses</h6>
@@ -359,68 +359,6 @@
                                 @endforelse
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Top Revenue Businesses -->
-        <div class="col-xxl-6">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-header bg-white py-16 px-24 d-flex align-items-center justify-content-between">
-                    <h6 class="text-lg fw-bold mb-0" style="color: #45B369;">Top Revenue (30 days)</h6>
-                    <a href="{{ route('super-admin.reports.revenue') }}" class="fw-bold d-flex align-items-center gap-1" style="color: #45B369; text-decoration: none;" onmouseover="this.style.color='#3a9557'" onmouseout="this.style.color='#45B369'">
-                        View Report
-                        <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
-                    </a>
-                </div>
-                <div class="card-body p-24">
-                    <div class="table-responsive scroll-sm">
-                        <table class="table bordered-table mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Business Name</th>
-                                    <th scope="col">Revenue</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($revenueByBusiness as $business)
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <span class="text-md d-block line-height-1 fw-medium text-primary-light text-w-200-px">{{ $business->name }}</span>
-                                            </div>
-                                        </td>
-                                        <td><span class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium text-sm">${{ number_format($business->total_revenue, 2) }}</span></td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="2" class="text-center py-4">No revenue data available</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- User Distribution -->
-        <div class="col-xxl-12">
-            <div class="card h-100 radius-8 border-0">
-                <div class="card-body p-24">
-                    <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between mb-3">
-                        <h6 class="mb-2 fw-bold text-lg">User Distribution by Role</h6>
-                    </div>
-                    <div class="row gy-3">
-                        @foreach($usersByRole as $role => $count)
-                            <div class="col-md-3">
-                                <div class="p-3 border radius-8 hover-shadow">
-                                    <h6 class="mb-1 text-secondary-light">{{ ucwords(str_replace('_', ' ', $role)) }}</h6>
-                                    <p class="text-2xl fw-bold mb-0" style="color: #487FFF;">{{ $count }}</p>
-                                </div>
-                            </div>
-                        @endforeach
                     </div>
                 </div>
             </div>
