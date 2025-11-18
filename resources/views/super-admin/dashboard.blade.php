@@ -148,37 +148,37 @@
                     <div id="platformGrowthChart" class="mt-28"></div>
                     
                     <div class="mt-20">
-                        <div class="d-flex align-items-center justify-content-between gap-3 mb-12">
-                            <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center gap-3 mb-12">
+                            <div class="d-flex align-items-center flex-shrink-0">
                                 <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0" style="color: #487FFF;">
                                     <iconify-icon icon="solar:buildings-outline" class="icon"></iconify-icon>
                                 </span>
-                                <span class="text-primary-light fw-medium text-sm ps-12">Active Businesses</span>
+                                <span class="text-primary-light fw-medium text-sm ps-12 text-nowrap">Active Businesses</span>
                             </div>
-                            <div class="d-flex align-items-center gap-2 w-100">
-                                <div class="w-100 max-w-66 ms-auto">
+                            <div class="d-flex align-items-center gap-2 flex-grow-1">
+                                <div class="flex-grow-1">
                                     <div class="progress progress-sm rounded-pill" role="progressbar" style="background-color: #f0f4ff;">
                                         <div class="progress-bar rounded-pill" style="width: {{ $stats['total_businesses'] > 0 ? ($stats['active_businesses'] / $stats['total_businesses']) * 100 : 0 }}%; background-color: #487FFF;"></div>
                                     </div>
                                 </div>
-                                <span class="text-secondary-light font-xs fw-bold">{{ $stats['total_businesses'] > 0 ? round(($stats['active_businesses'] / $stats['total_businesses']) * 100) : 0 }}%</span>
+                                <span class="text-secondary-light font-xs fw-bold text-nowrap">{{ $stats['total_businesses'] > 0 ? round(($stats['active_businesses'] / $stats['total_businesses']) * 100) : 0 }}%</span>
                             </div>
                         </div>
 
-                        <div class="d-flex align-items-center justify-content-between gap-3">
-                            <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center flex-shrink-0">
                                 <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0 text-success-main">
                                     <iconify-icon icon="solar:users-group-rounded-outline" class="icon"></iconify-icon>
                                 </span>
-                                <span class="text-primary-light fw-medium text-sm ps-12">Active Users</span>
+                                <span class="text-primary-light fw-medium text-sm ps-12 text-nowrap">Active Users</span>
                             </div>
-                            <div class="d-flex align-items-center gap-2 w-100">
-                                <div class="w-100 max-w-66 ms-auto">
+                            <div class="d-flex align-items-center gap-2 flex-grow-1">
+                                <div class="flex-grow-1">
                                     <div class="progress progress-sm rounded-pill" role="progressbar">
                                         <div class="progress-bar bg-success-main rounded-pill" style="width: {{ $stats['total_users'] > 0 ? ($stats['active_users'] / $stats['total_users']) * 100 : 0 }}%;"></div>
                                     </div>
                                 </div>
-                                <span class="text-secondary-light font-xs fw-semibold">{{ $stats['total_users'] > 0 ? round(($stats['active_users'] / $stats['total_users']) * 100) : 0 }}%</span>
+                                <span class="text-secondary-light font-xs fw-semibold text-nowrap">{{ $stats['total_users'] > 0 ? round(($stats['active_users'] / $stats['total_users']) * 100) : 0 }}%</span>
                             </div>
                         </div>
                     </div>
