@@ -37,6 +37,9 @@
     <!-- main css -->
     <link rel="stylesheet"  href="{{ asset('assets/css/style.css') }}">
     
+    <!-- Iconify Icon (Load early) -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    
     <!-- Page-specific styles -->
     @stack('styles')
 </head>
