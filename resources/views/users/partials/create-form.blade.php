@@ -45,7 +45,7 @@
                 </label>
                 <select name="role" class="form-select radius-8" required>
                     <option value="">Select Role</option>
-                    <option value="admin">Admin</option>
+                    <option value="business_owner">Business Owner</option>
                     <option value="manager">Manager</option>
                     <option value="accountant">Accountant</option>
                     <option value="staff">Staff</option>
@@ -110,7 +110,7 @@
             </div>
             @endforeach
         </div>
-        <small class="text-muted d-block mt-12">Select modules this user can access. Admins automatically get full access.</small>
+        <small class="text-muted d-block mt-12">Select modules this user can access. Business Owners automatically get full access.</small>
     </div>
     
     <!-- Settings Section -->
@@ -168,7 +168,7 @@ $(document).ready(function() {
         const role = $(this).val();
         const permissionsSection = $('#permissionsSection');
         
-        if (role === 'admin') {
+        if (role === 'business_owner') {
             permissionsSection.hide();
             // Uncheck all permissions for admins
             permissionsSection.find('input[type="checkbox"]').prop('checked', false);

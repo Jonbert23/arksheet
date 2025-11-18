@@ -316,7 +316,7 @@
                                 <iconify-icon icon="mdi:shield-account" style="font-size: 20px; color: #ec3737;"></iconify-icon>
                                 <select name="role" class="form-select radius-8 px-16 py-11" style="border: 1px solid #e5e7eb; min-width: 180px;">
                                     <option value="">All Roles</option>
-                                    <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
+                                    <option value="business_owner" {{ request('role') === 'business_owner' ? 'selected' : '' }}>Business Owner</option>
                                     <option value="manager" {{ request('role') === 'manager' ? 'selected' : '' }}>Manager</option>
                                     <option value="accountant" {{ request('role') === 'accountant' ? 'selected' : '' }}>Accountant</option>
                                     <option value="staff" {{ request('role') === 'staff' ? 'selected' : '' }}>Staff</option>
@@ -393,8 +393,8 @@
                     <div class="card-body p-20">
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p class="fw-medium text-primary-light mb-1">Admins</p>
-                                <h6 class="mb-0">{{ $users->where('role', 'admin')->count() }}</h6>
+                                <p class="fw-medium text-primary-light mb-1">Business Owners</p>
+                                <h6 class="mb-0">{{ $users->where('role', 'business_owner')->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
                                 <iconify-icon icon="mdi:shield-crown" class="text-white text-2xl mb-0"></iconify-icon>
@@ -481,7 +481,7 @@
                                 <td>
                                     @php
                                         $roleColors = [
-                                            'admin' => 'danger',
+                                            'business_owner' => 'danger',
                                             'manager' => 'warning',
                                             'accountant' => 'info',
                                             'staff' => 'primary'
@@ -1099,7 +1099,6 @@
                         const roleLabels = {
                             'super_admin': 'Super Admin',
                             'business_owner': 'Business Owner',
-                            'admin': 'Admin',
                             'manager': 'Manager',
                             'accountant': 'Accountant',
                             'staff': 'Staff'
@@ -1107,7 +1106,6 @@
                         const roleColors = {
                             'super_admin': { bg: '#fee2e2', text: '#991b1b' },
                             'business_owner': { bg: '#fef3c7', text: '#92400e' },
-                            'admin': { bg: '#fee2e2', text: '#991b1b' },
                             'manager': { bg: '#fef3c7', text: '#92400e' },
                             'accountant': { bg: '#dbeafe', text: '#1e40af' },
                             'staff': { bg: '#e5e7eb', text: '#374151' }
@@ -1141,7 +1139,7 @@
                         
                         let permissionsHtml = '';
                         
-                        if (user.role === 'admin' || user.role === 'super_admin' || user.role === 'business_owner') {
+                        if (user.role === 'business_owner' || user.role === 'super_admin') {
                             permissionsHtml = '<div class="col-12"><div class="alert alert-info mb-0" style="background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b;"><iconify-icon icon="mdi:information" class="me-2"></iconify-icon>This user has full access to all modules.</div></div>';
                         } else if (user.permissions && user.permissions.length > 0) {
                             user.permissions.forEach(function(permission) {
@@ -1162,7 +1160,7 @@
                         $("#view_permissions_list").html(permissionsHtml);
                         
                         // Hide permissions section for admin roles
-                        if (user.role === 'admin' || user.role === 'super_admin' || user.role === 'business_owner') {
+                        if (user.role === 'business_owner' || user.role === 'super_admin') {
                             $("#view_permissions_section").hide();
                         } else {
                             $("#view_permissions_section").show();

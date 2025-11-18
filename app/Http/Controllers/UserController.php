@@ -77,7 +77,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Password::min(8)],
-            'role' => 'required|in:admin,manager,accountant,staff',
+            'role' => 'required|in:business_owner,manager,accountant,staff',
             'phone' => 'nullable|string|max:255',
             'is_active' => 'nullable|boolean',
             'permissions' => 'nullable|array',
@@ -92,8 +92,8 @@ class UserController extends Controller
             $validated['is_active'] = true;
         }
 
-        // Handle permissions - admins get all permissions automatically
-        if ($validated['role'] === 'admin') {
+        // Handle permissions - business owners get all permissions automatically
+        if ($validated['role'] === 'business_owner') {
             $validated['permissions'] = array_keys(\App\Models\User::getAvailableModules());
         } elseif (!isset($validated['permissions'])) {
             $validated['permissions'] = [];
@@ -187,7 +187,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => ['nullable', 'confirmed', Password::min(8)],
-            'role' => 'required|in:admin,manager,accountant,staff',
+            'role' => 'required|in:business_owner,manager,accountant,staff',
             'phone' => 'nullable|string|max:255',
             'is_active' => 'nullable|boolean',
             'permissions' => 'nullable|array',
@@ -201,8 +201,8 @@ class UserController extends Controller
             unset($validated['password']);
         }
 
-        // Handle permissions - admins get all permissions automatically
-        if ($validated['role'] === 'admin') {
+        // Handle permissions - business owners get all permissions automatically
+        if ($validated['role'] === 'business_owner') {
             $validated['permissions'] = array_keys(\App\Models\User::getAvailableModules());
         } elseif (!isset($validated['permissions'])) {
             $validated['permissions'] = [];
