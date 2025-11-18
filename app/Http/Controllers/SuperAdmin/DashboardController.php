@@ -32,7 +32,20 @@ class DashboardController extends Controller
             'active_users' => User::where('role', '!=', 'super_admin')
                 ->where('is_active', true)
                 ->count(),
+            'total_sales' => Sale::where('created_at', '>=', now()->subDays(30))->count(),
         ];
+
+        // Calculate growth rate (month over month)
+        $currentMonthBusinesses = Business::whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->count();
+        $lastMonthBusinesses = Business::whereYear('created_at', now()->subMonth()->year)
+            ->whereMonth('created_at', now()->subMonth()->month)
+            ->count();
+        
+        $stats['growth_rate'] = $lastMonthBusinesses > 0 
+            ? round((($currentMonthBusinesses - $lastMonthBusinesses) / $lastMonthBusinesses) * 100, 1)
+            : 0;
 
         // Get total revenue across all businesses (last 30 days)
         $totalRevenue = Sale::where('created_at', '>=', now()->subDays(30))

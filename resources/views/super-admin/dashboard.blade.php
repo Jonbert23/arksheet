@@ -352,11 +352,11 @@
             return;
         }
         
-        // Platform Growth Chart (sparkline)
+        // Platform Growth Chart (sparkline) - Real Data
         var platformGrowthOptions = {
             series: [{
-                name: "Growth",
-                data: [10, 15, 13, 17, 21, 25, 28, 30]
+                name: "New Businesses",
+                data: @json($businessGrowth->pluck('count')->values()->toArray())
             }],
             chart: {
                 type: "area",
@@ -383,7 +383,12 @@
                 }
             },
             tooltip: {
-                enabled: true
+                enabled: true,
+                y: {
+                    formatter: function (val) {
+                        return val + " businesses"
+                    }
+                }
             }
         };
         var platformGrowthChart = new ApexCharts(document.querySelector("#platformGrowthChart"), platformGrowthOptions);
