@@ -22,12 +22,12 @@
             </li>
 
             <!-- Business Management -->
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="{{ request()->routeIs('super-admin.businesses.*') ? 'active-page' : '' }}">
+            <li class="dropdown {{ request()->routeIs('super-admin.businesses.*') ? 'open' : '' }}" id="businesses-dropdown">
+                <a href="#" onclick="toggleDropdown(event, 'businesses-dropdown')" class="{{ request()->routeIs('super-admin.businesses.*') ? 'active-page' : '' }}">
                     <iconify-icon icon="solar:buildings-outline" class="menu-icon"></iconify-icon>
                     <span>Businesses</span>
                 </a>
-                <ul class="sidebar-submenu">
+                <ul class="sidebar-submenu" style="{{ request()->routeIs('super-admin.businesses.*') ? 'display: block;' : 'display: none;' }}">
                     <li>
                         <a href="{{ route('super-admin.businesses.index') }}" class="{{ request()->routeIs('super-admin.businesses.index') ? 'active-page' : '' }}">
                             <i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> All Businesses
@@ -50,12 +50,12 @@
             </li>
 
             <!-- Reports -->
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="{{ request()->routeIs('super-admin.reports.*') ? 'active-page' : '' }}">
+            <li class="dropdown {{ request()->routeIs('super-admin.reports.*') ? 'open' : '' }}" id="reports-dropdown">
+                <a href="#" onclick="toggleDropdown(event, 'reports-dropdown')" class="{{ request()->routeIs('super-admin.reports.*') ? 'active-page' : '' }}">
                     <iconify-icon icon="solar:chart-2-outline" class="menu-icon"></iconify-icon>
                     <span>Reports</span>
                 </a>
-                <ul class="sidebar-submenu">
+                <ul class="sidebar-submenu" style="{{ request()->routeIs('super-admin.reports.*') ? 'display: block;' : 'display: none;' }}">
                     <li>
                         <a href="{{ route('super-admin.reports.index') }}" class="{{ request()->routeIs('super-admin.reports.index') ? 'active-page' : '' }}">
                             <i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Overview
@@ -80,12 +80,12 @@
             </li>
 
             <!-- System Settings -->
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="{{ request()->routeIs('super-admin.system.*') ? 'active-page' : '' }}">
+            <li class="dropdown {{ request()->routeIs('super-admin.system.*') ? 'open' : '' }}" id="system-dropdown">
+                <a href="#" onclick="toggleDropdown(event, 'system-dropdown')" class="{{ request()->routeIs('super-admin.system.*') ? 'active-page' : '' }}">
                     <iconify-icon icon="solar:settings-outline" class="menu-icon"></iconify-icon>
                     <span>System</span>
                 </a>
-                <ul class="sidebar-submenu">
+                <ul class="sidebar-submenu" style="{{ request()->routeIs('super-admin.system.*') ? 'display: block;' : 'display: none;' }}">
                     <li>
                         <a href="{{ route('super-admin.system.settings') }}" class="{{ request()->routeIs('super-admin.system.settings') ? 'active-page' : '' }}">
                             <i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Settings
@@ -116,6 +116,38 @@
         </ul>
     </div>
 </aside>
+
+<script>
+function toggleDropdown(event, dropdownId) {
+    event.preventDefault();
+    console.log('🎯 Dropdown clicked:', dropdownId);
+    
+    const dropdown = document.getElementById(dropdownId);
+    const submenu = dropdown.querySelector('.sidebar-submenu');
+    
+    // Close all other dropdowns
+    document.querySelectorAll('.sidebar-menu .dropdown').forEach(function(item) {
+        if (item.id !== dropdownId) {
+            const otherSubmenu = item.querySelector('.sidebar-submenu');
+            if (otherSubmenu) {
+                otherSubmenu.style.display = 'none';
+            }
+            item.classList.remove('open', 'dropdown-open');
+        }
+    });
+    
+    // Toggle current dropdown
+    if (submenu.style.display === 'none' || submenu.style.display === '') {
+        submenu.style.display = 'block';
+        dropdown.classList.add('open', 'dropdown-open');
+        console.log('✅ Opened:', dropdownId);
+    } else {
+        submenu.style.display = 'none';
+        dropdown.classList.remove('open', 'dropdown-open');
+        console.log('❌ Closed:', dropdownId);
+    }
+}
+</script>
 
 <style>
 .sidebar-link-btn {
