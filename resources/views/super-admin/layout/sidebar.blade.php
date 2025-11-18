@@ -22,23 +22,11 @@
             </li>
 
             <!-- Business Management -->
-            <li class="dropdown {{ request()->routeIs('super-admin.businesses.*') ? 'open' : '' }}" id="businesses-dropdown">
-                <a href="#" onclick="toggleDropdown(event, 'businesses-dropdown')" class="{{ request()->routeIs('super-admin.businesses.*') ? 'active-page' : '' }}">
+            <li>
+                <a href="{{ route('super-admin.businesses.index') }}" class="{{ request()->routeIs('super-admin.businesses.*') ? 'active-page' : '' }}">
                     <iconify-icon icon="solar:buildings-outline" class="menu-icon"></iconify-icon>
                     <span>Businesses</span>
                 </a>
-                <ul class="sidebar-submenu" style="{{ request()->routeIs('super-admin.businesses.*') ? 'display: block;' : 'display: none;' }}">
-                    <li>
-                        <a href="{{ route('super-admin.businesses.index') }}" class="{{ request()->routeIs('super-admin.businesses.index') ? 'active-page' : '' }}">
-                            <i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> All Businesses
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('super-admin.businesses.create') }}" class="{{ request()->routeIs('super-admin.businesses.create') ? 'active-page' : '' }}">
-                            <i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add New Business
-                        </a>
-                    </li>
-                </ul>
             </li>
 
             <!-- User Management -->

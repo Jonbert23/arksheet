@@ -145,7 +145,7 @@ Route::middleware(['auth', 'super-admin'])->prefix('super-admin')->name('super-a
     Route::get('/', [SuperAdminDashboardController::class, 'index'])->name('dashboard');
     
     // Business Management
-    Route::resource('businesses', SuperAdminBusinessController::class);
+    Route::resource('businesses', SuperAdminBusinessController::class)->except(['create', 'store']);
     Route::patch('businesses/{business}/toggle-status', [SuperAdminBusinessController::class, 'toggleStatus'])->name('businesses.toggle-status');
     
     // User Management

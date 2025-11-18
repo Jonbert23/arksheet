@@ -16,7 +16,7 @@
 </div>
 
 <div class="card">
-    <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-3">
+    <div class="card-header">
         <div class="d-flex flex-wrap align-items-center gap-3">
             <form method="GET" action="{{ route('super-admin.businesses.index') }}" class="d-flex gap-2">
                 <input type="text" name="search" class="form-control" placeholder="Search businesses..." value="{{ request('search') }}">
@@ -30,9 +30,6 @@
                 </button>
             </form>
         </div>
-        <a href="{{ route('super-admin.businesses.create') }}" class="btn btn-primary-600">
-            <i class="ri-add-line"></i> Add New Business
-        </a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
