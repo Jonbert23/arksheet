@@ -85,23 +85,93 @@
                         <div class="col-md-6">
                             <div class="mb-20">
                                 <label for="category" class="form-label fw-semibold text-primary-light text-sm mb-8">
-                                    Business Category
+                                    Industry Category
                                 </label>
                                 <select class="form-control radius-8 form-select @error('category') is-invalid @enderror" 
                                         id="category" 
                                         name="category">
-                                    <option value="">Select Category</option>
-                                    <option value="Retail" {{ old('category', $business->category ?? '') == 'Retail' ? 'selected' : '' }}>Retail</option>
-                                    <option value="Wholesale" {{ old('category', $business->category ?? '') == 'Wholesale' ? 'selected' : '' }}>Wholesale</option>
-                                    <option value="E-commerce" {{ old('category', $business->category ?? '') == 'E-commerce' ? 'selected' : '' }}>E-commerce</option>
-                                    <option value="Services" {{ old('category', $business->category ?? '') == 'Services' ? 'selected' : '' }}>Services</option>
-                                    <option value="Manufacturing" {{ old('category', $business->category ?? '') == 'Manufacturing' ? 'selected' : '' }}>Manufacturing</option>
-                                    <option value="Food & Beverage" {{ old('category', $business->category ?? '') == 'Food & Beverage' ? 'selected' : '' }}>Food & Beverage</option>
-                                    <option value="Technology" {{ old('category', $business->category ?? '') == 'Technology' ? 'selected' : '' }}>Technology</option>
-                                    <option value="Consulting" {{ old('category', $business->category ?? '') == 'Consulting' ? 'selected' : '' }}>Consulting</option>
-                                    <option value="Other" {{ old('category', $business->category ?? '') == 'Other' ? 'selected' : '' }}>Other</option>
+                                    <option value="">Select Industry</option>
+                                    <option value="electronics" {{ old('category', $business->category ?? '') == 'electronics' ? 'selected' : '' }}>Electronics</option>
+                                    <option value="fashion_apparel" {{ old('category', $business->category ?? '') == 'fashion_apparel' ? 'selected' : '' }}>Fashion & Apparel</option>
+                                    <option value="food_beverage" {{ old('category', $business->category ?? '') == 'food_beverage' ? 'selected' : '' }}>Food & Beverage</option>
+                                    <option value="health_beauty" {{ old('category', $business->category ?? '') == 'health_beauty' ? 'selected' : '' }}>Health & Beauty</option>
+                                    <option value="home_garden" {{ old('category', $business->category ?? '') == 'home_garden' ? 'selected' : '' }}>Home & Garden</option>
+                                    <option value="automotive" {{ old('category', $business->category ?? '') == 'automotive' ? 'selected' : '' }}>Automotive</option>
+                                    <option value="construction" {{ old('category', $business->category ?? '') == 'construction' ? 'selected' : '' }}>Construction</option>
+                                    <option value="technology" {{ old('category', $business->category ?? '') == 'technology' ? 'selected' : '' }}>Technology</option>
+                                    <option value="education" {{ old('category', $business->category ?? '') == 'education' ? 'selected' : '' }}>Education</option>
+                                    <option value="healthcare" {{ old('category', $business->category ?? '') == 'healthcare' ? 'selected' : '' }}>Healthcare</option>
+                                    <option value="professional_services" {{ old('category', $business->category ?? '') == 'professional_services' ? 'selected' : '' }}>Professional Services</option>
+                                    <option value="other" {{ old('category', $business->category ?? '') == 'other' ? 'selected' : '' }}>Other</option>
                                 </select>
                                 @error('category')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="business_type" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Business Type
+                                </label>
+                                <select class="form-control radius-8 form-select @error('business_type') is-invalid @enderror" 
+                                        id="business_type" 
+                                        name="business_type">
+                                    <option value="">Select Business Type</option>
+                                    <option value="retail_store" {{ old('business_type', $business->business_type ?? '') == 'retail_store' ? 'selected' : '' }}>Retail Store</option>
+                                    <option value="wholesale" {{ old('business_type', $business->business_type ?? '') == 'wholesale' ? 'selected' : '' }}>Wholesale</option>
+                                    <option value="restaurant" {{ old('business_type', $business->business_type ?? '') == 'restaurant' ? 'selected' : '' }}>Restaurant / Food Service</option>
+                                    <option value="service" {{ old('business_type', $business->business_type ?? '') == 'service' ? 'selected' : '' }}>Service Business</option>
+                                    <option value="manufacturing" {{ old('business_type', $business->business_type ?? '') == 'manufacturing' ? 'selected' : '' }}>Manufacturing</option>
+                                    <option value="ecommerce" {{ old('business_type', $business->business_type ?? '') == 'ecommerce' ? 'selected' : '' }}>E-commerce</option>
+                                    <option value="other" {{ old('business_type', $business->business_type ?? '') == 'other' ? 'selected' : '' }}>Other</option>
+                                </select>
+                                @error('business_type')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="employees" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Number of Employees
+                                </label>
+                                <select class="form-control radius-8 form-select @error('employees') is-invalid @enderror" 
+                                        id="employees" 
+                                        name="employees">
+                                    <option value="">Select Range</option>
+                                    <option value="1-5" {{ old('employees', $business->employees ?? '') == '1-5' ? 'selected' : '' }}>1-5 employees</option>
+                                    <option value="6-10" {{ old('employees', $business->employees ?? '') == '6-10' ? 'selected' : '' }}>6-10 employees</option>
+                                    <option value="11-20" {{ old('employees', $business->employees ?? '') == '11-20' ? 'selected' : '' }}>11-20 employees</option>
+                                    <option value="21-50" {{ old('employees', $business->employees ?? '') == '21-50' ? 'selected' : '' }}>21-50 employees</option>
+                                    <option value="51-100" {{ old('employees', $business->employees ?? '') == '51-100' ? 'selected' : '' }}>51-100 employees</option>
+                                    <option value="100+" {{ old('employees', $business->employees ?? '') == '100+' ? 'selected' : '' }}>100+ employees</option>
+                                </select>
+                                @error('employees')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="years_in_business" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Years in Business
+                                </label>
+                                <select class="form-control radius-8 form-select @error('years_in_business') is-invalid @enderror" 
+                                        id="years_in_business" 
+                                        name="years_in_business">
+                                    <option value="">Select Range</option>
+                                    <option value="new" {{ old('years_in_business', $business->years_in_business ?? '') == 'new' ? 'selected' : '' }}>Just Starting</option>
+                                    <option value="0-1" {{ old('years_in_business', $business->years_in_business ?? '') == '0-1' ? 'selected' : '' }}>Less than 1 year</option>
+                                    <option value="1-3" {{ old('years_in_business', $business->years_in_business ?? '') == '1-3' ? 'selected' : '' }}>1-3 years</option>
+                                    <option value="3-5" {{ old('years_in_business', $business->years_in_business ?? '') == '3-5' ? 'selected' : '' }}>3-5 years</option>
+                                    <option value="5-10" {{ old('years_in_business', $business->years_in_business ?? '') == '5-10' ? 'selected' : '' }}>5-10 years</option>
+                                    <option value="10+" {{ old('years_in_business', $business->years_in_business ?? '') == '10+' ? 'selected' : '' }}>10+ years</option>
+                                </select>
+                                @error('years_in_business')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -216,14 +286,116 @@
                         <div class="col-md-12">
                             <div class="mb-20">
                                 <label for="address" class="form-label fw-semibold text-primary-light text-sm mb-8">
-                                    Business Address
+                                    Street Address
                                 </label>
                                 <textarea class="form-control radius-8 @error('address') is-invalid @enderror" 
                                           id="address" 
                                           name="address" 
-                                          rows="3" 
-                                          placeholder="Enter complete business address">{{ old('address', $business->address ?? '') }}</textarea>
+                                          rows="2" 
+                                          placeholder="Enter street address">{{ old('address', $business->address ?? '') }}</textarea>
                                 @error('address')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="city" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    City
+                                </label>
+                                <input type="text" 
+                                       class="form-control radius-8 @error('city') is-invalid @enderror" 
+                                       id="city" 
+                                       name="city" 
+                                       value="{{ old('city', $business->city ?? '') }}" 
+                                       placeholder="Enter city">
+                                @error('city')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="state" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    State/Province
+                                </label>
+                                <input type="text" 
+                                       class="form-control radius-8 @error('state') is-invalid @enderror" 
+                                       id="state" 
+                                       name="state" 
+                                       value="{{ old('state', $business->state ?? '') }}" 
+                                       placeholder="Enter state/province">
+                                @error('state')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="postal_code" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Postal Code
+                                </label>
+                                <input type="text" 
+                                       class="form-control radius-8 @error('postal_code') is-invalid @enderror" 
+                                       id="postal_code" 
+                                       name="postal_code" 
+                                       value="{{ old('postal_code', $business->postal_code ?? '') }}" 
+                                       placeholder="Enter postal code">
+                                @error('postal_code')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="country" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Country
+                                </label>
+                                <input type="text" 
+                                       class="form-control radius-8 @error('country') is-invalid @enderror" 
+                                       id="country" 
+                                       name="country" 
+                                       value="{{ old('country', $business->country ?? 'Philippines') }}" 
+                                       placeholder="Enter country">
+                                @error('country')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="business_hours" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Business Hours
+                                </label>
+                                <input type="text" 
+                                       class="form-control radius-8 @error('business_hours') is-invalid @enderror" 
+                                       id="business_hours" 
+                                       name="business_hours" 
+                                       value="{{ old('business_hours', $business->business_hours ?? '') }}" 
+                                       placeholder="e.g., Mon-Fri: 9AM-6PM">
+                                @error('business_hours')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-20">
+                                <label for="tax_id" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Tax ID / Business Registration
+                                </label>
+                                <input type="text" 
+                                       class="form-control radius-8 @error('tax_id') is-invalid @enderror" 
+                                       id="tax_id" 
+                                       name="tax_id" 
+                                       value="{{ old('tax_id', $business->tax_id ?? '') }}" 
+                                       placeholder="Enter tax ID or business registration number">
+                                @error('tax_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

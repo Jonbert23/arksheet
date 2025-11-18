@@ -19,11 +19,20 @@ class Business extends Model
         'date_founded',
         'logo',
         'address',
+        'city',
+        'state',
+        'postal_code',
+        'country',
         'phone',
         'email',
         'website',
         'currency',
         'timezone',
+        'tax_id',
+        'business_type',
+        'business_hours',
+        'employees',
+        'years_in_business',
         'settings',
         'is_active',
     ];
@@ -41,10 +50,20 @@ class Business extends Model
     {
         parent::boot();
         
-        // Auto-generate slug from name
+        // Auto-generate unique slug from name
         static::creating(function ($business) {
             if (empty($business->slug)) {
-                $business->slug = Str::slug($business->name);
+                $slug = Str::slug($business->name);
+                $originalSlug = $slug;
+                $count = 1;
+                
+                // Check if slug exists and make it unique
+                while (static::where('slug', $slug)->exists()) {
+                    $slug = $originalSlug . '-' . $count;
+                    $count++;
+                }
+                
+                $business->slug = $slug;
             }
         });
     }

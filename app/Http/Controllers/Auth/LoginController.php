@@ -32,9 +32,15 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            // Check if user has business and is active
             $user = Auth::user();
             
+            // Super Admin login - redirect to Super Admin dashboard
+            if ($user->isSuperAdmin()) {
+                return redirect()->intended(route('super-admin.dashboard'))
+                    ->with('success', 'Welcome back, Super Admin!');
+            }
+
+            // Business Owner and Staff - check business association and active status
             if (!$user->business_id) {
                 Auth::logout();
                 return back()->with('error', 'Your account is not associated with any business.');
@@ -45,7 +51,8 @@ class LoginController extends Controller
                 return back()->with('error', 'Your account has been deactivated. Please contact your administrator.');
             }
 
-            return redirect()->intended(route('dashboard'))->with('success', 'Welcome back, ' . $user->name . '!');
+            return redirect()->intended(route('dashboard'))
+                ->with('success', 'Welcome back, ' . $user->name . '!');
         }
 
         throw ValidationException::withMessages([

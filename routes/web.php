@@ -16,6 +16,13 @@ use App\Http\Controllers\GoalController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 
+// Super Admin Controllers
+use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboardController;
+use App\Http\Controllers\SuperAdmin\BusinessController as SuperAdminBusinessController;
+use App\Http\Controllers\SuperAdmin\UserController as SuperAdminUserController;
+use App\Http\Controllers\SuperAdmin\SystemController as SuperAdminSystemController;
+use App\Http\Controllers\SuperAdmin\ReportController as SuperAdminReportController;
+
 // ============================================
 // ARKSHEETS APPLICATION ROUTES
 // ============================================
@@ -24,8 +31,18 @@ use App\Http\Controllers\ProfileController;
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
-    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [RegisterController::class, 'register']);
+    
+    // Multi-step Registration
+    Route::get('/register', [RegisterController::class, 'showStep1'])->name('register');
+    Route::prefix('register')->name('register.')->group(function () {
+        Route::post('/step1', [RegisterController::class, 'postStep1'])->name('step1.post');
+        Route::get('/step2', [RegisterController::class, 'showStep2'])->name('step2');
+        Route::post('/step2', [RegisterController::class, 'postStep2'])->name('step2.post');
+        Route::get('/step3', [RegisterController::class, 'showStep3'])->name('step3');
+        Route::post('/step3', [RegisterController::class, 'postStep3'])->name('step3.post');
+        Route::get('/step4', [RegisterController::class, 'showStep4'])->name('step4');
+        Route::post('/complete', [RegisterController::class, 'complete'])->name('complete');
+    });
 });
 
 // Authenticated Routes (Logged in users only)
@@ -116,6 +133,44 @@ Route::middleware('auth')->group(function () {
             Route::get('/products', [ReportController::class, 'products'])->name('products');
             Route::get('/customers', [ReportController::class, 'customers'])->name('customers');
         });
+    });
+});
+
+// ============================================
+// SUPER ADMIN ROUTES
+// ============================================
+
+Route::middleware(['auth', 'super-admin'])->prefix('super-admin')->name('super-admin.')->group(function () {
+    // Dashboard
+    Route::get('/', [SuperAdminDashboardController::class, 'index'])->name('dashboard');
+    
+    // Business Management
+    Route::resource('businesses', SuperAdminBusinessController::class);
+    Route::patch('businesses/{business}/toggle-status', [SuperAdminBusinessController::class, 'toggleStatus'])->name('businesses.toggle-status');
+    
+    // User Management
+    Route::get('users', [SuperAdminUserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}', [SuperAdminUserController::class, 'show'])->name('users.show');
+    Route::patch('users/{user}/toggle-status', [SuperAdminUserController::class, 'toggleStatus'])->name('users.toggle-status');
+    Route::delete('users/{user}', [SuperAdminUserController::class, 'destroy'])->name('users.destroy');
+    
+    // System Management
+    Route::prefix('system')->name('system.')->group(function () {
+        Route::get('settings', [SuperAdminSystemController::class, 'settings'])->name('settings');
+        Route::get('logs', [SuperAdminSystemController::class, 'logs'])->name('logs');
+        Route::post('clear-cache', [SuperAdminSystemController::class, 'clearCache'])->name('clear-cache');
+        Route::post('optimize', [SuperAdminSystemController::class, 'optimize'])->name('optimize');
+        Route::post('migrate', [SuperAdminSystemController::class, 'migrate'])->name('migrate');
+        Route::post('clear-logs', [SuperAdminSystemController::class, 'clearLogs'])->name('clear-logs');
+    });
+    
+    // Reports
+    Route::prefix('reports')->name('reports.')->group(function () {
+        Route::get('/', [SuperAdminReportController::class, 'index'])->name('index');
+        Route::get('revenue', [SuperAdminReportController::class, 'revenue'])->name('revenue');
+        Route::get('usage', [SuperAdminReportController::class, 'usage'])->name('usage');
+        Route::get('growth', [SuperAdminReportController::class, 'growth'])->name('growth');
+        Route::get('export/{type}', [SuperAdminReportController::class, 'export'])->name('export');
     });
 });
 

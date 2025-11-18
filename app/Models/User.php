@@ -64,32 +64,99 @@ class User extends Authenticatable
     /**
      * Role Helper Methods
      */
-    public function isAdmin()
+    
+    /**
+     * Check if user is Super Admin
+     * 
+     * @return bool
+     */
+    public function isSuperAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role === 'super_admin';
     }
 
-    public function isManager()
+    /**
+     * Check if user is Business Owner
+     * 
+     * @return bool
+     */
+    public function isBusinessOwner(): bool
+    {
+        return $this->role === 'business_owner';
+    }
+
+    /**
+     * Check if user is Admin (backward compatibility)
+     * Calls isBusinessOwner() internally
+     * 
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->isBusinessOwner();
+    }
+
+    /**
+     * Check if user is Manager
+     * 
+     * @return bool
+     */
+    public function isManager(): bool
     {
         return $this->role === 'manager';
     }
 
-    public function isAccountant()
+    /**
+     * Check if user is Accountant
+     * 
+     * @return bool
+     */
+    public function isAccountant(): bool
     {
         return $this->role === 'accountant';
     }
 
-    public function isStaff()
+    /**
+     * Check if user is Staff
+     * 
+     * @return bool
+     */
+    public function isStaff(): bool
     {
         return $this->role === 'staff';
     }
 
-    public function hasRole($role)
+    /**
+     * Check if user has specific role(s)
+     * 
+     * @param string|array $role
+     * @return bool
+     */
+    public function hasRole($role): bool
     {
         if (is_array($role)) {
             return in_array($this->role, $role);
         }
         return $this->role === $role;
+    }
+
+    /**
+     * Check if user can access a specific business
+     * Super Admin can access all businesses
+     * Business Owner and Staff can only access their own business
+     * 
+     * @param int $businessId
+     * @return bool
+     */
+    public function canAccessBusiness(int $businessId): bool
+    {
+        // Super Admin can access all businesses
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+        
+        // Business Owner and Staff can only access their own business
+        return $this->business_id == $businessId;
     }
 
     public function hasPermission($permission)
@@ -126,21 +193,46 @@ class User extends Authenticatable
     /**
      * Module Permission Methods
      */
-    public function hasModuleAccess($module)
+    
+    /**
+     * Check if user has access to a specific module
+     * 
+     * @param string $module
+     * @return bool
+     */
+    public function hasModuleAccess(string $module): bool
     {
-        // Admin has access to all modules
-        if ($this->isAdmin()) {
+        // Super Admin has access to super-admin specific modules
+        if ($this->isSuperAdmin()) {
+            $superAdminModules = [
+                'super-admin-dashboard',
+                'businesses',
+                'system-users',
+                'system-settings',
+                'system-reports',
+            ];
+            return in_array($module, $superAdminModules);
+        }
+
+        // Business Owner has access to all business modules
+        if ($this->isBusinessOwner()) {
             return true;
         }
 
-        // Check if user has permission to the specific module
+        // Staff: Check if user has permission to the specific module
         return in_array($module, $this->permissions ?? []);
     }
 
-    public function hasAnyModuleAccess($modules)
+    /**
+     * Check if user has access to any of the specified modules
+     * 
+     * @param array $modules
+     * @return bool
+     */
+    public function hasAnyModuleAccess(array $modules): bool
     {
-        // Admin has access to all modules
-        if ($this->isAdmin()) {
+        // Super Admin and Business Owner have access to all modules
+        if ($this->isSuperAdmin() || $this->isBusinessOwner()) {
             return true;
         }
 
@@ -154,17 +246,39 @@ class User extends Authenticatable
         return false;
     }
 
-    public function getAllowedModules()
+    /**
+     * Get all modules the user has access to
+     * 
+     * @return array
+     */
+    public function getAllowedModules(): array
     {
-        // Admin has access to all modules
-        if ($this->isAdmin()) {
+        // Super Admin has access to super-admin modules
+        if ($this->isSuperAdmin()) {
+            return [
+                'super-admin-dashboard' => 'Dashboard',
+                'businesses' => 'Business Management',
+                'system-users' => 'User Management',
+                'system-settings' => 'System Settings',
+                'system-reports' => 'System Reports',
+            ];
+        }
+
+        // Business Owner has access to all business modules
+        if ($this->isBusinessOwner()) {
             return $this->getAvailableModules();
         }
 
+        // Staff: Return granted modules
         return $this->permissions ?? [];
     }
 
-    public static function getAvailableModules()
+    /**
+     * Get all available business modules
+     * 
+     * @return array
+     */
+    public static function getAvailableModules(): array
     {
         return [
             'dashboard' => 'Dashboard',

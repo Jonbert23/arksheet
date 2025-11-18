@@ -53,11 +53,6 @@ The application has three distinct user roles, each with specific access levels 
 - ✅ Scheduled maintenance
 - ✅ Version updates
 
-### Restrictions:
-- ❌ Cannot access business-specific operational data (sales, inventory) unless impersonating
-- ❌ Should not interfere with day-to-day business operations
-
----
 
 ## 2. 🟠 Business Owner (Tenant Owner)
 
