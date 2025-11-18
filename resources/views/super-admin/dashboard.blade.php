@@ -24,15 +24,13 @@
                 <div class="col-xxl-4 col-sm-6">
                     <div class="card p-3 shadow-sm radius-8 border-0 h-100" style="background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%); border-left: 4px solid #487FFF !important;">
                         <div class="card-body p-0">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #487FFF;">
-                                        <iconify-icon icon="solar:buildings-outline" class="icon"></iconify-icon>
-                                    </span>
-                                    <div>
-                                        <span class="mb-2 fw-medium text-secondary-light text-sm">Businesses</span>
-                                        <h6 class="fw-bold" style="color: #487FFF;">{{ $stats['total_businesses'] }}</h6>
-                                    </div>
+                            <div class="d-flex align-items-center gap-2 mb-8">
+                                <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #487FFF;">
+                                    <iconify-icon icon="solar:buildings-outline" class="icon"></iconify-icon>
+                                </span>
+                                <div class="flex-grow-1">
+                                    <span class="d-block fw-medium text-secondary-light text-sm mb-1">Businesses</span>
+                                    <h6 class="fw-bold mb-0" style="color: #487FFF;">{{ $stats['total_businesses'] }}</h6>
                                 </div>
                             </div>
                             <p class="text-sm mb-0">Active <span class="px-1 rounded-2 fw-bold text-white text-sm" style="background-color: #45B369;">{{ $stats['active_businesses'] }}</span></p>
@@ -44,15 +42,13 @@
                 <div class="col-xxl-4 col-sm-6">
                     <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-2">
                         <div class="card-body p-0">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="mb-0 w-48-px h-48-px bg-success-main flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6">
-                                        <iconify-icon icon="solar:users-group-rounded-outline" class="icon"></iconify-icon>
-                                    </span>
-                                    <div>
-                                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Users</span>
-                                        <h6 class="fw-semibold">{{ $stats['total_users'] }}</h6>
-                                    </div>
+                            <div class="d-flex align-items-center gap-2 mb-8">
+                                <span class="mb-0 w-48-px h-48-px bg-success-main flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6">
+                                    <iconify-icon icon="solar:users-group-rounded-outline" class="icon"></iconify-icon>
+                                </span>
+                                <div class="flex-grow-1">
+                                    <span class="d-block fw-medium text-secondary-light text-sm mb-1">Total Users</span>
+                                    <h6 class="fw-semibold mb-0">{{ $stats['total_users'] }}</h6>
                                 </div>
                             </div>
                             <p class="text-sm mb-0">Active <span class="bg-success-focus px-1 rounded-2 fw-medium text-success-main text-sm">{{ $stats['active_users'] }}</span></p>
@@ -64,15 +60,13 @@
                 <div class="col-xxl-4 col-sm-6">
                     <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-3">
                         <div class="card-body p-0">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="mb-0 w-48-px h-48-px bg-yellow text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                        <iconify-icon icon="solar:dollar-minimalistic-outline" class="icon"></iconify-icon>
-                                    </span>
-                                    <div>
-                                        <span class="mb-2 fw-medium text-secondary-light text-sm">Revenue (30d)</span>
-                                        <h6 class="fw-semibold">${{ number_format($totalRevenue, 2) }}</h6>
-                                    </div>
+                            <div class="d-flex align-items-center gap-2 mb-8">
+                                <span class="mb-0 w-48-px h-48-px bg-yellow text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
+                                    <iconify-icon icon="solar:dollar-minimalistic-outline" class="icon"></iconify-icon>
+                                </span>
+                                <div class="flex-grow-1">
+                                    <span class="d-block fw-medium text-secondary-light text-sm mb-1">Revenue (30d)</span>
+                                    <h6 class="fw-semibold mb-0">${{ number_format($totalRevenue, 2) }}</h6>
                                 </div>
                             </div>
                             <p class="text-sm mb-0">All <span class="bg-info-focus px-1 rounded-2 fw-medium text-info-main text-sm">{{ $stats['total_businesses'] }} businesses</span></p>
@@ -84,15 +78,13 @@
                 <div class="col-xxl-4 col-sm-6">
                     <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-4">
                         <div class="card-body p-0">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="mb-0 w-48-px h-48-px bg-purple text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                        <iconify-icon icon="solar:box-outline" class="icon"></iconify-icon>
-                                    </span>
-                                    <div>
-                                        <span class="mb-2 fw-medium text-secondary-light text-sm">Products</span>
-                                        <h6 class="fw-semibold">{{ number_format($totalProducts) }}</h6>
-                                    </div>
+                            <div class="d-flex align-items-center gap-2 mb-8">
+                                <span class="mb-0 w-48-px h-48-px bg-purple text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
+                                    <iconify-icon icon="solar:box-outline" class="icon"></iconify-icon>
+                                </span>
+                                <div class="flex-grow-1">
+                                    <span class="d-block fw-medium text-secondary-light text-sm mb-1">Products</span>
+                                    <h6 class="fw-semibold mb-0">{{ number_format($totalProducts) }}</h6>
                                 </div>
                             </div>
                             <p class="text-sm mb-0">System <span class="bg-purple-focus px-1 rounded-2 fw-medium text-purple text-sm">wide</span></p>
@@ -104,15 +96,13 @@
                 <div class="col-xxl-4 col-sm-6">
                     <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-5">
                         <div class="card-body p-0">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="mb-0 w-48-px h-48-px bg-pink text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                        <iconify-icon icon="fluent:cart-16-filled" class="icon"></iconify-icon>
-                                    </span>
-                                    <div>
-                                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Sales</span>
-                                        <h6 class="fw-semibold">{{ $stats['total_sales'] ?? 0 }}</h6>
-                                    </div>
+                            <div class="d-flex align-items-center gap-2 mb-8">
+                                <span class="mb-0 w-48-px h-48-px bg-pink text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
+                                    <iconify-icon icon="fluent:cart-16-filled" class="icon"></iconify-icon>
+                                </span>
+                                <div class="flex-grow-1">
+                                    <span class="d-block fw-medium text-secondary-light text-sm mb-1">Total Sales</span>
+                                    <h6 class="fw-semibold mb-0">{{ $stats['total_sales'] ?? 0 }}</h6>
                                 </div>
                             </div>
                             <p class="text-sm mb-0">Last <span class="bg-danger-focus px-1 rounded-2 fw-medium text-danger-main text-sm">30 days</span></p>
@@ -124,15 +114,13 @@
                 <div class="col-xxl-4 col-sm-6">
                     <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-6">
                         <div class="card-body p-0">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="mb-0 w-48-px h-48-px bg-cyan text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                        <iconify-icon icon="solar:chart-2-outline" class="icon"></iconify-icon>
-                                    </span>
-                                    <div>
-                                        <span class="mb-2 fw-medium text-secondary-light text-sm">Growth Rate</span>
-                                        <h6 class="fw-semibold">{{ $stats['growth_rate'] ?? 0 }}%</h6>
-                                    </div>
+                            <div class="d-flex align-items-center gap-2 mb-8">
+                                <span class="mb-0 w-48-px h-48-px bg-cyan text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
+                                    <iconify-icon icon="solar:chart-2-outline" class="icon"></iconify-icon>
+                                </span>
+                                <div class="flex-grow-1">
+                                    <span class="d-block fw-medium text-secondary-light text-sm mb-1">Growth Rate</span>
+                                    <h6 class="fw-semibold mb-0">{{ $stats['growth_rate'] ?? 0 }}%</h6>
                                 </div>
                             </div>
                             <p class="text-sm mb-0">Month <span class="bg-success-focus px-1 rounded-2 fw-medium text-success-main text-sm">over month</span></p>
