@@ -62,7 +62,7 @@ class ReportController extends Controller
                 DB::raw('COUNT(*) as sales_count')
             )
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy('date')
+            ->groupBy(DB::raw('DATE(created_at)'))
             ->orderBy('date')
             ->get();
 
