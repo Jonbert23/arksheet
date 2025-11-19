@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -27,14 +27,14 @@
                 <h6 class="card-title mb-0">Customer Information</h6>
                 <div class="d-flex gap-2">
                     <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-success-600 radius-8 px-20 py-11">
-                        <iconify-icon icon="lucide:edit" class="icon text-xl me-1"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         Edit
                     </a>
                     <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-danger-600 radius-8 px-20 py-11 delete-btn">
-                            <iconify-icon icon="fluent:delete-24-regular" class="icon text-xl me-1"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Delete
                         </button>
                     </form>
@@ -46,7 +46,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:account" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Customer Name</span>
                             </div>
                             <h6 class="mb-0">{{ $customer->name }}</h6>
@@ -57,7 +57,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:check-circle" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Status</span>
                             </div>
                             @if($customer->is_active)
@@ -72,7 +72,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:email" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Email</span>
                             </div>
                             <h6 class="mb-0">{{ $customer->email ?? 'Not Provided' }}</h6>
@@ -83,7 +83,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:phone" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Phone</span>
                             </div>
                             <h6 class="mb-0">{{ $customer->phone ?? 'Not Provided' }}</h6>
@@ -94,7 +94,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:office-building" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Company</span>
                             </div>
                             <h6 class="mb-0">{{ $customer->company ?? 'Not Provided' }}</h6>
@@ -105,7 +105,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100 bg-success-50">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:cash-multiple" class="text-success-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Total Sales</span>
                             </div>
                             <h5 class="mb-0 text-success-600">{{ auth()->user()->business->currency }} {{ number_format($customer->sales->sum('total'), 2) }}</h5>
@@ -117,7 +117,7 @@
                     <div class="col-12">
                         <div class="p-16 border radius-8">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:map-marker" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Address</span>
                             </div>
                             <p class="mb-0">{{ $customer->address }}</p>
@@ -131,13 +131,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center gap-2">
-                                        <iconify-icon icon="mdi:clock-outline" class="text-secondary-light"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span class="text-sm text-secondary-light">Created: {{ $customer->created_at->format('M d, Y h:i A') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center gap-2">
-                                        <iconify-icon icon="mdi:clock-check-outline" class="text-secondary-light"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span class="text-sm text-secondary-light">Updated: {{ $customer->updated_at->format('M d, Y h:i A') }}</span>
                                     </div>
                                 </div>
@@ -200,14 +200,14 @@
                                 </td>
                                 <td class="text-center">
                                     <button type="button" class="view-sale-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View" data-sale-id="{{ $sale->id }}">
-                                        <iconify-icon icon="solar:eye-linear" class="icon text-lg"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </button>
                                 </td>
                             </tr>
                             @empty
                             <tr>
                                 <td colspan="8" class="text-center py-32">
-                                    <iconify-icon icon="mdi:receipt-text-remove" class="text-xxl text-secondary-light mb-8" style="font-size: 48px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <p class="text-secondary-light mb-0">No sales found for this customer</p>
                                 </td>
                             </tr>
@@ -221,7 +221,7 @@
         <!-- Back Button -->
         <div class="mt-24">
             <a href="{{ route('customers.index') }}" class="btn btn-secondary-600 radius-8 px-20 py-11">
-                <iconify-icon icon="mdi:arrow-left" class="icon text-xl me-1"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 Back to List
             </a>
         </div>

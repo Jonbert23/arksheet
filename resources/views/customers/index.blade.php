@@ -249,7 +249,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -260,7 +260,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -268,7 +268,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -282,7 +282,7 @@
                         <!-- Date Range Picker with Dropdown -->
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-secondary d-flex align-items-center gap-2 radius-8 px-16 py-11 dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" style="min-width: 280px;">
-                                <iconify-icon icon="mdi:calendar" class="text-secondary-light"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span id="dateRangeDisplay">
                                     {{ $dateFrom && $dateTo ? \Carbon\Carbon::parse($dateFrom)->format('M d, Y') . ' - ' . \Carbon\Carbon::parse($dateTo)->format('M d, Y') : \Carbon\Carbon::now()->startOfMonth()->format('M d, Y') . ' - ' . \Carbon\Carbon::now()->format('M d, Y') }}
                                 </span>
@@ -313,7 +313,7 @@
                         <!-- Status Filter -->
                         <div style="min-width: 200px;">
                             <div class="d-flex align-items-center gap-2">
-                                <iconify-icon icon="mdi:filter" style="font-size: 20px; color: #ec3737;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <select name="is_active" class="form-select radius-8 px-16 py-11" style="border: 1px solid #e5e7eb; min-width: 180px;">
                                     <option value="">All Status</option>
                                     <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>Active</option>
@@ -328,13 +328,13 @@
 
                         <!-- Apply Filter Button -->
                         <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2 ms-auto" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="mdi:filter-check" style="font-size: 18px;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             <span>Apply Filter</span>
                         </button>
 
                         <!-- Reset Filter Button -->
                         <a href="{{ route('customers.index') }}" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                            <iconify-icon icon="mdi:refresh" style="font-size: 18px;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             <span>Reset</span>
                         </a>
                     </div>
@@ -353,7 +353,7 @@
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ $customers->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <iconify-icon icon="mdi:account-multiple" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -368,7 +368,7 @@
                                 <h6 class="mb-0">{{ $customers->where('is_active', true)->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:account-check" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -383,7 +383,7 @@
                                 <h6 class="mb-0">{{ $customers->sum('sales_count') }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:cart" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -398,7 +398,7 @@
                                 <h6 class="mb-0">{{ $customers->whereNotNull('email')->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:email" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -421,7 +421,7 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search customers..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <iconify-icon icon="ion:search-outline"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </span>
                     </div>
                 </div>
@@ -484,16 +484,16 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <button type="button" class="view-customer-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View" data-customer-id="{{ $customer->id }}">
-                                            <iconify-icon icon="solar:eye-linear" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         <button type="button" class="edit-customer-btn fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white border-0" style="background-color: #ec3737;" title="Edit" data-customer-id="{{ $customer->id }}" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                            <iconify-icon icon="lucide:edit" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle delete-btn border-0" title="Delete">
-                                                <iconify-icon icon="fluent:delete-24-regular" class="icon text-lg"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -503,10 +503,10 @@
                             <tr>
                                 <td colspan="9" class="text-center py-48">
                                     <div class="d-flex flex-column align-items-center">
-                                        <iconify-icon icon="mdi:account-off" class="text-secondary-light mb-8" style="font-size: 48px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <p class="text-secondary-light mb-16">No customers found</p>
                                         <button type="button" id="addFirstCustomerBtn" class="btn text-white px-20 py-11 radius-8" style="background-color: #ec3737;">
-                                            <iconify-icon icon="ic:baseline-plus" class="icon text-xl me-1"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                             Add Your First Customer
                                         </button>
                                     </div>
@@ -881,6 +881,14 @@
                 return `${year}-${month}-${day}`;
             }
 
+            // Only initialize DataTable if there are customers
+            var hasCustomers = $("#customers-table tbody tr").length > 0 && !$("#customers-table tbody tr td[colspan]").length;
+            
+            if (!hasCustomers) {
+                console.log("No customers to display, skipping DataTable initialization");
+                return;
+            }
+
             // Initialize DataTable
             if ($.fn.DataTable.isDataTable("#customers-table")) {
                 $("#customers-table").DataTable().destroy();
@@ -896,19 +904,33 @@
                 "pageLength": 10,
                 "lengthChange": false,
                 "dom": '<"top">rt<"bottom"p><"clear">',
+                "columns": [
+                    { "orderable": false, "searchable": false },  // 0 - No.
+                    { "orderable": true, "searchable": true },    // 1 - Customer Name
+                    { "orderable": true, "searchable": true },    // 2 - Email
+                    { "orderable": true, "searchable": true },    // 3 - Phone
+                    { "orderable": true, "searchable": true },    // 4 - Company
+                    { "orderable": true, "searchable": true },    // 5 - City
+                    { "orderable": true, "searchable": false },   // 6 - Sales Count
+                    { "orderable": true, "searchable": false },   // 7 - Status
+                    { "orderable": false, "searchable": false }   // 8 - Actions
+                ],
+                "columnDefs": [
+                    {
+                        "targets": [6, 7, 8], // Center-aligned columns
+                        "className": "text-center"
+                    }
+                ],
                 "language": {
                     "emptyTable": "No customers available",
                     "zeroRecords": "No matching customers found",
                     "paginate": {
                         "first": "First",
                         "last": "Last",
-                        "next": '<iconify-icon icon="ic:baseline-chevron-right"></iconify-icon>',
-                        "previous": '<iconify-icon icon="ic:baseline-chevron-left"></iconify-icon>'
+                        "next": '<i class="bi bi-chevron-right"></i>',
+                        "previous": '<i class="bi bi-chevron-left"></i>'
                     }
                 },
-                "columnDefs": [
-                    { "orderable": false, "targets": [0, -1] }
-                ],
                 "order": [[1, "asc"]]
             });
 
@@ -1148,7 +1170,7 @@
                 if (!sales || sales.length === 0) {
                     container.html(
                         '<div class="text-center py-32">' +
-                            '<iconify-icon icon="mdi:receipt-text-remove" class="text-secondary-light mb-8" style="font-size: 48px;"></iconify-icon>' +
+                            '<i class="bi bi-circle-fill"></i>' +
                             '<p class="text-secondary-light mb-0">No sales found for this customer</p>' +
                         '</div>'
                     );

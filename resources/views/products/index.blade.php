@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -17,7 +17,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-check-circle"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -25,7 +25,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-check-circle"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -42,7 +42,7 @@
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ $products->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <iconify-icon icon="mdi:package-variant" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-box-seam text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($products->avg('price'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:cash-multiple" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-currency-dollar text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($products->avg('cost'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:cart-outline" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-cash-stack text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                 <h6 class="mb-0">{{ number_format($products->avg(function($product) { return $product->getProfitMargin(); }), 0) }}%</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:chart-line" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-percent text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -110,18 +110,18 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search products..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <iconify-icon icon="ion:search-outline"></iconify-icon>
+                            <i class="bi bi-search"></i>
                         </span>
                     </div>
                 </div>
-                <a href="{{ route('products.create') }}" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                    <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
+                <button type="button" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'" data-bs-toggle="modal" data-bs-target="#createProductModal">
+                    <i class="bi bi-plus-circle"></i>
                     Add New Product
-                </a>
+                </button>
             </div>
             <div class="card-body">
                 <div class="table-responsive" style="overflow-x: auto;">
-                    <table class="table bordered-table mb-0" id="products-table" style="min-width: 1450px;">
+                    <table class="table bordered-table mb-0" id="products-table" style="min-width: 1350px;">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" style="width: 50px;">No.</th>
@@ -129,7 +129,6 @@
                                 <th scope="col" style="min-width: 120px;">Item Code (SKU)</th>
                                 <th scope="col" class="text-end" style="min-width: 100px;">Item Cost</th>
                                 <th scope="col" class="text-end" style="min-width: 100px;">Tax Amount</th>
-                                <th scope="col" class="text-end" style="min-width: 100px;">Other Costs</th>
                                 <th scope="col" class="text-end" style="min-width: 100px;">Total Costs</th>
                                 <th scope="col" class="text-end" style="min-width: 120px;">Item Selling Price</th>
                                 <th scope="col" class="text-end" style="min-width: 120px;">Estimated Profit</th>
@@ -161,9 +160,6 @@
                                     <span class="text-sm">{{ number_format($product->tax_amount, 2) }}</span>
                                 </td>
                                 <td class="text-end">
-                                    <span class="text-sm">{{ number_format($product->other_costs, 2) }}</span>
-                                </td>
-                                <td class="text-end">
                                     <span class="text-sm fw-semibold text-primary-600">{{ number_format($product->getTotalCosts(), 2) }}</span>
                                 </td>
                                 <td class="text-end">
@@ -180,16 +176,16 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <a href="{{ route('products.show', $product->id) }}" class="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle" title="View">
-                                            <iconify-icon icon="solar:eye-linear" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-eye"></i>
                                         </a>
                                         <a href="{{ route('products.edit', $product->id) }}" class="fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white" style="background-color: #ec3737;" title="Edit" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                            <iconify-icon icon="lucide:edit" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-pencil"></i>
                                         </a>
                                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle delete-btn border-0" title="Delete">
-                                                <iconify-icon icon="fluent:delete-24-regular" class="icon text-lg"></iconify-icon>
+                                                <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -199,11 +195,11 @@
                             <tr>
                                 <td colspan="11" class="text-center py-48">
                                     <div class="d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: #fff5f5; border-radius: 50%; margin: 0 auto 16px;">
-                                        <iconify-icon icon="mdi:package-variant-closed-remove" class="text-xxl mb-0" style="font-size: 48px; color: #ec3737;"></iconify-icon>
+                                        <i class="bi bi-inbox" style="font-size: 2.5rem; color: #ec3737;"></i>
                                     </div>
                                     <p class="text-secondary-light fw-semibold mb-16">No products found</p>
                                     <a href="{{ route('products.create') }}" class="btn text-white radius-8 px-24 py-11 fw-bold" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                        <iconify-icon icon="ic:baseline-plus" class="text-lg me-1"></iconify-icon>
+                                        <i class="bi bi-plus-circle"></i>
                                         Add Your First Product
                                     </a>
                                 </td>
@@ -217,8 +213,12 @@
     </div>
 
     @php
+        $hasProducts = $products->count() > 0;
         $script = '<script>
-            $(document).ready(function() {
+            $(document).ready(function() {';
+        
+        if ($hasProducts) {
+            $script .= '
                 // Check if DataTable is already initialized
                 if ($.fn.DataTable.isDataTable("#products-table")) {
                     $("#products-table").DataTable().destroy();
@@ -235,23 +235,29 @@
                     "autoWidth": false,
                     "order": [[0, "asc"]],
                     "pagingType": "full_numbers",
+                    "columns": [
+                        { "orderable": true, "searchable": false },  // 0 - No.
+                        { "orderable": true, "searchable": true },   // 1 - Product Name
+                        { "orderable": true, "searchable": true },   // 2 - SKU
+                        { "orderable": true, "searchable": false },  // 3 - Item Cost
+                        { "orderable": true, "searchable": false },  // 4 - Tax Amount
+                        { "orderable": true, "searchable": false },  // 5 - Total Costs
+                        { "orderable": true, "searchable": false },  // 6 - Selling Price
+                        { "orderable": true, "searchable": false },  // 7 - Estimated Profit
+                        { "orderable": true, "searchable": false },  // 8 - Profit Margin
+                        { "orderable": false, "searchable": false }  // 9 - Actions
+                    ],
                     "columnDefs": [
                         {
-                            "targets": [0], // No. column
-                            "orderable": true,
-                            "searchable": false
-                        },
-                        {
-                            "targets": [10], // Actions column
-                            "orderable": false,
-                            "searchable": false
-                        },
-                        {
-                            "targets": [3, 4, 5, 6, 7, 8], // Numeric columns
+                            "targets": [3, 4, 5, 6, 7], // Numeric columns
                             "className": "text-end"
                         },
                         {
-                            "targets": [9], // Profit Margin
+                            "targets": [8], // Profit Margin
+                            "className": "text-center"
+                        },
+                        {
+                            "targets": [9], // Actions column
                             "className": "text-center"
                         }
                     ],
@@ -295,8 +301,12 @@
                 // Connect custom length selector to DataTable
                 $("#entries-per-page").on("change", function() {
                     table.page.len($(this).val()).draw();
-                });
-
+                });';
+        }
+        
+        // Common functions that run regardless of whether there are products
+        $script .= '
+                
                 // Delete confirmation function
                 function bindDeleteConfirmation() {
                     $(".delete-btn").off("click").on("click", function(e) {
@@ -320,7 +330,10 @@
                     });
                 }, 5000);
             });
-        </script>
+        </script>';
+        
+        echo $script;
+    @endphp
         
         <style>
             /* DataTables Pagination Styling */
@@ -425,8 +438,7 @@
                     font-size: 13px;
                 }
             }
-        </style>';
-    @endphp
+        </style>
 
     <x-script/>
     {!! $script !!}
@@ -476,6 +488,118 @@
             transition: all 0.3s ease;
         }
     </style>
+
+    <!-- Create Product Modal -->
+    <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #ec3737 0%, #d42f2f 100%);">
+                    <h5 class="modal-title text-white fw-bold" id="createProductModalLabel" style="font-size: 18px !important;">
+                        Add New Product
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="createProductModalBody">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load create product form via AJAX when modal is shown
+        $(document).ready(function() {
+            $('#createProductModal').on('show.bs.modal', function() {
+                // Reset wizard initialization flag
+                window.productWizardInit = false;
+                
+                $('#createProductModalBody').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                
+                $.ajax({
+                    url: '{{ route("products.create.form") }}',
+                    method: 'GET',
+                    success: function(response) {
+                        $('#createProductModalBody').html(response);
+                    },
+                    error: function() {
+                        $('#createProductModalBody').html('<div class="alert alert-danger">Failed to load form. Please try again.</div>');
+                    }
+                });
+            });
+
+            // Handle form submission via AJAX
+            $(document).on('submit', '#createProductForm', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = $(this).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+                submitBtn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Saving...');
+                
+                $.ajax({
+                    url: '{{ route("products.store") }}',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#createProductModal').modal('hide');
+                        location.reload(); // Reload page to show new product
+                    },
+                    error: function(xhr) {
+                        submitBtn.prop('disabled', false).html(originalText);
+                        
+                        console.error('Error response:', xhr);
+                        
+                        if (xhr.status === 422) {
+                            // Validation errors
+                            const errors = xhr.responseJSON.errors;
+                            let errorHtml = '<div class="alert alert-danger alert-dismissible fade show"><ul class="mb-0">';
+                            $.each(errors, function(key, value) {
+                                errorHtml += '<li>' + value[0] + '</li>';
+                            });
+                            errorHtml += '</ul></div>';
+                            
+                            // Insert errors at the top of modal body
+                            $('#createProductModalBody').prepend(errorHtml);
+                            
+                            // Auto dismiss after 5 seconds
+                            setTimeout(function() {
+                                $('.alert').fadeOut();
+                            }, 5000);
+                        } else {
+                            // Display more detailed error if available
+                            let errorMessage = 'An error occurred. Please try again.';
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            } else if (xhr.responseText) {
+                                try {
+                                    const response = JSON.parse(xhr.responseText);
+                                    errorMessage = response.message || errorMessage;
+                                } catch (e) {
+                                    // Keep default message if parsing fails
+                                }
+                            }
+                            
+                            let errorHtml = '<div class="alert alert-danger alert-dismissible fade show">' + 
+                                '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                                '<strong>Error!</strong> ' + errorMessage +
+                                '</div>';
+                            
+                            // Insert error at the top of modal body
+                            $('#createProductModalBody').prepend(errorHtml);
+                            
+                            // Auto dismiss after 8 seconds
+                            setTimeout(function() {
+                                $('.alert').fadeOut();
+                            }, 8000);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
 </x-layout.master>
 

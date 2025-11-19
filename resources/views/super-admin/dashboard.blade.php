@@ -8,7 +8,7 @@
         <ul class="d-flex align-items-center gap-2">
             <li class="fw-medium">
                 <a href="{{ route('super-admin.dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                    <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                    <i class="bi bi-house" class="icon text-lg"></i>
                     Dashboard
                 </a>
             </li>
@@ -26,7 +26,7 @@
                         <div class="card-body p-0">
                             <div class="d-flex align-items-center gap-2 mb-8">
                                 <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #487FFF;">
-                                    <iconify-icon icon="solar:buildings-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-building"></i>
                                 </span>
                                 <div class="flex-grow-1">
                                     <span class="d-block fw-medium text-secondary-light text-sm mb-1">Businesses</span>
@@ -44,7 +44,7 @@
                         <div class="card-body p-0">
                             <div class="d-flex align-items-center gap-2 mb-8">
                                 <span class="mb-0 w-48-px h-48-px bg-success-main flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <iconify-icon icon="solar:users-group-rounded-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-people-fill"></i>
                                 </span>
                                 <div class="flex-grow-1">
                                     <span class="d-block fw-medium text-secondary-light text-sm mb-1">Total Users</span>
@@ -62,7 +62,7 @@
                         <div class="card-body p-0">
                             <div class="d-flex align-items-center gap-2 mb-8">
                                 <span class="mb-0 w-48-px h-48-px bg-yellow text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <iconify-icon icon="solar:dollar-minimalistic-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-currency-dollar"></i>
                                 </span>
                                 <div class="flex-grow-1">
                                     <span class="d-block fw-medium text-secondary-light text-sm mb-1">Revenue (30d)</span>
@@ -80,7 +80,7 @@
                         <div class="card-body p-0">
                             <div class="d-flex align-items-center gap-2 mb-8">
                                 <span class="mb-0 w-48-px h-48-px bg-purple text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <iconify-icon icon="solar:box-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-box-seam"></i>
                                 </span>
                                 <div class="flex-grow-1">
                                     <span class="d-block fw-medium text-secondary-light text-sm mb-1">Products</span>
@@ -98,7 +98,7 @@
                         <div class="card-body p-0">
                             <div class="d-flex align-items-center gap-2 mb-8">
                                 <span class="mb-0 w-48-px h-48-px bg-pink text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <iconify-icon icon="fluent:cart-16-filled" class="icon"></iconify-icon>
+                                    <i class="bi bi-cart-check"></i>
                                 </span>
                                 <div class="flex-grow-1">
                                     <span class="d-block fw-medium text-secondary-light text-sm mb-1">Total Sales</span>
@@ -116,7 +116,7 @@
                         <div class="card-body p-0">
                             <div class="d-flex align-items-center gap-2 mb-8">
                                 <span class="mb-0 w-48-px h-48-px bg-cyan text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <iconify-icon icon="solar:chart-2-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <div class="flex-grow-1">
                                     <span class="d-block fw-medium text-secondary-light text-sm mb-1">Growth Rate</span>
@@ -151,7 +151,7 @@
                         <div class="d-flex align-items-center gap-3 mb-12">
                             <div class="d-flex align-items-center flex-shrink-0">
                                 <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0" style="color: #487FFF;">
-                                    <iconify-icon icon="solar:buildings-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-primary-light fw-medium text-sm ps-12 text-nowrap">Active Businesses</span>
                             </div>
@@ -168,7 +168,7 @@
                         <div class="d-flex align-items-center gap-3">
                             <div class="d-flex align-items-center flex-shrink-0">
                                 <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0 text-success-main">
-                                    <iconify-icon icon="solar:users-group-rounded-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-primary-light fw-medium text-sm ps-12 text-nowrap">Active Users</span>
                             </div>
@@ -215,7 +215,7 @@
                         <h6 class="mb-2 fw-bold text-lg">Business Health Status</h6>
                         <a href="{{ route('super-admin.businesses.index') }}" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
                             View All
-                            <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                            <i class="bi bi-arrow-right class="icon""></i>
                         </a>
                     </div>
                     @if(array_sum($businessStatusDistribution) > 0)
@@ -265,7 +265,7 @@
                         <h6 class="mb-2 fw-bold text-lg">User Role Distribution</h6>
                         <a href="{{ route('super-admin.users.index') }}" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
                             View All
-                            <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                            <i class="bi bi-arrow-right class="icon""></i>
                         </a>
                     </div>
                     @if(($userRoleDistribution['business_owners'] + $userRoleDistribution['staff']) > 0)
@@ -320,7 +320,7 @@
                     <h6 class="text-lg fw-bold mb-0" style="color: #487FFF;">Recent Businesses</h6>
                     <a href="{{ route('super-admin.businesses.index') }}" class="fw-bold d-flex align-items-center gap-1" style="color: #487FFF; text-decoration: none;" onmouseover="this.style.color='#3666d4'" onmouseout="this.style.color='#487FFF'">
                         View All
-                        <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                        <i class="bi bi-arrow-right class="icon""></i>
                     </a>
                 </div>
                 <div class="card-body p-24">

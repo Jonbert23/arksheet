@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -23,7 +23,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -39,7 +39,7 @@
                     <div class="card bg-warning-50 border border-warning-600">
                         <div class="card-body">
                             <div class="d-flex align-items-start gap-2">
-                                <iconify-icon icon="mdi:alert" class="text-warning-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <div>
                                     <h6 class="text-warning-600 mb-8">Important Notice</h6>
                                     <ul class="text-sm text-secondary-light mb-0 ps-16">
@@ -59,7 +59,7 @@
                     <div class="card mb-24">
                         <div class="card-header bg-neutral-50">
                             <div class="d-flex align-items-center gap-2">
-                                <iconify-icon icon="mdi:pencil" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <h6 class="card-title mb-0">Stock Entry Information</h6>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <small class="text-secondary-light">
-                                        <iconify-icon icon="mdi:information-outline" class="text-xs"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span id="unit-label">Units received</span>
                                     </small>
                                 </div>
@@ -130,7 +130,7 @@
                                         <input type="text" id="total_cost_display" class="form-control fw-semibold text-success-600" placeholder="0.00" readonly>
                                     </div>
                                     <small class="text-secondary-light">
-                                        <iconify-icon icon="mdi:calculator" class="text-xs"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Automatically calculated
                                     </small>
                                 </div>
@@ -172,16 +172,16 @@
                         <div class="card-body p-24">
                             <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
                                 <div class="text-secondary-light">
-                                    <iconify-icon icon="mdi:information-outline" class="text-lg"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span class="ms-2">Fields marked with <span class="text-danger fw-semibold">*</span> are required</span>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
                                     <a href="{{ route('stock.show', $stock->id) }}" class="btn bg-neutral-200 text-neutral-900 hover-bg-neutral-300 radius-8 px-32 py-14 d-flex align-items-center gap-2 fw-semibold">
-                                        <iconify-icon icon="mdi:arrow-left" class="text-xl"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Cancel
                                     </a>
                                     <button type="submit" class="btn btn-primary-600 hover-bg-primary-700 radius-8 px-32 py-14 d-flex align-items-center gap-2 fw-semibold shadow-sm">
-                                        <iconify-icon icon="mdi:content-save" class="text-xl"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Update Stock Entry
                                     </button>
                                 </div>
@@ -368,7 +368,7 @@
                 // Show product info
                 if (selectedOption.val()) {
                     $("#product-info").html(
-                        '<iconify-icon icon="mdi:information" class="text-xs"></iconify-icon>' +
+                        '<i class="bi bi-circle-fill"></i>' +
                         'Current stock: <strong>' + currentStock + ' ' + unit + '</strong> | Current cost: <strong>₱ ' + currentCost.toFixed(2) + '</strong>'
                     );
                 } else {

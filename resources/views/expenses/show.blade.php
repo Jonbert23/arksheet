@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -26,14 +26,14 @@
                 <h6 class="card-title mb-0" style="font-size: 18px !important; color: #4b5563;">Expense Information</h6>
                 <div class="d-flex gap-2">
                     <a href="{{ route('expenses.edit', $expense->id) }}" class="btn btn-success-600 radius-8 px-20 py-11">
-                        <iconify-icon icon="lucide:edit" class="icon text-xl me-1"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         Edit
                     </a>
                     <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-danger-600 radius-8 px-20 py-11 delete-btn">
-                            <iconify-icon icon="fluent:delete-24-regular" class="icon text-xl me-1"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Delete
                         </button>
                     </form>
@@ -45,7 +45,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:calendar" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Expense Date</span>
                             </div>
                             <h6 class="mb-0">{{ $expense->date->format('F d, Y') }}</h6>
@@ -56,7 +56,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:tag" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Category</span>
                             </div>
                             <span class="badge bg-primary-100 text-primary-600 px-16 py-6 text-md">
@@ -69,7 +69,7 @@
                     <div class="col-12">
                         <div class="p-16 border radius-8">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:text" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Title</span>
                             </div>
                             <h6 class="mb-0">{{ $expense->title }}</h6>
@@ -81,7 +81,7 @@
                     <div class="col-12">
                         <div class="p-16 border radius-8">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:text-box" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Description</span>
                             </div>
                             <p class="mb-0">{{ $expense->description }}</p>
@@ -93,7 +93,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100 bg-danger-50">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:cash-minus" class="text-danger-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Amount</span>
                             </div>
                             <h4 class="mb-0 text-danger-600">{{ auth()->user()->business->currency }} {{ number_format($expense->amount, 2) }}</h4>
@@ -104,7 +104,7 @@
                     <div class="col-md-6">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:credit-card" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Payment Method</span>
                             </div>
                             <h6 class="mb-0">{{ $expense->payment_method ?? 'Not Specified' }}</h6>
@@ -115,7 +115,7 @@
                     <div class="col-md-12">
                         <div class="p-16 border radius-8 h-100">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:store" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Vendor/Supplier</span>
                             </div>
                             <h6 class="mb-0">{{ $expense->vendor ?? 'Not Specified' }}</h6>
@@ -127,7 +127,7 @@
                     <div class="col-12">
                         <div class="p-16 border radius-8">
                             <div class="d-flex align-items-center gap-2 mb-2">
-                                <iconify-icon icon="mdi:note-text" class="text-primary-600 text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span class="text-sm text-secondary-light">Notes</span>
                             </div>
                             <p class="mb-0">{{ $expense->notes }}</p>
@@ -141,13 +141,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center gap-2">
-                                        <iconify-icon icon="mdi:clock-outline" class="text-secondary-light"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span class="text-sm text-secondary-light">Created: {{ $expense->created_at->format('M d, Y h:i A') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center gap-2">
-                                        <iconify-icon icon="mdi:clock-check-outline" class="text-secondary-light"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span class="text-sm text-secondary-light">Updated: {{ $expense->updated_at->format('M d, Y h:i A') }}</span>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
                     <!-- Back Button -->
                     <div class="col-12">
                         <a href="{{ route('expenses.index') }}" class="btn btn-secondary-600 radius-8 px-20 py-11">
-                            <iconify-icon icon="mdi:arrow-left" class="icon text-xl me-1"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Back to List
                         </a>
                     </div>

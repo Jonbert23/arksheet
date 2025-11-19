@@ -3,15 +3,15 @@
         <div class="col-auto">
             <div class="d-flex flex-wrap align-items-center gap-4">
                 <button type="button" class="sidebar-toggle">
-                    <iconify-icon icon="heroicons:bars-3-solid" class="icon text-2xl non-active"></iconify-icon>
-                    <iconify-icon icon="iconoir:arrow-right" class="icon text-2xl active"></iconify-icon>
+                    <i class="bi bi-list icon text-2xl non-active"></i>
+                    <i class="bi bi-arrow-right icon text-2xl active"></i>
                 </button>
                 <button type="button" class="sidebar-mobile-toggle">
-                    <iconify-icon icon="heroicons:bars-3-solid" class="icon"></iconify-icon>
+                    <i class="bi bi-list icon"></i>
                 </button>
                 <form class="navbar-search">
                     <input type="text" name="search" placeholder="Search">
-                    <iconify-icon icon="ion:search-outline" class="icon"></iconify-icon>
+                    <i class="bi bi-search icon"></i>
                 </form>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <!-- Business Info -->
                 @if(auth()->check() && auth()->user()->business)
                 <div class="d-flex align-items-center gap-2 bg-neutral-50 px-3 py-2 rounded-pill d-none d-md-flex">
-                    <iconify-icon icon="mdi:office-building" class="text-primary-600 text-xl"></iconify-icon>
+                    <i class="bi bi-building text-primary-600 text-xl"></i>
                     <span class="text-sm fw-semibold">{{ auth()->user()->business->name }}</span>
                 </div>
                 @endif
@@ -31,7 +31,7 @@
                 <!-- Notifications -->
                 <div class="dropdown">
                     <button class="has-indicator w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center" type="button" data-bs-toggle="dropdown">
-                        <iconify-icon icon="iconoir:bell" class="text-primary-light text-xl"></iconify-icon>
+                        <i class="bi bi-bell text-primary-light text-xl"></i>
                     </button>
                     <div class="dropdown-menu to-top dropdown-menu-lg p-0">
                         <div class="m-16 py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
@@ -43,7 +43,7 @@
 
                         <div class="max-h-400-px overflow-y-auto scroll-sm pe-4">
                             <div class="text-center py-5">
-                                <iconify-icon icon="mdi:bell-off-outline" class="text-xxl text-secondary-light"></iconify-icon>
+                                <i class="bi bi-bell-slash text-xxl text-secondary-light"></i>
                                 <p class="text-secondary-light mt-2">No notifications yet</p>
                             </div>
                         </div>
@@ -68,14 +68,14 @@
                                 <div class="flex-grow-1">
                                     <h6 class="text-md fw-bold mb-1 text-dark">{{ auth()->user()->name }}</h6>
                                     <span class="badge bg-primary-50 text-primary-600 px-8 py-4 radius-4 text-xs fw-medium d-inline-flex align-items-center gap-1">
-                                        <iconify-icon icon="mdi:shield-account" class="text-sm"></iconify-icon>
+                                        <i class="bi bi-shield-check text-sm"></i>
                                         {{ ucfirst(auth()->user()->role) }}
                                     </span>
                                 </div>
                             </div>
                             @if(auth()->user()->email)
                             <div class="d-flex align-items-center gap-2 px-2">
-                                <iconify-icon icon="mdi:email-outline" class="text-secondary-light text-lg"></iconify-icon>
+                                <i class="bi bi-envelope text-secondary-light text-lg"></i>
                                 <span class="text-secondary-light text-xs">{{ auth()->user()->email }}</span>
                             </div>
                             @endif
@@ -86,24 +86,24 @@
                             <li class="mb-4">
                                 <a class="dropdown-item text-dark px-12 py-10 hover-bg-primary-50 hover-text-primary d-flex align-items-center gap-3 radius-8 transition fw-medium" href="{{ route('profile.index') }}">
                                     <div class="w-32-px h-32-px bg-primary-50 text-primary-600 rounded-circle d-flex align-items-center justify-content-center">
-                                        <iconify-icon icon="solar:user-bold" class="text-lg"></iconify-icon>
+                                        <i class="bi bi-person text-lg"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <span class="text-sm d-block">My Profile</span>
                                     </div>
-                                    <iconify-icon icon="solar:alt-arrow-right-linear" class="text-lg text-secondary-light"></iconify-icon>
+                                    <i class="bi bi-arrow-right text-lg text-secondary-light"></i>
                                 </a>
                             </li>
                             @if(auth()->user()->isAdmin())
                             <li class="mb-4">
                                 <a class="dropdown-item text-dark px-12 py-10 hover-bg-primary-50 hover-text-primary d-flex align-items-center gap-3 radius-8 transition fw-medium" href="{{ route('settings.config.index') }}">
                                     <div class="w-32-px h-32-px bg-primary-50 text-primary-600 rounded-circle d-flex align-items-center justify-content-center">
-                                        <iconify-icon icon="solar:settings-bold" class="text-lg"></iconify-icon>
+                                        <i class="bi bi-gear text-lg"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <span class="text-sm d-block">Settings</span>
                                     </div>
-                                    <iconify-icon icon="solar:alt-arrow-right-linear" class="text-lg text-secondary-light"></iconify-icon>
+                                    <i class="bi bi-arrow-right text-lg text-secondary-light"></i>
                                 </a>
                             </li>
                             @endif
@@ -115,7 +115,7 @@
                                 @csrf
                                 <button type="button" onclick="confirmLogout()" class="dropdown-item text-danger-600 px-12 py-10 hover-bg-danger-50 d-flex align-items-center gap-3 radius-8 transition w-100 border-0 bg-transparent fw-semibold">
                                     <div class="w-32-px h-32-px bg-danger-50 text-danger-600 rounded-circle d-flex align-items-center justify-content-center">
-                                        <iconify-icon icon="solar:logout-2-bold" class="text-lg"></iconify-icon>
+                                        <i class="bi bi-box-arrow-right text-lg"></i>
                                     </div>
                                     <span class="text-sm">Log Out</span>
                                 </button>
@@ -280,7 +280,7 @@
     }
     
     /* Arrow icon animation on hover */
-    .dropdown-item:hover iconify-icon[icon*="arrow"] {
+    .dropdown-item:hover i[class*='arrow'] {
         transform: translateX(4px);
         transition: transform 0.2s ease;
     }

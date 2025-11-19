@@ -5,7 +5,7 @@
     <div class="mb-24">
         <div class="d-flex align-items-center gap-2 mb-16">
             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <iconify-icon icon="mdi:information-outline" class="text-white" style="font-size: 16px;"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Basic Information</h6>
         </div>
@@ -59,7 +59,7 @@
     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
         <div class="d-flex align-items-center gap-2 mb-16">
             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <iconify-icon icon="mdi:lock-outline" class="text-white" style="font-size: 16px;"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Account Security</h6>
         </div>
@@ -90,7 +90,7 @@
     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;" id="permissionsSection">
         <div class="d-flex align-items-center gap-2 mb-16">
             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <iconify-icon icon="mdi:shield-account-outline" class="text-white" style="font-size: 16px;"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Module Permissions</h6>
         </div>
@@ -117,7 +117,7 @@
     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
         <div class="d-flex align-items-center gap-2 mb-16">
             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <iconify-icon icon="mdi:tune-variant" class="text-white" style="font-size: 16px;"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Settings</h6>
         </div>
@@ -151,11 +151,11 @@
     <!-- Modal Footer -->
     <div class="d-flex justify-content-end gap-3 mt-24 pt-24" style="border-top: 1px solid #e5e7eb;">
         <button type="button" class="btn btn-outline-secondary radius-8 d-flex align-items-center gap-2" style="padding: 11px 24px; font-size: 14px; font-weight: 500; transition: all 0.2s ease;" data-bs-dismiss="modal">
-            <iconify-icon icon="mdi:close" style="font-size: 18px;"></iconify-icon>
+            <i class="bi bi-circle-fill"></i>
             <span>Cancel</span>
         </button>
         <button type="submit" class="btn text-white radius-8 d-flex align-items-center gap-2" style="background-color: #ec3737; padding: 11px 24px; font-size: 14px; font-weight: 500; transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-            <iconify-icon icon="mdi:check-circle" style="font-size: 18px;"></iconify-icon>
+            <i class="bi bi-circle-fill"></i>
             <span>Create User</span>
         </button>
     </div>

@@ -26,7 +26,7 @@ class BusinessConfigController extends Controller
         $productTypes = BusinessSetting::where('business_id', $business->id)
             ->where('setting_key', 'product_type')->ordered()->get();
         $units = BusinessSetting::where('business_id', $business->id)
-            ->where('setting_key', 'unit')->ordered()->get();
+            ->where('setting_key', 'unit_of_measurement')->ordered()->get();
         $paymentMethods = BusinessSetting::where('business_id', $business->id)
             ->where('setting_key', 'payment_method')->ordered()->get();
         $paymentStatuses = BusinessSetting::where('business_id', $business->id)

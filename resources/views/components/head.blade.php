@@ -5,6 +5,8 @@
     <link rel="icon" type="image/png"  href="{{ asset('assets/images/favicon.png') }}" sizes="16x16">
     <!-- remix icon font css  -->
     <link rel="stylesheet"  href="{{ asset('assets/css/remixicon.css') }}">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- BootStrap css -->
     <link rel="stylesheet"  href="{{ asset('assets/css/lib/bootstrap.min.css') }}">
     <!-- Apex Chart css -->
@@ -36,9 +38,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <!-- main css -->
     <link rel="stylesheet"  href="{{ asset('assets/css/style.css') }}">
-    
-    <!-- Iconify Icon (Load early) -->
-    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
     
     <!-- Page-specific styles -->
     @stack('styles')

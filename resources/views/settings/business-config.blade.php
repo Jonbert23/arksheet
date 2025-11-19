@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -19,7 +19,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl"></iconify-icon>
+                <i class="bi bi-check-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -27,7 +27,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl"></iconify-icon>
+                <i class="bi bi-exclamation-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -37,31 +37,31 @@
         <ul class="nav bordered-tab nav-primary mb-0" id="mainTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active d-flex align-items-center gap-2 px-24 py-12" id="main-business-tab" data-bs-toggle="tab" data-bs-target="#main-business" type="button" role="tab" aria-selected="true">
-                    <iconify-icon icon="mdi:office-building" class="text-xl"></iconify-icon>
+                    <i class="bi bi-building"></i>
                     <span>Business</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link d-flex align-items-center gap-2 px-24 py-12" id="main-products-tab" data-bs-toggle="tab" data-bs-target="#main-products" type="button" role="tab" aria-selected="false">
-                    <iconify-icon icon="mdi:package-variant" class="text-xl"></iconify-icon>
+                    <i class="bi bi-box-seam"></i>
                     <span>Products</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link d-flex align-items-center gap-2 px-24 py-12" id="main-stock-tab" data-bs-toggle="tab" data-bs-target="#main-stock" type="button" role="tab" aria-selected="false">
-                    <iconify-icon icon="mdi:truck-delivery" class="text-xl"></iconify-icon>
+                    <i class="bi bi-boxes"></i>
                     <span>Stock</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link d-flex align-items-center gap-2 px-24 py-12" id="main-sales-tab" data-bs-toggle="tab" data-bs-target="#main-sales" type="button" role="tab" aria-selected="false">
-                    <iconify-icon icon="mdi:cart-outline" class="text-xl"></iconify-icon>
+                    <i class="bi bi-cart-check"></i>
                     <span>Sales</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link d-flex align-items-center gap-2 px-24 py-12" id="main-expenses-tab" data-bs-toggle="tab" data-bs-target="#main-expenses" type="button" role="tab" aria-selected="false">
-                    <iconify-icon icon="mdi:cash-remove" class="text-xl"></iconify-icon>
+                    <i class="bi bi-receipt"></i>
                     <span>Expenses</span>
                 </button>
             </li>
@@ -201,12 +201,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                            <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
-                            Cancel
-                        </button>
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
-                            Add Channel
+                        <i class="bi bi-x-circle"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                        <i class="bi bi-plus-circle"></i>
+                        Add Channel
                         </button>
                     </div>
                 </form>
@@ -243,12 +243,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                            <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
-                            Cancel
-                        </button>
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
-                            Update Channel
+                        <i class="bi bi-x-circle"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                        <i class="bi bi-check-circle"></i>
+                        Update Channel
                         </button>
                     </div>
                 </form>
@@ -272,12 +272,12 @@
                     <div class="modal-body">
                         <div class="mb-20">
                             <label class="form-label fw-semibold text-primary-light text-sm mb-8">Method Name <span class="text-danger-600">*</span></label>
-                            <input type="text" class="form-control radius-8" name="label" required placeholder="e.g., Cash">
+                            <input type="text" class="form-control radius-8" name="setting_label" required placeholder="e.g., Cash">
                         </div>
                         <div class="mb-20">
                             <label class="form-label fw-semibold text-primary-light text-sm mb-8">Method Value <span class="text-danger-600">*</span></label>
-                            <input type="text" class="form-control radius-8" name="value" required placeholder="e.g., cash">
-                            <small class="text-secondary-light d-block mt-1"><iconify-icon icon="mdi:information" class="icon-sm"></iconify-icon> Lowercase, no spaces (use underscores)</small>
+                            <input type="text" class="form-control radius-8" name="setting_value" required placeholder="e.g., cash">
+                            <small class="text-secondary-light d-block mt-1"><i class="bi bi-info-circle"></i> Lowercase, no spaces (use underscores)</small>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" name="is_active" checked>
@@ -286,12 +286,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                            <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
-                            Cancel
-                        </button>
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
-                            Add Method
+                        <i class="bi bi-x-circle"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                        <i class="bi bi-plus-circle"></i>
+                        Add Method
                         </button>
                     </div>
                 </form>
@@ -315,12 +315,12 @@
                     <div class="modal-body">
                         <div class="mb-20">
                             <label class="form-label fw-semibold text-primary-light text-sm mb-8">Status Label <span class="text-danger-600">*</span></label>
-                            <input type="text" class="form-control radius-8" name="label" required placeholder="e.g., Paid">
+                            <input type="text" class="form-control radius-8" name="setting_label" required placeholder="e.g., Paid">
                         </div>
                         <div class="mb-20">
                             <label class="form-label fw-semibold text-primary-light text-sm mb-8">Status Value <span class="text-danger-600">*</span></label>
-                            <input type="text" class="form-control radius-8" name="value" required placeholder="e.g., paid">
-                            <small class="text-secondary-light d-block mt-1"><iconify-icon icon="mdi:information" class="icon-sm"></iconify-icon> Lowercase, no spaces (use underscores)</small>
+                            <input type="text" class="form-control radius-8" name="setting_value" required placeholder="e.g., paid">
+                            <small class="text-secondary-light d-block mt-1"><i class="bi bi-info-circle"></i> Lowercase, no spaces (use underscores)</small>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" name="is_active" checked>
@@ -329,11 +329,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                            <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
+                            <i class="bi bi-x-circle"></i>
                             Cancel
                         </button>
                         <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                            <i class="bi bi-plus-circle"></i>
                             Add Status
                         </button>
                     </div>
@@ -370,12 +370,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                            <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
-                            Cancel
-                        </button>
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
-                            Add Category
+                        <i class="bi bi-x-circle"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                        <i class="bi bi-plus-circle"></i>
+                        Add Category
                         </button>
                     </div>
                 </form>
@@ -412,12 +412,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                            <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
-                            Cancel
-                        </button>
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
-                            Update Category
+                        <i class="bi bi-x-circle"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                        <i class="bi bi-check-circle"></i>
+                        Update Category
                         </button>
                     </div>
                 </form>
@@ -441,12 +441,12 @@
                     <div class="modal-body">
                         <div class="mb-20">
                             <label class="form-label fw-semibold text-primary-light text-sm mb-8">Status Label <span class="text-danger-600">*</span></label>
-                            <input type="text" class="form-control radius-8" name="label" required placeholder="e.g., Approved">
+                            <input type="text" class="form-control radius-8" name="setting_label" required placeholder="e.g., Approved">
                         </div>
                         <div class="mb-20">
                             <label class="form-label fw-semibold text-primary-light text-sm mb-8">Status Value <span class="text-danger-600">*</span></label>
-                            <input type="text" class="form-control radius-8" name="value" required placeholder="e.g., approved">
-                            <small class="text-secondary-light d-block mt-1"><iconify-icon icon="mdi:information" class="icon-sm"></iconify-icon> Lowercase, no spaces (use underscores)</small>
+                            <input type="text" class="form-control radius-8" name="setting_value" required placeholder="e.g., approved">
+                            <small class="text-secondary-light d-block mt-1"><i class="bi bi-info-circle"></i> Lowercase, no spaces (use underscores)</small>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" name="is_active" checked>
@@ -455,11 +455,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                            <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
+                            <i class="bi bi-x-circle"></i>
                             Cancel
                         </button>
                         <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                            <i class="bi bi-plus-circle"></i>
                             Add Status
                         </button>
                     </div>

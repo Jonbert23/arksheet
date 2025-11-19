@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -17,7 +17,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -25,7 +25,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -42,7 +42,7 @@
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ $stockIns->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <iconify-icon icon="mdi:package-variant-plus" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                                 <h6 class="mb-0">{{ number_format($stockIns->sum('quantity')) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:cube-outline" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($stockIns->sum('total_cost'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:cash-multiple" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ $stockIns->count() > 0 ? number_format($stockIns->avg('cost_per_unit'), 2) : '0.00' }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:chart-bar" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -110,12 +110,12 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search stock entries..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <iconify-icon icon="ion:search-outline"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </span>
                     </div>
                 </div>
                 <a href="{{ route('stock.create') }}" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                    <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     Add Stock
                 </a>
             </div>
@@ -184,16 +184,16 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <a href="{{ route('stock.show', $stockIn->id) }}" class="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle" title="View">
-                                            <iconify-icon icon="solar:eye-linear" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </a>
                                         <button type="button" class="edit-stock-btn bg-success-focus text-success-600 bg-hover-success-200 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="Edit">
-                                            <iconify-icon icon="lucide:edit" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         <form action="{{ route('stock.destroy', $stockIn->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle delete-btn border-0" title="Delete">
-                                                <iconify-icon icon="fluent:delete-24-regular" class="icon text-lg"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -202,9 +202,12 @@
                             @empty
                             <tr>
                                 <td colspan="9" class="text-center py-48">
-                                    <iconify-icon icon="mdi:package-variant-closed-remove" class="text-xxl text-secondary-light mb-16" style="font-size: 64px;"></iconify-icon>
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: #fff5f5; border-radius: 50%; margin: 0 auto 16px;">
+                                        <i class="bi bi-inbox" style="font-size: 2.5rem; color: #ec3737;"></i>
+                                    </div>
                                     <p class="text-secondary-light fw-semibold mb-16">No stock entries found</p>
-                                    <a href="{{ route('stock.create') }}" class="btn btn-primary-600 radius-8 px-20 py-11">
+                                    <a href="{{ route('stock.create') }}" class="btn text-white radius-8 px-24 py-11 fw-bold" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                                        <i class="bi bi-plus-circle"></i>
                                         Add Your First Stock Entry
                                     </a>
                                 </td>
@@ -229,7 +232,7 @@
                     <div class="modal-header border-bottom py-16 px-24">
                         <div class="d-flex align-items-center gap-3">
                             <div class="w-40-px h-40-px bg-success-100 text-success-600 rounded-circle d-flex align-items-center justify-content-center">
-                                <iconify-icon icon="lucide:edit" class="text-2xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h5 class="modal-title fw-bold mb-0" id="editStockModalLabel">Edit Stock Entry</h5>
@@ -379,7 +382,7 @@
                                 Cancel
                             </button>
                             <button type="submit" class="btn btn-success-600 radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                                <iconify-icon icon="mdi:check-circle" class="icon text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Update Stock Entry
                             </button>
                         </div>
@@ -390,8 +393,12 @@
     </div>
 
     @php
+        $hasStockEntries = $stockIns->count() > 0;
         $script = '<script>
-            $(document).ready(function() {
+            $(document).ready(function() {';
+        
+        if ($hasStockEntries) {
+            $script .= '
                 // Check if DataTable is already initialized
                 if ($.fn.DataTable.isDataTable("#stock-table")) {
                     $("#stock-table").DataTable().destroy();
@@ -408,20 +415,25 @@
                     "autoWidth": false,
                     "order": [[1, "desc"]],
                     "pagingType": "full_numbers",
+                    "columns": [
+                        { "orderable": false, "searchable": false },  // 0 - No.
+                        { "orderable": true, "searchable": false },   // 1 - Date
+                        { "orderable": true, "searchable": true },    // 2 - Product
+                        { "orderable": true, "searchable": true },    // 3 - Reference No.
+                        { "orderable": true, "searchable": false },   // 4 - Quantity
+                        { "orderable": true, "searchable": false },   // 5 - Cost Per Unit
+                        { "orderable": true, "searchable": false },   // 6 - Total Cost
+                        { "orderable": true, "searchable": true },    // 7 - Supplier
+                        { "orderable": false, "searchable": false }   // 8 - Actions
+                    ],
                     "columnDefs": [
-                        {
-                            "targets": [0], // No. column
-                            "orderable": false,
-                            "searchable": false
-                        },
-                        {
-                            "targets": [8], // Actions column
-                            "orderable": false,
-                            "searchable": false
-                        },
                         {
                             "targets": [4, 5, 6], // Numeric columns
                             "className": "text-end"
+                        },
+                        {
+                            "targets": [8], // Actions column
+                            "className": "text-center"
                         }
                     ],
                     "language": {
@@ -457,7 +469,11 @@
                 // Connect custom length selector to DataTable
                 $("#entries-per-page").on("change", function() {
                     table.page.len($(this).val()).draw();
-                });
+                });';
+        }
+        
+        // Common functions that run regardless of whether there are stock entries
+        $script .= '
 
                 // Delete confirmation function
                 function bindDeleteConfirmation() {
@@ -552,7 +568,10 @@
                     });
                 }, 5000);
             });
-        </script>
+        </script>';
+        
+        echo $script;
+    @endphp
         
         <style>
             /* Edit Modal Product Info Styling */
@@ -657,8 +676,7 @@
                     font-size: 13px;
                 }
             }
-        </style>';
-    @endphp
+        </style>
 
     <x-script/>
     {!! $script !!}

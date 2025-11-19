@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -51,7 +51,7 @@
                         <div class="card-header bg-white">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                    <iconify-icon icon="mdi:information-outline" class="text-white" style="font-size: 18px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <h6 class="card-title mb-0 fw-bold">Basic Information</h6>
                             </div>
@@ -92,7 +92,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 <div class="mt-8 text-sm text-secondary-light">
-                                    <iconify-icon icon="mdi:information" class="icon-sm"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span id="goal-type-hint">Select a goal type to see description</span>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                                         <input class="form-check-input" type="radio" name="priority" id="priority-high" value="high" {{ old('priority') === 'high' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="priority-high">
                                             <span class="badge bg-danger-100 text-danger-600">
-                                                <iconify-icon icon="mdi:fire" class="icon-sm"></iconify-icon> High Priority
+                                                <i class="bi bi-circle-fill"></i> High Priority
                                             </span>
                                         </label>
                                     </div>
@@ -197,7 +197,7 @@
                             <!-- Action Buttons -->
                             <div class="d-flex gap-2 mt-24">
                                 <button type="submit" class="btn text-white radius-8 px-20 py-11 flex-grow-1" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                    <iconify-icon icon="mdi:check" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     Create Goal
                                 </button>
                                 <a href="{{ route('goals.index') }}" class="btn btn-outline-secondary radius-8 px-20 py-11">
@@ -211,7 +211,7 @@
                     <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2 mb-12">
-                                <iconify-icon icon="mdi:lightbulb-on" style="color: #ec3737; font-size: 24px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <h6 class="fw-bold mb-0">Quick Tips</h6>
                             </div>
                             <ul class="text-sm text-secondary-light mb-0 ps-3">

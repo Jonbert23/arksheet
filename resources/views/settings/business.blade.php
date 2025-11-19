@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -21,7 +21,7 @@
         <div class="card-body p-40">
             @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <iconify-icon icon="mdi:check-circle" class="icon text-xl"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     {{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -29,7 +29,7 @@
 
             @if($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <iconify-icon icon="mdi:alert-circle" class="icon text-xl"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <ul class="mb-0">
                         @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -491,11 +491,11 @@
                 <!-- Action Buttons -->
                 <div class="d-flex align-items-center justify-content-center gap-3 mt-24">
                     <button type="reset" class="border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-40 py-11 radius-8">
-                        <iconify-icon icon="mdi:refresh" class="icon text-xl"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         Reset
                     </button>
                     <button type="submit" class="btn btn-primary-600 radius-8 px-24 py-12 d-flex align-items-center gap-2">
-                        <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         Save Changes
                     </button>
                 </div>

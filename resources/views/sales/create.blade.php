@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -23,7 +23,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -31,7 +31,7 @@
 
         @if($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 <strong>Please fix the following errors:</strong>
                 <ul class="mb-0 mt-2">
                     @foreach($errors->all() as $error)
@@ -49,7 +49,7 @@
                     <div class="col-md-4">
                         <div class="d-flex align-items-center gap-3" id="step1Indicator">
                             <div class="step-number active">
-                                <iconify-icon icon="mdi:information" class="text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="mb-0 fw-bold">Step 1</h6>
@@ -60,7 +60,7 @@
                     <div class="col-md-4">
                         <div class="d-flex align-items-center gap-3" id="step2Indicator">
                             <div class="step-number">
-                                <iconify-icon icon="mdi:cart" class="text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="mb-0 fw-bold">Step 2</h6>
@@ -71,7 +71,7 @@
                     <div class="col-md-4">
                         <div class="d-flex align-items-center gap-3" id="step3Indicator">
                             <div class="step-number">
-                                <iconify-icon icon="mdi:check-circle" class="text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="mb-0 fw-bold">Step 3</h6>
@@ -96,7 +96,7 @@
                         <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="w-32-px h-32-px bg-primary-100 text-primary-600 rounded-circle d-flex align-items-center justify-content-center">
-                                    <iconify-icon icon="mdi:information" class="text-xl"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <h6 class="card-title mb-0">Step 1: Sale Information</h6>
                             </div>
@@ -184,7 +184,7 @@
                         <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="w-32-px h-32-px bg-success-100 text-success-600 rounded-circle d-flex align-items-center justify-content-center">
-                                    <iconify-icon icon="mdi:cart" class="text-xl"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <div>
                                     <h6 class="card-title mb-0">Step 2: Sale Items</h6>
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-success-600 btn-sm" id="addItemBtn">
-                                <iconify-icon icon="ic:baseline-plus" class="text-lg"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Add Item
                             </button>
                         </div>
@@ -238,18 +238,18 @@
                             <div id="noItemsMessage" class="text-center py-5">
                                 <div class="mb-4">
                                     <div class="w-80-px h-80-px bg-neutral-100 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
-                                        <iconify-icon icon="mdi:cart-off" class="text-secondary-light" style="font-size: 48px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </div>
                                 </div>
                                 <h6 class="fw-bold mb-2">No Items Added Yet</h6>
                                 <p class="text-secondary-light mb-4">Start by adding products to this sale</p>
                                 <button type="button" class="btn btn-success-600 mt-2 px-24 py-12" id="addFirstItemBtn">
-                                    <iconify-icon icon="ic:baseline-plus" class="text-xl me-1"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     Add First Item
                                 </button>
                                 <div class="mt-4">
                                     <small class="text-secondary-light">
-                                        <iconify-icon icon="mdi:lightbulb-outline" class="text-warning-600"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Tip: You can add multiple items and adjust quantities before submitting
                                     </small>
                                 </div>
@@ -264,14 +264,14 @@
                         <div class="card-header border-bottom">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="w-32-px h-32-px bg-warning-100 text-warning-600 rounded-circle d-flex align-items-center justify-content-center">
-                                    <iconify-icon icon="mdi:check-circle" class="text-xl"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <h6 class="card-title mb-0">Step 3: Review & Submit</h6>
                             </div>
                         </div>
                         <div class="card-body p-24">
                             <div class="alert alert-info d-flex align-items-start gap-3 mb-4">
-                                <iconify-icon icon="mdi:information" class="text-2xl mt-1"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <div>
                                     <h6 class="mb-1 fw-bold">Ready to record this sale?</h6>
                                     <p class="mb-0 text-sm">Please review the sale details above. Once submitted, the stock quantities will be automatically updated.</p>
@@ -280,11 +280,11 @@
                             
                             <div class="d-flex align-items-center justify-content-between">
                                 <a href="{{ route('sales.index') }}" class="btn btn-neutral-600 hover-bg-neutral-700 radius-8 px-24 py-12">
-                                    <iconify-icon icon="mdi:close" class="text-lg me-1"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     Cancel
                                 </a>
                                 <button type="submit" class="btn btn-primary-600 hover-bg-primary-700 radius-8 px-32 py-12 fw-bold" id="submitBtn" disabled>
-                                    <iconify-icon icon="mdi:check-circle" class="text-lg me-1"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span id="submitBtnText">Record Sale</span>
                                     <span id="submitBtnLoader" class="spinner-border spinner-border-sm ms-2" style="display: none;"></span>
                                 </button>
@@ -413,7 +413,7 @@
                         </td>
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-danger remove-item-btn" data-item-id="${itemCounter}">
-                                <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                         </td>
                     </tr>

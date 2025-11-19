@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -32,7 +32,7 @@
                         <div class="card-header bg-white">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                    <iconify-icon icon="mdi:information-outline" class="text-white" style="font-size: 18px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <h6 class="card-title mb-0 fw-bold">Basic Information</h6>
                             </div>
@@ -164,7 +164,7 @@
                                         <input class="form-check-input" type="radio" name="priority" id="priority-high" value="high" {{ old('priority', $goal->priority) === 'high' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="priority-high">
                                             <span class="badge bg-danger-100 text-danger-600">
-                                                <iconify-icon icon="mdi:fire" class="icon-sm"></iconify-icon> High Priority
+                                                <i class="bi bi-circle-fill"></i> High Priority
                                             </span>
                                         </label>
                                     </div>
@@ -185,7 +185,7 @@
                             <!-- Action Buttons -->
                             <div class="d-flex gap-2 mt-24">
                                 <button type="submit" class="btn text-white radius-8 px-20 py-11 flex-grow-1" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                    <iconify-icon icon="mdi:check" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     Update Goal
                                 </button>
                                 <a href="{{ route('goals.index') }}" class="btn btn-outline-secondary radius-8 px-20 py-11">

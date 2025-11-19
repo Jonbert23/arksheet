@@ -13,10 +13,11 @@ class SalesChannelSeeder extends Seeder
      */
     public function run(): void
     {
-        $business = Business::first();
+        // Get all businesses
+        $businesses = Business::all();
 
-        if (!$business) {
-            $this->command->error('No business found. Please run BusinessSeeder first.');
+        if ($businesses->isEmpty()) {
+            $this->command->warn('No businesses found. Please create a business first.');
             return;
         }
 
@@ -51,13 +52,25 @@ class SalesChannelSeeder extends Seeder
             ],
         ];
 
-        foreach ($channels as $channel) {
-            SalesChannel::create(array_merge($channel, [
-                'business_id' => $business->id,
-                'is_active' => true,
-            ]));
+        foreach ($businesses as $business) {
+            $this->command->info("Seeding sales channels for: {$business->name}");
+
+            foreach ($channels as $channel) {
+                SalesChannel::firstOrCreate(
+                    [
+                        'business_id' => $business->id,
+                        'name' => $channel['name'],
+                    ],
+                    [
+                        'description' => $channel['description'],
+                        'is_active' => true,
+                    ]
+                );
+            }
+
+            $this->command->info("  ✓ Created " . count($channels) . " sales channels");
         }
 
-        $this->command->info('✓ Sales Channels created!');
+        $this->command->info("\n✅ Sales channels seeded successfully!");
     }
 }

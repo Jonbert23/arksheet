@@ -7,7 +7,7 @@
         <div class="mb-24">
             @foreach($goalNotifications as $notification)
             <div class="alert alert-{{ $notification['type'] }} alert-dismissible fade show d-flex align-items-center gap-3 border-0 shadow-sm radius-8 mb-16" role="alert" style="border-left: 4px solid {{ $notification['type'] === 'success' ? '#10b981' : ($notification['type'] === 'warning' ? '#f59e0b' : '#ef4444') }} !important;">
-                <iconify-icon icon="{{ $notification['icon'] }}" style="font-size: 32px; color: {{ $notification['type'] === 'success' ? '#10b981' : ($notification['type'] === 'warning' ? '#f59e0b' : '#ef4444') }};"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 <div class="flex-grow-1">
                     <h6 class="fw-bold mb-4">{{ $notification['title'] }}</h6>
                     <p class="mb-0 text-sm">{{ $notification['message'] }}</p>
@@ -33,7 +33,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #ec3737;">
-                                            <iconify-icon icon="streamline:bag-dollar-solid" class="icon"></iconify-icon>
+                                            <i class="bi bi-cash-stack"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Gross Profit</span>
@@ -53,7 +53,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px bg-success-main flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6">
-                                            <iconify-icon icon="fluent:cart-16-filled" class="icon"></iconify-icon>
+                                            <i class="bi bi-cart-check-fill"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Total Sales</span>
@@ -73,7 +73,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px bg-yellow text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                            <iconify-icon icon="iconamoon:discount-fill" class="icon"></iconify-icon>
+                                            <i class="bi bi-tag-fill"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Items Sold</span>
@@ -93,7 +93,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px bg-purple text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                            <iconify-icon icon="mdi:package-variant" class="icon"></iconify-icon>
+                                            <i class="bi bi-box-seam-fill"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Products</span>
@@ -113,7 +113,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px bg-pink text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                            <iconify-icon icon="mdi:cash-remove" class="icon"></iconify-icon>
+                                            <i class="bi bi-wallet2"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Expenses</span>
@@ -133,7 +133,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px bg-cyan text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                            <iconify-icon icon="mdi:account-group" class="icon"></iconify-icon>
+                                            <i class="bi bi-people-fill"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Customers</span>
@@ -169,7 +169,7 @@
                             <div class="d-flex align-items-center justify-content-between gap-3 mb-12">
                                 <div class="d-flex align-items-center">
                                     <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0" style="color: #ec3737;">
-                                        <iconify-icon icon="fluent:cart-16-filled" class="icon"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </span>
                                     <span class="text-primary-light fw-medium text-sm ps-12">Sales Target</span>
                                 </div>
@@ -186,7 +186,7 @@
                             <div class="d-flex align-items-center justify-content-between gap-3">
                                 <div class="d-flex align-items-center">
                                     <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0 text-success-main">
-                                        <iconify-icon icon="iconamoon:discount-fill" class="icon"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </span>
                                     <span class="text-primary-light fw-medium text-sm ps-12">Items Target</span>
                                 </div>
@@ -225,7 +225,7 @@
                         <div class="mt-20 d-flex justify-content-center flex-wrap gap-3">
                             <div class="d-inline-flex align-items-center gap-2 p-2 radius-8 border pe-36 br-hover-primary group-item">
                                 <span class="bg-neutral-100 w-44-px h-44-px text-xxl radius-8 d-flex justify-content-center align-items-center text-secondary-light group-hover:bg-primary-600 group-hover:text-white">
-                                    <iconify-icon icon="fluent:cart-16-filled" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <div>
                                     <span class="text-secondary-light text-sm fw-medium">Peak Day</span>
@@ -235,7 +235,7 @@
 
                             <div class="d-inline-flex align-items-center gap-2 p-2 radius-8 border pe-36 br-hover-primary group-item">
                                 <span class="bg-neutral-100 w-44-px h-44-px text-xxl radius-8 d-flex justify-content-center align-items-center text-secondary-light group-hover:bg-primary-600 group-hover:text-white">
-                                    <iconify-icon icon="uis:chart" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <div>
                                     <span class="text-secondary-light text-sm fw-medium">Average</span>
@@ -260,7 +260,7 @@
                                     <h6 class="mb-2 fw-bold text-lg">Inventory</h6>
                                     <a href="{{ route('products.index') }}" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
                                         View All
-                                        <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                                        <i class="bi bi-arrow-right class="icon""></i>
                                     </a>
                                 </div>
 
@@ -268,7 +268,7 @@
                                     <div class="d-flex align-items-center justify-content-between gap-3 mb-12">
                                         <div class="d-flex align-items-center">
                                             <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0 text-success-main">
-                                                <iconify-icon icon="mdi:package-variant" class="icon"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </span>
                                             <span class="text-primary-light fw-medium text-sm ps-12">In Stock</span>
                                         </div>
@@ -285,7 +285,7 @@
                                     <div class="d-flex align-items-center justify-content-between gap-3 mb-12">
                                         <div class="d-flex align-items-center">
                                             <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0 text-warning-main">
-                                                <iconify-icon icon="mdi:alert-circle" class="icon"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </span>
                                             <span class="text-primary-light fw-medium text-sm ps-12">Low Stock</span>
                                         </div>
@@ -302,7 +302,7 @@
                                     <div class="d-flex align-items-center justify-content-between gap-3">
                                         <div class="d-flex align-items-center">
                                             <span class="text-xxl line-height-1 d-flex align-content-center flex-shrink-0 text-danger-main">
-                                                <iconify-icon icon="mdi:package-variant-closed-remove" class="icon"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </span>
                                             <span class="text-primary-light fw-medium text-sm ps-12">Out of Stock</span>
                                         </div>
@@ -427,7 +427,7 @@
                         <h6 class="text-lg fw-bold mb-0" style="color: #ec3737;">Bestselling Products</h6>
                         <a href="{{ route('products.index') }}" class="fw-bold d-flex align-items-center gap-1" style="color: #ec3737; text-decoration: none;" onmouseover="this.style.color='#d42f2f'" onmouseout="this.style.color='#ec3737'">
                             View All
-                            <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                            <i class="bi bi-arrow-right class="icon""></i>
                         </a>
                     </div>
                     <div class="card-body p-24">

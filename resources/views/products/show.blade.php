@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -30,7 +30,7 @@
                             <h6 class="card-title mb-0">Product Information</h6>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary-600 radius-8 px-12 py-8">
-                                    <iconify-icon icon="lucide:edit" class="icon me-4"></iconify-icon>
+                                    <i class="bi bi-pencil"></i>
                                     Edit
                                 </a>
                             </div>
@@ -122,7 +122,7 @@
                     <div class="card-body">
                         <div class="text-center mb-24">
                             <div class="w-80-px h-80-px bg-primary-50 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-16">
-                                <iconify-icon icon="mdi:package-variant" class="text-primary-600" style="font-size: 40px;"></iconify-icon>
+                                <i class="bi bi-box-seam text-primary-600" style="font-size: 2rem;"></i>
                             </div>
                             <h3 class="mb-0 fw-bold">{{ $product->stock_quantity }}</h3>
                             <p class="text-secondary-light mb-0">Units in Stock</p>
@@ -194,7 +194,7 @@
 
         <div class="mt-24">
             <a href="{{ route('products.index') }}" class="btn btn-neutral-500 radius-8 px-20 py-11">
-                <iconify-icon icon="ep:back" class="icon me-8"></iconify-icon>
+                <i class="bi bi-arrow-left"></i>
                 Back to Products
             </a>
         </div>

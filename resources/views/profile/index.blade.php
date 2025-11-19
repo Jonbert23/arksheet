@@ -5,7 +5,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -17,11 +17,11 @@
         @if(session('success'))
         <div class="alert alert-success bg-success-100 text-success-600 border-success-600 border-start-width-4-px border-top-0 border-end-0 border-bottom-0 px-24 py-13 mb-24 fw-semibold text-lg radius-4 d-flex align-items-center justify-content-between" role="alert">
             <div class="d-flex align-items-center gap-2">
-                <iconify-icon icon="akar-icons:double-check" class="icon text-xl"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('success') }}
             </div>
             <button class="remove-button cursor-pointer bg-transparent border-0" onclick="this.parentElement.remove()">
-                <iconify-icon icon="iconamoon:sign-times-light" class="icon text-2xl"></iconify-icon>                            
+                <i class="bi bi-circle-fill"></i>                            
             </button>
         </div>
         @endif
@@ -29,7 +29,7 @@
         @if($errors->any())
         <div class="alert alert-danger bg-danger-100 text-danger-600 border-danger-600 border-start-width-4-px border-top-0 border-end-0 border-bottom-0 px-24 py-13 mb-24 fw-semibold text-lg radius-4 d-flex align-items-center justify-content-between" role="alert">
             <div class="d-flex align-items-center gap-2">
-                <iconify-icon icon="akar-icons:circle-alert" class="icon text-xl"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 <ul class="mb-0">
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -37,7 +37,7 @@
                 </ul>
             </div>
             <button class="remove-button cursor-pointer bg-transparent border-0" onclick="this.parentElement.remove()">
-                <iconify-icon icon="iconamoon:sign-times-light" class="icon text-2xl"></iconify-icon>                            
+                <i class="bi bi-circle-fill"></i>                            
             </button>
         </div>
         @endif
@@ -58,7 +58,7 @@
                         <h6 class="mb-0 mt-16">{{ $user->name }}</h6>
                         <span class="text-secondary-light mb-16 d-block">{{ $user->email }}</span>
                         <span class="badge bg-primary-100 text-primary-600 px-16 py-6 radius-8 fw-semibold">
-                            <iconify-icon icon="mdi:shield-account" class="text-sm"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             {{ ucfirst($user->role) }}
                         </span>
                     </div>
@@ -110,13 +110,13 @@
                         <ul class="nav border-gradient-tab nav-pills mb-32 d-inline-flex" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link d-flex align-items-center gap-2 px-24 py-12 fw-medium active" id="pills-edit-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-edit-profile" type="button" role="tab" aria-controls="pills-edit-profile" aria-selected="true">
-                                <iconify-icon icon="solar:user-linear" class="text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Edit Profile
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link d-flex align-items-center gap-2 px-24 py-12 fw-medium" id="pills-change-password-tab" data-bs-toggle="pill" data-bs-target="#pills-change-password" type="button" role="tab" aria-controls="pills-change-password" aria-selected="false">
-                                <iconify-icon icon="solar:lock-password-outline" class="text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Change Password
                             </button>
                         </li>
@@ -133,7 +133,7 @@
                                     <div class="avatar-edit position-absolute bottom-0 end-0 me-24 mt-16 z-1 cursor-pointer">
                                         <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" hidden>
                                         <label for="imageUpload" class="w-40-px h-40-px d-flex justify-content-center align-items-center bg-primary-600 text-white border-0 bg-hover-primary-700 text-xl rounded-circle cursor-pointer shadow-sm">
-                                            <iconify-icon icon="solar:camera-outline" class="icon"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </label>
                                     </div>
                                     <div class="avatar-preview">
@@ -207,11 +207,11 @@
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center gap-3 mt-32">
                                     <button type="reset" class="btn btn-outline-secondary px-32 py-12 radius-8 d-flex align-items-center gap-2 fw-medium">
-                                        <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Reset
                                     </button>
                                     <button type="submit" class="btn btn-primary-600 px-32 py-12 radius-8 d-flex align-items-center gap-2 fw-semibold">
-                                        <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Save Changes
                                     </button>
                                 </div>
@@ -275,11 +275,11 @@
 
                                 <div class="d-flex align-items-center justify-content-center gap-3 mt-32">
                                     <button type="reset" class="btn btn-outline-secondary px-32 py-12 radius-8 d-flex align-items-center gap-2 fw-medium">
-                                        <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Reset
                                     </button>
                                     <button type="submit" class="btn btn-primary-600 px-32 py-12 radius-8 d-flex align-items-center gap-2 fw-semibold">
-                                        <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Update Password
                                     </button>
                                 </div>

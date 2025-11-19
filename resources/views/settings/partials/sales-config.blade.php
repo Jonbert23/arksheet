@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-between align-items-center mb-20">
             <h6 class="text-lg mb-0">Sales Channels</h6>
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addChannelModal">
-                <iconify-icon icon="mdi:plus"></iconify-icon> Add Channel
+                <i class="bi bi-circle-fill"></i> Add Channel
             </button>
         </div>
         <div id="channelsList">
@@ -17,13 +17,13 @@
                     </div>
                     <div class="d-flex gap-2">
                         <span class="badge {{$channel->is_active?'bg-success-100 text-success-600':'bg-secondary-100 text-secondary-600'}} badge-status">{{$channel->is_active?'Active':'Inactive'}}</span>
-                        <button class="btn btn-sm btn-outline-primary btn-icon edit-channel" data-id="{{$channel->id}}" data-name="{{$channel->name}}" data-description="{{$channel->description}}" data-active="{{$channel->is_active}}"><iconify-icon icon="mdi:pencil"></iconify-icon></button>
-                        <button class="btn btn-sm btn-outline-danger btn-icon delete-channel" data-id="{{$channel->id}}"><iconify-icon icon="mdi:delete"></iconify-icon></button>
+                        <button class="btn btn-sm btn-outline-primary btn-icon edit-channel" data-id="{{$channel->id}}" data-name="{{$channel->name}}" data-description="{{$channel->description}}" data-active="{{$channel->is_active}}"><i class="bi bi-circle-fill"></i></button>
+                        <button class="btn btn-sm btn-outline-danger btn-icon delete-channel" data-id="{{$channel->id}}"><i class="bi bi-circle-fill"></i></button>
                     </div>
                 </div>
             </div>
             @empty
-            <div class="text-center py-5"><iconify-icon icon="mdi:store" style="font-size:48px;" class="text-secondary-light"></iconify-icon><p class="text-secondary-light mt-2">No sales channels configured</p></div>
+            <div class="text-center py-5"><i class="bi bi-circle-fill"></i><p class="text-secondary-light mt-2">No sales channels configured</p></div>
             @endforelse
         </div>
     </div>
@@ -34,7 +34,7 @@
             <div class="d-flex justify-content-between align-items-center mb-20">
                 <h6 class="text-lg mb-0">Payment Methods</h6>
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addPaymentMethodModal">
-                    <iconify-icon icon="mdi:plus"></iconify-icon> Add Method
+                    <i class="bi bi-circle-fill"></i> Add Method
                 </button>
             </div>
             @forelse($paymentMethods as $method)
@@ -44,8 +44,8 @@
                     <div class="d-flex gap-2">
                         <span class="badge {{$method->is_active?'bg-success-100 text-success-600':'bg-secondary-100 text-secondary-600'}} badge-status">{{$method->is_active?'Active':'Inactive'}}</span>
                         @if(!$method->is_system)
-                        <button class="btn btn-sm btn-outline-primary btn-icon edit-payment-method" data-id="{{$method->id}}" data-label="{{$method->setting_label}}" data-value="{{$method->setting_value}}" data-active="{{$method->is_active}}"><iconify-icon icon="mdi:pencil"></iconify-icon></button>
-                        <button class="btn btn-sm btn-outline-danger btn-icon delete-payment-method" data-id="{{$method->id}}"><iconify-icon icon="mdi:delete"></iconify-icon></button>
+                        <button class="btn btn-sm btn-outline-primary btn-icon edit-payment-method" data-id="{{$method->id}}" data-label="{{$method->setting_label}}" data-value="{{$method->setting_value}}" data-active="{{$method->is_active}}"><i class="bi bi-circle-fill"></i></button>
+                        <button class="btn btn-sm btn-outline-danger btn-icon delete-payment-method" data-id="{{$method->id}}"><i class="bi bi-circle-fill"></i></button>
                         @else
                         <span class="badge bg-info-100 text-info-600 badge-status">System</span>
                         @endif
@@ -53,7 +53,7 @@
                 </div>
             </div>
             @empty
-            <div class="text-center py-5"><iconify-icon icon="mdi:credit-card" style="font-size:48px;" class="text-secondary-light"></iconify-icon><p class="text-secondary-light mt-2">No payment methods configured</p></div>
+            <div class="text-center py-5"><i class="bi bi-circle-fill"></i><p class="text-secondary-light mt-2">No payment methods configured</p></div>
             @endforelse
         </div>
 
@@ -61,7 +61,7 @@
             <div class="d-flex justify-content-between align-items-center mb-20">
                 <h6 class="text-lg mb-0">Payment Status</h6>
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addPaymentStatusModal">
-                    <iconify-icon icon="mdi:plus"></iconify-icon> Add Status
+                    <i class="bi bi-circle-fill"></i> Add Status
                 </button>
             </div>
             @forelse($paymentStatuses as $status)
@@ -71,8 +71,8 @@
                     <div class="d-flex gap-2">
                         <span class="badge {{$status->is_active?'bg-success-100 text-success-600':'bg-secondary-100 text-secondary-600'}} badge-status">{{$status->is_active?'Active':'Inactive'}}</span>
                         @if(!$status->is_system)
-                        <button class="btn btn-sm btn-outline-primary btn-icon edit-payment-status" data-id="{{$status->id}}" data-label="{{$status->setting_label}}" data-value="{{$status->setting_value}}" data-active="{{$status->is_active}}"><iconify-icon icon="mdi:pencil"></iconify-icon></button>
-                        <button class="btn btn-sm btn-outline-danger btn-icon delete-payment-status" data-id="{{$status->id}}"><iconify-icon icon="mdi:delete"></iconify-icon></button>
+                        <button class="btn btn-sm btn-outline-primary btn-icon edit-payment-status" data-id="{{$status->id}}" data-label="{{$status->setting_label}}" data-value="{{$status->setting_value}}" data-active="{{$status->is_active}}"><i class="bi bi-circle-fill"></i></button>
+                        <button class="btn btn-sm btn-outline-danger btn-icon delete-payment-status" data-id="{{$status->id}}"><i class="bi bi-circle-fill"></i></button>
                         @else
                         <span class="badge bg-info-100 text-info-600 badge-status">System</span>
                         @endif
@@ -80,7 +80,7 @@
                 </div>
             </div>
             @empty
-            <div class="text-center py-5"><iconify-icon icon="mdi:check-circle" style="font-size:48px;" class="text-secondary-light"></iconify-icon><p class="text-secondary-light mt-2">No payment statuses configured</p></div>
+            <div class="text-center py-5"><i class="bi bi-circle-fill"></i><p class="text-secondary-light mt-2">No payment statuses configured</p></div>
             @endforelse
         </div>
     </div>

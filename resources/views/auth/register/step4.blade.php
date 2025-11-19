@@ -230,7 +230,7 @@
             <div class="auth-announcements-section">
                 <div class="announcements-container">
                     <div class="announcement-badge">
-                        <iconify-icon icon="solar:stars-line-linear" width="16"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         Final Step!
                     </div>
                     
@@ -289,7 +289,7 @@
                     @if ($errors->any() || session('error'))
                         <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;">
                             <div style="display: flex; align-items-start; gap: 10px;">
-                                <iconify-icon icon="solar:danger-circle-bold" width="20" style="color: #dc2626; margin-top: 2px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <div style="flex: 1;">
                                     @if($errors->any())
                                         <strong style="color: #991b1b; font-size: 14px;">Please fix the following errors:</strong>
@@ -318,7 +318,7 @@
                                 <div class="logo-upload">
                                     <img id="logo-preview" alt="Logo Preview">
                                     <label for="logo" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; cursor: pointer; padding: 10px;">
-                                        <iconify-icon icon="solar:camera-add-linear" width="28" style="color: #9ca3af;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span style="font-size: 11px; color: #9ca3af; margin-top: 6px;">Upload</span>
                                     </label>
                                     <input type="file" id="logo" name="logo" accept="image/*" hidden onchange="previewLogo(this)">
@@ -352,22 +352,22 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
                                 <label class="payment-checkbox">
                                     <input type="checkbox" name="payment_methods[]" value="Cash" checked>
-                                    <iconify-icon icon="solar:wallet-money-linear" width="18" style="color: #ec3737;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span style="font-size: 14px; color: #374151;">Cash</span>
                                 </label>
                                 <label class="payment-checkbox">
                                     <input type="checkbox" name="payment_methods[]" value="Credit/Debit Card">
-                                    <iconify-icon icon="solar:card-linear" width="18" style="color: #ec3737;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span style="font-size: 14px; color: #374151;">Card</span>
                                 </label>
                                 <label class="payment-checkbox">
                                     <input type="checkbox" name="payment_methods[]" value="Bank Transfer">
-                                    <iconify-icon icon="solar:bank-linear" width="18" style="color: #ec3737;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span style="font-size: 14px; color: #374151;">Bank</span>
                                 </label>
                                 <label class="payment-checkbox">
                                     <input type="checkbox" name="payment_methods[]" value="Mobile Money">
-                                    <iconify-icon icon="solar:smartphone-linear" width="18" style="color: #ec3737;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span style="font-size: 14px; color: #374151;">Mobile</span>
                                 </label>
                             </div>
@@ -375,12 +375,12 @@
 
                         {{-- Info Box --}}
                         <div style="background: #e8f4fd; border: 1px solid #b8dff5; border-radius: 8px; padding: 12px 14px; margin: 20px 0; display: flex; align-items-start; gap: 10px;">
-                            <iconify-icon icon="solar:info-circle-bold" width="18" style="color: #0c5ba0; margin-top: 2px;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             <small style="color: #0c5ba0; font-size: 13px;"><strong>Note:</strong> All these settings can be changed later from your dashboard.</small>
                         </div>
 
                         <button type="submit" class="btn-primary" style="margin-top: 24px;">
-                            <iconify-icon icon="solar:check-circle-linear" width="18" style="margin-right: 6px;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Complete Setup & Start
                         </button>
 
@@ -395,7 +395,6 @@
 
     <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script>
         function previewLogo(input) {
             if (input.files && input.files[0]) {

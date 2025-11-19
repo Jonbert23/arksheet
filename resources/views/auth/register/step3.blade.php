@@ -237,7 +237,7 @@
             <div class="auth-announcements-section">
                 <div class="announcements-container">
                     <div class="announcement-badge">
-                        <iconify-icon icon="solar:stars-line-linear" width="16"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         Step 3 of 4
                     </div>
                     
@@ -296,7 +296,7 @@
                     @if ($errors->any())
                         <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;">
                             <div style="display: flex; align-items-start; gap: 10px;">
-                                <iconify-icon icon="solar:danger-circle-bold" width="20" style="color: #dc2626; margin-top: 2px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <div style="flex: 1;">
                                     <strong style="color: #991b1b; font-size: 14px;">Please fix the following errors:</strong>
                                     <ul style="margin: 8px 0 0 0; padding-left: 20px; color: #991b1b; font-size: 13px;">
@@ -375,6 +375,5 @@
 
     <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-</body>
+    </body>
 </html>

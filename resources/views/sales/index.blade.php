@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -17,7 +17,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -25,7 +25,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -40,7 +40,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #ec3737;">
-                                    <iconify-icon icon="mdi:cart-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Total Sales</span>
                             </div>
@@ -58,7 +58,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-success-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <iconify-icon icon="mdi:cash-multiple" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Total Revenue</span>
                             </div>
@@ -76,7 +76,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-info-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <iconify-icon icon="mdi:chart-line" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Avg. Sale Value</span>
                             </div>
@@ -94,7 +94,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-warning-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <iconify-icon icon="mdi:clock-alert-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Pending</span>
                             </div>
@@ -122,12 +122,12 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search sales..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <iconify-icon icon="ion:search-outline"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </span>
                     </div>
                 </div>
                 <a href="{{ route('sales.pos') }}" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                    <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     Record New Sale
                 </a>
             </div>
@@ -201,16 +201,16 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <button type="button" class="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View" onclick="viewSale({{ $sale->id }})">
-                                            <iconify-icon icon="solar:eye-linear" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         <a href="{{ route('sales.edit', $sale->id) }}" class="bg-success-focus text-success-600 bg-hover-success-200 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle" title="Edit">
-                                            <iconify-icon icon="lucide:edit" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </a>
                                         <form action="{{ route('sales.destroy', $sale->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this sale? Stock will be restored.');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="Delete">
-                                                <iconify-icon icon="mingcute:delete-2-line" class="icon text-lg"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -219,10 +219,10 @@
                             @empty
                             <tr>
                                 <td colspan="11" class="text-center py-5">
-                                    <iconify-icon icon="mdi:cart-off" class="text-secondary-light mb-2" style="font-size: 48px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <p class="text-secondary-light mb-0">No sales recorded yet</p>
                                     <a href="{{ route('sales.create') }}" class="btn btn-primary-600 mt-3">
-                                        <iconify-icon icon="ic:baseline-plus" class="text-xl"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Record First Sale
                                     </a>
                                 </td>
@@ -332,12 +332,12 @@
                     <button type="button" class="btn d-flex align-items-center justify-content-center gap-2 radius-8 py-12 px-20" 
                             style="background: #f8f9fa; color: #495057; border: 1px solid #dee2e6; font-weight: 600;"
                             data-bs-dismiss="modal">
-                        <iconify-icon icon="mdi:close" class="text-lg"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         <span>Close</span>
                     </button>
                     <a href="#" id="modalEditButton" class="btn d-flex align-items-center justify-content-center gap-2 radius-8 py-12 px-20" 
                        style="background: linear-gradient(135deg, #ec3737 0%, #c91c1c 100%); color: white; border: none; font-weight: 700; box-shadow: 0 4px 12px rgba(236, 55, 55, 0.4); text-decoration: none;">
-                        <iconify-icon icon="lucide:edit" class="text-lg"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         <span>Edit Sale</span>
                     </a>
                 </div>
@@ -389,6 +389,14 @@
 
     <script>
         $(document).ready(function() {
+            // Only initialize DataTable if there are sales
+            var hasSales = $("#sales-table tbody tr").length > 0 && !$("#sales-table tbody tr td[colspan]").length;
+            
+            if (!hasSales) {
+                console.log("No sales to display, skipping DataTable initialization");
+                return;
+            }
+
             // Check if DataTable is already initialized
             if ($.fn.DataTable.isDataTable("#sales-table")) {
                 $("#sales-table").DataTable().destroy();
@@ -405,12 +413,20 @@
                 "autoWidth": false,
                 "order": [[1, "desc"]], // Sort by date descending
                 "pagingType": "full_numbers",
+                "columns": [
+                    { "orderable": true, "searchable": true },   // 0 - Invoice #
+                    { "orderable": true, "searchable": false },  // 1 - Date
+                    { "orderable": true, "searchable": true },   // 2 - Customer
+                    { "orderable": true, "searchable": true },   // 3 - Sales Channel
+                    { "orderable": true, "searchable": false },  // 4 - Subtotal
+                    { "orderable": true, "searchable": false },  // 5 - Tax
+                    { "orderable": true, "searchable": false },  // 6 - Discount
+                    { "orderable": true, "searchable": false },  // 7 - Total
+                    { "orderable": true, "searchable": false },  // 8 - Payment Status
+                    { "orderable": true, "searchable": false },  // 9 - Payment Method
+                    { "orderable": false, "searchable": false }  // 10 - Action
+                ],
                 "columnDefs": [
-                    {
-                        "targets": [10], // Actions column
-                        "orderable": false,
-                        "searchable": false
-                    },
                     {
                         "targets": [4, 5, 6, 7], // Numeric columns (Subtotal, Tax, Discount, Total)
                         "className": "text-end"
@@ -662,7 +678,7 @@
                         </div>
                         <div class="col-md-1">
                             <button type="button" class="btn btn-danger-600 w-100 remove-modal-item" style="height: 44px;">
-                                <iconify-icon icon="mdi:delete" class="text-lg"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                         </div>
                     </div>
@@ -894,18 +910,18 @@
                             <div class="d-flex justify-content-between align-items-center mb-16">
                                 <h6 class="fw-bold mb-0" style="font-size: 18px !important;">Sale Items</h6>
                                 <button type="button" class="btn btn-sm btn-primary-600 px-16 py-8" id="modalAddItemBtn">
-                                    <iconify-icon icon="ic:baseline-plus" class="text-lg"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     Add Item
                                 </button>
                             </div>
                             
                             <!-- Empty State -->
                             <div id="modalEmptyState" class="text-center py-48 border radius-8 bg-neutral-50">
-                                <iconify-icon icon="mdi:cart-off" class="text-secondary-light mb-16" style="font-size: 64px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <p class="text-secondary-light fw-semibold mb-8">No items added yet</p>
                                 <p class="text-secondary-light text-sm mb-16">Click "Add Item" button to start adding products to this sale</p>
                                 <button type="button" class="btn btn-primary-600 px-20 py-11 radius-8" onclick="document.getElementById('modalAddItemBtn').click()">
-                                    <iconify-icon icon="ic:baseline-plus" class="text-lg"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     Add First Item
                                 </button>
                             </div>
@@ -956,7 +972,7 @@
                             Cancel
                         </button>
                         <button type="submit" form="modalSaleForm" class="btn btn-primary-600 radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                            <iconify-icon icon="mdi:content-save" class="icon text-xl"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Record Sale
                         </button>
                     </div>

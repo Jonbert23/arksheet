@@ -9,7 +9,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -26,7 +26,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -34,7 +34,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -56,7 +56,7 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search products..." id="search-input">
                         <span class="icon">
-                            <iconify-icon icon="ion:search-outline"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </span>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                                 </td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-primary text-sm btn-sm px-12 py-8 radius-8 d-flex align-items-center gap-1 add-stock-btn" style="margin: 0 auto;">
-                                        <iconify-icon icon="ic:baseline-plus" class="icon text-lg line-height-1"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Add Stock
                                     </button>
                                 </td>
@@ -335,7 +335,7 @@
                                     Cancel
                                 </button>
                                 <button type="submit" class="btn btn-primary-600 radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                                    <iconify-icon icon="mdi:content-save" class="icon text-xl"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     Save Stock Entry
                                 </button>
                             </div>
@@ -465,6 +465,14 @@
     
     <script>
         $(document).ready(function() {
+            // Only initialize DataTable if there are products
+            var hasProducts = $("#products-table tbody tr").length > 0 && !$("#products-table tbody tr td[colspan]").length;
+            
+            if (!hasProducts) {
+                console.log("No products to display, skipping DataTable initialization");
+                return;
+            }
+
             // Check if DataTable is already initialized
             if ($.fn.DataTable.isDataTable("#products-table")) {
                 $("#products-table").DataTable().destroy();
@@ -481,15 +489,23 @@
                 "autoWidth": false,
                 "order": [[0, "asc"]],
                 "pagingType": "full_numbers",
+                "columns": [
+                    { "orderable": true, "searchable": true },   // 0 - Product Name
+                    { "orderable": true, "searchable": true },   // 1 - SKU
+                    { "orderable": true, "searchable": true },   // 2 - Category
+                    { "orderable": true, "searchable": false },  // 3 - Current Stock
+                    { "orderable": true, "searchable": false },  // 4 - Current Cost
+                    { "orderable": true, "searchable": false },  // 5 - Stock Value
+                    { "orderable": false, "searchable": false }  // 6 - Action
+                ],
                 "columnDefs": [
-                    {
-                        "targets": [6], // Actions column
-                        "orderable": false,
-                        "searchable": false
-                    },
                     {
                         "targets": [3, 4, 5], // Numeric columns (Stock, Cost, Value)
                         "className": "text-end"
+                    },
+                    {
+                        "targets": [6], // Actions column
+                        "className": "text-center"
                     }
                 ],
                 "language": {

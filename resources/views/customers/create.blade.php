@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -23,7 +23,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -125,7 +125,7 @@
                             Cancel
                         </a>
                         <button type="submit" class="btn btn-primary-600 hover-bg-primary-700 radius-8 px-24 py-11">
-                            <iconify-icon icon="mdi:check-circle" class="text-lg me-1"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Save Customer
                         </button>
                     </div>

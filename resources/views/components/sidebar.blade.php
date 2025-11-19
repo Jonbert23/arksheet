@@ -1,6 +1,6 @@
 <aside class="sidebar">
     <button type="button" class="sidebar-close-btn">
-        <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
+        <i class="bi bi-circle-fill"></i>
     </button>
     <div>
         <a href="{{ route('index') }}" class="sidebar-logo">
@@ -13,7 +13,7 @@
         <ul class="sidebar-menu" id="sidebar-menu">
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-house" class="menu-icon"></i>
                     <span>Dashboard</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -52,31 +52,31 @@
             <li class="sidebar-menu-group-title">Application</li>
             <li>
                   <a href="{{ route('email') }}">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Email</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('chatMessage') }}">
-                    <iconify-icon icon="bi:chat-dots" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Chat</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('calendar') }}">
-                    <iconify-icon icon="solar:calendar-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Calendar</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('kanban') }}">
-                    <iconify-icon icon="material-symbols:map-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Kanban</span>
                 </a>
             </li>
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Invoice</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -143,7 +143,7 @@
 
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="solar:document-text-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Components</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -214,7 +214,7 @@
             </li>
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="heroicons:document" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Forms</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -234,7 +234,7 @@
             </li>
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="mingcute:storage-line" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Table</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -248,7 +248,7 @@
             </li>
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="solar:pie-chart-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Chart</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -265,13 +265,13 @@
             </li>
             <li>
                 <a  href="{{ route('widgets') }}">
-                    <iconify-icon icon="fe:vector" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Widgets</span>
                 </a>
             </li>
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Users</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -309,7 +309,7 @@
 
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="simple-line-icons:vector" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Authentication</span>
                 </a>
                 <ul class="sidebar-submenu">
@@ -326,13 +326,13 @@
             </li>
             <li>
                 <a  href="{{ route('gallery') }}">
-                    <iconify-icon icon="solar:gallery-wide-linear" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Gallery</span>
                 </a>
             </li>
             <li>
                 <a  href="{{ route('pricing') }}">
-                    <iconify-icon icon="hugeicons:money-send-square" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Pricing</span>
                 </a>
             </li>
@@ -361,19 +361,19 @@
             </li>
             <li>
                 <a  href="{{ route('faq') }}">
-                    <iconify-icon icon="mage:message-question-mark-round" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>FAQs</span>
                 </a>
             </li>
             <li>
                 <a  href="{{ route('error') }}">
-                    <iconify-icon icon="streamline:straight-face" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>404</span>
                 </a>
             </li>
             <li>
                 <a  href="{{ route('termsCondition') }}">
-                    <iconify-icon icon="octicon:info-24" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Terms & Conditions</span>
                 </a>
             </li>
@@ -397,7 +397,7 @@
             </li>
             <li class="dropdown">
                 <a  href="javascript:void(0)">
-                    <iconify-icon icon="icon-park-outline:setting-two" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <span>Settings</span>
                 </a>
                 <ul class="sidebar-submenu">

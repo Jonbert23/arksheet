@@ -6,7 +6,7 @@
     <ul class="d-flex align-items-center gap-2">
         <li class="fw-medium">
             <a href="{{ route('super-admin.dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                <i class="bi bi-house" class="icon text-lg"></i>
                 Dashboard
             </a>
         </li>
@@ -31,7 +31,7 @@
                 @csrf
                 <button type="submit" class="btn btn-sm btn-danger-600" 
                         onclick="return confirm('Are you sure you want to clear all logs?')">
-                    <iconify-icon icon="solar:trash-bin-minimalistic-outline"></iconify-icon> Clear Logs
+                    <i class="bi bi-circle-fill"></i> Clear Logs
                 </button>
             </form>
         </div>
@@ -48,7 +48,7 @@
             </div>
         @else
             <div class="text-center py-5">
-                <iconify-icon icon="solar:inbox-line-duotone" class="text-5xl text-secondary-light mb-3"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 <p class="text-secondary-light mb-0">No logs available</p>
             </div>
         @endif

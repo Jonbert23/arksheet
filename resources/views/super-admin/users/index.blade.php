@@ -6,7 +6,7 @@
     <ul class="d-flex align-items-center gap-2">
         <li class="fw-medium">
             <a href="{{ route('super-admin.dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                <i class="bi bi-house" class="icon text-lg"></i>
                 Dashboard
             </a>
         </li>
@@ -46,12 +46,12 @@
                 </select>
 
                 <button type="submit" class="btn btn-primary-600">
-                    <iconify-icon icon="solar:magnifer-linear"></iconify-icon> Search
+                    <i class="bi bi-circle-fill"></i> Search
                 </button>
                 
                 @if(request()->hasAny(['search', 'business_id', 'role', 'status']))
                     <a href="{{ route('super-admin.users.index') }}" class="btn btn-outline-secondary">
-                        <iconify-icon icon="solar:refresh-linear"></iconify-icon> Reset
+                        <i class="bi bi-circle-fill"></i> Reset
                     </a>
                 @endif
             </form>
@@ -111,7 +111,7 @@
                                 <div class="d-flex align-items-center justify-content-center gap-2">
                                     <a href="{{ route('super-admin.users.show', $user) }}" 
                                        class="btn btn-sm btn-outline-info-600">
-                                        <iconify-icon icon="solar:eye-linear"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </a>
                                     <form method="POST" action="{{ route('super-admin.users.toggle-status', $user) }}" class="d-inline">
                                         @csrf
@@ -119,7 +119,7 @@
                                         <button type="submit" 
                                                 class="btn btn-sm btn-outline-{{ $user->is_active ? 'warning' : 'success' }}-600" 
                                                 onclick="return confirm('Are you sure you want to {{ $user->is_active ? 'deactivate' : 'activate' }} this user?')">
-                                            <iconify-icon icon="solar:{{ $user->is_active ? 'eye-closed-linear' : 'check-circle-linear' }}"></iconify-icon>
+                                            <i class="bi bi-circle-fill">is_active ? 'eye-closed-linear' : 'check-circle-linear' }}"></i>
                                         </button>
                                     </form>
                                     @if($user->role !== 'business_owner')
@@ -129,7 +129,7 @@
                                             <button type="submit" 
                                                     class="btn btn-sm btn-outline-danger-600" 
                                                     onclick="return confirm('Are you sure you want to delete this user?')">
-                                                <iconify-icon icon="solar:trash-bin-minimalistic-linear"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </button>
                                         </form>
                                     @endif
@@ -139,7 +139,7 @@
                     @empty
                         <tr>
                             <td colspan="7" class="text-center text-secondary-light py-4">
-                                <iconify-icon icon="solar:inbox-line-duotone" class="text-5xl mb-2"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <p class="mb-0">No users found</p>
                             </td>
                         </tr>

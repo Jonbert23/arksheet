@@ -278,11 +278,11 @@
     <!-- Action Buttons -->
     <div class="d-flex align-items-center justify-content-end gap-3">
         <button type="reset" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2">
-            <iconify-icon icon="mdi:refresh" class="icon text-xl"></iconify-icon>
+            <i class="bi bi-circle-fill"></i>
             Reset
         </button>
         <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-            <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+            <i class="bi bi-circle-fill"></i>
             Save Changes
         </button>
     </div>

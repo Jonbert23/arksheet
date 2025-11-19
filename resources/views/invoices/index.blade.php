@@ -87,7 +87,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -98,7 +98,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -106,7 +106,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -121,7 +121,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #ec3737;">
-                                    <iconify-icon icon="mdi:file-document-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Total Invoices</span>
                             </div>
@@ -139,7 +139,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-success-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <iconify-icon icon="mdi:cash-multiple" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Total Amount</span>
                             </div>
@@ -157,7 +157,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-info-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <iconify-icon icon="mdi:check-circle-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Paid</span>
                             </div>
@@ -175,7 +175,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-warning-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <iconify-icon icon="mdi:clock-alert-outline" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Pending</span>
                             </div>
@@ -203,13 +203,13 @@
                     <div class="icon-field">
                         <input type="text" class="form-control form-control-sm w-auto" placeholder="Search invoices..." id="invoice-search-input" style="min-width: 250px;">
                         <span class="icon" style="color: #ec3737;">
-                            <iconify-icon icon="ion:search-outline"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </span>
                     </div>
                 </div>
                 <div class="d-flex flex-wrap align-items-center gap-3">
                     <button type="button" id="printBtn" class="btn text-white text-sm btn-sm px-20 py-11 radius-8 d-flex align-items-center gap-2 fw-semibold shadow-sm" style="background-color: #ec3737; border: none; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(236, 55, 55, 0.35)'" onmouseout="this.style.backgroundColor='#ec3737'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(236, 55, 55, 0.25)'">
-                        <iconify-icon icon="mdi:printer" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         Print List
                     </button>
                 </div>
@@ -241,7 +241,7 @@
                                 <td>{{ \Carbon\Carbon::parse($invoice->date)->format('M d, Y') }}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
-                                        <iconify-icon icon="mdi:account-circle" class="icon text-xl text-secondary-light"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span class="fw-medium">{{ $invoice->customer->name ?? 'Walk-in Customer' }}</span>
                                     </div>
                                 </td>
@@ -281,18 +281,18 @@
                                            class="btn btn-sm px-12 py-8 text-white radius-4" 
                                            style="background-color: #ec3737;"
                                            title="View Invoice">
-                                            <iconify-icon icon="mdi:eye-outline" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </a>
                                         <a href="{{ route('invoices.show', $invoice->id) }}" 
                                            target="_blank"
                                            class="btn btn-sm px-12 py-8 bg-info-600 text-white radius-4"
                                            title="Print Invoice">
-                                            <iconify-icon icon="mdi:printer" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </a>
                                         <a href="{{ route('invoices.download', $invoice->id) }}" 
                                            class="btn btn-sm px-12 py-8 bg-success-600 text-white radius-4"
                                            title="Download PDF">
-                                            <iconify-icon icon="mdi:download" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -301,7 +301,7 @@
                             <tr>
                                 <td colspan="10" class="text-center py-5">
                                     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px;">
-                                        <iconify-icon icon="mdi:file-document-outline" class="icon text-6xl text-secondary-light mb-3" style="font-size: 4rem;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <p class="text-secondary-light mb-0">No invoices found</p>
                                     </div>
                                 </td>
@@ -316,6 +316,14 @@
     @push('scripts')
     <script>
         $(document).ready(function() {
+            // Only initialize DataTable if there are invoices
+            var hasInvoices = $("#invoicesTable tbody tr").length > 0 && !$("#invoicesTable tbody tr td[colspan]").length;
+            
+            if (!hasInvoices) {
+                console.log("No invoices to display, skipping DataTable initialization");
+                return;
+            }
+
             // Check if DataTable is already initialized
             if ($.fn.DataTable.isDataTable("#invoicesTable")) {
                 $("#invoicesTable").DataTable().destroy();
@@ -333,12 +341,19 @@
                 "order": [[1, "desc"]], // Sort by date descending
                 "pagingType": "full_numbers",
                 "dom": 'rtip', // Hide default length menu and search box, show only table, info, and pagination
+                "columns": [
+                    { "orderable": true, "searchable": true },   // 0 - Invoice #
+                    { "orderable": true, "searchable": false },  // 1 - Date
+                    { "orderable": true, "searchable": true },   // 2 - Customer
+                    { "orderable": true, "searchable": true },   // 3 - Channel
+                    { "orderable": true, "searchable": false },  // 4 - Subtotal
+                    { "orderable": true, "searchable": false },  // 5 - Tax
+                    { "orderable": true, "searchable": false },  // 6 - Discount
+                    { "orderable": true, "searchable": false },  // 7 - Total
+                    { "orderable": true, "searchable": false },  // 8 - Payment
+                    { "orderable": false, "searchable": false }  // 9 - Actions
+                ],
                 "columnDefs": [
-                    {
-                        "targets": [9], // Actions column
-                        "orderable": false,
-                        "searchable": false
-                    },
                     {
                         "targets": [4, 5, 6, 7], // Numeric columns (Subtotal, Tax, Discount, Total)
                         "className": "text-end"

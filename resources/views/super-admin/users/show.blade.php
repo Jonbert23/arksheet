@@ -6,7 +6,7 @@
     <ul class="d-flex align-items-center gap-2">
         <li class="fw-medium">
             <a href="{{ route('super-admin.dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                <i class="bi bi-house" class="icon text-lg"></i>
                 Dashboard
             </a>
         </li>
@@ -47,7 +47,7 @@
                         @method('PATCH')
                         <button type="submit" class="btn btn-sm btn-{{ $user->is_active ? 'warning' : 'success' }}-600"
                                 onclick="return confirm('Are you sure you want to {{ $user->is_active ? 'deactivate' : 'activate' }} this user?')">
-                            <iconify-icon icon="solar:{{ $user->is_active ? 'eye-closed-linear' : 'check-circle-linear' }}"></iconify-icon>
+                            <i class="bi bi-circle-fill">is_active ? 'eye-closed-linear' : 'check-circle-linear' }}"></i>
                             {{ $user->is_active ? 'Deactivate' : 'Activate' }}
                         </button>
                     </form>
@@ -58,7 +58,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger-600"
                                     onclick="return confirm('Are you sure you want to delete this user?')">
-                                <iconify-icon icon="solar:trash-bin-minimalistic-linear"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Delete
                             </button>
                         </form>
@@ -76,7 +76,7 @@
                 <div class="card-body">
                     <a href="{{ route('super-admin.businesses.show', $user->business) }}" 
                        class="d-flex align-items-center gap-2 text-primary-600">
-                        <iconify-icon icon="solar:buildings-outline" class="text-xl"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         <div>
                             <div class="fw-semibold">{{ $user->business->name }}</div>
                             <div class="text-sm text-secondary-light">{{ $user->business->email }}</div>
@@ -148,7 +148,7 @@
                         <div class="d-flex flex-wrap gap-2">
                             @foreach($stats['allowed_modules'] as $module => $label)
                                 <span class="badge bg-info-100 text-info-600 px-3 py-2">
-                                    <iconify-icon icon="solar:check-circle-linear" class="me-1"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     {{ $label }}
                                 </span>
                             @endforeach

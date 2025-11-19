@@ -6,7 +6,7 @@
     <ul class="d-flex align-items-center gap-2">
         <li class="fw-medium">
             <a href="{{ route('super-admin.dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                <i class="bi bi-house" class="icon text-lg"></i>
                 Dashboard
             </a>
         </li>
@@ -26,7 +26,7 @@
                     <option value="inactive" {{ request('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
                 </select>
                 <button type="submit" class="btn btn-primary-600">
-                    <iconify-icon icon="solar:magnifer-linear"></iconify-icon> Search
+                    <i class="bi bi-circle-fill"></i> Search
                 </button>
             </form>
         </div>
@@ -83,17 +83,17 @@
                             <td class="text-center">
                                 <div class="d-flex align-items-center justify-content-center gap-2">
                                     <a href="{{ route('super-admin.businesses.show', $business) }}" class="btn btn-sm btn-outline-info-600">
-                                        <iconify-icon icon="solar:eye-linear"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </a>
                                     <a href="{{ route('super-admin.businesses.edit', $business) }}" class="btn btn-sm btn-outline-primary-600">
-                                        <iconify-icon icon="solar:pen-linear"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </a>
                                     <form method="POST" action="{{ route('super-admin.businesses.toggle-status', $business) }}" class="d-inline">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-sm btn-outline-{{ $business->is_active ? 'warning' : 'success' }}-600" 
                                                 onclick="return confirm('Are you sure you want to {{ $business->is_active ? 'deactivate' : 'activate' }} this business?')">
-                                            <iconify-icon icon="solar:{{ $business->is_active ? 'eye-closed-linear' : 'check-circle-linear' }}"></iconify-icon>
+                                            <i class="bi bi-circle-fill">is_active ? 'eye-closed-linear' : 'check-circle-linear' }}"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -102,7 +102,7 @@
                     @empty
                         <tr>
                             <td colspan="9" class="text-center text-secondary-light py-4">
-                                <iconify-icon icon="solar:inbox-line-duotone" class="text-5xl mb-2"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <p class="mb-0">No businesses found</p>
                             </td>
                         </tr>

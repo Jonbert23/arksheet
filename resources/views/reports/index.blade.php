@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -22,7 +22,7 @@
                     <div class="card-body p-24">
                         <div class="d-flex align-items-center gap-3 mb-16">
                             <div class="w-60-px h-60-px bg-primary-100 rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:chart-bar" class="text-primary-600 text-xxxl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="fw-semibold mb-0">Sales Report</h6>
@@ -39,7 +39,7 @@
                     <div class="card-body p-24">
                         <div class="d-flex align-items-center gap-3 mb-16">
                             <div class="w-60-px h-60-px bg-danger-100 rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:cash-remove" class="text-danger-600 text-xxxl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="fw-semibold mb-0">Expense Report</h6>
@@ -56,7 +56,7 @@
                     <div class="card-body p-24">
                         <div class="d-flex align-items-center gap-3 mb-16">
                             <div class="w-60-px h-60-px bg-success-100 rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:chart-line" class="text-success-600 text-xxxl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="fw-semibold mb-0">Financial Statement</h6>
@@ -73,7 +73,7 @@
                     <div class="card-body p-24">
                         <div class="d-flex align-items-center gap-3 mb-16">
                             <div class="w-60-px h-60-px bg-info-100 rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:package-variant" class="text-info-600 text-xxxl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="fw-semibold mb-0">Product Performance</h6>
@@ -90,7 +90,7 @@
                     <div class="card-body p-24">
                         <div class="d-flex align-items-center gap-3 mb-16">
                             <div class="w-60-px h-60-px bg-warning-100 rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:account-group" class="text-warning-600 text-xxxl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="fw-semibold mb-0">Customer Report</h6>
@@ -107,7 +107,7 @@
                     <div class="card-body p-24">
                         <div class="d-flex align-items-center gap-3 mb-16">
                             <div class="w-60-px h-60-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:file-pdf-box" class="text-neutral-600 text-xxxl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <div>
                                 <h6 class="fw-semibold mb-0">Export Reports</h6>

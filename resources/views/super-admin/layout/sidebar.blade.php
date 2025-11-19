@@ -1,6 +1,6 @@
 <aside class="sidebar">
     <button type="button" class="sidebar-close-btn">
-        <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
+        <i class="bi bi-x-lg"></i>
     </button>
     <div>
         <!-- Logo -->
@@ -16,7 +16,7 @@
             <!-- Dashboard -->
             <li>
                 <a href="{{ route('super-admin.dashboard') }}" class="{{ request()->routeIs('super-admin.dashboard') ? 'active-page' : '' }}">
-                    <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-house menu-icon"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -24,7 +24,7 @@
             <!-- Business Management -->
             <li>
                 <a href="{{ route('super-admin.businesses.index') }}" class="{{ request()->routeIs('super-admin.businesses.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="solar:buildings-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-building menu-icon"></i>
                     <span>Businesses</span>
                 </a>
             </li>
@@ -32,7 +32,7 @@
             <!-- User Management -->
             <li>
                 <a href="{{ route('super-admin.users.index') }}" class="{{ request()->routeIs('super-admin.users.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="solar:users-group-rounded-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-people menu-icon"></i>
                     <span>Users</span>
                 </a>
             </li>
@@ -40,7 +40,7 @@
             <!-- Reports -->
             <li class="dropdown {{ request()->routeIs('super-admin.reports.*') ? 'open' : '' }}" id="reports-dropdown">
                 <a href="#" onclick="toggleDropdown(event, 'reports-dropdown')" class="{{ request()->routeIs('super-admin.reports.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="solar:chart-2-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-graph-up menu-icon"></i>
                     <span>Reports</span>
                 </a>
                 <ul class="sidebar-submenu" style="{{ request()->routeIs('super-admin.reports.*') ? 'display: block;' : 'display: none;' }}">
@@ -70,7 +70,7 @@
             <!-- System Settings -->
             <li class="dropdown {{ request()->routeIs('super-admin.system.*') ? 'open' : '' }}" id="system-dropdown">
                 <a href="#" onclick="toggleDropdown(event, 'system-dropdown')" class="{{ request()->routeIs('super-admin.system.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="solar:settings-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-gear menu-icon"></i>
                     <span>System</span>
                 </a>
                 <ul class="sidebar-submenu" style="{{ request()->routeIs('super-admin.system.*') ? 'display: block;' : 'display: none;' }}">
@@ -95,7 +95,7 @@
                 <form method="POST" action="{{ route('super-admin.system.clear-cache') }}" class="d-inline">
                     @csrf
                     <button type="submit" class="sidebar-link-btn">
-                        <iconify-icon icon="solar:refresh-outline" class="menu-icon"></iconify-icon>
+                        <i class="bi bi-arrow-clockwise menu-icon"></i>
                         <span>Clear Cache</span>
                     </button>
                 </form>

@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -29,11 +29,11 @@
                         <h6 class="card-title mb-0" style="font-size: 18px !important; color: #4b5563;">Invoice: {{ $sale->invoice_number }}</h6>
                         <div class="d-flex gap-2">
                             <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-sm btn-success-600">
-                                <iconify-icon icon="lucide:edit" class="text-lg"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Edit
                             </a>
                             <button onclick="window.print()" class="btn btn-sm btn-primary-600">
-                                <iconify-icon icon="mdi:printer" class="text-lg"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Print
                             </button>
                         </div>
@@ -174,22 +174,22 @@
                     <div class="card-body p-24">
                         <div class="d-grid gap-2">
                             <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-success-600 w-100">
-                                <iconify-icon icon="lucide:edit" class="text-lg me-1"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Edit Sale
                             </a>
                             <button onclick="window.print()" class="btn btn-primary-600 w-100">
-                                <iconify-icon icon="mdi:printer" class="text-lg me-1"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Print Invoice
                             </button>
                             <a href="{{ route('sales.index') }}" class="btn btn-neutral-600 w-100">
-                                <iconify-icon icon="mdi:arrow-left" class="text-lg me-1"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Back to Sales
                             </a>
                             <form action="{{ route('sales.destroy', $sale->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this sale? Stock will be restored.');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger-600 w-100">
-                                    <iconify-icon icon="mingcute:delete-2-line" class="text-lg me-1"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     Delete Sale
                                 </button>
                             </form>

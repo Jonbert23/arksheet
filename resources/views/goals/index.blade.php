@@ -281,7 +281,7 @@
             background-color: #f9fafb !important;
         }
         
-        .goal-menu-item:hover iconify-icon {
+        .goal-menu-item:hover i {
             color: #1f2937 !important;
         }
         
@@ -289,7 +289,7 @@
             background-color: #fef2f2 !important;
         }
         
-        .goal-menu-delete:hover iconify-icon {
+        .goal-menu-delete:hover i {
             color: #dc2626 !important;
         }
         
@@ -304,7 +304,7 @@
         <!-- Success/Error Messages -->
         @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show mb-24 d-flex align-items-center" role="alert">
-            <iconify-icon icon="mdi:check-circle" style="font-size: 20px;" class="me-2"></iconify-icon>
+            <i class="bi bi-circle-fill"></i>
             <span class="flex-grow-1">{{ session('success') }}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
@@ -312,7 +312,7 @@
 
         @if(session('error'))
         <div class="alert alert-danger alert-dismissible fade show mb-24 d-flex align-items-center" role="alert">
-            <iconify-icon icon="mdi:alert-circle" style="font-size: 20px;" class="me-2"></iconify-icon>
+            <i class="bi bi-circle-fill"></i>
             <span class="flex-grow-1">{{ session('error') }}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
@@ -323,7 +323,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -340,7 +340,7 @@
                         <!-- Date Range Picker with Dropdown -->
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-secondary d-flex align-items-center gap-2 radius-8 px-16 py-11 dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" style="min-width: 280px;">
-                                <iconify-icon icon="mdi:calendar" class="text-secondary-light"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span id="dateRangeDisplay">
                                     {{ request('date_from') && request('date_to') ? \Carbon\Carbon::parse(request('date_from'))->format('M d, Y') . ' - ' . \Carbon\Carbon::parse(request('date_to'))->format('M d, Y') : \Carbon\Carbon::now()->startOfMonth()->format('M d, Y') . ' - ' . \Carbon\Carbon::now()->format('M d, Y') }}
                                 </span>
@@ -380,13 +380,13 @@
 
                         <!-- Refresh Button -->
                         <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" onclick="refreshAllGoals()">
-                            <iconify-icon icon="mdi:refresh" class="icon"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Refresh
                         </button>
 
                         <!-- Create Goal Button -->
                         <button type="button" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2 ms-auto" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'" data-bs-toggle="modal" data-bs-target="#createGoalModal">
-                            <iconify-icon icon="mdi:plus" class="icon"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Create Goal
                         </button>
                     </div>
@@ -405,7 +405,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #06b6d4;">
-                                            <iconify-icon icon="mdi:target" class="icon"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Active Goals</span>
@@ -425,7 +425,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #10b981;">
-                                            <iconify-icon icon="mdi:check-circle" class="icon"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">On Track</span>
@@ -445,7 +445,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #f59e0b;">
-                                            <iconify-icon icon="mdi:alert-circle" class="icon"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">At Risk</span>
@@ -465,7 +465,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #a855f7;">
-                                            <iconify-icon icon="mdi:trophy" class="icon"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Completed</span>
@@ -500,7 +500,7 @@
                                     </span>
                                     @if($goal->priority === 'high')
                                     <span class="badge bg-danger-100 text-danger-600 px-12 py-4 d-inline-flex align-items-center gap-1">
-                                        <iconify-icon icon="mdi:fire" style="font-size: 14px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span>High Priority</span>
                                     </span>
                                     @endif
@@ -508,12 +508,12 @@
                             </div>
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-light radius-8" type="button" data-bs-toggle="dropdown" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
-                                    <iconify-icon icon="mdi:dots-vertical" style="font-size: 18px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 goal-action-menu" style="min-width: 160px; border-radius: 12px; overflow: hidden; margin-top: 8px;">
                                     <li>
                                         <a class="dropdown-item goal-menu-item edit-goal-btn" href="javascript:void(0);" data-goal-id="{{ $goal->id }}" style="padding: 12px 16px; display: flex; align-items-center; gap: 10px; transition: all 0.2s ease; cursor: pointer;">
-                                            <iconify-icon icon="mdi:pencil" style="font-size: 18px; color: #6b7280;"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                             <span style="font-weight: 500;">Edit</span>
                                         </a>
                                     </li>
@@ -523,7 +523,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item goal-menu-item goal-menu-delete" style="padding: 12px 16px; display: flex; align-items: center; gap: 10px; width: 100%; border: none; background: none; text-align: left; transition: all 0.2s ease;">
-                                                <iconify-icon icon="mdi:delete" style="font-size: 18px; color: #ef4444;"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                                 <span style="font-weight: 500; color: #ef4444;">Delete</span>
                                             </button>
                                         </form>
@@ -577,7 +577,7 @@
                             @if($goal->current_amount >= $goal->target_amount)
                             <div class="text-center mt-12">
                                 <span class="badge bg-success-100 text-success-600 px-16 py-8 d-inline-flex align-items-center gap-1">
-                                    <iconify-icon icon="mdi:check-circle" style="font-size: 16px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span>Goal Achieved! 🎉</span>
                                 </span>
                             </div>
@@ -599,7 +599,7 @@
                         <div class="border-top pt-16">
                             <div class="d-flex align-items-center justify-content-between text-sm">
                                 <div class="d-flex align-items-center gap-2">
-                                    <iconify-icon icon="mdi:calendar-range" class="text-secondary-light"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span class="text-secondary-light">
                                         {{ $goal->start_date->format('M d, Y') }} - {{ $goal->end_date->format('M d, Y') }}
                                     </span>
@@ -608,7 +608,7 @@
                             @if($goal->isActive())
                             <div class="d-flex align-items-center justify-content-between text-sm mt-8">
                                 <div class="d-flex align-items-center gap-2">
-                                    <iconify-icon icon="mdi:clock-outline" class="text-secondary-light"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span class="text-secondary-light">
                                         {{ $goal->getDaysRemaining() }} days remaining
                                     </span>
@@ -633,7 +633,7 @@
                 <div class="card border-0 shadow-sm">
                     <div class="card-body text-center py-80">
                         <div class="d-flex justify-content-center mb-16">
-                            <iconify-icon icon="mdi:target" class="text-secondary-light" style="font-size: 64px;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </div>
                         <h5 class="fw-bold mb-8">No Goals Found</h5>
                         <p class="text-secondary-light mb-0">Start tracking your business goals and measure your progress.</p>
@@ -649,7 +649,7 @@
                 <div class="modal-content">
                     <div class="modal-header" style="background: linear-gradient(135deg, #ec3737 0%, #d42f2f 100%);">
                         <h5 class="modal-title text-white fw-bold" id="createGoalModalLabel" style="font-size: 18px !important;">
-                            <iconify-icon icon="mdi:target-plus" class="icon me-2"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Create New Goal
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -850,7 +850,7 @@
             const originalText = btn.innerHTML;
             
             btn.disabled = true;
-            btn.innerHTML = '<iconify-icon icon="mdi:loading" class="icon animate-spin"></iconify-icon> Refreshing...';
+            btn.innerHTML = '<i class="bi bi-circle-fill"></i> Refreshing...';
             
             fetch('{{ route("goals.refresh-all") }}', {
                 method: 'POST',

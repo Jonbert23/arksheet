@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -36,11 +36,11 @@
                     <div class="alert alert-warning-100 border-start border-warning-600 border-3 radius-8 px-24 py-20" role="alert">
                         <div class="d-flex align-items-start gap-3">
                             <div class="d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; background-color: #f59e0b; border-radius: 12px;">
-                                <iconify-icon icon="mdi:alert-circle-outline" class="text-white" style="font-size: 28px;"></iconify-icon>
+                                <i class="bi bi-exclamation-triangle text-white"></i>
                             </div>
                             <div class="flex-grow-1">
                                 <h6 class="mb-12 fw-bold text-warning-600" style="font-size: 16px;">
-                                    <iconify-icon icon="mdi:cog-outline" class="me-1"></iconify-icon>
+                                    <i class="bi bi-exclamation-triangle"></i>
                                     Configuration Required
                                 </h6>
                                 <div class="text-sm text-secondary-light mb-12">
@@ -57,13 +57,12 @@
                                 </div>
                                 @if(auth()->user()->isAdmin())
                                 <a href="{{ route('settings.config.index') }}" class="btn btn-warning-600 text-white radius-8 px-20 py-10 d-inline-flex align-items-center gap-2 hover-bg-warning-700 fw-semibold">
-                                    <iconify-icon icon="mdi:cog" class="text-lg"></iconify-icon>
-                                    Go to Business Settings
-                                    <iconify-icon icon="mdi:arrow-right" class="text-lg"></iconify-icon>
+                                    <i class="bi bi-gear"></i>
+                                    Go to Business Settings <i class="bi bi-arrow-right"></i>
                                 </a>
                                 @else
                                 <div class="alert alert-info-100 border-info-600 px-16 py-12 radius-8 mt-12">
-                                    <iconify-icon icon="mdi:information-outline" class="me-2"></iconify-icon>
+                                    <i class="bi bi-info-circle"></i>
                                     <small>Please contact your administrator to configure product settings.</small>
                                 </div>
                                 @endif
@@ -77,7 +76,7 @@
                 <div class="col-12">
                     <div class="alert alert-info-100 border-start border-info-600 border-3 radius-8 px-24 py-16" role="alert">
                         <div class="d-flex align-items-center gap-3">
-                            <iconify-icon icon="mdi:information-outline" class="text-info-600" style="font-size: 24px;"></iconify-icon>
+                            <i class="bi bi-info-circle text-info-600"></i>
                             <div class="flex-grow-1">
                                 <p class="mb-0 text-sm text-secondary-light">
                                     <strong class="text-info-600">Info:</strong> No units of measurement configured. Default units will be available, or 
@@ -99,7 +98,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-start gap-3">
                                 <div class="d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; background-color: #ec3737; border-radius: 12px;">
-                                    <iconify-icon icon="mdi:lightbulb-on-outline" class="text-white" style="font-size: 24px;"></iconify-icon>
+                                    <i class="bi bi-box-seam text-white"></i>
                                 </div>
                                 <div class="flex-grow-1">
                                     <h6 class="mb-12 fw-bold" style="color: #ec3737; font-size: 16px;">Quick Tips for Success</h6>
@@ -122,7 +121,7 @@
                         <div class="card-header bg-white border-bottom">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                    <iconify-icon icon="mdi:information-outline" class="text-white" style="font-size: 18px;"></iconify-icon>
+                                    <i class="bi bi-info-circle text-white"></i>
                                 </div>
                                 <h6 class="card-title mb-0 fw-bold">Basic Information</h6>
                             </div>
@@ -200,7 +199,7 @@
                         <div class="card-header bg-white border-bottom">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                    <iconify-icon icon="mdi:currency-usd" class="text-white" style="font-size: 18px;"></iconify-icon>
+                                    <i class="bi bi-currency-dollar text-white"></i>
                                 </div>
                                 <h6 class="card-title mb-0 fw-bold">Pricing & Costs</h6>
                             </div>
@@ -254,8 +253,7 @@
                                         @enderror
                                     </div>
                                     <small class="text-secondary-light">
-                                        <iconify-icon icon="mdi:information-outline" class="text-xs"></iconify-icon>
-                                        Packaging, shipping, handling, etc.
+                                        <i class="bi bi-info-circle"></i> Packaging, shipping, handling, etc.
                                     </small>
                                 </div>
 
@@ -263,9 +261,7 @@
                                 <div class="col-12">
                                     <div class="alert alert-info-100 border border-info-600 text-info-600 radius-8 px-20 py-12">
                                         <div class="d-flex align-items-center gap-2">
-                                            <iconify-icon icon="mdi:calculator" class="text-xl"></iconify-icon>
-                                            <div>
-                                                <strong>Profit Calculation:</strong>
+                                            <i class="bi bi-calculator"></i><div><strong>Profit Calculation:</strong>
                                                 <span class="ms-2">Estimated Profit = Selling Price - (Cost + Tax + Other Costs)</span>
                                             </div>
                                         </div>
@@ -280,7 +276,7 @@
                         <div class="card-header bg-white border-bottom">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                    <iconify-icon icon="mdi:warehouse" class="text-white" style="font-size: 18px;"></iconify-icon>
+                                    <i class="bi bi-box text-white"></i>
                                 </div>
                                 <h6 class="card-title mb-0 fw-bold">Inventory Management</h6>
                             </div>
@@ -304,8 +300,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <small class="text-secondary-light">
-                                        <iconify-icon icon="mdi:alert-circle-outline" class="text-xs"></iconify-icon>
-                                        Alert when stock falls below this level
+                                        <i class="bi bi-bell"></i> Alert when stock falls below this level
                                     </small>
                                 </div>
 
@@ -339,17 +334,14 @@
                         <div class="card-body p-24">
                             <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
                                 <div class="text-secondary-light">
-                                    <iconify-icon icon="mdi:information-outline" class="text-lg" style="color: #ec3737;"></iconify-icon>
-                                    <span class="ms-2">Fields marked with <span class="fw-bold" style="color: #ec3737;">*</span> are required</span>
+                                    <i class="bi bi-info-circle"></i><span class="ms-2">Fields marked with <span class="fw-bold" style="color: #ec3737;">*</span> are required</span>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
                                     <a href="{{ route('products.index') }}" class="btn text-secondary-light border border-neutral-200 hover-bg-neutral-100 radius-8 px-32 py-14 d-flex align-items-center gap-2">
-                                        <iconify-icon icon="mdi:arrow-left" class="text-xl"></iconify-icon>
-                                        Cancel
+                                        <i class="bi bi-x-circle"></i> Cancel
                                     </a>
                                     <button type="submit" class="btn text-white radius-8 px-32 py-14 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                        <iconify-icon icon="mdi:check-circle" class="text-xl"></iconify-icon>
-                                        Update Product
+                                        <i class="bi bi-check-circle"></i> Update Product
                                     </button>
                                 </div>
                             </div>

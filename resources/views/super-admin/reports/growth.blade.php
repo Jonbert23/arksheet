@@ -6,7 +6,7 @@
     <ul class="d-flex align-items-center gap-2">
         <li class="fw-medium">
             <a href="{{ route('super-admin.dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                <i class="bi bi-house" class="icon text-lg"></i>
                 Dashboard
             </a>
         </li>
@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-primary-600 w-100">
-                    <iconify-icon icon="solar:magnifer-linear"></iconify-icon> Apply Filter
+                    <i class="bi bi-circle-fill"></i> Apply Filter
                 </button>
             </div>
         </form>

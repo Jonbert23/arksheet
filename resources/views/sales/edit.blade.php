@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -23,7 +23,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -31,7 +31,7 @@
 
         @if($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 <strong>Please fix the following errors:</strong>
                 <ul class="mb-0 mt-2">
                     @foreach($errors->all() as $error)
@@ -134,7 +134,7 @@
                         <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                             <h6 class="card-title mb-0">Sale Items</h6>
                             <button type="button" class="btn btn-primary-600 btn-sm" id="addItemBtn">
-                                <iconify-icon icon="ic:baseline-plus" class="text-lg"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 Add Item
                             </button>
                         </div>
@@ -184,11 +184,11 @@
                 <div class="col-12">
                     <div class="d-flex align-items-center justify-content-center gap-3">
                         <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-neutral-600 hover-bg-neutral-700 radius-8 px-24 py-11">
-                            <iconify-icon icon="mdi:close" class="text-lg me-1"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Cancel
                         </a>
                         <button type="submit" class="btn btn-success-600 hover-bg-success-700 radius-8 px-24 py-11" id="submitBtn">
-                            <iconify-icon icon="mdi:content-save" class="text-lg me-1"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             Update Sale
                         </button>
                     </div>
@@ -256,7 +256,7 @@
                         </td>
                         <td class="text-center">
                             <button type="button" class="btn btn-sm btn-danger remove-item-btn" data-item-id="${itemCounter}">
-                                <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                         </td>
                     </tr>

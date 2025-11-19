@@ -5,7 +5,7 @@
             <div class="d-flex justify-content-between align-items-center mb-20">
                 <h6 class="text-lg mb-0">Product Categories</h6>
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addProductCategoryModal">
-                    <iconify-icon icon="mdi:plus" class="icon"></iconify-icon> Add Category
+                    <i class="bi bi-circle-fill"></i> Add Category
                 </button>
             </div>
 
@@ -24,17 +24,17 @@
                                 {{ $category->is_active ? 'Active' : 'Inactive' }}
                             </span>
                             <button type="button" class="btn btn-sm btn-outline-primary btn-icon edit-category" data-id="{{ $category->id }}" data-name="{{ $category->name }}" data-description="{{ $category->description }}" data-active="{{ $category->is_active }}">
-                                <iconify-icon icon="mdi:pencil" class="icon"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-outline-danger btn-icon delete-category" data-id="{{ $category->id }}">
-                                <iconify-icon icon="mdi:delete" class="icon"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                         </div>
                     </div>
                 </div>
                 @empty
                 <div class="text-center py-5">
-                    <iconify-icon icon="mdi:package-variant-closed" class="text-secondary-light" style="font-size: 48px;"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <p class="text-secondary-light mt-2">No product categories yet</p>
                 </div>
                 @endforelse
@@ -49,7 +49,7 @@
             <div class="d-flex justify-content-between align-items-center mb-20">
                 <h6 class="text-lg mb-0">Product Types</h6>
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addProductTypeModal">
-                    <iconify-icon icon="mdi:plus" class="icon"></iconify-icon> Add Type
+                    <i class="bi bi-circle-fill"></i> Add Type
                 </button>
             </div>
 
@@ -69,10 +69,10 @@
                             </span>
                             @if(!$type->is_system)
                             <button type="button" class="btn btn-sm btn-outline-primary btn-icon edit-type" data-id="{{ $type->id }}" data-label="{{ $type->setting_label }}" data-value="{{ $type->setting_value }}" data-description="{{ $type->description }}" data-active="{{ $type->is_active }}">
-                                <iconify-icon icon="mdi:pencil" class="icon"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-outline-danger btn-icon delete-type" data-id="{{ $type->id }}">
-                                <iconify-icon icon="mdi:delete" class="icon"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                             @else
                             <span class="badge bg-info-100 text-info-600 badge-status">System</span>
@@ -82,7 +82,7 @@
                 </div>
                 @empty
                 <div class="text-center py-5">
-                    <iconify-icon icon="mdi:shape" class="text-secondary-light" style="font-size: 48px;"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     <p class="text-secondary-light mt-2">No product types configured</p>
                 </div>
                 @endforelse
@@ -169,14 +169,15 @@
             </div>
             <form id="addProductTypeForm">
                 @csrf
+                <input type="hidden" name="setting_key" value="product_type">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Type Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="label" required placeholder="e.g., Digital Product">
+                        <input type="text" class="form-control" name="setting_label" required placeholder="e.g., Digital Product">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Type Value <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="value" required placeholder="e.g., digital">
+                        <input type="text" class="form-control" name="setting_value" required placeholder="e.g., digital">
                         <small class="text-secondary-light">Lowercase, no spaces (use underscores)</small>
                     </div>
                     <div class="mb-3">
@@ -212,11 +213,11 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Type Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="label" id="edit_type_label" required>
+                        <input type="text" class="form-control" name="setting_label" id="edit_type_label" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Type Value <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="value" id="edit_type_value" required>
+                        <input type="text" class="form-control" name="setting_value" id="edit_type_value" required>
                         <small class="text-secondary-light">Lowercase, no spaces (use underscores)</small>
                     </div>
                     <div class="mb-3">

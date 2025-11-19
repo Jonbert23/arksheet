@@ -249,7 +249,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -260,7 +260,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -268,7 +268,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -282,7 +282,7 @@
                         <!-- Date Range Picker with Dropdown -->
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-secondary d-flex align-items-center gap-2 radius-8 px-16 py-11 dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" style="min-width: 280px;">
-                                <iconify-icon icon="mdi:calendar" class="text-secondary-light"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span id="dateRangeDisplay">
                                     {{ $dateFrom && $dateTo ? \Carbon\Carbon::parse($dateFrom)->format('M d, Y') . ' - ' . \Carbon\Carbon::parse($dateTo)->format('M d, Y') : \Carbon\Carbon::now()->startOfMonth()->format('M d, Y') . ' - ' . \Carbon\Carbon::now()->format('M d, Y') }}
                                 </span>
@@ -313,7 +313,7 @@
                         <!-- Role Filter -->
                         <div style="min-width: 200px;">
                             <div class="d-flex align-items-center gap-2">
-                                <iconify-icon icon="mdi:shield-account" style="font-size: 20px; color: #ec3737;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <select name="role" class="form-select radius-8 px-16 py-11" style="border: 1px solid #e5e7eb; min-width: 180px;">
                                     <option value="">All Roles</option>
                                     <option value="business_owner" {{ request('role') === 'business_owner' ? 'selected' : '' }}>Business Owner</option>
@@ -327,7 +327,7 @@
                         <!-- Status Filter -->
                         <div style="min-width: 200px;">
                             <div class="d-flex align-items-center gap-2">
-                                <iconify-icon icon="mdi:filter" style="font-size: 20px; color: #ec3737;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <select name="is_active" class="form-select radius-8 px-16 py-11" style="border: 1px solid #e5e7eb; min-width: 180px;">
                                     <option value="">All Status</option>
                                     <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>Active</option>
@@ -342,13 +342,13 @@
 
                         <!-- Apply Filter Button -->
                         <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2 ms-auto" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <iconify-icon icon="mdi:filter-check" style="font-size: 18px;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             <span>Apply Filter</span>
                         </button>
 
                         <!-- Reset Filter Button -->
                         <a href="{{ route('users.index') }}" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                            <iconify-icon icon="mdi:refresh" style="font-size: 18px;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             <span>Reset</span>
                         </a>
                     </div>
@@ -367,7 +367,7 @@
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ $users->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <iconify-icon icon="mdi:account-group" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -382,7 +382,7 @@
                                 <h6 class="mb-0">{{ $users->where('is_active', true)->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:account-check" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -397,7 +397,7 @@
                                 <h6 class="mb-0">{{ $users->where('role', 'business_owner')->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:shield-crown" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -412,7 +412,7 @@
                                 <h6 class="mb-0">{{ $users->where('role', 'manager')->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:account-tie" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -435,12 +435,12 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search users..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <iconify-icon icon="ion:search-outline"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </span>
                     </div>
                 </div>
                 <button type="button" id="addUserBtn" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                    <iconify-icon icon="ic:baseline-plus" style="font-size: 18px;"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     Add New User
                 </button>
             </div>
@@ -500,17 +500,17 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <button type="button" class="view-user-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View" data-user-id="{{ $user->id }}">
-                                            <iconify-icon icon="solar:eye-linear" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         <button type="button" class="edit-user-btn fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white border-0" style="background-color: #ec3737;" title="Edit" data-user-id="{{ $user->id }}" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                            <iconify-icon icon="lucide:edit" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         @if($user->id !== auth()->id())
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle delete-btn border-0" title="Delete">
-                                                <iconify-icon icon="fluent:delete-24-regular" class="icon text-lg"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </button>
                                         </form>
                                         @endif
@@ -521,10 +521,10 @@
                             <tr>
                                 <td colspan="7" class="text-center py-48">
                                     <div class="d-flex flex-column align-items-center">
-                                        <iconify-icon icon="mdi:account-off" class="text-secondary-light mb-8" style="font-size: 48px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <p class="text-secondary-light mb-16">No users found</p>
                                         <button type="button" id="addFirstUserBtn" class="btn text-white px-20 py-11 radius-8" style="background-color: #ec3737;">
-                                            <iconify-icon icon="ic:baseline-plus" class="icon text-xl me-1"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                             Add Your First User
                                         </button>
                                     </div>
@@ -595,7 +595,7 @@
                     <div class="mb-24">
                         <div class="d-flex align-items-center gap-2 mb-20">
                             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                <iconify-icon icon="mdi:information-outline" class="text-white" style="font-size: 16px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Basic Information</h6>
                         </div>
@@ -604,7 +604,7 @@
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0;">
-                                        <iconify-icon icon="mdi:account" style="color: #ec3737; font-size: 20px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="mb-1" style="font-size: 12px; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">Full Name</p>
@@ -616,7 +616,7 @@
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0;">
-                                        <iconify-icon icon="mdi:email" style="color: #ec3737; font-size: 20px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="mb-1" style="font-size: 12px; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</p>
@@ -628,7 +628,7 @@
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0;">
-                                        <iconify-icon icon="mdi:phone" style="color: #ec3737; font-size: 20px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="mb-1" style="font-size: 12px; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">Phone Number</p>
@@ -640,7 +640,7 @@
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0;">
-                                        <iconify-icon icon="mdi:shield-account" style="color: #ec3737; font-size: 20px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="mb-1" style="font-size: 12px; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">User Role</p>
@@ -655,7 +655,7 @@
                     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;" id="view_permissions_section">
                         <div class="d-flex align-items-center gap-2 mb-16">
                             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                <iconify-icon icon="mdi:shield-account-outline" class="text-white" style="font-size: 16px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Module Permissions</h6>
                         </div>
@@ -671,7 +671,7 @@
                     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
                         <div class="d-flex align-items-center gap-2 mb-16">
                             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                <iconify-icon icon="mdi:tune-variant" class="text-white" style="font-size: 16px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Account Status</h6>
                         </div>
@@ -700,7 +700,7 @@
                 </div>
                 <div class="modal-footer border-top" style="padding: 20px 24px;">
                     <button type="button" class="btn btn-outline-secondary radius-8 d-flex align-items-center gap-2" style="padding: 11px 24px; font-size: 14px; font-weight: 500;" data-bs-dismiss="modal">
-                        <iconify-icon icon="mdi:close" style="font-size: 18px;"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         <span>Close</span>
                     </button>
                 </div>
@@ -859,8 +859,8 @@
                     "paginate": {
                         "first": "First",
                         "last": "Last",
-                        "next": '<iconify-icon icon="ic:baseline-chevron-right"></iconify-icon>',
-                        "previous": '<iconify-icon icon="ic:baseline-chevron-left"></iconify-icon>'
+                        "next": '<i class="bi bi-circle-fill"></i>',
+                        "previous": '<i class="bi bi-circle-fill"></i>'
                     }
                 },
                 "columnDefs": [
@@ -1140,21 +1140,21 @@
                         let permissionsHtml = '';
                         
                         if (user.role === 'business_owner' || user.role === 'super_admin') {
-                            permissionsHtml = '<div class="col-12"><div class="alert alert-info mb-0" style="background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b;"><iconify-icon icon="mdi:information" class="me-2"></iconify-icon>This user has full access to all modules.</div></div>';
+                            permissionsHtml = '<div class="col-12"><div class="alert alert-info mb-0" style="background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b;"><i class="bi bi-circle-fill"></i>This user has full access to all modules.</div></div>';
                         } else if (user.permissions && user.permissions.length > 0) {
                             user.permissions.forEach(function(permission) {
                                 const label = moduleLabels[permission] || permission;
                                 permissionsHtml += `
                                     <div class="col-md-6 mb-12">
                                         <div class="p-12 rounded-2 d-flex align-items-center gap-2" style="background-color: #fef2f2; border: 1px solid #fecaca;">
-                                            <iconify-icon icon="mdi:check-circle" style="color: #ec3737; font-size: 18px;"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                             <span class="fw-medium" style="color: #991b1b; font-size: 14px;">${label}</span>
                                         </div>
                                     </div>
                                 `;
                             });
                         } else {
-                            permissionsHtml = '<div class="col-12"><div class="alert alert-warning mb-0" style="background-color: #fef3c7; border: 1px solid #fde047; color: #92400e;"><iconify-icon icon="mdi:alert" class="me-2"></iconify-icon>No module permissions assigned.</div></div>';
+                            permissionsHtml = '<div class="col-12"><div class="alert alert-warning mb-0" style="background-color: #fef3c7; border: 1px solid #fde047; color: #92400e;"><i class="bi bi-circle-fill"></i>No module permissions assigned.</div></div>';
                         }
                         
                         $("#view_permissions_list").html(permissionsHtml);

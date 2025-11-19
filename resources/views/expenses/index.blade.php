@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -17,7 +17,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:check-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -25,7 +25,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <iconify-icon icon="mdi:alert-circle" class="icon text-xl me-2"></iconify-icon>
+                <i class="bi bi-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -42,7 +42,7 @@
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ auth()->user()->business->currency }} {{ number_format($expenses->sum('amount'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <iconify-icon icon="mdi:cash-minus" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                                 <h6 class="mb-0">{{ number_format($expenses->count()) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:receipt-text" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($expenses->avg('amount'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:chart-bar" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($expenses->filter(function($expense) { return $expense->date->isCurrentMonth(); })->sum('amount'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <iconify-icon icon="mdi:calendar-month" class="text-white text-2xl mb-0"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -110,12 +110,12 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search expenses..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <iconify-icon icon="ion:search-outline"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </span>
                     </div>
                 </div>
                 <button type="button" id="addExpenseBtn" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                    <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     Record Expense
                 </button>
             </div>
@@ -171,13 +171,13 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <button type="button" class="view-expense-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View" data-expense-id="{{ $expense->id }}">
-                                            <iconify-icon icon="solar:eye-linear" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         <button type="button" class="edit-expense-btn fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white border-0" style="background-color: #ec3737;" title="Edit" data-expense-id="{{ $expense->id }}" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                            <iconify-icon icon="lucide:edit" class="icon text-lg"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         <button type="button" class="delete-expense-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="Delete" data-expense-id="{{ $expense->id }}">
-                                                <iconify-icon icon="fluent:delete-24-regular" class="icon text-lg"></iconify-icon>
+                                                <i class="bi bi-circle-fill"></i>
                                             </button>
                                     </div>
                                 </td>
@@ -185,7 +185,7 @@
                             @empty
                             <tr>
                                 <td colspan="9" class="text-center py-48">
-                                    <iconify-icon icon="mdi:cash-remove" class="text-xxl text-secondary-light mb-16" style="font-size: 64px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <p class="text-secondary-light fw-semibold mb-16">No expenses found</p>
                                     <a href="{{ route('expenses.create') }}" class="btn btn-primary-600 radius-8 px-20 py-11">
                                         Record Your First Expense
@@ -561,6 +561,14 @@
                         return null;
                     }
                     
+                    // Only initialize DataTable if there are expenses
+                    var hasExpenses = $("#expenses-table tbody tr").length > 0 && !$("#expenses-table tbody tr td[colspan]").length;
+                    
+                    if (!hasExpenses) {
+                        console.log("No expenses to display, skipping DataTable initialization");
+                        return null;
+                    }
+                    
                     // Destroy existing instance if present
                 if ($.fn.DataTable.isDataTable("#expenses-table")) {
                         console.log("Destroying existing DataTable instance...");
@@ -579,26 +587,29 @@
                     "autoWidth": false,
                     "order": [[2, "desc"]],
                     "pagingType": "simple_numbers",
+                    "columns": [
+                        { "orderable": true, "searchable": false },   // 0 - No.
+                        { "orderable": true, "searchable": true },    // 1 - Expense
+                        { "orderable": true, "searchable": false },   // 2 - Date
+                        { "orderable": true, "searchable": true },    // 3 - Category
+                        { "orderable": true, "searchable": true },    // 4 - Payment Method
+                        { "orderable": true, "searchable": true },    // 5 - Receipt Number
+                        { "orderable": true, "searchable": true },    // 6 - Status
+                        { "orderable": true, "searchable": false },   // 7 - Amount
+                        { "orderable": false, "searchable": false }   // 8 - Actions
+                    ],
                     "columnDefs": [
                         {
-                            "targets": [0],
-                            "orderable": true,
-                            "searchable": false
-                        },
-                        {
-                                "targets": [8], // Actions column
-                            "orderable": false,
-                            "searchable": false
-                        },
-                        {
                                 "targets": [6], // Status column
-                                "orderable": true,
-                                "searchable": true,
                                 "className": "text-center"
                             },
                             {
                                 "targets": [7], // Amount column
                             "className": "text-end"
+                        },
+                        {
+                                "targets": [8], // Actions column
+                                "className": "text-center"
                         }
                     ],
                     "language": {

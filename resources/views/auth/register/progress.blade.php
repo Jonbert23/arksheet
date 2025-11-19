@@ -10,7 +10,7 @@
         <div class="progress-step {{ $currentStep >= 1 ? 'active' : '' }}">
             <div class="step-circle">
                 @if($currentStep > 1)
-                    <iconify-icon icon="solar:check-circle-bold" width="20"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                 @else
                     1
                 @endif
@@ -21,7 +21,7 @@
         <div class="progress-step {{ $currentStep >= 2 ? 'active' : '' }}">
             <div class="step-circle">
                 @if($currentStep > 2)
-                    <iconify-icon icon="solar:check-circle-bold" width="20"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                 @else
                     2
                 @endif
@@ -32,7 +32,7 @@
         <div class="progress-step {{ $currentStep >= 3 ? 'active' : '' }}">
             <div class="step-circle">
                 @if($currentStep > 3)
-                    <iconify-icon icon="solar:check-circle-bold" width="20"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                 @else
                     3
                 @endif

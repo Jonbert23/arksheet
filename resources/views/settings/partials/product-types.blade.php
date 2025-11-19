@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between align-items-center mb-20">
     <h6 class="text-lg mb-0 fw-semibold">Product Types</h6>
     <button type="button" class="btn btn-primary text-sm btn-sm px-12 py-6 radius-8 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addProductTypeModal">
-        <iconify-icon icon="ic:round-plus" class="icon text-xl"></iconify-icon>
+        <i class="bi bi-plus-circle"></i>
         Add Type
     </button>
 </div>
@@ -23,10 +23,10 @@
                 </span>
                 @if(!$type->is_system)
                 <button type="button" class="btn btn-sm btn-outline-primary-600 radius-8 px-12 py-4 d-flex align-items-center gap-1 edit-type" data-id="{{ $type->id }}" data-label="{{ $type->setting_label }}" data-value="{{ $type->setting_value }}" data-description="{{ $type->description }}" data-active="{{ $type->is_active }}" title="Edit">
-                    <iconify-icon icon="lucide:edit" class="text-lg"></iconify-icon>
+                    <i class="bi bi-pencil-square"></i>
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-danger-600 radius-8 px-12 py-4 d-flex align-items-center gap-1 delete-type" data-id="{{ $type->id }}" title="Delete">
-                    <iconify-icon icon="mingcute:delete-2-line" class="text-lg"></iconify-icon>
+                    <i class="bi bi-trash3"></i>
                 </button>
                 @else
                 <span class="badge bg-info-100 text-info-600 badge-status fw-medium">System</span>
@@ -37,7 +37,7 @@
     @empty
     <div class="text-center py-5">
         <div class="d-flex justify-content-center mb-3">
-            <iconify-icon icon="mdi:shape" class="text-secondary-light" style="font-size: 48px;"></iconify-icon>
+            <i class="bi bi-inbox" style="font-size: 48px; color: #9ca3af;"></i>
         </div>
         <p class="text-secondary-light mb-0">No product types configured</p>
     </div>
@@ -60,12 +60,12 @@
                 <div class="modal-body">
                     <div class="mb-20">
                         <label class="form-label fw-semibold text-primary-light text-sm mb-8">Type Name <span class="text-danger-600">*</span></label>
-                        <input type="text" class="form-control radius-8" name="label" required placeholder="e.g., Digital Product">
+                        <input type="text" class="form-control radius-8" name="setting_label" required placeholder="e.g., Digital Product">
                     </div>
                     <div class="mb-20">
                         <label class="form-label fw-semibold text-primary-light text-sm mb-8">Type Value <span class="text-danger-600">*</span></label>
-                        <input type="text" class="form-control radius-8" name="value" required placeholder="e.g., digital">
-                        <small class="text-secondary-light d-block mt-1"><iconify-icon icon="mdi:information" class="icon-sm"></iconify-icon> Lowercase, no spaces (use underscores)</small>
+                        <input type="text" class="form-control radius-8" name="setting_value" required placeholder="e.g., digital">
+                        <small class="text-secondary-light d-block mt-1"><i class="bi bi-info-circle"></i> Lowercase, no spaces (use underscores)</small>
                     </div>
                     <div class="mb-20">
                         <label class="form-label fw-semibold text-primary-light text-sm mb-8">Description</label>
@@ -78,11 +78,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                        <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
+                        <i class="bi bi-x-circle"></i>
                         Cancel
                     </button>
                     <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                        <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                        <i class="bi bi-plus-circle"></i>
                         Add Type
                     </button>
                 </div>
@@ -108,12 +108,12 @@
                 <div class="modal-body">
                     <div class="mb-20">
                         <label class="form-label fw-semibold text-primary-light text-sm mb-8">Type Name <span class="text-danger-600">*</span></label>
-                        <input type="text" class="form-control radius-8" name="label" id="edit_type_label" required>
+                        <input type="text" class="form-control radius-8" name="setting_label" id="edit_type_label" required>
                     </div>
                     <div class="mb-20">
                         <label class="form-label fw-semibold text-primary-light text-sm mb-8">Type Value <span class="text-danger-600">*</span></label>
-                        <input type="text" class="form-control radius-8" name="value" id="edit_type_value" required>
-                        <small class="text-secondary-light d-block mt-1"><iconify-icon icon="mdi:information" class="icon-sm"></iconify-icon> Lowercase, no spaces (use underscores)</small>
+                        <input type="text" class="form-control radius-8" name="setting_value" id="edit_type_value" required>
+                        <small class="text-secondary-light d-block mt-1"><i class="bi bi-info-circle"></i> Lowercase, no spaces (use underscores)</small>
                     </div>
                     <div class="mb-20">
                         <label class="form-label fw-semibold text-primary-light text-sm mb-8">Description</label>
@@ -126,11 +126,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                        <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
+                        <i class="bi bi-x-circle"></i>
                         Cancel
                     </button>
                     <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                        <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                        <i class="bi bi-check-circle"></i>
                         Update Type
                     </button>
                 </div>

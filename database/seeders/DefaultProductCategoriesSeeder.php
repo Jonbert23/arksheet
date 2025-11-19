@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Business;
 use App\Models\ProductCategory;
-use App\Models\BusinessSetting;
 use Illuminate\Database\Seeder;
 
 class DefaultProductCategoriesSeeder extends Seeder
@@ -76,55 +75,6 @@ class DefaultProductCategoriesSeeder extends Seeder
             ],
         ];
 
-        // Default Product Types (Business Settings)
-        $defaultProductTypes = [
-            [
-                'setting_key' => 'product_type',
-                'setting_value' => 'physical',
-                'setting_label' => 'Physical Product',
-                'description' => 'Tangible products that require inventory management and shipping',
-                'sort_order' => 1,
-                'is_active' => true,
-                'is_system' => true,
-            ],
-            [
-                'setting_key' => 'product_type',
-                'setting_value' => 'digital',
-                'setting_label' => 'Digital Product',
-                'description' => 'Digital products like software, ebooks, or downloadable content',
-                'sort_order' => 2,
-                'is_active' => true,
-                'is_system' => true,
-            ],
-            [
-                'setting_key' => 'product_type',
-                'setting_value' => 'service',
-                'setting_label' => 'Service',
-                'description' => 'Service-based products like consulting or maintenance',
-                'sort_order' => 3,
-                'is_active' => true,
-                'is_system' => true,
-            ],
-            [
-                'setting_key' => 'product_type',
-                'setting_value' => 'subscription',
-                'setting_label' => 'Subscription',
-                'description' => 'Recurring subscription-based products',
-                'sort_order' => 4,
-                'is_active' => true,
-                'is_system' => false,
-            ],
-            [
-                'setting_key' => 'product_type',
-                'setting_value' => 'bundle',
-                'setting_label' => 'Bundle/Package',
-                'description' => 'Combination of multiple products sold as a package',
-                'sort_order' => 5,
-                'is_active' => true,
-                'is_system' => false,
-            ],
-        ];
-
         foreach ($businesses as $business) {
             $this->command->info("Seeding default data for business: {$business->name}");
 
@@ -143,29 +93,9 @@ class DefaultProductCategoriesSeeder extends Seeder
             }
 
             $this->command->info("  ✓ Created " . count($defaultCategories) . " product categories");
-
-            // Seed Product Types
-            foreach ($defaultProductTypes as $type) {
-                BusinessSetting::firstOrCreate(
-                    [
-                        'business_id' => $business->id,
-                        'setting_key' => $type['setting_key'],
-                        'setting_value' => $type['setting_value'],
-                    ],
-                    [
-                        'setting_label' => $type['setting_label'],
-                        'description' => $type['description'],
-                        'sort_order' => $type['sort_order'],
-                        'is_active' => $type['is_active'],
-                        'is_system' => $type['is_system'],
-                    ]
-                );
-            }
-
-            $this->command->info("  ✓ Created " . count($defaultProductTypes) . " product types");
         }
 
-        $this->command->info("\n✅ Default product categories and types seeded successfully!");
+        $this->command->info("\n✅ Default product categories seeded successfully!");
     }
 }
 

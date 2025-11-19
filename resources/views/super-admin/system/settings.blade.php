@@ -6,7 +6,7 @@
     <ul class="d-flex align-items-center gap-2">
         <li class="fw-medium">
             <a href="{{ route('super-admin.dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                <i class="bi bi-house" class="icon text-lg"></i>
                 Dashboard
             </a>
         </li>
@@ -123,7 +123,7 @@
                         <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-center gap-3 mb-3">
                                 <div class="w-48-px h-48-px bg-primary-100 text-primary-600 rounded d-flex align-items-center justify-content-center">
-                                    <iconify-icon icon="solar:refresh-outline" class="text-2xl"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <div>
                                     <h6 class="mb-0">Clear Cache</h6>
@@ -145,7 +145,7 @@
                         <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-center gap-3 mb-3">
                                 <div class="w-48-px h-48-px bg-success-100 text-success-600 rounded d-flex align-items-center justify-content-center">
-                                    <iconify-icon icon="solar:settings-minimalistic-outline" class="text-2xl"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <div>
                                     <h6 class="mb-0">Optimize</h6>
@@ -167,7 +167,7 @@
                         <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-center gap-3 mb-3">
                                 <div class="w-48-px h-48-px bg-info-100 text-info-600 rounded d-flex align-items-center justify-content-center">
-                                    <iconify-icon icon="solar:database-outline" class="text-2xl"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <div>
                                     <h6 class="mb-0">Migrate</h6>
@@ -189,7 +189,7 @@
                         <div class="border rounded p-3 h-100">
                             <div class="d-flex align-items-center gap-3 mb-3">
                                 <div class="w-48-px h-48-px bg-danger-100 text-danger-600 rounded d-flex align-items-center justify-content-center">
-                                    <iconify-icon icon="solar:trash-bin-minimalistic-outline" class="text-2xl"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </div>
                                 <div>
                                     <h6 class="mb-0">Clear Logs</h6>

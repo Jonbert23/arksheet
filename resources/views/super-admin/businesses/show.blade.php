@@ -6,7 +6,7 @@
     <ul class="d-flex align-items-center gap-2">
         <li class="fw-medium">
             <a href="{{ route('super-admin.dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                <i class="bi bi-house" class="icon text-lg"></i>
                 Dashboard
             </a>
         </li>
@@ -28,12 +28,12 @@
                 @csrf
                 @method('PATCH')
                 <button type="submit" class="btn btn-sm btn-{{ $business->is_active ? 'warning' : 'success' }}-600">
-                    <iconify-icon icon="solar:{{ $business->is_active ? 'eye-closed-linear' : 'check-circle-linear' }}"></iconify-icon>
+                    <i class="bi bi-circle-fill">is_active ? 'eye-closed-linear' : 'check-circle-linear' }}"></i>
                     {{ $business->is_active ? 'Deactivate' : 'Activate' }}
                 </button>
             </form>
             <a href="{{ route('super-admin.businesses.edit', $business) }}" class="btn btn-sm btn-primary-600">
-                <iconify-icon icon="solar:pen-linear"></iconify-icon> Edit
+                <i class="bi bi-circle-fill"></i> Edit
             </a>
         </div>
     </div>

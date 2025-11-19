@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between align-items-center mb-20">
     <h6 class="text-lg mb-0 fw-semibold">Product Categories</h6>
     <button type="button" class="btn btn-primary text-sm btn-sm px-12 py-6 radius-8 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addProductCategoryModal">
-        <iconify-icon icon="ic:round-plus" class="icon text-xl"></iconify-icon>
+        <i class="bi bi-plus-circle"></i>
         Add Category
     </button>
 </div>
@@ -21,10 +21,10 @@
                     {{ $category->is_active ? 'Active' : 'Inactive' }}
                 </span>
                 <button type="button" class="btn btn-sm btn-outline-primary-600 radius-8 px-12 py-4 d-flex align-items-center gap-1 edit-category" data-id="{{ $category->id }}" data-name="{{ $category->name }}" data-description="{{ $category->description }}" data-active="{{ $category->is_active }}" title="Edit">
-                    <iconify-icon icon="lucide:edit" class="text-lg"></iconify-icon>
+                    <i class="bi bi-pencil-square"></i>
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-danger-600 radius-8 px-12 py-4 d-flex align-items-center gap-1 delete-category" data-id="{{ $category->id }}" title="Delete">
-                    <iconify-icon icon="mingcute:delete-2-line" class="text-lg"></iconify-icon>
+                    <i class="bi bi-trash3"></i>
                 </button>
             </div>
         </div>
@@ -32,7 +32,7 @@
     @empty
     <div class="text-center py-5">
         <div class="d-flex justify-content-center mb-3">
-            <iconify-icon icon="mdi:package-variant-closed" class="text-secondary-light" style="font-size: 48px;"></iconify-icon>
+            <i class="bi bi-inbox" style="font-size: 48px; color: #9ca3af;"></i>
         </div>
         <p class="text-secondary-light mb-0">No product categories yet</p>
     </div>
@@ -67,11 +67,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                        <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
+                        <i class="bi bi-x-circle"></i>
                         Cancel
                     </button>
                     <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                        <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                        <i class="bi bi-plus-circle"></i>
                         Add Category
                     </button>
                 </div>
@@ -110,11 +110,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2" data-bs-dismiss="modal">
-                        <iconify-icon icon="ic:round-close" class="text-xl"></iconify-icon>
+                        <i class="bi bi-x-circle"></i>
                         Cancel
                     </button>
                     <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                        <iconify-icon icon="ic:round-check" class="text-xl"></iconify-icon>
+                        <i class="bi bi-check-circle"></i>
                         Update Category
                     </button>
                 </div>

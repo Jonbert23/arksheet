@@ -6,7 +6,7 @@
             <ul class="d-flex align-items-center gap-2">
                 <li class="fw-medium">
                     <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                        <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                        <i class="bi bi-house" class="icon text-lg"></i>
                         Dashboard
                     </a>
                 </li>
@@ -29,32 +29,32 @@
                         <!-- Add Filter Dropdown -->
                         <div class="dropdown">
                             <button class="btn text-white d-flex align-items-center gap-2 fw-semibold radius-8 px-20 py-11 dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ec3737; border: none; box-shadow: 0 2px 4px rgba(236, 55, 55, 0.2);" onmouseover="this.style.backgroundColor='#d42f2f'; this.style.boxShadow='0 4px 8px rgba(236, 55, 55, 0.3)'" onmouseout="this.style.backgroundColor='#ec3737'; this.style.boxShadow='0 2px 4px rgba(236, 55, 55, 0.2)'">
-                                <iconify-icon icon="mdi:filter-variant" class="icon text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>Add Filter</span>
                             </button>
                             <ul class="dropdown-menu radius-8 shadow border-0 mt-2" aria-labelledby="filterDropdown" style="min-width: 220px;">
                                 <li>
                                     <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeModal" style="transition: all 0.2s;">
-                                        <iconify-icon icon="mdi:calendar-range" class="icon text-lg text-primary-600"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span>Date Range</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#customerFilterModal" style="transition: all 0.2s;">
-                                        <iconify-icon icon="mdi:account" class="icon text-lg text-success-600"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span>Customer</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#channelFilterModal" style="transition: all 0.2s;">
-                                        <iconify-icon icon="mdi:tag" class="icon text-lg text-info-600"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span>Sales Channel</span>
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider my-2"></li>
                                 <li>
                                     <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#advancedFilterModal" style="transition: all 0.2s;">
-                                        <iconify-icon icon="mdi:tune" class="icon text-lg text-warning-600"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span>Advanced Filter</span>
                                     </a>
                                 </li>
@@ -64,7 +64,7 @@
                         <!-- Clear All Filters Button -->
                         @if(request()->has('date_from') || request()->has('customer_id') || request()->has('channel_id'))
                         <a href="{{ route('reports.sales') }}" class="btn btn-outline-secondary d-flex align-items-center gap-2 radius-8 px-20 py-11">
-                            <iconify-icon icon="mdi:close-circle-outline" class="icon"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                             <span>Clear All Filters</span>
                         </a>
                         @endif
@@ -76,28 +76,28 @@
                         <span class="text-sm text-secondary-light fw-medium">Active Filters:</span>
                         @if(request('date_from'))
                             <span class="badge bg-primary-100 text-primary-600 px-12 py-6 d-inline-flex align-items-center gap-2" style="padding-right: 8px !important;">
-                                <iconify-icon icon="mdi:calendar" style="font-size: 14px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>{{ \Carbon\Carbon::parse(request('date_from'))->format('M d, Y') }} - {{ \Carbon\Carbon::parse(request('date_to'))->format('M d, Y') }}</span>
                                 <a href="{{ route('reports.sales', array_merge(request()->except(['date_from', 'date_to']), [])) }}" class="text-primary-600 d-inline-flex align-items-center" style="text-decoration: none; margin-left: 4px;" title="Remove date filter">
-                                    <iconify-icon icon="mdi:close" style="font-size: 16px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </a>
                             </span>
                         @endif
                         @if(request('customer_id'))
                             <span class="badge bg-success-100 text-success-600 px-12 py-6 d-inline-flex align-items-center gap-2" style="padding-right: 8px !important;">
-                                <iconify-icon icon="mdi:account" style="font-size: 14px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>{{ $customers->firstWhere('id', request('customer_id'))?->name }}</span>
                                 <a href="{{ route('reports.sales', request()->except('customer_id')) }}" class="text-success-600 d-inline-flex align-items-center" style="text-decoration: none; margin-left: 4px;" title="Remove customer filter">
-                                    <iconify-icon icon="mdi:close" style="font-size: 16px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </a>
                             </span>
                         @endif
                         @if(request('channel_id'))
                             <span class="badge bg-info-100 text-info-600 px-12 py-6 d-inline-flex align-items-center gap-2" style="padding-right: 8px !important;">
-                                <iconify-icon icon="mdi:tag" style="font-size: 14px;"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>{{ $channels->firstWhere('id', request('channel_id'))?->name }}</span>
                                 <a href="{{ route('reports.sales', request()->except('channel_id')) }}" class="text-info-600 d-inline-flex align-items-center" style="text-decoration: none; margin-left: 4px;" title="Remove channel filter">
-                                    <iconify-icon icon="mdi:close" style="font-size: 16px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </a>
                             </span>
                         @endif
@@ -116,7 +116,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #ec3737;">
-                                    <iconify-icon icon="mdi:cash-multiple" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <div>
                                     <span class="mb-2 fw-medium text-secondary-light text-sm">Total Sales</span>
@@ -136,7 +136,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-success-main flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <iconify-icon icon="fluent:cart-16-filled" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <div>
                                     <span class="mb-2 fw-medium text-secondary-light text-sm">Transactions</span>
@@ -156,7 +156,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-yellow text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <iconify-icon icon="mdi:chart-line" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <div>
                                     <span class="mb-2 fw-medium text-secondary-light text-sm">Average Sale</span>
@@ -176,7 +176,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-purple text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <iconify-icon icon="mdi:percent" class="icon"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <div>
                                     <span class="mb-2 fw-medium text-secondary-light text-sm">Total Discount</span>
@@ -266,32 +266,32 @@
                 <h6 class="fw-bold mb-0" style="font-size: 18px !important; color: #4b5563;">Sales Transactions</h6>
                 <div class="dropdown">
                     <button class="btn text-white d-flex align-items-center gap-2 fw-semibold radius-8 px-20 py-11 dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ec3737; border: none; box-shadow: 0 2px 4px rgba(236, 55, 55, 0.2);" onmouseover="this.style.backgroundColor='#d42f2f'; this.style.boxShadow='0 4px 8px rgba(236, 55, 55, 0.3)'" onmouseout="this.style.backgroundColor='#ec3737'; this.style.boxShadow='0 2px 4px rgba(236, 55, 55, 0.2)'">
-                        <iconify-icon icon="mdi:file-export" class="icon text-xl"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         <span>Export</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end radius-8 shadow border-0 mt-2" aria-labelledby="exportDropdown" style="min-width: 180px;">
                         <li>
                             <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" onclick="exportToExcel(); return false;" style="transition: all 0.2s;">
-                                <iconify-icon icon="mdi:file-excel" class="icon text-lg text-success-600"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>Export to Excel</span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" onclick="exportToPDF(); return false;" style="transition: all 0.2s;">
-                                <iconify-icon icon="mdi:file-pdf-box" class="icon text-lg text-danger-600"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>Export to PDF</span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" onclick="exportToCSV(); return false;" style="transition: all 0.2s;">
-                                <iconify-icon icon="mdi:file-delimited" class="icon text-lg text-primary-600"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>Export to CSV</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider my-2"></li>
                         <li>
                             <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" onclick="printTable(); return false;" style="transition: all 0.2s;">
-                                <iconify-icon icon="mdi:printer" class="icon text-lg text-info-600"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>Print</span>
                             </a>
                         </li>
@@ -549,7 +549,7 @@
             transform: translateX(4px);
         }
         
-        .dropdown-menu .dropdown-item:hover iconify-icon {
+        .dropdown-menu .dropdown-item:hover i {
             transform: scale(1.1);
         }
         

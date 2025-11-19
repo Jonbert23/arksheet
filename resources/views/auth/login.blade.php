@@ -304,7 +304,7 @@
             <div class="auth-form-section">
                 <div class="form-card">
                 <div class="brand-icon">
-                    <iconify-icon icon="mdi:shield-check" style="font-size: 28px; color: white;"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                 </div>
                     
                     <h1 class="auth-title">Welcome Back</h1>
@@ -380,7 +380,7 @@
         <div class="auth-announcements-section">
             <div class="announcements-container">
                 <div class="announcement-badge">
-                    <iconify-icon icon="mdi:bell" style="font-size: 16px;"></iconify-icon>
+                    <i class="bi bi-circle-fill"></i>
                     Announcements
                 </div>
 
@@ -390,7 +390,7 @@
                 <div class="announcement-card">
                     <div class="announcement-card-header">
                         <div class="announcement-icon">
-                            <iconify-icon icon="mdi:information-outline" style="font-size: 24px; color: white;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </div>
                         <div style="flex: 1;">
                             <div class="announcement-card-title">System Update</div>
@@ -403,7 +403,7 @@
                 <div class="announcement-card">
                     <div class="announcement-card-header">
                         <div class="announcement-icon">
-                            <iconify-icon icon="mdi:shield-lock" style="font-size: 24px; color: white;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </div>
                         <div style="flex: 1;">
                             <div class="announcement-card-title">Security Enhancement</div>
@@ -416,7 +416,7 @@
                 <div class="announcement-card">
                     <div class="announcement-card-header">
                         <div class="announcement-icon">
-                            <iconify-icon icon="mdi:star-circle" style="font-size: 24px; color: white;"></iconify-icon>
+                            <i class="bi bi-circle-fill"></i>
                         </div>
                         <div style="flex: 1;">
                             <div class="announcement-card-title">New Features</div>
@@ -430,6 +430,5 @@
         </div>
     </div>
 
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-</body>
+    </body>
 </html>

@@ -1,6 +1,6 @@
 <aside class="sidebar">
     <button type="button" class="sidebar-close-btn">
-        <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
+        <i class="bi bi-x-lg"></i>
     </button>
     <div>
         <a href="{{ route('dashboard') }}" class="sidebar-logo">
@@ -16,7 +16,7 @@
             @if(auth()->user()->hasModuleAccess('dashboard'))
             <li>
                 <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active-page' : '' }}">
-                    <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-house menu-icon"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -28,32 +28,18 @@
             @endif
             
             @if(auth()->user()->hasModuleAccess('products'))
-            <li class="dropdown {{ request()->routeIs('products.*') ? 'open' : '' }}" id="products-dropdown">
-                <a href="#" onclick="toggleDropdown(event, 'products-dropdown')" class="{{ request()->routeIs('products.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:package-variant" class="menu-icon"></iconify-icon>
+            <li>
+                <a href="{{ route('products.index') }}" class="{{ request()->routeIs('products.*') ? 'active-page' : '' }}">
+                    <i class="bi bi-box-seam menu-icon"></i>
                     <span>Products</span>
                 </a>
-                <ul class="sidebar-submenu" style="{{ request()->routeIs('products.*') ? 'display: block;' : 'display: none;' }}">
-                    <li>
-                        <a href="{{ route('products.index') }}" class="{{ request()->routeIs('products.index') ? 'active-page' : '' }}">
-                            <i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i>
-                            All Products
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('products.create') }}" class="{{ request()->routeIs('products.create') ? 'active-page' : '' }}">
-                            <i class="ri-circle-fill circle-icon text-warning-main w-auto"></i>
-                            Add Product
-                        </a>
-                    </li>
-                </ul>
             </li>
             @endif
 
             @if(auth()->user()->hasModuleAccess('stock'))
             <li class="dropdown {{ request()->routeIs('stock.*') ? 'open' : '' }}" id="stock-dropdown">
                 <a href="#" onclick="toggleDropdown(event, 'stock-dropdown')" class="{{ request()->routeIs('stock.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:truck-delivery" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-truck menu-icon"></i>
                     <span>Stock Management</span>
                 </a>
                 <ul class="sidebar-submenu" style="{{ request()->routeIs('stock.*') ? 'display: block;' : 'display: none;' }}">
@@ -81,7 +67,7 @@
             @if(auth()->user()->hasModuleAccess('sales'))
             <li>
                 <a href="{{ route('sales.index') }}" class="{{ request()->routeIs('sales.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:cart-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-cart menu-icon"></i>
                     <span>Sales</span>
                 </a>
             </li>
@@ -90,7 +76,7 @@
             @if(auth()->user()->hasModuleAccess('invoices'))
             <li>
                 <a href="{{ route('invoices.index') }}" class="{{ request()->routeIs('invoices.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:receipt-text" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-receipt menu-icon"></i>
                     <span>Invoices</span>
                 </a>
             </li>
@@ -99,7 +85,7 @@
             @if(auth()->user()->hasModuleAccess('customers'))
             <li>
                 <a href="{{ route('customers.index') }}" class="{{ request()->routeIs('customers.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:account-group" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-people menu-icon"></i>
                     <span>Customers</span>
                 </a>
             </li>
@@ -113,7 +99,7 @@
             @if(auth()->user()->hasModuleAccess('expenses'))
             <li>
                 <a href="{{ route('expenses.index') }}" class="{{ request()->routeIs('expenses.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:cash-remove" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-cash-coin menu-icon"></i>
                     <span>Expenses</span>
                 </a>
             </li>
@@ -122,7 +108,7 @@
             @if(auth()->user()->hasModuleAccess('reports'))
             <li class="dropdown {{ request()->routeIs('reports.*') ? 'open' : '' }}" id="reports-dropdown">
                 <a href="#" onclick="toggleDropdown(event, 'reports-dropdown')" class="{{ request()->routeIs('reports.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:chart-line" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-graph-up menu-icon"></i>
                     <span>Reports</span>
                 </a>
                 <ul class="sidebar-submenu" style="{{ request()->routeIs('reports.*') ? 'display: block;' : 'display: none;' }}">
@@ -168,7 +154,7 @@
             @if(auth()->user()->hasModuleAccess('goals'))
             <li>
                 <a href="{{ route('goals.index') }}" class="{{ request()->routeIs('goals.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:target" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-bullseye menu-icon"></i>
                     <span>Target Goals</span>
                 </a>
             </li>
@@ -177,7 +163,7 @@
             @if(auth()->user()->hasModuleAccess('users') && (auth()->user()->isAdmin() || auth()->user()->isManager()))
             <li>
                 <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users.*') ? 'active-page' : '' }}">
-                    <iconify-icon icon="mdi:account-cog" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-person-gear menu-icon"></i>
                     <span>User Management</span>
                 </a>
             </li>
@@ -189,7 +175,7 @@
             @if(auth()->user()->isAdmin())
             <li>
                 <a href="{{ route('settings.config.index') }}" class="{{ request()->routeIs('settings.config.*') || request()->routeIs('settings.business') ? 'active-page' : '' }}">
-                    <iconify-icon icon="tabler:settings" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-gear menu-icon"></i>
                     <span>Business Settings</span>
                 </a>
             </li>
@@ -200,7 +186,7 @@
 
             <li>
                 <a href="javascript:void(0)">
-                    <iconify-icon icon="mdi:help-circle-outline" class="menu-icon"></iconify-icon>
+                    <i class="bi bi-question-circle menu-icon"></i>
                     <span>Help & Support</span>
                 </a>
             </li>

@@ -132,7 +132,7 @@
         <ul class="d-flex align-items-center gap-2">
             <li class="fw-medium">
                 <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-1 hover-text-primary">
-                    <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+                    <i class="bi bi-house" class="icon text-lg"></i>
                     Dashboard
                 </a>
             </li>
@@ -157,7 +157,7 @@
                         <div class="search-box">
                             <div class="input-group">
                                 <span class="input-group-text bg-neutral-50">
-                                    <iconify-icon icon="mdi:magnify" class="text-secondary-light"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </span>
                                 <input type="text" id="productSearch" class="form-control" placeholder="Search products by name, SKU, or category..." style="height: 44px;">
                             </div>
@@ -199,7 +199,7 @@
                                         </div>
                                         @if($product->stock_quantity > 0)
                                         <button type="button" class="btn btn-sm btn-primary-600 px-8 py-4" onclick="event.stopPropagation(); addToCart({{ $product->id }})">
-                                            <iconify-icon icon="ic:baseline-plus" class="text-sm"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                         @endif
                                     </div>
@@ -208,11 +208,11 @@
                             @empty
                             <div class="col-12">
                                 <div class="text-center py-48">
-                                    <iconify-icon icon="mdi:package-variant-closed" class="text-secondary-light mb-16" style="font-size: 64px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <p class="text-secondary-light fw-semibold mb-8">No Products Available</p>
                                     <p class="text-secondary-light text-sm mb-16">Please add products to your inventory first</p>
                                     <a href="{{ route('products.create') }}" class="btn btn-primary-600 px-20 py-11 radius-8">
-                                        <iconify-icon icon="ic:baseline-plus" class="text-lg"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         Add Product
                                     </a>
                                 </div>
@@ -267,12 +267,12 @@
                         
                         <div class="d-flex gap-3 mt-20">
                             <button type="button" class="btn btn-clear-cart px-20 py-12 radius-8 d-flex align-items-center justify-content-center gap-2" onclick="clearCart()" style="min-width: 100px;">
-                                <iconify-icon icon="mdi:delete-outline" class="text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                                 <span>Clear</span>
                             </button>
                             <button type="button" class="btn btn-proceed-sale flex-grow-1 px-20 py-12 radius-8 d-flex align-items-center justify-content-center gap-2" id="proceedToSaleBtn" onclick="openSaleInfoModal()" disabled style="min-width: 150px;">
                                 <span style="font-size: 15px;">Proceed</span>
-                                <iconify-icon icon="mdi:arrow-right" class="text-xl"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                         </div>
                     </div>
@@ -474,7 +474,7 @@
                             onmouseover="this.style.background='#e9ecef'; this.style.borderColor='#adb5bd';"
                             onmouseout="this.style.background='#f8f9fa'; this.style.borderColor='#dee2e6';"
                             onclick="backToSaleInfo()">
-                        <iconify-icon icon="mdi:arrow-left" class="text-lg"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         <span>Back</span>
                     </button>
                     <button type="button" class="btn flex-grow-1 d-flex align-items-center justify-content-center gap-2 radius-8 py-12" 
@@ -482,7 +482,7 @@
                             onmouseover="this.style.background='linear-gradient(135deg, #d12929 0%, #b01515 100%)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(236, 55, 55, 0.5)';"
                             onmouseout="this.style.background='linear-gradient(135deg, #ec3737 0%, #c91c1c 100%)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(236, 55, 55, 0.4)';"
                             onclick="completeSale()">
-                        <iconify-icon icon="mdi:check-bold" class="text-lg"></iconify-icon>
+                        <i class="bi bi-circle-fill"></i>
                         <span>Complete Sale</span>
                     </button>
                 </div>
@@ -585,7 +585,7 @@
                                 <p class="text-primary-600 mb-0" style="font-size: 12px;">${currency} ${item.price.toFixed(2)} each</p>
                             </div>
                             <button type="button" class="btn btn-sm btn-danger-600 p-0" style="width: 24px; height: 24px;" onclick="removeFromCart(${item.id})">
-                                <iconify-icon icon="mdi:close" class="text-sm"></iconify-icon>
+                                <i class="bi bi-circle-fill"></i>
                             </button>
                         </div>
                         
@@ -593,11 +593,11 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="quantity-controls d-flex gap-2">
                                 <button type="button" class="btn btn-sm btn-neutral-200" onclick="decreaseQuantity(${item.id})">
-                                    <iconify-icon icon="mdi:minus"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </button>
                                 <input type="number" class="form-control text-center" style="width: 80px; height: 32px; color: #000; font-weight: 600;" value="${item.quantity}" min="1" max="${item.stock}" onchange="updateQuantity(${item.id}, this.value)">
                                 <button type="button" class="btn btn-sm btn-primary-600" onclick="increaseQuantity(${item.id})" ${item.quantity >= item.stock ? 'disabled' : ''}>
-                                    <iconify-icon icon="mdi:plus"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                 </button>
                             </div>
                             <div class="text-end">
@@ -612,14 +612,14 @@
                             ${discountAmount > 0 ? `
                                 <div class="d-flex align-items-center justify-content-between p-8 bg-danger-50 radius-6">
                                     <div class="d-flex align-items-center gap-2">
-                                        <iconify-icon icon="mdi:tag" class="text-danger-600" style="font-size: 14px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                         <span class="text-danger-600" style="font-size: 12px; font-weight: 600;">
                                             ${item.discountType === 'percent' ? item.discountValue + '% Off' : currency + ' ' + item.discountValue.toFixed(2) + ' Off'}
                                         </span>
                                         <span class="text-danger-600" style="font-size: 11px;">(-${currency} ${discountAmount.toFixed(2)})</span>
                                     </div>
                                     <button type="button" class="btn btn-sm p-0" style="width: 20px; height: 20px;" onclick="toggleItemDiscount(${item.id})">
-                                        <iconify-icon icon="mdi:pencil" class="text-danger-600" style="font-size: 12px;"></iconify-icon>
+                                        <i class="bi bi-circle-fill"></i>
                                     </button>
                                 </div>
                                 <div id="discount-form-${item.id}" class="discount-form mt-8" style="display: none;">
@@ -636,13 +636,13 @@
                                                onchange="updateItemDiscount(${item.id}, this.value)"
                                                placeholder="0.00">
                                         <button type="button" class="btn btn-sm btn-danger-600" style="height: 38px; padding: 0 12px;" onclick="removeItemDiscount(${item.id})">
-                                            <iconify-icon icon="mdi:close" style="font-size: 14px;"></iconify-icon>
+                                            <i class="bi bi-circle-fill"></i>
                                         </button>
                                     </div>
                                 </div>
                             ` : `
                                 <button type="button" class="btn btn-sm btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-1" style="height: 32px; font-size: 11px; padding: 4px 8px;" onclick="toggleItemDiscount(${item.id})">
-                                    <iconify-icon icon="mdi:tag-outline" style="font-size: 14px;"></iconify-icon>
+                                    <i class="bi bi-circle-fill"></i>
                                     <span>Add Discount</span>
                                 </button>
                                 <div id="discount-form-${item.id}" class="discount-form mt-8" style="display: none;">
