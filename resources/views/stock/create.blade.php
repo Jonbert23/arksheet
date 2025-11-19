@@ -124,20 +124,20 @@
 
         <!-- Add Stock Modal -->
         <div class="modal fade" id="addStockModal" tabindex="-1" aria-labelledby="addStockModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content radius-12">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
                     <form action="{{ route('stock.store') }}" method="POST" id="addStockForm">
                         @csrf
                         <input type="hidden" name="product_id" id="modal_product_id">
                         
-                        <div class="modal-header border-bottom py-16 px-24">
-                            <div class="d-flex align-items-center gap-3">
-                                <div>
-                                    <h5 class="modal-title fw-bold mb-0" id="addStockModalLabel">Add Stock</h5>
-                                    <p class="text-secondary-light mb-0" style="font-size: 13px;" id="modal_product_name_display">-</p>
-                                </div>
+                        <div class="modal-header" style="background: linear-gradient(135deg, #ec3737 0%, #d42f2f 100%);">
+                            <div>
+                                <h5 class="modal-title text-white fw-bold mb-1" id="addStockModalLabel" style="font-size: 18px !important;">
+                                    Add Stock Entry
+                                </h5>
+                                <p class="text-white mb-0" style="font-size: 13px; opacity: 0.9;" id="modal_product_name_display">-</p>
                             </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
                         <div class="modal-body px-24 py-24">
@@ -171,171 +171,213 @@
                                 </div>
                             </div>
 
-                            <!-- Stock Entry Form -->
-                            <div class="row g-4">
-                                <!-- Date -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                        Date Received <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="date" name="date" class="form-control" style="height: 44px;" value="{{ date('Y-m-d') }}" required>
+                            <!-- Stock Entry Details Section -->
+                            <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                                <div class="d-flex align-items-center gap-2 mb-16">
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                        <i class="bi bi-box-seam text-white"></i>
+                                    </div>
+                                    <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Stock Details</h6>
                                 </div>
+                                
+                                <div class="row g-4">
+                                    <!-- Date -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            Date Received <span class="text-danger-600">*</span>
+                                        </label>
+                                        <input type="date" name="date" class="form-control radius-8" value="{{ date('Y-m-d') }}" required>
+                                    </div>
 
-                                <!-- Quantity -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                        Quantity <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="number" name="quantity" id="modal_quantity" class="form-control" style="height: 44px;" placeholder="0" value="1" min="1" required>
-                                    <small class="text-secondary-light d-block mt-4" style="font-size: 12px;" id="modal_unit_label">Units to add</small>
-                                </div>
+                                    <!-- Quantity -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            Quantity <span class="text-danger-600">*</span>
+                                        </label>
+                                        <input type="number" name="quantity" id="modal_quantity" class="form-control radius-8" placeholder="0" value="1" min="1" required>
+                                        <small class="text-secondary-light d-block mt-4" style="font-size: 12px;" id="modal_unit_label">Units to add</small>
+                                    </div>
 
-                                <!-- Reference Number -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                        Reference / PO Number
-                                    </label>
-                                    <input type="text" name="reference_number" class="form-control" style="height: 44px;" placeholder="PO-12345, INV-67890...">
-                                </div>
+                                    <!-- Reference Number -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            Reference / PO Number
+                                        </label>
+                                        <input type="text" name="reference_number" class="form-control radius-8" placeholder="PO-12345, INV-67890...">
+                                    </div>
 
-                                <!-- Supplier -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                        Supplier
-                                    </label>
-                                    <input type="text" name="supplier" class="form-control" style="height: 44px;" placeholder="Supplier name or company">
-                                </div>
-
-                                <!-- Cost Per Unit -->
-                                <div class="col-md-12">
-                                    <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                        Cost Per Unit <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-warning-50 text-warning-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
-                                        <input type="number" name="cost_per_unit" id="modal_cost_per_unit" step="0.01" class="form-control" style="height: 44px;" placeholder="0.00" value="0" min="0" required>
+                                    <!-- Supplier -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            Supplier
+                                        </label>
+                                        <input type="text" name="supplier" class="form-control radius-8" placeholder="Supplier name or company">
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Additional Costs Section -->
-                                <div class="col-12">
-                                    <div class="p-16 bg-white border radius-8">
-                                        <h6 class="fw-bold mb-12" style="font-size: 18px !important; color: #212529;">Additional Costs (Optional)</h6>
-                                        <div class="row g-3">
-                                            <!-- Shipping/Freight Cost -->
-                                            <div class="col-md-4">
-                                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                                    Shipping/Freight
-                                                </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
-                                                    <input type="number" name="shipping_cost" id="modal_shipping_cost" step="0.01" class="form-control" style="height: 44px;" placeholder="0.00" value="0" min="0">
+                            <!-- Cost Information Section -->
+                            <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                                <div class="d-flex align-items-center gap-2 mb-16">
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                        <i class="bi bi-currency-dollar text-white"></i>
+                                    </div>
+                                    <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Cost Information</h6>
+                                </div>
+                                
+                                <div class="row g-4">
+                                    <!-- Cost Per Unit -->
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            Cost Per Unit <span class="text-danger-600">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-warning-50 text-warning-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
+                                            <input type="number" name="cost_per_unit" id="modal_cost_per_unit" step="0.01" class="form-control radius-8" placeholder="0.00" value="0" min="0" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Additional Costs Collapsible -->
+                                    <div class="col-12">
+                                        <button class="btn btn-outline-danger btn-sm radius-8 mb-12 d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#additionalCostsCollapse" aria-expanded="false" style="border-color: #ec3737; color: #ec3737;">
+                                            <i class="bi bi-plus-circle"></i>
+                                            <span>Add Additional Costs (Optional)</span>
+                                        </button>
+                                        
+                                        <div class="collapse" id="additionalCostsCollapse">
+                                            <div class="p-16 bg-neutral-50 radius-8">
+                                                <div class="row g-3">
+                                                    <!-- Shipping/Freight Cost -->
+                                                    <div class="col-md-4">
+                                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                                            Shipping/Freight
+                                                        </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
+                                                            <input type="number" name="shipping_cost" id="modal_shipping_cost" step="0.01" class="form-control radius-8" placeholder="0.00" value="0" min="0">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Import Duties/Taxes -->
+                                                    <div class="col-md-4">
+                                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                                            Import Duties/Taxes
+                                                        </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
+                                                            <input type="number" name="import_duties" id="modal_import_duties" step="0.01" class="form-control radius-8" placeholder="0.00" value="0" min="0">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Other Transaction Costs -->
+                                                    <div class="col-md-4">
+                                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                                            Other Costs
+                                                        </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
+                                                            <input type="number" name="other_transaction_costs" id="modal_other_costs" step="0.01" class="form-control radius-8" placeholder="0.00" value="0" min="0">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <!-- Import Duties/Taxes -->
-                                            <div class="col-md-4">
-                                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                                    Import Duties/Taxes
-                                                </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
-                                                    <input type="number" name="import_duties" id="modal_import_duties" step="0.01" class="form-control" style="height: 44px;" placeholder="0.00" value="0" min="0">
+                                    <!-- Total Cost -->
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            Total Cost
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-success-50 text-success-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
+                                            <input type="text" id="modal_total_cost" class="form-control fw-semibold text-success-600 radius-8" placeholder="0.00" readonly>
+                                        </div>
+                                        <small class="text-secondary-light d-block mt-4" style="font-size: 12px;">Auto-calculated (Base Cost + Additional Costs)</small>
+                                    </div>
+
+                                    <!-- Cost Breakdown Display -->
+                                    <div class="col-12" id="cost-breakdown-section" style="display: none;">
+                                        <div class="p-16 radius-8" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border: 1px solid #fecaca;">
+                                            <div class="d-flex align-items-center gap-2 mb-12">
+                                                <div class="d-flex align-items-center justify-content-center" style="width: 24px; height: 24px; background-color: #ec3737; border-radius: 6px;">
+                                                    <i class="bi bi-calculator text-white" style="font-size: 12px;"></i>
+                                                </div>
+                                                <h6 class="fw-bold mb-0" style="font-size: 15px; color: #4b5563;">Cost Breakdown</h6>
+                                            </div>
+                                            <div class="row g-3">
+                                                <div class="col-md-3">
+                                                    <div class="text-center p-12 bg-white radius-6">
+                                                        <p class="text-secondary-light mb-4" style="font-size: 11px;">Base Cost</p>
+                                                        <p class="fw-bold mb-0" style="font-size: 14px;" id="breakdown-base-cost">{{ auth()->user()->business->currency }} 0.00</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="text-center p-12 bg-white radius-6">
+                                                        <p class="text-secondary-light mb-4" style="font-size: 11px;">Additional Costs</p>
+                                                        <p class="fw-bold mb-0" style="font-size: 14px;" id="breakdown-additional-costs">{{ auth()->user()->business->currency }} 0.00</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="text-center p-12 bg-white radius-6">
+                                                        <p class="text-secondary-light mb-4" style="font-size: 11px;">Cost Per Unit</p>
+                                                        <p class="fw-bold mb-0" style="font-size: 14px;" id="breakdown-per-unit">{{ auth()->user()->business->currency }} 0.00</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="text-center p-12 radius-6" style="background-color: #fff5f5;">
+                                                        <p class="text-secondary-light mb-4" style="font-size: 11px;">True Cost Per Unit</p>
+                                                        <p class="fw-bold mb-0" style="font-size: 14px; color: #ec3737;" id="breakdown-true-cost">{{ auth()->user()->business->currency }} 0.00</p>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <!-- Other Transaction Costs -->
-                                            <div class="col-md-4">
-                                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                                    Other Costs
-                                                </label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
-                                                    <input type="number" name="other_transaction_costs" id="modal_other_costs" step="0.01" class="form-control" style="height: 44px;" placeholder="0.00" value="0" min="0">
+                                    <!-- Projected WAC Display -->
+                                    <div class="col-12" id="modal-projected-wac" style="display: none;">
+                                        <div class="p-16 bg-success-50 border border-success-100 radius-8">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div>
+                                                    <p class="text-secondary-light mb-4" style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">New Weighted Average Cost</p>
+                                                    <p class="text-success-600 fw-bold mb-0" style="font-size: 20px;" id="modal-new-wac">-</p>
+                                                </div>
+                                                <div>
+                                                    <p class="text-secondary-light mb-4" style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">New Total Stock</p>
+                                                    <p class="text-success-600 fw-bold mb-0" style="font-size: 20px;" id="modal-new-total-stock">-</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Total Cost -->
-                                <div class="col-md-12">
-                                    <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                        Total Cost
+                            <!-- Notes Section -->
+                            <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                                <div class="d-flex align-items-center gap-2 mb-16">
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                        <i class="bi bi-sticky text-white"></i>
+                                    </div>
+                                    <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Additional Notes</h6>
+                                </div>
+                                
+                                <div>
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                        Notes (Optional)
                                     </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-success-50 text-success-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
-                                        <input type="text" id="modal_total_cost" class="form-control fw-semibold text-success-600" style="height: 44px;" placeholder="0.00" readonly>
-                                    </div>
-                                    <small class="text-secondary-light d-block mt-4" style="font-size: 12px;">Auto-calculated (Base Cost + Additional Costs)</small>
-                                </div>
-
-                                <!-- Cost Breakdown Display -->
-                                <div class="col-12" id="cost-breakdown-section" style="display: none;">
-                                    <div class="p-16 bg-white border radius-8">
-                                        <h6 class="fw-bold mb-12" style="font-size: 18px !important; color: #212529;">Cost Breakdown</h6>
-                                        <div class="row g-3">
-                                            <div class="col-md-3">
-                                                <div class="text-center p-12 bg-neutral-50 radius-6">
-                                                    <p class="text-secondary-light mb-4" style="font-size: 11px;">Base Cost</p>
-                                                    <p class="fw-bold mb-0" style="font-size: 14px;" id="breakdown-base-cost">{{ auth()->user()->business->currency }} 0.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="text-center p-12 bg-neutral-50 radius-6">
-                                                    <p class="text-secondary-light mb-4" style="font-size: 11px;">Additional Costs</p>
-                                                    <p class="fw-bold mb-0" style="font-size: 14px;" id="breakdown-additional-costs">{{ auth()->user()->business->currency }} 0.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="text-center p-12 bg-neutral-50 radius-6">
-                                                    <p class="text-secondary-light mb-4" style="font-size: 11px;">Cost Per Unit</p>
-                                                    <p class="fw-bold mb-0" style="font-size: 14px;" id="breakdown-per-unit">{{ auth()->user()->business->currency }} 0.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="text-center p-12 radius-6" style="background-color: #fff5f5;">
-                                                    <p class="text-secondary-light mb-4" style="font-size: 11px;">True Cost Per Unit</p>
-                                                    <p class="fw-bold mb-0" style="font-size: 14px; color: #ec3737;" id="breakdown-true-cost">{{ auth()->user()->business->currency }} 0.00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Projected WAC Display -->
-                                <div class="col-12" id="modal-projected-wac" style="display: none;">
-                                    <div class="p-16 bg-success-50 border border-success-100 radius-8">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="text-secondary-light mb-4" style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">New Weighted Average Cost</p>
-                                                <p class="text-success-600 fw-bold mb-0" style="font-size: 20px;" id="modal-new-wac">-</p>
-                                            </div>
-                                            <div>
-                                                <p class="text-secondary-light mb-4" style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">New Total Stock</p>
-                                                <p class="text-success-600 fw-bold mb-0" style="font-size: 20px;" id="modal-new-total-stock">-</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Notes -->
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                        Notes
-                                    </label>
-                                    <textarea name="notes" rows="3" class="form-control" style="resize: vertical;" placeholder="Additional information..."></textarea>
+                                    <textarea name="notes" rows="3" class="form-control radius-8" style="resize: vertical;" placeholder="Additional information about this stock entry..."></textarea>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="modal-footer border-top py-16 px-24 bg-white">
                             <div class="d-flex align-items-center justify-content-end gap-3 w-100">
-                                <button type="button" class="btn text-secondary-light border border-neutral-200 hover-bg-neutral-100 radius-8 px-20 py-11" data-bs-dismiss="modal">
+                                <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11" data-bs-dismiss="modal">
+                                    <i class="bi bi-x-circle"></i>
                                     Cancel
                                 </button>
-                                <button type="submit" class="btn btn-primary-600 radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                                    <i class="bi bi-circle-fill"></i>
+                                <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                                    <i class="bi bi-check-circle"></i>
                                     Save Stock Entry
                                 </button>
                             </div>
