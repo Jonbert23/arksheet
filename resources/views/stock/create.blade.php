@@ -124,8 +124,8 @@
 
         <!-- Add Stock Modal -->
         <div class="modal fade" id="addStockModal" tabindex="-1" aria-labelledby="addStockModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" style="max-height: 90vh; margin: 1.75rem auto;">
+                <div class="modal-content" style="max-height: 90vh;">
                     <form action="{{ route('stock.store') }}" method="POST" id="addStockForm">
                         @csrf
                         <input type="hidden" name="product_id" id="modal_product_id">
@@ -140,7 +140,7 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
-                        <div class="modal-body px-24 py-24">
+                        <div class="modal-body px-24 py-24" style="overflow-y: auto;">
                             <!-- Current Product Information -->
                             <div class="mb-24">
                                 <div class="row g-3">
