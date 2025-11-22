@@ -24,6 +24,15 @@ class CustomerController extends Controller
             $dateTo . ' 23:59:59'
         ]);
 
+        // Status filter
+        if ($request->filled('is_active')) {
+            if ($request->is_active === '1') {
+                $query->where('is_active', true);
+            } elseif ($request->is_active === '0') {
+                $query->where('is_active', false);
+            }
+        }
+
         // Search
         if ($request->filled('search')) {
             $search = $request->search;
@@ -32,15 +41,6 @@ class CustomerController extends Controller
                   ->orWhere('email', 'like', "%{$search}%")
                   ->orWhere('phone', 'like', "%{$search}%");
             });
-        }
-
-        // Filter by status
-        if ($request->filled('is_active')) {
-            if ($request->is_active === '1' || $request->is_active === 'active') {
-                $query->where('is_active', true);
-            } else {
-                $query->where('is_active', false);
-            }
         }
 
         $customers = $query->latest()->get();

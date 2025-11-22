@@ -175,12 +175,27 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
-                                        <a href="{{ route('products.show', $product->id) }}" class="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle" title="View">
+                                        <button type="button" class="view-product-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View"
+                                            data-product-id="{{ $product->id }}"
+                                            data-product-name="{{ $product->name }}"
+                                            data-product-sku="{{ $product->sku ?? 'N/A' }}"
+                                            data-product-category="{{ $product->category ? $product->category->name : 'No Category' }}"
+                                            data-product-type="{{ $product->type ?? 'product' }}"
+                                            data-product-description="{{ $product->description ?? 'No description provided' }}"
+                                            data-product-price="{{ number_format($product->price, 2) }}"
+                                            data-product-cost="{{ number_format($product->cost, 2) }}"
+                                            data-product-tax="{{ number_format($product->tax_amount, 2) }}"
+                                            data-product-total-cost="{{ number_format($product->cost + $product->tax_amount, 2) }}"
+                                            data-product-margin="{{ $product->getProfitMargin() }}"
+                                            data-product-stock="{{ $product->stock_quantity }}"
+                                            data-product-unit="{{ $product->unit ?? 'N/A' }}"
+                                            data-product-min-stock="{{ $product->min_stock_alert }}"
+                                            data-product-status="{{ $product->is_active ? 'Active' : 'Inactive' }}">
                                             <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="{{ route('products.edit', $product->id) }}" class="fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white" style="background-color: #ec3737;" title="Edit" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                                        </button>
+                                        <button type="button" class="edit-product-btn fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white border-0" style="background-color: #ec3737;" title="Edit" data-product-id="{{ $product->id }}" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
                                             <i class="bi bi-pencil"></i>
-                                        </a>
+                                        </button>
                                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
@@ -306,7 +321,7 @@
         
         // Common functions that run regardless of whether there are products
         $script .= '
-                
+
                 // Delete confirmation function
                 function bindDeleteConfirmation() {
                     $(".delete-btn").off("click").on("click", function(e) {
@@ -487,9 +502,255 @@
         .btn {
             transition: all 0.3s ease;
         }
+        
+        /* View Product Modal Styles */
+        #viewProductModal .modal-body {
+            max-height: 70vh;
+            overflow-y: auto !important;
+        }
+        
+        #viewProductModal .modal-body h6 {
+            font-size: 18px !important;
+        }
+        
+        #viewProductModal .modal-body label {
+            font-size: 14px !important;
+        }
+        
+        #viewProductModal .modal-body p {
+            font-size: 15px !important;
+        }
+        
+        /* Key Metrics Cards */
+        #viewProductModal .card-body p {
+            font-size: 12px !important;
+        }
+        
+        #viewProductModal .card-body h6 {
+            font-size: 18px !important;
+        }
+        
+        /* Pricing Breakdown */
+        #viewProductModal .border-bottom {
+            border-color: #e5e7eb !important;
+        }
     </style>
 
-    <!-- Create Product Modal -->
+    <!-- View Product Modal -->
+    <div class="modal fade" id="viewProductModal" tabindex="-1" aria-labelledby="viewProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #ec3737 0%, #d42f2f 100%);">
+                    <div>
+                        <h5 class="modal-title text-white fw-bold mb-1" id="viewProductModalLabel" style="font-size: 18px !important;">
+                            Product Details
+                        </h5>
+                        <p class="text-white mb-0" style="font-size: 13px; opacity: 0.9;" id="view_product_subtitle">-</p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body px-24 py-24">
+                    <!-- Key Metrics Cards -->
+                    <div class="row g-3 mb-24">
+                        <div class="col-md-3 col-6">
+                            <div class="card border-0 radius-8 h-100" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border-left: 3px solid #10b981 !important;">
+                                <div class="card-body p-12">
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <i class="bi bi-tag-fill text-success-600" style="font-size: 16px;"></i>
+                                        <p class="text-secondary-light mb-0" style="font-size: 12px;">Selling Price</p>
+                                    </div>
+                                    <h6 class="mb-0 text-success-600 fw-bold" style="font-size: 18px;" id="view-metric-price">-</h6>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 col-6">
+                            <div class="card border-0 radius-8 h-100" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border-left: 3px solid #ec3737 !important;">
+                                <div class="card-body p-12">
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <i class="bi bi-graph-up text-danger" style="font-size: 16px;"></i>
+                                        <p class="text-secondary-light mb-0" style="font-size: 12px;">Profit Margin</p>
+                                    </div>
+                                    <h6 class="mb-0 fw-bold" style="font-size: 18px; color: #ec3737;" id="view-metric-margin">-</h6>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 col-6">
+                            <div class="card border-0 radius-8 h-100" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border-left: 3px solid #3b82f6 !important;">
+                                <div class="card-body p-12">
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <i class="bi bi-boxes text-primary-600" style="font-size: 16px;"></i>
+                                        <p class="text-secondary-light mb-0" style="font-size: 12px;">In Stock</p>
+                                    </div>
+                                    <h6 class="mb-0 text-primary-600 fw-bold" style="font-size: 18px;" id="view-metric-stock">-</h6>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 col-6">
+                            <div class="card border-0 radius-8 h-100" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border-left: 3px solid #f59e0b !important;">
+                                <div class="card-body p-12">
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <i class="bi bi-info-circle text-warning-600" style="font-size: 16px;"></i>
+                                        <p class="text-secondary-light mb-0" style="font-size: 12px;">Status</p>
+                                    </div>
+                                    <div id="view-metric-status">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="mb-24">
+                        <div class="d-flex align-items-center gap-2 mb-16">
+                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-box-seam text-white"></i>
+                            </div>
+                            <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Product Details</h6>
+                        </div>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <div class="p-16 radius-8" style="background-color: #f9fafb; border: 1px solid #e5e7eb;">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">Product Name</label>
+                                    <p class="text-dark fw-bold mb-0" style="font-size: 16px;" id="view-product-name">-</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="p-16 radius-8" style="background-color: #f9fafb; border: 1px solid #e5e7eb;">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">SKU</label>
+                                    <p class="text-dark mb-0" style="font-size: 14px;" id="view-product-sku">-</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="p-16 radius-8" style="background-color: #f9fafb; border: 1px solid #e5e7eb;">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">Category</label>
+                                    <p class="text-dark mb-0" id="view-product-category">-</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="p-16 radius-8" style="background-color: #f9fafb; border: 1px solid #e5e7eb;">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">Type</label>
+                                    <p class="text-dark text-capitalize mb-0" id="view-product-type">-</p>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="p-16 radius-8" style="background-color: #f9fafb; border: 1px solid #e5e7eb;">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">Description</label>
+                                    <p class="text-dark mb-0" id="view-product-description" style="white-space: pre-wrap; line-height: 1.6;">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing Breakdown Section -->
+                    <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                        <div class="d-flex align-items-center gap-2 mb-16">
+                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-currency-dollar text-white"></i>
+                            </div>
+                            <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Pricing Breakdown</h6>
+                        </div>
+                        
+                        <div class="p-20 radius-8" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border: 1px solid #fecaca;">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                                        <span class="text-secondary-light" style="font-size: 14px;">Cost Price</span>
+                                        <span class="text-dark fw-semibold" id="view-product-cost">-</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                                        <span class="text-secondary-light" style="font-size: 14px;">Tax Amount</span>
+                                        <span class="text-dark fw-semibold" id="view-product-tax">-</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between align-items-center py-2">
+                                        <span class="text-secondary-light fw-bold" style="font-size: 14px;">Total Cost</span>
+                                        <span class="text-dark fw-bold" style="font-size: 16px;" id="view-product-total-cost">-</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between align-items-center py-2">
+                                        <span class="text-success-600 fw-bold" style="font-size: 14px;">Selling Price</span>
+                                        <span class="text-success-600 fw-bold" style="font-size: 16px;" id="view-product-price">-</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mt-2 p-12 radius-8 text-center" style="background-color: #ec3737;">
+                                        <span class="text-white" style="font-size: 13px;">Estimated Profit per Unit: </span>
+                                        <span class="text-white fw-bold" style="font-size: 16px;" id="view-product-profit">-</span>
+                                        <span class="text-white mx-2">|</span>
+                                        <span class="text-white" style="font-size: 13px;">Margin: </span>
+                                        <span class="text-white fw-bold" style="font-size: 16px;" id="view-product-margin">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stock Management Section -->
+                    <div class="pt-24" style="border-top: 1px solid #e5e7eb;">
+                        <div class="d-flex align-items-center gap-2 mb-16">
+                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-boxes text-white"></i>
+                            </div>
+                            <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Stock Management</h6>
+                        </div>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-16 radius-8 text-center" style="background-color: #f0f9ff; border: 1px solid #bfdbfe;">
+                                    <i class="bi bi-boxes text-primary-600 mb-2" style="font-size: 24px;"></i>
+                                    <p class="text-secondary-light mb-1" style="font-size: 13px;">Current Stock</p>
+                                    <p class="text-primary-600 fw-bold mb-0" style="font-size: 18px;" id="view-product-stock">-</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="p-16 radius-8 text-center" style="background-color: #fef3c7; border: 1px solid #fde68a;">
+                                    <i class="bi bi-exclamation-triangle text-warning-600 mb-2" style="font-size: 24px;"></i>
+                                    <p class="text-secondary-light mb-1" style="font-size: 13px;">Min. Stock Alert</p>
+                                    <p class="text-warning-600 fw-bold mb-0" style="font-size: 18px;" id="view-product-min-stock">-</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="p-16 radius-8 text-center" style="background-color: #f3f4f6; border: 1px solid #d1d5db;">
+                                    <i class="bi bi-rulers text-secondary-light mb-2" style="font-size: 24px;"></i>
+                                    <p class="text-secondary-light mb-1" style="font-size: 13px;">Unit</p>
+                                    <p class="text-dark fw-bold mb-0" style="font-size: 16px;" id="view-product-unit">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer border-top py-16 px-24 bg-white">
+                    <div class="d-flex align-items-center justify-content-end gap-3 w-100">
+                        <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Close
+                        </button>
+                        <a href="#" id="view-product-edit-link" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                            <i class="bi bi-pencil-square"></i>
+                            Edit Product
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Product Modal -->
     <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div class="modal-content">
@@ -510,9 +771,104 @@
         </div>
     </div>
 
+    <!-- Edit Product Modal -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #ec3737 0%, #d42f2f 100%);">
+                    <h5 class="modal-title text-white fw-bold" id="editProductModalLabel" style="font-size: 18px !important;">
+                        Edit Product
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="editProductModalBody">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Load create product form via AJAX when modal is shown
         $(document).ready(function() {
+            // View Product Modal Handler
+            $(document).on('click', '.view-product-btn', function(e) {
+                e.preventDefault();
+                
+                var $btn = $(this);
+                var productId = $btn.data('product-id');
+                var productName = $btn.data('product-name');
+                var productSku = $btn.data('product-sku');
+                var productCategory = $btn.data('product-category');
+                var productType = $btn.data('product-type');
+                var productDescription = $btn.data('product-description');
+                var productPrice = $btn.data('product-price');
+                var productCost = $btn.data('product-cost');
+                var productTax = $btn.data('product-tax');
+                var productTotalCost = $btn.data('product-total-cost');
+                var productMargin = $btn.data('product-margin');
+                var productStock = $btn.data('product-stock');
+                var productUnit = $btn.data('product-unit');
+                var productMinStock = $btn.data('product-min-stock');
+                var productStatus = $btn.data('product-status');
+                
+                var currency = "{{ auth()->user()->business->currency }}";
+                
+                // Parse numeric values for calculations
+                var priceNum = parseFloat(productPrice.replace(/,/g, ''));
+                var costNum = parseFloat(productCost.replace(/,/g, ''));
+                var taxNum = parseFloat(productTax.replace(/,/g, ''));
+                var totalCostNum = parseFloat(productTotalCost.replace(/,/g, ''));
+                var profit = priceNum - totalCostNum;
+                
+                // Populate modal header
+                $("#view_product_subtitle").text(productName + " - " + productSku);
+                
+                // Populate key metrics cards at the top
+                $("#view-metric-price").text(currency + " " + productPrice);
+                $("#view-metric-margin").text(productMargin + "%");
+                $("#view-metric-stock").text(productStock + " " + productUnit);
+                
+                // Status badge for metrics
+                var statusBadgeHtml = '';
+                if (productStatus === 'Active') {
+                    statusBadgeHtml = '<span class="badge bg-success-100 text-success-600 px-12 py-4" style="font-size: 11px;">Active</span>';
+                } else {
+                    statusBadgeHtml = '<span class="badge bg-danger-100 text-danger-600 px-12 py-4" style="font-size: 11px;">Inactive</span>';
+                }
+                $("#view-metric-status").html(statusBadgeHtml);
+                
+                // Populate product details
+                $("#view-product-name").text(productName);
+                $("#view-product-sku").text(productSku);
+                $("#view-product-category").text(productCategory);
+                $("#view-product-type").text(productType);
+                $("#view-product-description").text(productDescription);
+                
+                // Populate pricing breakdown
+                $("#view-product-cost").text(currency + " " + productCost);
+                $("#view-product-tax").text(currency + " " + productTax);
+                $("#view-product-total-cost").text(currency + " " + productTotalCost);
+                $("#view-product-price").text(currency + " " + productPrice);
+                $("#view-product-profit").text(currency + " " + profit.toFixed(2));
+                $("#view-product-margin").text(productMargin + "%");
+                
+                // Populate stock management
+                $("#view-product-stock").text(productStock + " " + productUnit);
+                $("#view-product-min-stock").text(productMinStock + " " + productUnit);
+                $("#view-product-unit").text(productUnit);
+                
+                // Set edit link
+                $("#view-product-edit-link").attr("href", "/products/" + productId + "/edit");
+                
+                // Show modal
+                $("#viewProductModal").modal("show");
+            });
+            
             $('#createProductModal').on('show.bs.modal', function() {
                 // Reset wizard initialization flag
                 window.productWizardInit = false;
@@ -589,6 +945,101 @@
                             
                             // Insert error at the top of modal body
                             $('#createProductModalBody').prepend(errorHtml);
+                            
+                            // Auto dismiss after 8 seconds
+                            setTimeout(function() {
+                                $('.alert').fadeOut();
+                            }, 8000);
+                        }
+                    }
+                });
+            });
+
+            // Edit Product Modal Handler
+            $(document).on('click', '.edit-product-btn', function(e) {
+                e.preventDefault();
+                
+                const productId = $(this).data('product-id');
+                
+                // Reset wizard initialization flag
+                window.editProductWizardInit = false;
+                
+                // Show modal and load form
+                $('#editProductModal').modal('show');
+                $('#editProductModalBody').html('<div class="text-center py-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                
+                $.ajax({
+                    url: '/products/' + productId + '/edit-form',
+                    method: 'GET',
+                    success: function(response) {
+                        $('#editProductModalBody').html(response);
+                    },
+                    error: function() {
+                        $('#editProductModalBody').html('<div class="alert alert-danger">Failed to load product data. Please try again.</div>');
+                    }
+                });
+            });
+
+            // Handle edit form submission via AJAX
+            $(document).on('submit', '#editProductForm', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = $(this).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+                const formAction = $(this).attr('action');
+                
+                submitBtn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Updating...');
+                
+                $.ajax({
+                    url: formAction,
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#editProductModal').modal('hide');
+                        location.reload(); // Reload page to show updated product
+                    },
+                    error: function(xhr) {
+                        submitBtn.prop('disabled', false).html(originalText);
+                        
+                        console.error('Error response:', xhr);
+                        
+                        if (xhr.status === 422) {
+                            // Validation errors
+                            const errors = xhr.responseJSON.errors;
+                            let errorHtml = '<div class="alert alert-danger alert-dismissible fade show"><ul class="mb-0">';
+                            $.each(errors, function(key, value) {
+                                errorHtml += '<li>' + value[0] + '</li>';
+                            });
+                            errorHtml += '</ul></div>';
+                            
+                            // Insert errors at the top of modal body
+                            $('#editProductModalBody').prepend(errorHtml);
+                            
+                            // Auto dismiss after 5 seconds
+                            setTimeout(function() {
+                                $('.alert').fadeOut();
+                            }, 5000);
+                        } else {
+                            // Display more detailed error if available
+                            let errorMessage = 'An error occurred. Please try again.';
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            } else if (xhr.responseText) {
+                                try {
+                                    const response = JSON.parse(xhr.responseText);
+                                    errorMessage = response.message || errorMessage;
+                                } catch (e) {
+                                    // Keep default message if parsing fails
+                                }
+                            }
+                            
+                            let errorHtml = '<div class="alert alert-danger alert-dismissible fade show">' + 
+                                            '<i class="bi bi-exclamation-circle-fill me-2"></i>' + 
+                                            errorMessage + 
+                                            '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' + 
+                                            '</div>';
+                            
+                            $('#editProductModalBody').prepend(errorHtml);
                             
                             // Auto dismiss after 8 seconds
                             setTimeout(function() {

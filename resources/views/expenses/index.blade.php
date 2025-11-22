@@ -1,5 +1,40 @@
 <x-layout.master>
 
+    @push('styles')
+    <style>
+        /* Custom Select Dropdown Styling */
+        .form-select-custom {
+            width: 220px;
+            height: 42px;
+            padding: 12px 36px 12px 16px;
+            border: none;
+            background-color: #ffffff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1f2937;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231f2937' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        
+        .form-select-custom:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-select-custom:focus {
+            box-shadow: 0 0 0 3px rgba(236, 55, 55, 0.1);
+        }
+    </style>
+    @endpush
+
     <div class="dashboard-main-body">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
             <h6 class="fw-semibold mb-0">Expenses Management</h6>
@@ -17,7 +52,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-check-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -25,11 +60,37 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-exclamation-triangle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+
+        <!-- Date Range and Filters -->
+        <form method="GET" action="{{ route('expenses.index') }}" id="expenseFilterForm" class="mb-24 pb-24" style="border-bottom: 2px solid #e5e7eb;">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <!-- Date Range Filter -->
+                <x-filters.date-range 
+                    form-id="expenseFilterForm"
+                    :date-from="request('date_from')"
+                    :date-to="request('date_to')"
+                    :auto-submit="false"
+                />
+
+                <!-- Category Filter -->
+                <select name="category_id" class="form-select-custom">
+                    <option value="all">All Categories</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                    @endforeach
+                </select>
+
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn text-white d-flex align-items-center justify-content-center gap-2" style="background-color: #ec3737; height: 42px; padding: 0 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    Apply Filter
+                </button>
+            </div>
+        </form>
 
         <!-- Summary Stats -->
         <div class="row gy-4 mb-24">
@@ -42,7 +103,7 @@
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ auth()->user()->business->currency }} {{ number_format($expenses->sum('amount'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-wallet2 text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -57,7 +118,7 @@
                                 <h6 class="mb-0">{{ number_format($expenses->count()) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-receipt text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -72,7 +133,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($expenses->avg('amount'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-calculator text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -87,7 +148,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($expenses->filter(function($expense) { return $expense->date->isCurrentMonth(); })->sum('amount'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-calendar-month text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -110,12 +171,12 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search expenses..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <i class="bi bi-circle-fill"></i>
+                            <i class="bi bi-search"></i>
                         </span>
                     </div>
                 </div>
                 <button type="button" id="addExpenseBtn" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                    <i class="bi bi-circle-fill"></i>
+                    <i class="bi bi-plus-circle"></i>
                     Record Expense
                 </button>
             </div>
@@ -171,13 +232,13 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <button type="button" class="view-expense-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View" data-expense-id="{{ $expense->id }}">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-eye-fill"></i>
                                         </button>
                                         <button type="button" class="edit-expense-btn fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white border-0" style="background-color: #ec3737;" title="Edit" data-expense-id="{{ $expense->id }}" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-pencil-fill"></i>
                                         </button>
                                         <button type="button" class="delete-expense-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="Delete" data-expense-id="{{ $expense->id }}">
-                                                <i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-trash-fill"></i>
                                             </button>
                                     </div>
                                 </td>
@@ -185,9 +246,12 @@
                             @empty
                             <tr>
                                 <td colspan="9" class="text-center py-48">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: #fff5f5; border-radius: 50%; margin: 0 auto 16px;">
+                                        <i class="bi bi-receipt" style="font-size: 2.5rem; color: #ec3737;"></i>
+                                    </div>
                                     <p class="text-secondary-light fw-semibold mb-16">No expenses found</p>
-                                    <a href="{{ route('expenses.create') }}" class="btn btn-primary-600 radius-8 px-20 py-11">
+                                    <a href="{{ route('expenses.create') }}" class="btn text-white radius-8 px-24 py-11 fw-bold" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                                        <i class="bi bi-plus-circle"></i>
                                         Record Your First Expense
                                     </a>
                                 </td>
@@ -704,17 +768,24 @@
                             });
                         },
                         error: function(xhr) {
-                            var errors = xhr.responseJSON.errors;
                             var errorMessage = "Please check the form for errors.";
+                            var errorHtml = "";
                             
-                            if (errors) {
-                                errorMessage = Object.values(errors).flat().join("\\n");
+                            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                var errors = xhr.responseJSON.errors;
+                                errorHtml = "<ul style='text-align: left; padding-left: 20px;'>";
+                                $.each(errors, function(field, messages) {
+                                    $.each(messages, function(index, message) {
+                                        errorHtml += "<li>" + message + "</li>";
+                                    });
+                                });
+                                errorHtml += "</ul>";
                             }
                             
                             Swal.fire({
                                 icon: "error",
                                 title: "Oops...",
-                                text: errorMessage
+                                html: errorHtml || errorMessage
                             });
                         }
                     });
@@ -831,17 +902,24 @@
                             });
                         },
                         error: function(xhr) {
-                            var errors = xhr.responseJSON.errors;
                             var errorMessage = "Please check the form for errors.";
+                            var errorHtml = "";
                             
-                            if (errors) {
-                                errorMessage = Object.values(errors).flat().join("\\n");
+                            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                var errors = xhr.responseJSON.errors;
+                                errorHtml = "<ul style='text-align: left; padding-left: 20px;'>";
+                                $.each(errors, function(field, messages) {
+                                    $.each(messages, function(index, message) {
+                                        errorHtml += "<li>" + message + "</li>";
+                                    });
+                                });
+                                errorHtml += "</ul>";
                             }
 
                     Swal.fire({
                                 icon: "error",
                                 title: "Oops...",
-                                text: errorMessage
+                                html: errorHtml || errorMessage
                             });
                         }
                     });

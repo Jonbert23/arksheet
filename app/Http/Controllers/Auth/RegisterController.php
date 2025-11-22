@@ -193,14 +193,14 @@ class RegisterController extends Controller
                 foreach ($validated['payment_methods'] as $index => $method) {
                     BusinessSetting::firstOrCreate(
                         [
-                            'business_id' => $business->id,
-                            'setting_key' => 'payment_method',
+                        'business_id' => $business->id,
+                        'setting_key' => 'payment_method',
                             'setting_value' => strtolower(str_replace(' ', '_', $method)),
                         ],
                         [
-                            'setting_label' => $method,
+                        'setting_label' => $method,
                             'sort_order' => 100 + $index, // High sort order to appear after defaults
-                            'is_active' => true,
+                        'is_active' => true,
                             'is_system' => false,
                         ]
                     );
@@ -213,12 +213,12 @@ class RegisterController extends Controller
                 foreach ($categories as $index => $category) {
                     ProductCategory::firstOrCreate(
                         [
-                            'business_id' => $business->id,
-                            'name' => $category,
+                        'business_id' => $business->id,
+                        'name' => $category,
                         ],
                         [
                             'description' => null,
-                            'is_active' => true,
+                        'is_active' => true,
                         ]
                     );
                 }

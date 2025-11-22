@@ -4,8 +4,8 @@
     <!-- Basic Information Section -->
     <div class="mb-24">
         <div class="d-flex align-items-center gap-2 mb-16">
-            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <i class="bi bi-circle-fill"></i>
+            <div class="d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                <i class="bi bi-person-fill"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Basic Information</h6>
         </div>
@@ -58,8 +58,8 @@
     <!-- Account Security Section -->
     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
         <div class="d-flex align-items-center gap-2 mb-16">
-            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <i class="bi bi-circle-fill"></i>
+            <div class="d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                <i class="bi bi-lock-fill"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Account Security</h6>
         </div>
@@ -89,8 +89,8 @@
     <!-- Module Permissions Section -->
     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;" id="permissionsSection">
         <div class="d-flex align-items-center gap-2 mb-16">
-            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <i class="bi bi-circle-fill"></i>
+            <div class="d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                <i class="bi bi-shield-check"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Module Permissions</h6>
         </div>
@@ -116,8 +116,8 @@
     <!-- Settings Section -->
     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
         <div class="d-flex align-items-center gap-2 mb-16">
-            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <i class="bi bi-circle-fill"></i>
+            <div class="d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                <i class="bi bi-gear-fill"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Settings</h6>
         </div>
@@ -151,11 +151,11 @@
     <!-- Modal Footer -->
     <div class="d-flex justify-content-end gap-3 mt-24 pt-24" style="border-top: 1px solid #e5e7eb;">
         <button type="button" class="btn btn-outline-secondary radius-8 d-flex align-items-center gap-2" style="padding: 11px 24px; font-size: 14px; font-weight: 500; transition: all 0.2s ease;" data-bs-dismiss="modal">
-            <i class="bi bi-circle-fill"></i>
+            <i class="bi bi-x-circle"></i>
             <span>Cancel</span>
         </button>
         <button type="submit" class="btn text-white radius-8 d-flex align-items-center gap-2" style="background-color: #ec3737; padding: 11px 24px; font-size: 14px; font-weight: 500; transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-            <i class="bi bi-circle-fill"></i>
+            <i class="bi bi-check-circle"></i>
             <span>Create User</span>
         </button>
     </div>

@@ -3,244 +3,6 @@
     @push('styles')
     <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/lib/flatpickr.min.css') }}">
-    
-    <style>
-        /* Quick select buttons styling */
-        .quick-date-btn {
-            transition: all 0.2s ease;
-            font-size: 16px;
-            padding: 8px 0 !important;
-            border-radius: 0 !important;
-            background-color: transparent !important;
-            border: none !important;
-            color: #1f2937 !important;
-            font-weight: 600 !important;
-        }
-        
-        .quick-date-btn:hover {
-            background-color: transparent !important;
-            color: #ec3737 !important;
-            border: none !important;
-        }
-        
-        .quick-date-btn:active,
-        .quick-date-btn.active {
-            background-color: transparent !important;
-            color: #ec3737 !important;
-            border: none !important;
-        }
-        
-        /* User filter hover styling */
-        #userFilterForm .btn-outline-secondary:hover {
-            background-color: #ec3737 !important;
-            border-color: #ec3737 !important;
-            color: #ffffff !important;
-        }
-        
-        #userFilterForm .btn-outline-secondary:hover .text-secondary-light {
-            color: #ffffff !important;
-        }
-        
-        #userFilterForm select.form-select:hover {
-            background-color: #ec3737 !important;
-            border-color: #ec3737 !important;
-            color: #ffffff !important;
-        }
-        
-        /* Select dropdown options styling */
-        #userFilterForm select.form-select option {
-            background-color: #ffffff !important;
-            color: #1f2937 !important;
-            padding: 8px 12px;
-        }
-        
-        #userFilterForm select.form-select option:hover {
-            background-color: #ec3737 !important;
-            color: #ffffff !important;
-        }
-        
-        #userFilterForm select.form-select option:checked,
-        #userFilterForm select.form-select option:focus {
-            background-color: #ec3737 !important;
-            color: #ffffff !important;
-        }
-        
-        /* Ensure Flatpickr calendar is visible - Match Goals Module */
-        #dateRangePicker .flatpickr-calendar {
-            display: block !important;
-            position: relative !important;
-            box-shadow: none !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            width: auto !important;
-            border: none !important;
-            background: transparent !important;
-        }
-        
-        .flatpickr-calendar.inline {
-            display: block !important;
-            position: relative !important;
-            box-shadow: none !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            border: none !important;
-        }
-        
-        /* Style for two-month display */
-        .flatpickr-months {
-            display: flex !important;
-            gap: 20px;
-        }
-        
-        /* Month navigation */
-        .flatpickr-month {
-            background: transparent !important;
-            color: #1f2937 !important;
-            height: auto !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-        }
-        
-        .flatpickr-current-month {
-            padding: 10px 0 !important;
-            font-size: 16px !important;
-            font-weight: 600 !important;
-            color: #1f2937 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: static !important;
-            width: auto !important;
-            transform: none !important;
-            height: auto !important;
-        }
-        
-        .flatpickr-monthDropdown-months {
-            font-weight: 600 !important;
-            color: #1f2937 !important;
-            background: transparent !important;
-            border: none !important;
-        }
-        
-        .numInputWrapper {
-            display: inline-block !important;
-        }
-        
-        .cur-year {
-            display: inline-block !important;
-            font-weight: 600 !important;
-            color: #1f2937 !important;
-        }
-        
-        .cur-year .numInput {
-            display: inline-block !important;
-            color: #1f2937 !important;
-            font-weight: 600 !important;
-        }
-        
-        /* Weekday headers */
-        .flatpickr-weekdays {
-            background: transparent !important;
-            height: 40px !important;
-            align-items: center !important;
-        }
-        
-        .flatpickr-weekday {
-            color: #6b7280 !important;
-            font-weight: 600 !important;
-            font-size: 13px !important;
-        }
-        
-        /* Day cells */
-        .flatpickr-days {
-            width: auto !important;
-        }
-        
-        .flatpickr-day {
-            color: #1f2937 !important;
-            border: none !important;
-            border-radius: 6px !important;
-            height: 36px !important;
-            line-height: 36px !important;
-            max-width: 36px !important;
-            font-weight: 500 !important;
-            margin: 2px !important;
-        }
-        
-        .flatpickr-day:hover {
-            background: #f3f4f6 !important;
-            border-color: transparent !important;
-        }
-        
-        /* Today - RED BRANDING */
-        .flatpickr-day.today {
-            border: 2px solid #ec3737 !important;
-            color: #ec3737 !important;
-            font-weight: 600 !important;
-        }
-        
-        .flatpickr-day.today:hover {
-            background: #fef2f2 !important;
-            border-color: #ec3737 !important;
-        }
-        
-        /* Selected and range - RED BRANDING */
-        .flatpickr-day.selected,
-        .flatpickr-day.startRange,
-        .flatpickr-day.endRange {
-            background: #ec3737 !important;
-            border-color: #ec3737 !important;
-            color: #ffffff !important;
-            font-weight: 600 !important;
-        }
-        
-        .flatpickr-day.selected:hover,
-        .flatpickr-day.startRange:hover,
-        .flatpickr-day.endRange:hover {
-            background: #d42f2f !important;
-            border-color: #d42f2f !important;
-        }
-        
-        .flatpickr-day.inRange {
-            background: #fee2e2 !important;
-            border-color: transparent !important;
-            color: #991b1b !important;
-            box-shadow: none !important;
-        }
-        
-        /* Disabled days */
-        .flatpickr-day.flatpickr-disabled,
-        .flatpickr-day.prevMonthDay,
-        .flatpickr-day.nextMonthDay {
-            color: #d1d5db !important;
-        }
-        
-        .flatpickr-day.flatpickr-disabled:hover {
-            background: transparent !important;
-            cursor: not-allowed !important;
-        }
-        
-        /* Ensure two months display side by side */
-        #dateRangePicker .flatpickr-months {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-        }
-        
-        /* Ensure calendar doesn't overflow */
-        #dateRangePicker {
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        #dateRangePicker .flatpickr-calendar.inline {
-            display: block !important;
-            position: static !important;
-            box-shadow: none !important;
-            width: auto !important;
-            max-width: none !important;
-        }
-    </style>
     @endpush
 
     <div class="dashboard-main-body">
@@ -260,7 +22,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-check-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -268,93 +30,44 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-exclamation-triangle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
         <!-- Date Range and Filter Section -->
-        <div class="card mb-24 border-0 shadow-sm">
-            <div class="card-body">
-                <form method="GET" action="{{ route('users.index') }}" id="userFilterForm">
-                    <div class="d-flex flex-wrap align-items-center gap-3">
-                        <!-- Date Range Picker with Dropdown -->
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-outline-secondary d-flex align-items-center gap-2 radius-8 px-16 py-11 dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" style="min-width: 280px;">
-                                <i class="bi bi-circle-fill"></i>
-                                <span id="dateRangeDisplay">
-                                    {{ $dateFrom && $dateTo ? \Carbon\Carbon::parse($dateFrom)->format('M d, Y') . ' - ' . \Carbon\Carbon::parse($dateTo)->format('M d, Y') : \Carbon\Carbon::now()->startOfMonth()->format('M d, Y') . ' - ' . \Carbon\Carbon::now()->format('M d, Y') }}
-                                </span>
-                            </button>
-                            <div class="dropdown-menu p-0" style="width: 800px; max-width: 95vw;" onclick="event.stopPropagation();">
-                                <div class="d-flex">
-                                    <!-- Quick Select Options -->
-                                    <div style="width: 160px; border-right: 1px solid #e5e7eb; padding: 16px 12px; flex-shrink: 0;">
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="today">Today</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="yesterday">Yesterday</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="this_week">This week</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="month_to_date">Month to date</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="this_month">This month</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="last_month">Last month</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="this_quarter">This quarter</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="this_year">This year</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="year_to_date">Year to date</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="last_year">Last year</button>
-                                    </div>
-                                    <!-- Calendar -->
-                                    <div style="flex: 1; padding: 16px; min-width: 0; overflow-x: auto;">
-                                        <div id="dateRangePicker"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <form method="GET" action="{{ route('users.index') }}" id="userFilterForm" class="mb-24 pb-24" style="border-bottom: 2px solid #e5e7eb;">
+            <div class="d-flex align-items-center gap-3">
+                <!-- Date Range Filter -->
+                <x-filters.date-range 
+                    form-id="userFilterForm"
+                    :date-from="$dateFrom"
+                    :date-to="$dateTo"
+                    :auto-submit="false"
+                />
 
-                        <!-- Role Filter -->
-                        <div style="min-width: 200px;">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-circle-fill"></i>
-                                <select name="role" class="form-select radius-8 px-16 py-11" style="border: 1px solid #e5e7eb; min-width: 180px;">
-                                    <option value="">All Roles</option>
-                                    <option value="business_owner" {{ request('role') === 'business_owner' ? 'selected' : '' }}>Business Owner</option>
-                                    <option value="manager" {{ request('role') === 'manager' ? 'selected' : '' }}>Manager</option>
-                                    <option value="accountant" {{ request('role') === 'accountant' ? 'selected' : '' }}>Accountant</option>
-                                    <option value="staff" {{ request('role') === 'staff' ? 'selected' : '' }}>Staff</option>
-                                </select>
-                            </div>
-                        </div>
+                <!-- Status Filter -->
+                <x-filters.status-filter 
+                    form-id="userFilterForm"
+                    :status-filter="request('is_active', 'all')"
+                    :status-options="[
+                        ['value' => 'all', 'label' => 'All'],
+                        ['value' => '1', 'label' => 'Active'],
+                        ['value' => '0', 'label' => 'Inactive']
+                    ]"
+                    :total-count="$users->count()"
+                    module-label="Users"
+                    :auto-submit="false"
+                    parameter-name="is_active"
+                />
 
-                        <!-- Status Filter -->
-                        <div style="min-width: 200px;">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-circle-fill"></i>
-                                <select name="is_active" class="form-select radius-8 px-16 py-11" style="border: 1px solid #e5e7eb; min-width: 180px;">
-                                    <option value="">All Status</option>
-                                    <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>Active</option>
-                                    <option value="0" {{ request('is_active') === '0' ? 'selected' : '' }}>Inactive</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Hidden Inputs -->
-                        <input type="hidden" name="date_from" id="filter_date_from" value="{{ $dateFrom }}">
-                        <input type="hidden" name="date_to" id="filter_date_to" value="{{ $dateTo }}">
-
-                        <!-- Apply Filter Button -->
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2 ms-auto" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <i class="bi bi-circle-fill"></i>
-                            <span>Apply Filter</span>
-                        </button>
-
-                        <!-- Reset Filter Button -->
-                        <a href="{{ route('users.index') }}" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                            <i class="bi bi-circle-fill"></i>
-                            <span>Reset</span>
-                        </a>
-                    </div>
-                </form>
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn text-white d-flex align-items-center justify-content-center gap-2" style="background-color: #ec3737; height: 42px; padding: 0 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    Apply Filter
+                </button>
             </div>
-        </div>
+        </form>
 
         <!-- Summary Stats -->
         <div class="row gy-4 mb-24">
@@ -366,8 +79,8 @@
                                 <p class="fw-medium text-secondary-light mb-1">Total Users</p>
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ $users->count() }}</h6>
                             </div>
-                            <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <i class="bi bi-circle-fill"></i>
+                            <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center text-white" style="background-color: #ec3737;">
+                                <i class="bi bi-people-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -381,8 +94,8 @@
                                 <p class="fw-medium text-primary-light mb-1">Active Users</p>
                                 <h6 class="mb-0">{{ $users->where('is_active', true)->count() }}</h6>
                             </div>
-                            <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                            <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center text-white">
+                                <i class="bi bi-person-check-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -396,8 +109,8 @@
                                 <p class="fw-medium text-primary-light mb-1">Business Owners</p>
                                 <h6 class="mb-0">{{ $users->where('role', 'business_owner')->count() }}</h6>
                             </div>
-                            <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                            <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center text-white">
+                                <i class="bi bi-briefcase-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -411,8 +124,8 @@
                                 <p class="fw-medium text-primary-light mb-1">Managers</p>
                                 <h6 class="mb-0">{{ $users->where('role', 'manager')->count() }}</h6>
                             </div>
-                            <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                            <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center text-white">
+                                <i class="bi bi-person-badge-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -435,12 +148,12 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search users..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <i class="bi bi-circle-fill"></i>
+                            <i class="bi bi-search"></i>
                         </span>
                     </div>
                 </div>
                 <button type="button" id="addUserBtn" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                    <i class="bi bi-circle-fill"></i>
+                    <i class="bi bi-plus-circle"></i>
                     Add New User
                 </button>
             </div>
@@ -500,17 +213,17 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <button type="button" class="view-user-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View" data-user-id="{{ $user->id }}">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-eye-fill"></i>
                                         </button>
                                         <button type="button" class="edit-user-btn fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white border-0" style="background-color: #ec3737;" title="Edit" data-user-id="{{ $user->id }}" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-pencil-fill"></i>
                                         </button>
                                         @if($user->id !== auth()->id())
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle delete-btn border-0" title="Delete">
-                                                <i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-trash-fill"></i>
                                             </button>
                                         </form>
                                         @endif
@@ -521,10 +234,10 @@
                             <tr>
                                 <td colspan="7" class="text-center py-48">
                                     <div class="d-flex flex-column align-items-center">
-                                        <i class="bi bi-circle-fill"></i>
+                                        <i class="bi bi-inbox text-secondary-light mb-3" style="font-size: 48px;"></i>
                                         <p class="text-secondary-light mb-16">No users found</p>
                                         <button type="button" id="addFirstUserBtn" class="btn text-white px-20 py-11 radius-8" style="background-color: #ec3737;">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-plus-circle"></i>
                                             Add Your First User
                                         </button>
                                     </div>
@@ -594,8 +307,8 @@
                     <!-- Basic Information Section -->
                     <div class="mb-24">
                         <div class="d-flex align-items-center gap-2 mb-20">
-                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                <i class="bi bi-circle-fill"></i>
+                            <div class="d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-person-fill"></i>
                             </div>
                             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Basic Information</h6>
                         </div>
@@ -603,8 +316,8 @@
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start gap-3">
-                                    <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0;">
-                                        <i class="bi bi-circle-fill"></i>
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0; color: #ec3737;">
+                                        <i class="bi bi-person-fill"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="mb-1" style="font-size: 12px; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">Full Name</p>
@@ -615,8 +328,8 @@
                             
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start gap-3">
-                                    <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0;">
-                                        <i class="bi bi-circle-fill"></i>
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0; color: #ec3737;">
+                                        <i class="bi bi-envelope-fill"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="mb-1" style="font-size: 12px; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</p>
@@ -627,8 +340,8 @@
                             
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start gap-3">
-                                    <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0;">
-                                        <i class="bi bi-circle-fill"></i>
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0; color: #ec3737;">
+                                        <i class="bi bi-telephone-fill"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="mb-1" style="font-size: 12px; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">Phone Number</p>
@@ -639,8 +352,8 @@
                             
                             <div class="col-md-6">
                                 <div class="d-flex align-items-start gap-3">
-                                    <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0;">
-                                        <i class="bi bi-circle-fill"></i>
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 8px; flex-shrink: 0; color: #ec3737;">
+                                        <i class="bi bi-shield-check"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <p class="mb-1" style="font-size: 12px; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;">User Role</p>
@@ -654,8 +367,8 @@
                     <!-- Module Permissions Section -->
                     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;" id="view_permissions_section">
                         <div class="d-flex align-items-center gap-2 mb-16">
-                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                <i class="bi bi-circle-fill"></i>
+                            <div class="d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-shield-check"></i>
                             </div>
                             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Module Permissions</h6>
                         </div>
@@ -670,8 +383,8 @@
                     <!-- Account Status Section -->
                     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
                         <div class="d-flex align-items-center gap-2 mb-16">
-                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                                <i class="bi bi-circle-fill"></i>
+                            <div class="d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-clock-fill"></i>
                             </div>
                             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Account Status</h6>
                         </div>
@@ -700,7 +413,7 @@
                 </div>
                 <div class="modal-footer border-top" style="padding: 20px 24px;">
                     <button type="button" class="btn btn-outline-secondary radius-8 d-flex align-items-center gap-2" style="padding: 11px 24px; font-size: 14px; font-weight: 500;" data-bs-dismiss="modal">
-                        <i class="bi bi-circle-fill"></i>
+                        <i class="bi bi-x-circle"></i>
                         <span>Close</span>
                     </button>
                 </div>
@@ -714,129 +427,6 @@
     
     <script>
         $(document).ready(function() {
-            // Initialize Flatpickr for inline calendar
-            let userDateRangePicker = null;
-            const dropdownButton = $('#userFilterForm .dropdown-toggle[data-bs-toggle="dropdown"]').first();
-            
-            // Initialize Flatpickr when dropdown is opened
-            dropdownButton.on('click', function() {
-                setTimeout(function() {
-                    if (!userDateRangePicker) {
-                        console.log('Initializing User Date Range Picker...');
-                        
-                        const calendarElement = document.getElementById('dateRangePicker');
-                        if (calendarElement && typeof flatpickr !== 'undefined') {
-                            userDateRangePicker = flatpickr(calendarElement, {
-                                mode: "range",
-                                inline: true,
-                                showMonths: 2,
-                                dateFormat: "Y-m-d",
-                                defaultDate: ['{{ $dateFrom }}', '{{ $dateTo }}'],
-                                onChange: function(selectedDates, dateStr, instance) {
-                                    console.log('User dates selected:', selectedDates);
-                                    if (selectedDates.length === 2) {
-                                        updateUserDateRange(selectedDates[0], selectedDates[1]);
-                                    }
-                                },
-                                onReady: function() {
-                                    console.log('User Flatpickr ready with', this.config.showMonths, 'months!');
-                                }
-                            });
-                            
-                            console.log('User Flatpickr instance created:', userDateRangePicker);
-                        } else {
-                            console.error('Cannot initialize User Flatpickr:', {
-                                element: calendarElement,
-                                flatpickrAvailable: typeof flatpickr !== 'undefined'
-                            });
-                        }
-                    }
-                }, 100);
-            });
-
-            // Quick date range selection
-            $('.quick-date-btn').on('click', function() {
-                const range = $(this).data('range');
-                const dates = getUserDateRange(range);
-                
-                $('.quick-date-btn').removeClass('active');
-                $(this).addClass('active');
-                
-                if (userDateRangePicker) {
-                    userDateRangePicker.setDate([dates.from, dates.to]);
-                }
-                updateUserDateRange(dates.from, dates.to);
-            });
-
-            function getUserDateRange(range) {
-                const today = new Date();
-                let from, to;
-
-                switch(range) {
-                    case 'today':
-                        from = to = new Date();
-                        break;
-                    case 'yesterday':
-                        from = to = new Date(today.setDate(today.getDate() - 1));
-                        break;
-                    case 'this_week':
-                        from = new Date(today.setDate(today.getDate() - today.getDay()));
-                        to = new Date();
-                        break;
-                    case 'month_to_date':
-                    case 'this_month':
-                        from = new Date(today.getFullYear(), today.getMonth(), 1);
-                        to = new Date();
-                        break;
-                    case 'last_month':
-                        from = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-                        to = new Date(today.getFullYear(), today.getMonth(), 0);
-                        break;
-                    case 'this_quarter':
-                        const quarter = Math.floor(today.getMonth() / 3);
-                        from = new Date(today.getFullYear(), quarter * 3, 1);
-                        to = new Date(today.getFullYear(), (quarter + 1) * 3, 0);
-                        break;
-                    case 'this_year':
-                        from = new Date(today.getFullYear(), 0, 1);
-                        to = new Date(today.getFullYear(), 11, 31);
-                        break;
-                    case 'year_to_date':
-                        from = new Date(today.getFullYear(), 0, 1);
-                        to = new Date();
-                        break;
-                    case 'last_year':
-                        from = new Date(today.getFullYear() - 1, 0, 1);
-                        to = new Date(today.getFullYear() - 1, 11, 31);
-                        break;
-                }
-
-                return { from, to };
-            }
-
-            function updateUserDateRange(from, to) {
-                const fromDate = from instanceof Date ? from : new Date(from);
-                const toDate = to instanceof Date ? to : new Date(to);
-                
-                // Format dates for display
-                const options = { year: 'numeric', month: 'short', day: 'numeric' };
-                const fromStr = fromDate.toLocaleDateString('en-US', options);
-                const toStr = toDate.toLocaleDateString('en-US', options);
-                
-                // Update display
-                $('#dateRangeDisplay').text(fromStr + ' - ' + toStr);
-                
-                // Update hidden inputs
-                $('#filter_date_from').val(formatUserDate(fromDate));
-                $('#filter_date_to').val(formatUserDate(toDate));
-            }
-
-            function formatUserDate(date) {
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            }
 
             // Initialize DataTable
             if ($.fn.DataTable.isDataTable("#users-table")) {
@@ -859,8 +449,8 @@
                     "paginate": {
                         "first": "First",
                         "last": "Last",
-                        "next": '<i class="bi bi-circle-fill"></i>',
-                        "previous": '<i class="bi bi-circle-fill"></i>'
+                        "next": '<i class="bi bi-chevron-right"></i>',
+                        "previous": '<i class="bi bi-chevron-left"></i>'
                     }
                 },
                 "columnDefs": [
@@ -1140,21 +730,21 @@
                         let permissionsHtml = '';
                         
                         if (user.role === 'business_owner' || user.role === 'super_admin') {
-                            permissionsHtml = '<div class="col-12"><div class="alert alert-info mb-0" style="background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b;"><i class="bi bi-circle-fill"></i>This user has full access to all modules.</div></div>';
+                            permissionsHtml = '<div class="col-12"><div class="alert alert-info mb-0" style="background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b;"><i class="bi bi-shield-check me-2"></i>This user has full access to all modules.</div></div>';
                         } else if (user.permissions && user.permissions.length > 0) {
                             user.permissions.forEach(function(permission) {
                                 const label = moduleLabels[permission] || permission;
                                 permissionsHtml += `
                                     <div class="col-md-6 mb-12">
                                         <div class="p-12 rounded-2 d-flex align-items-center gap-2" style="background-color: #fef2f2; border: 1px solid #fecaca;">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-check-circle-fill" style="color: #ec3737;"></i>
                                             <span class="fw-medium" style="color: #991b1b; font-size: 14px;">${label}</span>
                                         </div>
                                     </div>
                                 `;
                             });
                         } else {
-                            permissionsHtml = '<div class="col-12"><div class="alert alert-warning mb-0" style="background-color: #fef3c7; border: 1px solid #fde047; color: #92400e;"><i class="bi bi-circle-fill"></i>No module permissions assigned.</div></div>';
+                            permissionsHtml = '<div class="col-12"><div class="alert alert-warning mb-0" style="background-color: #fef3c7; border: 1px solid #fde047; color: #92400e;"><i class="bi bi-exclamation-triangle-fill me-2"></i>No module permissions assigned.</div></div>';
                         }
                         
                         $("#view_permissions_list").html(permissionsHtml);

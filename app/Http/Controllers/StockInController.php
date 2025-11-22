@@ -16,36 +16,23 @@ class StockInController extends Controller
     {
         $query = StockIn::with('product', 'product.category');
 
-        // Filter by product
-        if ($request->filled('product_id')) {
+        // Filter by product (exclude 'all')
+        if ($request->filled('product_id') && $request->product_id !== 'all') {
             $query->where('product_id', $request->product_id);
         }
 
-        // Filter by supplier
-        if ($request->filled('supplier')) {
-            $query->where('supplier', $request->supplier);
-        }
-
-        // Filter by date range
-        if ($request->filled('date_from')) {
-            $query->whereDate('date', '>=', $request->date_from);
-        }
-        if ($request->filled('date_to')) {
-            $query->whereDate('date', '<=', $request->date_to);
-        }
+        // Filter by date range (default to current month if not provided)
+        $dateFrom = $request->filled('date_from') ? $request->date_from : now()->startOfMonth()->format('Y-m-d');
+        $dateTo = $request->filled('date_to') ? $request->date_to : now()->format('Y-m-d');
+        
+        $query->whereDate('date', '>=', $dateFrom);
+        $query->whereDate('date', '<=', $dateTo);
 
         // Get all stock entries (DataTables handles pagination)
         $stockIns = $query->recent()->get();
         $products = Product::active()->orderBy('name')->get();
-        
-        // Get unique suppliers
-        $suppliers = StockIn::select('supplier')
-            ->distinct()
-            ->whereNotNull('supplier')
-            ->orderBy('supplier')
-            ->pluck('supplier');
 
-        return view('stock.index', compact('stockIns', 'products', 'suppliers'));
+        return view('stock.index', compact('stockIns', 'products'));
     }
 
     /**

@@ -15,24 +15,43 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $business = auth()->user()->business;
+        
+        // Get date range from request or use defaults
+        $dateFrom = $request->filled('date_from') ? $request->date_from : now()->startOfMonth()->format('Y-m-d');
+        $dateTo = $request->filled('date_to') ? $request->date_to : now()->format('Y-m-d');
+        
         $currentMonth = now()->month;
         $currentYear = now()->year;
         $today = now()->toDateString();
 
+        // ==================== FILTERED DATE RANGE METRICS ====================
+        $filteredSales = Sale::whereDate('date', '>=', $dateFrom)
+            ->whereDate('date', '<=', $dateTo)
+            ->sum('total');
+        $filteredExpenses = Expense::whereDate('date', '>=', $dateFrom)
+            ->whereDate('date', '<=', $dateTo)
+            ->sum('amount');
+        $filteredGrossProfit = $filteredSales - $filteredExpenses;
+        $grossProfitMargin = $filteredSales > 0 ? round(($filteredGrossProfit / $filteredSales) * 100) : 0;
+        
         // ==================== ALL-TIME METRICS ====================
         $allTimeSales = Sale::sum('total');
         $allTimeExpenses = Expense::sum('amount');
         $allTimeGrossProfit = $allTimeSales - $allTimeExpenses;
-        $grossProfitMargin = $allTimeSales > 0 ? round(($allTimeGrossProfit / $allTimeSales) * 100) : 0;
 
         // ==================== TODAY'S METRICS ====================
         $salesToday = Sale::whereDate('date', $today)->sum('total');
         $expensesToday = Expense::whereDate('date', $today)->sum('amount');
         $itemsSoldToday = SaleItem::whereHas('sale', function($q) use ($today) {
             $q->whereDate('date', $today);
+        })->sum('quantity');
+        
+        // ==================== FILTERED ITEMS SOLD ====================
+        $filteredItemsSold = SaleItem::whereHas('sale', function($q) use ($dateFrom, $dateTo) {
+            $q->whereDate('date', '>=', $dateFrom)->whereDate('date', '<=', $dateTo);
         })->sum('quantity');
 
         // ==================== MONTHLY METRICS ====================
@@ -50,14 +69,15 @@ class DashboardController extends Controller
             $q->whereMonth('date', $currentMonth)->whereYear('date', $currentYear);
         })->sum('quantity');
 
-        // ==================== TARGETS ====================
+        // ==================== TARGETS (Based on Filtered Date) ====================
         $itemsSoldTarget = 500;
         $salesTarget = 500000;
         $annualSalesTarget = 6000000;
         
-        $itemsSoldPercentage = $itemsSoldTarget > 0 ? round(($monthlyItemsSold / $itemsSoldTarget) * 100) : 0;
-        $salesPercentage = $salesTarget > 0 ? round(($monthlySales / $salesTarget) * 100) : 0;
-        $annualSalesPercentage = $annualSalesTarget > 0 ? round(($allTimeSales / $annualSalesTarget) * 100) : 0;
+        // Calculate percentages based on filtered data
+        $itemsSoldPercentage = $itemsSoldTarget > 0 ? round(($filteredItemsSold / $itemsSoldTarget) * 100) : 0;
+        $salesPercentage = $salesTarget > 0 ? round(($filteredSales / $salesTarget) * 100) : 0;
+        $annualSalesPercentage = $annualSalesTarget > 0 ? round(($filteredSales / $annualSalesTarget) * 100) : 0;
 
         // ==================== INVENTORY STATUS ====================
         $inStockProducts = Product::where('stock_quantity', '>', DB::raw('min_stock_alert'))->count();
@@ -66,14 +86,22 @@ class DashboardController extends Controller
             ->count();
         $outOfStockProducts = Product::where('stock_quantity', 0)->count();
 
-        // ==================== DAILY SALES TREND (Last 31 days) ====================
+        // ==================== DAILY SALES TREND (Filtered Date Range) ====================
         $dailySalesTrend = [];
-        for ($i = 30; $i >= 0; $i--) {
-            $date = now()->subDays($i)->toDateString();
-            $dailySales = Sale::whereDate('date', $date)->sum('total');
+        $startDate = \Carbon\Carbon::parse($dateFrom);
+        $endDate = \Carbon\Carbon::parse($dateTo);
+        $daysDiff = $startDate->diffInDays($endDate);
+        
+        // Limit to maximum 31 days for chart readability
+        if ($daysDiff > 31) {
+            $startDate = $endDate->copy()->subDays(30);
+        }
+        
+        for ($date = $startDate->copy(); $date->lte($endDate); $date->addDay()) {
+            $dailySales = Sale::whereDate('date', $date->toDateString())->sum('total');
             $dailySalesTrend[] = [
-                'date' => $date,
-                'day' => now()->subDays($i)->format('d'),
+                'date' => $date->toDateString(),
+                'day' => $date->format('d'),
                 'sales' => $dailySales
             ];
         }
@@ -96,31 +124,40 @@ class DashboardController extends Controller
             ];
         }
 
-        // ==================== BESTSELLING PRODUCTS ====================
+        // ==================== BESTSELLING PRODUCTS (Filtered) ====================
         $bestsellingProducts = SaleItem::select('product_id', DB::raw('SUM(quantity * unit_price) as revenue'))
             ->with('product')
+            ->whereHas('sale', function($q) use ($dateFrom, $dateTo) {
+                $q->whereDate('date', '>=', $dateFrom)->whereDate('date', '<=', $dateTo);
+            })
             ->groupBy('product_id')
             ->orderBy('revenue', 'desc')
             ->take(5)
             ->get();
 
-        // ==================== TOP SALES CHANNELS ====================
+        // ==================== TOP SALES CHANNELS (Filtered) ====================
         $topSalesChannels = Sale::select('sales_channel_id', DB::raw('SUM(total) as total_amount'))
             ->with('salesChannel')
             ->whereNotNull('sales_channel_id')
+            ->whereDate('date', '>=', $dateFrom)
+            ->whereDate('date', '<=', $dateTo)
             ->groupBy('sales_channel_id')
             ->orderBy('total_amount', 'desc')
             ->get();
 
-        // ==================== EXPENSE DISTRIBUTION ====================
+        // ==================== EXPENSE DISTRIBUTION (Filtered) ====================
         $expenseDistribution = Expense::select('category_id', DB::raw('SUM(amount) as total'))
-            ->with('expenseCategory')
+            ->with('category')
             ->whereNotNull('category_id')
+            ->whereDate('date', '>=', $dateFrom)
+            ->whereDate('date', '<=', $dateTo)
             ->groupBy('category_id')
             ->get();
 
-        // ==================== RECENT SALES ====================
+        // ==================== RECENT SALES (Filtered) ====================
         $recentSales = Sale::with('customer', 'salesChannel')
+            ->whereDate('date', '>=', $dateFrom)
+            ->whereDate('date', '<=', $dateTo)
             ->latest('date')
             ->take(10)
             ->get();
@@ -172,6 +209,14 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact(
             'business',
+            // Date range
+            'dateFrom',
+            'dateTo',
+            // Filtered metrics (based on date range)
+            'filteredSales',
+            'filteredExpenses',
+            'filteredGrossProfit',
+            'filteredItemsSold',
             // All-time
             'allTimeSales',
             'allTimeExpenses',

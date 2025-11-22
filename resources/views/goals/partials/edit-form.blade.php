@@ -6,7 +6,7 @@
     <div class="mb-24">
         <div class="d-flex align-items-center gap-2 mb-16">
             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-info-circle text-white"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Basic Information</h6>
         </div>
@@ -34,7 +34,7 @@
     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
         <div class="d-flex align-items-center gap-2 mb-16">
             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-bullseye text-white"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Goal Configuration</h6>
         </div>
@@ -73,7 +73,7 @@
             </label>
             <div class="input-group date-range-input-group">
                 <span class="input-group-text bg-white border-end-0" style="border-radius: 8px 0 0 8px; border: 1px solid #e5e7eb;">
-                    <i class="bi bi-circle-fill"></i>
+                    <i class="bi bi-calendar-range"></i>
                 </span>
                 <input type="text" class="form-control border-start-0" id="edit_date_range" placeholder="Select start and end date" readonly style="background-color: #ffffff; cursor: pointer; border-radius: 0 8px 8px 0; font-weight: 500; color: #1f2937; border: 1px solid #e5e7eb; padding: 10px 12px;">
             </div>
@@ -261,7 +261,7 @@
     <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
         <div class="d-flex align-items-center gap-2 mb-16">
             <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-gear text-white"></i>
             </div>
             <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Settings</h6>
         </div>
@@ -289,7 +289,7 @@
                         <input class="form-check-input" type="radio" name="priority" id="edit_priority_high" value="high" {{ $goal->priority === 'high' ? 'checked' : '' }}>
                         <label class="form-check-label" for="edit_priority_high">
                             <span class="badge bg-danger-100 text-danger-600 px-12 py-6">
-                                <i class="bi bi-circle-fill"></i> High Priority
+                                <i class="bi bi-flag-fill"></i> High Priority
                             </span>
                         </label>
                     </div>
@@ -313,12 +313,12 @@
 
     <!-- Modal Footer -->
     <div class="d-flex justify-content-end gap-3 mt-24 pt-24" style="border-top: 1px solid #e5e7eb;">
-        <button type="button" class="btn btn-outline-secondary radius-8 d-flex align-items-center gap-2" style="padding: 11px 24px; font-size: 14px; font-weight: 500; transition: all 0.2s ease;" data-bs-dismiss="modal">
-            <i class="bi bi-circle-fill"></i>
+        <button type="button" class="btn btn-outline-secondary radius-8 d-flex align-items-center gap-2" style="padding: 6px 20px; font-size: 14px; font-weight: 500; transition: all 0.2s ease;" data-bs-dismiss="modal">
+            <i class="bi bi-x-circle"></i>
             <span>Cancel</span>
         </button>
-        <button type="submit" class="btn text-white radius-8 d-flex align-items-center gap-2" style="background-color: #ec3737; padding: 11px 24px; font-size: 14px; font-weight: 500; transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-            <i class="bi bi-circle-fill"></i>
+        <button type="submit" class="btn text-white radius-8 d-flex align-items-center gap-2" style="background-color: #ec3737; padding: 6px 20px; font-size: 14px; font-weight: 500; transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+            <i class="bi bi-check-circle"></i>
             <span>Update Goal</span>
         </button>
     </div>

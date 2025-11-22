@@ -1,6 +1,59 @@
 <x-layout.master>
 
+    @push('styles')
+    <style>
+        /* Custom Select Dropdown Styling */
+        .form-select-custom {
+            width: 220px;
+            height: 42px;
+            padding: 12px 36px 12px 16px;
+            border: none;
+            background-color: #ffffff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1f2937;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231f2937' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        
+        .form-select-custom:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-select-custom:focus {
+            box-shadow: 0 0 0 3px rgba(236, 55, 55, 0.1);
+        }
+    </style>
+    @endpush
+
     <div class="dashboard-main-body">
+        
+        <!-- Date Range Filter -->
+        <form method="GET" action="{{ route('dashboard') }}" id="dashboardFilterForm" class="mb-24 pb-24" style="border-bottom: 2px solid #e5e7eb;">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <!-- Date Range Filter -->
+                <x-filters.date-range 
+                    form-id="dashboardFilterForm"
+                    :date-from="$dateFrom"
+                    :date-to="$dateTo"
+                    :auto-submit="false"
+                />
+
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn text-white d-flex align-items-center justify-content-center gap-2" style="background-color: #ec3737; height: 42px; padding: 0 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    Apply Filter
+                </button>
+            </div>
+        </form>
         
         <!-- Goal Notifications -->
         @if(!empty($goalNotifications))
@@ -26,7 +79,7 @@
             <div class="col-xxl-8">
                 <div class="row gy-4">
                     
-                    <!-- All-time Gross Profit -->
+                    <!-- Gross Profit (Filtered) -->
                     <div class="col-xxl-4 col-sm-6">
                         <div class="card p-3 shadow-sm radius-8 border-0 h-100" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border-left: 4px solid #ec3737 !important;">
                             <div class="card-body p-0">
@@ -37,7 +90,7 @@
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Gross Profit</span>
-                                            <h6 class="fw-bold" style="color: #ec3737;">{{ $business->currency }} {{ number_format($allTimeGrossProfit, 2) }}</h6>
+                                            <h6 class="fw-bold" style="color: #ec3737;">{{ $business->currency }} {{ number_format($filteredGrossProfit, 2) }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +99,7 @@
                         </div>
                     </div>
 
-                    <!-- All-time Sales -->
+                    <!-- Total Sales (Filtered) -->
                     <div class="col-xxl-4 col-sm-6">
                         <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-2">
                             <div class="card-body p-0">
@@ -57,16 +110,16 @@
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Total Sales</span>
-                                            <h6 class="fw-semibold">{{ $business->currency }} {{ number_format($allTimeSales, 2) }}</h6>
+                                            <h6 class="fw-semibold">{{ $business->currency }} {{ number_format($filteredSales, 2) }}</h6>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-sm mb-0">Today <span class="bg-success-focus px-1 rounded-2 fw-medium text-success-main text-sm">{{ $business->currency }} {{ number_format($salesToday, 2) }}</span></p>
+                                <p class="text-sm mb-0">Selected Period</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Items Sold Today -->
+                    <!-- Items Sold (Filtered) -->
                     <div class="col-xxl-4 col-sm-6">
                         <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-3">
                             <div class="card-body p-0">
@@ -77,11 +130,11 @@
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Items Sold</span>
-                                            <h6 class="fw-semibold">{{ number_format($monthlyItemsSold) }}</h6>
+                                            <h6 class="fw-semibold">{{ number_format($filteredItemsSold) }}</h6>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-sm mb-0">Today <span class="bg-success-focus px-1 rounded-2 fw-medium text-success-main text-sm">+{{ number_format($itemsSoldToday) }}</span></p>
+                                <p class="text-sm mb-0">Selected Period</p>
                             </div>
                         </div>
                     </div>
@@ -106,7 +159,7 @@
                         </div>
                     </div>
 
-                    <!-- Monthly Expenses -->
+                    <!-- Expenses (Filtered) -->
                     <div class="col-xxl-4 col-sm-6">
                         <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-5">
                             <div class="card-body p-0">
@@ -117,11 +170,11 @@
                                         </span>
                                         <div>
                                             <span class="mb-2 fw-medium text-secondary-light text-sm">Expenses</span>
-                                            <h6 class="fw-semibold">{{ $business->currency }} {{ number_format($monthlyExpenses, 2) }}</h6>
+                                            <h6 class="fw-semibold">{{ $business->currency }} {{ number_format($filteredExpenses, 2) }}</h6>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-sm mb-0">Today <span class="bg-danger-focus px-1 rounded-2 fw-medium text-danger-main text-sm">{{ $business->currency }} {{ number_format($expensesToday, 2) }}</span></p>
+                                <p class="text-sm mb-0">Selected Period</p>
                             </div>
                         </div>
                     </div>
@@ -155,11 +208,11 @@
                     <div class="card-body p-24">
                         <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
                             <div>
-                                <h6 class="mb-2 fw-bold text-lg" style="color: #ec3737;">Monthly Target</h6>
+                                <h6 class="mb-2 fw-bold text-lg" style="color: #ec3737;">Sales Target</h6>
                                 <span class="text-sm fw-medium text-secondary-light">{{ $business->name }}</span>
                             </div>
                             <div class="text-end">
-                                <h6 class="mb-2 fw-bold text-lg">{{ $business->currency }} {{ number_format($monthlySales, 2) }}</h6>
+                                <h6 class="mb-2 fw-bold text-lg">{{ $business->currency }} {{ number_format($filteredSales, 2) }}</h6>
                                 <span class="ps-12 pe-12 pt-2 pb-2 rounded-2 fw-bold text-white text-sm" style="background-color: #ec3737;">{{ $salesPercentage }}%</span>
                             </div>
                         </div>
@@ -347,21 +400,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Monthly Sales & Expense Trend -->
-            <div class="col-xxl-12">
-                <div class="card h-100 radius-8 border-0">
-                    <div class="card-body p-24">
-                        <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
-                            <div>
-                                <h6 class="mb-2 fw-bold text-lg">Monthly Trend</h6>
-                                <span class="text-sm fw-medium text-secondary-light">Sales vs Expenses (12 months)</span>
-                            </div>
-                        </div>
-                        <div id="monthlySalesChart" class="mt-20"></div>
                     </div>
                 </div>
             </div>
@@ -566,61 +604,6 @@
         };
         var dailySalesChart = new ApexCharts(document.querySelector("#dailySalesChart"), dailySalesOptions);
         dailySalesChart.render();
-
-        // Monthly Sales Chart
-        var monthlySalesOptions = {
-            series: [{
-                name: "Sales",
-                data: @json(array_column($monthlyTrend, 'sales'))
-            }, {
-                name: "Expenses",
-                data: @json(array_column($monthlyTrend, 'expenses'))
-            }],
-            chart: {
-                type: "bar",
-                height: 350,
-                toolbar: {
-                    show: false
-                }
-            },
-            plotOptions: {
-                bar: {
-                    borderRadius: 4,
-                    columnWidth: "40%",
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            xaxis: {
-                categories: @json(array_column($monthlyTrend, 'month')),
-                labels: {
-                    style: {
-                        colors: "#A0AEC0",
-                        fontSize: "12px"
-                    }
-                }
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: "#A0AEC0",
-                        fontSize: "12px"
-                    }
-                }
-            },
-            colors: ["#45B369", "#EF4A00"],
-            legend: {
-                position: "top",
-                horizontalAlign: "right"
-            },
-            grid: {
-                borderColor: "#E2E8F0",
-                strokeDashArray: 3,
-            }
-        };
-        var monthlySalesChart = new ApexCharts(document.querySelector("#monthlySalesChart"), monthlySalesOptions);
-        monthlySalesChart.render();
 
         // Annual Target Donut Chart
         var annualTargetOptions = {

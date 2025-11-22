@@ -1,244 +1,36 @@
 <x-layout.master>
 
     @push('styles')
-    <!-- Flatpickr CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/lib/flatpickr.min.css') }}">
-    
     <style>
-        /* Quick select buttons styling */
-        .quick-date-btn {
+        /* Custom Select Dropdown - Match Sales Module */
+        .form-select-custom {
+            width: 220px;
+            height: 42px;
+            padding: 12px 36px 12px 16px;
+            border: none;
+            background-color: #ffffff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1f2937;
+            cursor: pointer;
+            outline: none;
             transition: all 0.2s ease;
-            font-size: 16px;
-            padding: 8px 0 !important;
-            border-radius: 0 !important;
-            background-color: transparent !important;
-            border: none !important;
-            color: #1f2937 !important;
-            font-weight: 600 !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231f2937' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
         }
         
-        .quick-date-btn:hover {
-            background-color: transparent !important;
-            color: #ec3737 !important;
-            border: none !important;
+        .form-select-custom:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        .quick-date-btn:active,
-        .quick-date-btn.active {
-            background-color: transparent !important;
-            color: #ec3737 !important;
-            border: none !important;
-        }
-        
-        /* Customer filter hover styling */
-        #customerFilterForm .btn-outline-secondary:hover {
-            background-color: #ec3737 !important;
-            border-color: #ec3737 !important;
-            color: #ffffff !important;
-        }
-        
-        #customerFilterForm .btn-outline-secondary:hover .text-secondary-light {
-            color: #ffffff !important;
-        }
-        
-        #customerFilterForm select.form-select:hover {
-            background-color: #ec3737 !important;
-            border-color: #ec3737 !important;
-            color: #ffffff !important;
-        }
-        
-        /* Select dropdown options styling */
-        #customerFilterForm select.form-select option {
-            background-color: #ffffff !important;
-            color: #1f2937 !important;
-            padding: 8px 12px;
-        }
-        
-        #customerFilterForm select.form-select option:hover {
-            background-color: #ec3737 !important;
-            color: #ffffff !important;
-        }
-        
-        #customerFilterForm select.form-select option:checked,
-        #customerFilterForm select.form-select option:focus {
-            background-color: #ec3737 !important;
-            color: #ffffff !important;
-        }
-        
-        /* Ensure Flatpickr calendar is visible - Match Goals Module */
-        #dateRangePicker .flatpickr-calendar {
-            display: block !important;
-            position: relative !important;
-            box-shadow: none !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            width: auto !important;
-            border: none !important;
-            background: transparent !important;
-        }
-        
-        .flatpickr-calendar.inline {
-            display: block !important;
-            position: relative !important;
-            box-shadow: none !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            border: none !important;
-        }
-        
-        /* Style for two-month display */
-        .flatpickr-months {
-            display: flex !important;
-            gap: 20px;
-        }
-        
-        /* Month navigation */
-        .flatpickr-month {
-            background: transparent !important;
-            color: #1f2937 !important;
-            height: auto !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-        }
-        
-        .flatpickr-current-month {
-            padding: 10px 0 !important;
-            font-size: 16px !important;
-            font-weight: 600 !important;
-            color: #1f2937 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: static !important;
-            width: auto !important;
-            transform: none !important;
-            height: auto !important;
-        }
-        
-        .flatpickr-monthDropdown-months {
-            font-weight: 600 !important;
-            color: #1f2937 !important;
-            background: transparent !important;
-            border: none !important;
-        }
-        
-        .numInputWrapper {
-            display: inline-block !important;
-        }
-        
-        .cur-year {
-            display: inline-block !important;
-            font-weight: 600 !important;
-            color: #1f2937 !important;
-        }
-        
-        .cur-year .numInput {
-            display: inline-block !important;
-            color: #1f2937 !important;
-            font-weight: 600 !important;
-        }
-        
-        /* Weekday headers */
-        .flatpickr-weekdays {
-            background: transparent !important;
-            height: 40px !important;
-            align-items: center !important;
-        }
-        
-        .flatpickr-weekday {
-            color: #6b7280 !important;
-            font-weight: 600 !important;
-            font-size: 13px !important;
-        }
-        
-        /* Day cells */
-        .flatpickr-days {
-            width: auto !important;
-        }
-        
-        .flatpickr-day {
-            color: #1f2937 !important;
-            border: none !important;
-            border-radius: 6px !important;
-            height: 36px !important;
-            line-height: 36px !important;
-            max-width: 36px !important;
-            font-weight: 500 !important;
-            margin: 2px !important;
-        }
-        
-        .flatpickr-day:hover {
-            background: #f3f4f6 !important;
-            border-color: transparent !important;
-        }
-        
-        /* Today - RED BRANDING */
-        .flatpickr-day.today {
-            border: 2px solid #ec3737 !important;
-            color: #ec3737 !important;
-            font-weight: 600 !important;
-        }
-        
-        .flatpickr-day.today:hover {
-            background: #fef2f2 !important;
-            border-color: #ec3737 !important;
-        }
-        
-        /* Selected and range - RED BRANDING */
-        .flatpickr-day.selected,
-        .flatpickr-day.startRange,
-        .flatpickr-day.endRange {
-            background: #ec3737 !important;
-            border-color: #ec3737 !important;
-            color: #ffffff !important;
-            font-weight: 600 !important;
-        }
-        
-        .flatpickr-day.selected:hover,
-        .flatpickr-day.startRange:hover,
-        .flatpickr-day.endRange:hover {
-            background: #d42f2f !important;
-            border-color: #d42f2f !important;
-        }
-        
-        .flatpickr-day.inRange {
-            background: #fee2e2 !important;
-            border-color: transparent !important;
-            color: #991b1b !important;
-            box-shadow: none !important;
-        }
-        
-        /* Disabled days */
-        .flatpickr-day.flatpickr-disabled,
-        .flatpickr-day.prevMonthDay,
-        .flatpickr-day.nextMonthDay {
-            color: #d1d5db !important;
-        }
-        
-        .flatpickr-day.flatpickr-disabled:hover {
-            background: transparent !important;
-            cursor: not-allowed !important;
-        }
-        
-        /* Ensure two months display side by side */
-        #dateRangePicker .flatpickr-months {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-        }
-        
-        /* Ensure calendar doesn't overflow */
-        #dateRangePicker {
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        #dateRangePicker .flatpickr-calendar.inline {
-            display: block !important;
-            position: static !important;
-            box-shadow: none !important;
-            width: auto !important;
-            max-width: none !important;
+        .form-select-custom:focus {
+            box-shadow: 0 0 0 3px rgba(236, 55, 55, 0.1);
         }
     </style>
     @endpush
@@ -260,7 +52,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-check-circle-fill me-2"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -268,79 +60,36 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
-        <!-- Date Range and Status Filter -->
-        <div class="card mb-24 border-0 shadow-sm">
-            <div class="card-body">
-                <form method="GET" action="{{ route('customers.index') }}" id="customerFilterForm">
-                    <div class="d-flex flex-wrap align-items-center gap-3">
-                        <!-- Date Range Picker with Dropdown -->
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-outline-secondary d-flex align-items-center gap-2 radius-8 px-16 py-11 dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" style="min-width: 280px;">
-                                <i class="bi bi-circle-fill"></i>
-                                <span id="dateRangeDisplay">
-                                    {{ $dateFrom && $dateTo ? \Carbon\Carbon::parse($dateFrom)->format('M d, Y') . ' - ' . \Carbon\Carbon::parse($dateTo)->format('M d, Y') : \Carbon\Carbon::now()->startOfMonth()->format('M d, Y') . ' - ' . \Carbon\Carbon::now()->format('M d, Y') }}
-                                </span>
-                            </button>
-                            <div class="dropdown-menu p-0" style="width: 800px; max-width: 95vw;" onclick="event.stopPropagation();">
-                                <div class="d-flex">
-                                    <!-- Quick Select Options -->
-                                    <div style="width: 160px; border-right: 1px solid #e5e7eb; padding: 16px 12px; flex-shrink: 0;">
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="today">Today</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="yesterday">Yesterday</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="this_week">This week</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="month_to_date">Month to date</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="this_month">This month</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="last_month">Last month</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="this_quarter">This quarter</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="this_year">This year</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="year_to_date">Year to date</button>
-                                        <button type="button" class="btn btn-sm btn-light w-100 text-start mb-2 quick-date-btn" data-range="last_year">Last year</button>
-                                    </div>
-                                    <!-- Calendar -->
-                                    <div style="flex: 1; padding: 16px; min-width: 0; overflow-x: auto;">
-                                        <div id="dateRangePicker"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Filters Section -->
+        <form method="GET" action="{{ route('customers.index') }}" id="customerFilterForm" class="mb-24 pb-24" style="border-bottom: 2px solid #e5e7eb;">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <!-- Date Range Filter -->
+                <x-filters.date-range 
+                    formId="customerFilterForm"
+                    :dateFrom="$dateFrom ?? ''"
+                    :dateTo="$dateTo ?? ''"
+                    :autoSubmit="false"
+                />
 
-                        <!-- Status Filter -->
-                        <div style="min-width: 200px;">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-circle-fill"></i>
-                                <select name="is_active" class="form-select radius-8 px-16 py-11" style="border: 1px solid #e5e7eb; min-width: 180px;">
-                                    <option value="">All Status</option>
-                                    <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>Active</option>
-                                    <option value="0" {{ request('is_active') === '0' ? 'selected' : '' }}>Inactive</option>
-                                </select>
-                            </div>
-                        </div>
+                <!-- Status Filter -->
+                <select name="is_active" class="form-select-custom">
+                    <option value="">All Status</option>
+                    <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>Active</option>
+                    <option value="0" {{ request('is_active') === '0' ? 'selected' : '' }}>Inactive</option>
+                </select>
 
-                        <!-- Hidden Inputs -->
-                        <input type="hidden" name="date_from" id="filter_date_from" value="{{ $dateFrom }}">
-                        <input type="hidden" name="date_to" id="filter_date_to" value="{{ $dateTo }}">
-
-                        <!-- Apply Filter Button -->
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2 ms-auto" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            <i class="bi bi-circle-fill"></i>
-                            <span>Apply Filter</span>
-                        </button>
-
-                        <!-- Reset Filter Button -->
-                        <a href="{{ route('customers.index') }}" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                            <i class="bi bi-circle-fill"></i>
-                            <span>Reset</span>
-                        </a>
-                    </div>
-                </form>
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn text-white d-flex align-items-center justify-content-center gap-2" style="background-color: #ec3737; height: 42px; padding: 0 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    Apply Filter
+                </button>
             </div>
-        </div>
+        </form>
 
         <!-- Summary Stats -->
         <div class="row gy-4 mb-24">
@@ -353,7 +102,7 @@
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ $customers->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-people-fill text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -368,7 +117,7 @@
                                 <h6 class="mb-0">{{ $customers->where('is_active', true)->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-check-circle-fill text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -383,7 +132,7 @@
                                 <h6 class="mb-0">{{ $customers->sum('sales_count') }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-cart-fill text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -398,7 +147,7 @@
                                 <h6 class="mb-0">{{ $customers->whereNotNull('email')->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-envelope-fill text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -421,11 +170,12 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search customers..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <i class="bi bi-circle-fill"></i>
+                            <i class="bi bi-search"></i>
                         </span>
                     </div>
                 </div>
                 <button type="button" id="addCustomerBtn" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    <i class="bi bi-person-plus-fill"></i>
                     Add New Customer
                 </button>
             </div>
@@ -484,16 +234,16 @@
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
                                         <button type="button" class="view-customer-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="View" data-customer-id="{{ $customer->id }}">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-eye-fill"></i>
                                         </button>
                                         <button type="button" class="edit-customer-btn fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle text-white border-0" style="background-color: #ec3737;" title="Edit" data-customer-id="{{ $customer->id }}" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-pencil-fill"></i>
                                         </button>
                                         <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle delete-btn border-0" title="Delete">
-                                                <i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-trash-fill"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -503,10 +253,10 @@
                             <tr>
                                 <td colspan="9" class="text-center py-48">
                                     <div class="d-flex flex-column align-items-center">
-                                        <i class="bi bi-circle-fill"></i>
+                                        <i class="bi bi-inbox text-secondary-light mb-16" style="font-size: 48px;"></i>
                                         <p class="text-secondary-light mb-16">No customers found</p>
                                         <button type="button" id="addFirstCustomerBtn" class="btn text-white px-20 py-11 radius-8" style="background-color: #ec3737;">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-person-plus-fill me-2"></i>
                                             Add Your First Customer
                                         </button>
                                     </div>
@@ -526,7 +276,7 @@
             <div class="modal-content radius-12">
                 <div class="modal-header border-bottom py-16 px-24" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);">
                     <h5 class="modal-title fw-bold mb-0" style="color: #ec3737;" id="addCustomerModalLabel">
-                       
+                        <i class="bi bi-person-plus-fill me-2"></i>
                         Add New Customer
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -598,7 +348,7 @@
             <div class="modal-content radius-12">
                 <div class="modal-header border-bottom py-16 px-24" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);">
                     <h5 class="modal-title fw-bold mb-0" style="color: #ec3737;" id="editCustomerModalLabel">
-                        
+                        <i class="bi bi-pencil-square me-2"></i>
                         Edit Customer
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -673,6 +423,7 @@
                 <div class="modal-header border-bottom py-16 px-24" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);">
                     <div>
                         <h5 class="modal-title fw-bold mb-0" style="color: #ec3737;" id="viewCustomerModalLabel">
+                            <i class="bi bi-person-circle me-2"></i>
                             Customer Details
                         </h5>
                         <p class="text-secondary-light mb-0 mt-1" style="font-size: 13px;" id="view_customer_name_subtitle"></p>
@@ -752,198 +503,70 @@
     </div>
 
     @push('scripts')
-    <!-- Flatpickr JS -->
-    <script src="{{ asset('assets/js/flatpickr.js') }}"></script>
-    
     <script>
         $(document).ready(function() {
-            // Initialize Flatpickr for inline calendar
-            let customerDateRangePicker = null;
-            const dropdownButton = $('#customerFilterForm .dropdown-toggle[data-bs-toggle="dropdown"]').first();
-            
-            // Initialize Flatpickr when dropdown is opened
-            dropdownButton.on('click', function() {
-                setTimeout(function() {
-                    if (!customerDateRangePicker) {
-                        console.log('Initializing Customer Date Range Picker...');
-                        
-                        const calendarElement = document.getElementById('dateRangePicker');
-                        if (calendarElement && typeof flatpickr !== 'undefined') {
-                            customerDateRangePicker = flatpickr(calendarElement, {
-                                mode: "range",
-                                inline: true,
-                                showMonths: 2,
-                                dateFormat: "Y-m-d",
-                                defaultDate: ['{{ $dateFrom }}', '{{ $dateTo }}'],
-                                onChange: function(selectedDates, dateStr, instance) {
-                                    console.log('Customer dates selected:', selectedDates);
-                                    if (selectedDates.length === 2) {
-                                        updateCustomerDateRange(selectedDates[0], selectedDates[1]);
-                                    }
-                                },
-                                onReady: function() {
-                                    console.log('Customer Flatpickr ready with', this.config.showMonths, 'months!');
-                                }
-                            });
-                            
-                            console.log('Customer Flatpickr instance created:', customerDateRangePicker);
-                        } else {
-                            console.error('Cannot initialize Customer Flatpickr:', {
-                                element: calendarElement,
-                                flatpickrAvailable: typeof flatpickr !== 'undefined'
-                            });
-                        }
-                    }
-                }, 100);
-            });
-
-            // Quick date range selection
-            $('.quick-date-btn').on('click', function() {
-                const range = $(this).data('range');
-                const dates = getCustomerDateRange(range);
-                
-                $('.quick-date-btn').removeClass('active');
-                $(this).addClass('active');
-                
-                if (customerDateRangePicker) {
-                    customerDateRangePicker.setDate([dates.from, dates.to]);
-                }
-                updateCustomerDateRange(dates.from, dates.to);
-            });
-
-            function getCustomerDateRange(range) {
-                const today = new Date();
-                let from, to;
-
-                switch(range) {
-                    case 'today':
-                        from = to = new Date();
-                        break;
-                    case 'yesterday':
-                        from = to = new Date(today.setDate(today.getDate() - 1));
-                        break;
-                    case 'this_week':
-                        from = new Date(today.setDate(today.getDate() - today.getDay()));
-                        to = new Date();
-                        break;
-                    case 'month_to_date':
-                    case 'this_month':
-                        from = new Date(today.getFullYear(), today.getMonth(), 1);
-                        to = new Date();
-                        break;
-                    case 'last_month':
-                        from = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-                        to = new Date(today.getFullYear(), today.getMonth(), 0);
-                        break;
-                    case 'this_quarter':
-                        const quarter = Math.floor(today.getMonth() / 3);
-                        from = new Date(today.getFullYear(), quarter * 3, 1);
-                        to = new Date(today.getFullYear(), (quarter + 1) * 3, 0);
-                        break;
-                    case 'this_year':
-                        from = new Date(today.getFullYear(), 0, 1);
-                        to = new Date(today.getFullYear(), 11, 31);
-                        break;
-                    case 'year_to_date':
-                        from = new Date(today.getFullYear(), 0, 1);
-                        to = new Date();
-                        break;
-                    case 'last_year':
-                        from = new Date(today.getFullYear() - 1, 0, 1);
-                        to = new Date(today.getFullYear() - 1, 11, 31);
-                        break;
-                }
-
-                return { from, to };
-            }
-
-            function updateCustomerDateRange(from, to) {
-                const fromDate = from instanceof Date ? from : new Date(from);
-                const toDate = to instanceof Date ? to : new Date(to);
-                
-                // Format dates for display
-                const options = { year: 'numeric', month: 'short', day: 'numeric' };
-                const fromStr = fromDate.toLocaleDateString('en-US', options);
-                const toStr = toDate.toLocaleDateString('en-US', options);
-                
-                // Update display
-                $('#dateRangeDisplay').text(fromStr + ' - ' + toStr);
-                
-                // Update hidden inputs
-                $('#filter_date_from').val(formatCustomerDate(fromDate));
-                $('#filter_date_to').val(formatCustomerDate(toDate));
-            }
-
-            function formatCustomerDate(date) {
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            }
-
-            // Only initialize DataTable if there are customers
+            // Initialize DataTable only if there are customers
             var hasCustomers = $("#customers-table tbody tr").length > 0 && !$("#customers-table tbody tr td[colspan]").length;
             
-            if (!hasCustomers) {
-                console.log("No customers to display, skipping DataTable initialization");
-                return;
+            if (hasCustomers) {
+                // Initialize DataTable
+                if ($.fn.DataTable.isDataTable("#customers-table")) {
+                    $("#customers-table").DataTable().destroy();
+                }
+
+                var table = $("#customers-table").DataTable({
+                    "paging": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "responsive": true,
+                    "autoWidth": false,
+                    "pageLength": 10,
+                    "lengthChange": false,
+                    "dom": '<"top">rt<"bottom"p><"clear">',
+                    "columns": [
+                        { "orderable": false, "searchable": false },  // 0 - No.
+                        { "orderable": true, "searchable": true },    // 1 - Customer Name
+                        { "orderable": true, "searchable": true },    // 2 - Email
+                        { "orderable": true, "searchable": true },    // 3 - Phone
+                        { "orderable": true, "searchable": true },    // 4 - Company
+                        { "orderable": true, "searchable": true },    // 5 - City
+                        { "orderable": true, "searchable": false },   // 6 - Sales Count
+                        { "orderable": true, "searchable": false },   // 7 - Status
+                        { "orderable": false, "searchable": false }   // 8 - Actions
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [6, 7, 8], // Center-aligned columns
+                            "className": "text-center"
+                        }
+                    ],
+                    "language": {
+                        "emptyTable": "No customers available",
+                        "zeroRecords": "No matching customers found",
+                        "paginate": {
+                            "first": "First",
+                            "last": "Last",
+                            "next": '<i class="bi bi-chevron-right"></i>',
+                            "previous": '<i class="bi bi-chevron-left"></i>'
+                        }
+                    },
+                    "order": [[1, "asc"]]
+                });
+
+                // Custom search
+                $("#search-input").on("keyup", function() {
+                    table.search(this.value).draw();
+                });
+
+                // Custom page length
+                $("#entries-per-page").on("change", function() {
+                    table.page.len(parseInt(this.value)).draw();
+                });
             }
 
-            // Initialize DataTable
-            if ($.fn.DataTable.isDataTable("#customers-table")) {
-                $("#customers-table").DataTable().destroy();
-            }
-
-            var table = $("#customers-table").DataTable({
-                "paging": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "responsive": true,
-                "autoWidth": false,
-                "pageLength": 10,
-                "lengthChange": false,
-                "dom": '<"top">rt<"bottom"p><"clear">',
-                "columns": [
-                    { "orderable": false, "searchable": false },  // 0 - No.
-                    { "orderable": true, "searchable": true },    // 1 - Customer Name
-                    { "orderable": true, "searchable": true },    // 2 - Email
-                    { "orderable": true, "searchable": true },    // 3 - Phone
-                    { "orderable": true, "searchable": true },    // 4 - Company
-                    { "orderable": true, "searchable": true },    // 5 - City
-                    { "orderable": true, "searchable": false },   // 6 - Sales Count
-                    { "orderable": true, "searchable": false },   // 7 - Status
-                    { "orderable": false, "searchable": false }   // 8 - Actions
-                ],
-                "columnDefs": [
-                    {
-                        "targets": [6, 7, 8], // Center-aligned columns
-                        "className": "text-center"
-                    }
-                ],
-                "language": {
-                    "emptyTable": "No customers available",
-                    "zeroRecords": "No matching customers found",
-                    "paginate": {
-                        "first": "First",
-                        "last": "Last",
-                        "next": '<i class="bi bi-chevron-right"></i>',
-                        "previous": '<i class="bi bi-chevron-left"></i>'
-                    }
-                },
-                "order": [[1, "asc"]]
-            });
-
-            // Custom search
-            $("#search-input").on("keyup", function() {
-                table.search(this.value).draw();
-            });
-
-            // Custom page length
-            $("#entries-per-page").on("change", function() {
-                table.page.len(parseInt(this.value)).draw();
-            });
-
+            // ========== MODAL HANDLERS (Always Available) ==========
+            
             // Open Add Customer Modal
             $("#addCustomerBtn, #addFirstCustomerBtn").on("click", function() {
                 $("#addCustomerForm")[0].reset();
@@ -1170,7 +793,7 @@
                 if (!sales || sales.length === 0) {
                     container.html(
                         '<div class="text-center py-32">' +
-                            '<i class="bi bi-circle-fill"></i>' +
+                            '<i class="bi bi-cart-x text-secondary-light mb-16" style="font-size: 48px;"></i>' +
                             '<p class="text-secondary-light mb-0">No sales found for this customer</p>' +
                         '</div>'
                     );

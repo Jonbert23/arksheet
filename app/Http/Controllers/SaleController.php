@@ -19,22 +19,25 @@ class SaleController extends Controller
     {
         $query = Sale::with('customer', 'salesChannel', 'saleItems.product');
 
+        // Date range filter
+        $dateFrom = $request->input('date_from', now()->startOfMonth()->format('Y-m-d'));
+        $dateTo = $request->input('date_to', now()->format('Y-m-d'));
+        
+        $query->whereBetween('date', [$dateFrom, $dateTo]);
+
         // Filter by customer
         if ($request->filled('customer_id')) {
             $query->where('customer_id', $request->customer_id);
         }
 
         // Filter by sales channel
-        if ($request->filled('sales_channel_id')) {
+        if ($request->filled('sales_channel_id') && $request->sales_channel_id !== 'all') {
             $query->where('sales_channel_id', $request->sales_channel_id);
         }
 
-        // Filter by date range
-        if ($request->filled('date_from')) {
-            $query->whereDate('date', '>=', $request->date_from);
-        }
-        if ($request->filled('date_to')) {
-            $query->whereDate('date', '<=', $request->date_to);
+        // Filter by payment status
+        if ($request->filled('payment_status') && $request->payment_status !== 'all') {
+            $query->where('payment_status', $request->payment_status);
         }
 
         // Get all sales (DataTables handles pagination)
@@ -43,7 +46,7 @@ class SaleController extends Controller
         $salesChannels = SalesChannel::active()->orderBy('name')->get();
         $products = Product::active()->orderBy('name')->get();
 
-        return view('sales.index', compact('sales', 'customers', 'salesChannels', 'products'));
+        return view('sales.index', compact('sales', 'customers', 'salesChannels', 'products', 'dateFrom', 'dateTo'));
     }
 
     /**

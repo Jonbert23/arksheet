@@ -28,19 +28,19 @@
                     <div class="card-header bg-neutral-50">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-box-seam text-primary"></i>
                                 <h6 class="card-title mb-0">Stock Entry Information</h6>
                             </div>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('stock.edit', $stock->id) }}" class="btn btn-sm btn-primary-600 hover-bg-primary-700 radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-pencil-square"></i>
                                     Edit
                                 </a>
                                 <form action="{{ route('stock.destroy', $stock->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this stock entry? This will reduce the product stock quantity.');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger-600 hover-bg-danger-700 radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                                        <i class="bi bi-circle-fill"></i>
+                                        <i class="bi bi-trash3"></i>
                                         Delete
                                     </button>
                                 </form>
@@ -53,7 +53,7 @@
                             <div class="col-12">
                                 <div class="p-16 bg-primary-50 radius-8">
                                     <div class="d-flex align-items-center gap-2 mb-12">
-                                        <i class="bi bi-circle-fill"></i>
+                                        <i class="bi bi-box-seam text-primary-600"></i>
                                         <h6 class="text-primary-600 mb-0">Product Information</h6>
                                     </div>
                                     <div class="row gy-2">
@@ -91,7 +91,7 @@
                             <div class="col-md-4">
                                 <label class="text-secondary-light text-sm">Quantity Received</label>
                                 <p class="text-dark fw-semibold mb-0 text-success-600">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-arrow-down-circle"></i>
                                     {{ $stock->quantity }} {{ $stock->product->unit ?? 'pcs' }}
                                 </p>
                             </div>
@@ -173,19 +173,19 @@
                     <div class="card-body">
                         <div class="d-flex flex-column gap-3">
                             <a href="{{ route('stock.edit', $stock->id) }}" class="btn btn-primary-600 hover-bg-primary-700 radius-8 px-20 py-11 d-flex align-items-center gap-2 w-100">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-pencil-square"></i>
                                 Edit Stock Entry
                             </a>
                             <a href="{{ route('products.show', $stock->product->id) }}" class="btn btn-info-600 hover-bg-info-700 radius-8 px-20 py-11 d-flex align-items-center gap-2 w-100">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-eye"></i>
                                 View Product
                             </a>
                             <a href="{{ route('stock.create') }}" class="btn btn-success-600 hover-bg-success-700 radius-8 px-20 py-11 d-flex align-items-center gap-2 w-100">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-plus-circle"></i>
                                 Add New Stock
                             </a>
                             <a href="{{ route('stock.index') }}" class="btn btn-neutral-600 hover-bg-neutral-700 radius-8 px-20 py-11 d-flex align-items-center gap-2 w-100">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-arrow-left"></i>
                                 Back to List
                             </a>
                         </div>

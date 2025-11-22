@@ -407,7 +407,7 @@ class ReportController extends Controller
             'active_customers' => $customersData->filter(fn($c) => $c['transaction_count'] > 0)->count(),
             'total_revenue' => $customersData->sum('total_sales'),
             'total_transactions' => $customersData->sum('transaction_count'),
-            'avg_transaction_value' => $customersData->count() > 0 ? $customersData->sum('total_sales') / $customersData->sum('transaction_count') : 0,
+            'avg_transaction_value' => $customersData->sum('transaction_count') > 0 ? $customersData->sum('total_sales') / $customersData->sum('transaction_count') : 0,
         ];
 
         // Daily trend - customer transactions per day

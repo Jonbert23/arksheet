@@ -16,8 +16,8 @@ class ExpenseController extends Controller
     {
         $query = Expense::with('category');
 
-        // Filter by category
-        if ($request->filled('category_id')) {
+        // Filter by category (exclude 'all')
+        if ($request->filled('category_id') && $request->category_id !== 'all') {
             $query->where('category_id', $request->category_id);
         }
 

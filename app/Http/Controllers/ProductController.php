@@ -231,6 +231,28 @@ class ProductController extends Controller
     }
 
     /**
+     * Load edit product form for modal
+     */
+    public function editForm(Product $product)
+    {
+        $businessId = auth()->user()->business_id;
+        
+        $categories = ProductCategory::where('business_id', $businessId)->active()->get();
+        $productTypes = BusinessSetting::where('business_id', $businessId)
+            ->where('setting_key', 'product_type')
+            ->active()
+            ->ordered()
+            ->get();
+        $units = BusinessSetting::where('business_id', $businessId)
+            ->where('setting_key', 'unit_of_measurement')
+            ->active()
+            ->ordered()
+            ->get();
+        
+        return view('products.partials.edit-form', compact('product', 'categories', 'productTypes', 'units'));
+    }
+
+    /**
      * Update the specified product
      */
     public function update(Request $request, Product $product)
@@ -244,6 +266,7 @@ class ProductController extends Controller
             'type' => 'required|string|max:50',
             'price' => 'required|numeric|min:0',
             'cost' => 'nullable|numeric|min:0',
+            'cost_per_unit' => 'nullable|numeric|min:0',
             'tax_amount' => 'nullable|numeric|min:0',
             'other_costs' => 'nullable|numeric|min:0',
             'stock_quantity' => 'nullable|integer|min:0',
@@ -252,7 +275,27 @@ class ProductController extends Controller
             'is_active' => 'boolean',
         ]);
 
+        // Set default values for nullable numeric fields
+        $validated['tax_amount'] = $validated['tax_amount'] ?? 0;
+        $validated['other_costs'] = $validated['other_costs'] ?? 0;
+        $validated['stock_quantity'] = $validated['stock_quantity'] ?? 0;
+        $validated['min_stock_alert'] = $validated['min_stock_alert'] ?? 0;
+        
+        // If cost is not provided, keep existing cost
+        if (!isset($validated['cost'])) {
+            $validated['cost'] = $product->cost;
+        }
+
         $product->update($validated);
+
+        // Return JSON response for AJAX requests
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Product updated successfully!',
+                'product' => $product
+            ]);
+        }
 
         return redirect()->route('products.index')
             ->with('success', 'Product updated successfully!');

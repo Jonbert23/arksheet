@@ -1,0 +1,77 @@
+/* Sales Module Custom Styles */
+
+/* DataTables Custom Styling */
+.dataTables_info {
+    padding-top: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dataTables_paginate {
+    padding-top: 0.75rem;
+}
+
+.dataTables_paginate .paginate_button {
+    padding: 0.375rem 0.75rem;
+    margin-left: 2px;
+    border-radius: 6px;
+    border: 1px solid #E0E0E0;
+    background: white;
+    color: #637381;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background: #f8f9fa;
+    border-color: #d0d0d0;
+    color: #212529;
+}
+
+.dataTables_paginate .paginate_button.current {
+    background: #487fff !important;
+    color: white !important;
+    border-color: #487fff !important;
+}
+
+.dataTables_paginate .paginate_button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Brand Color Focus States */
+.form-control:focus,
+.form-select:focus {
+    border-color: #ec3737 !important;
+    box-shadow: 0 0 0 0.2rem rgba(236, 55, 55, 0.15) !important;
+}
+
+/* Search input icon */
+.icon-field:focus-within .icon {
+    color: #ec3737 !important;
+}
+
+/* Hover effects for table rows */
+#sales-table tbody tr:hover {
+    background-color: #fff5f5 !important;
+    transition: background-color 0.2s ease;
+}
+
+/* DataTable pagination active state */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #ec3737 !important;
+    border-color: #ec3737 !important;
+    color: white !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: #d42f2f !important;
+    border-color: #d42f2f !important;
+    color: white !important;
+}
+
+/* Smooth transitions */
+.btn {
+    transition: all 0.3s ease;
+}
+

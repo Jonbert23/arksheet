@@ -23,7 +23,7 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-exclamation-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -39,7 +39,7 @@
                     <div class="card bg-warning-50 border border-warning-600">
                         <div class="card-body">
                             <div class="d-flex align-items-start gap-2">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-exclamation-triangle-fill text-warning-600"></i>
                                 <div>
                                     <h6 class="text-warning-600 mb-8">Important Notice</h6>
                                     <ul class="text-sm text-secondary-light mb-0 ps-16">
@@ -56,107 +56,128 @@
 
                 <!-- Stock Entry Information -->
                 <div class="col-lg-12">
-                    <div class="card mb-24">
-                        <div class="card-header bg-neutral-50">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-circle-fill"></i>
-                                <h6 class="card-title mb-0">Stock Entry Information</h6>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row gy-3">
-                                <!-- Product -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Select Product <span class="text-danger">*</span></label>
-                                    <select name="product_id" id="product_id" class="form-select select2-product @error('product_id') is-invalid @enderror" required>
-                                        <option value="">Search and select a product...</option>
-                                        @foreach($products as $product)
-                                            <option value="{{ $product->id }}" 
-                                                    data-unit="{{ $product->unit ?? 'pcs' }}"
-                                                    data-current-stock="{{ $product->stock_quantity }}"
-                                                    data-current-cost="{{ $product->cost }}"
-                                                    data-sku="{{ $product->sku ?? 'N/A' }}"
-                                                    data-name="{{ $product->name }}"
-                                                    {{ old('product_id', $stock->product_id) == $product->id ? 'selected' : '' }}>
-                                                {{ $product->name }} - {{ $product->sku ?? 'No SKU' }} (Current: {{ $product->stock_quantity }} {{ $product->unit ?? 'pcs' }})
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('product_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    <small class="text-secondary-light" id="product-info"></small>
+                    <div class="card mb-24 border-0 shadow-sm">
+                        <div class="card-body p-24">
+                            <!-- Stock Entry Details Section -->
+                            <div class="mb-24">
+                                <div class="d-flex align-items-center gap-2 mb-16">
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                        <i class="bi bi-box-seam text-white"></i>
+                                    </div>
+                                    <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Stock Entry Details</h6>
                                 </div>
+                                
+                                <div class="row gy-3">
+                                    <!-- Product -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">Select Product <span class="text-danger-600">*</span></label>
+                                        <select name="product_id" id="product_id" class="form-select radius-8 select2-product @error('product_id') is-invalid @enderror" required>
+                                            <option value="">Search and select a product...</option>
+                                            @foreach($products as $product)
+                                                <option value="{{ $product->id }}" 
+                                                        data-unit="{{ $product->unit ?? 'pcs' }}"
+                                                        data-current-stock="{{ $product->stock_quantity }}"
+                                                        data-current-cost="{{ $product->cost }}"
+                                                        data-sku="{{ $product->sku ?? 'N/A' }}"
+                                                        data-name="{{ $product->name }}"
+                                                        {{ old('product_id', $stock->product_id) == $product->id ? 'selected' : '' }}>
+                                                    {{ $product->name }} - {{ $product->sku ?? 'No SKU' }} (Current: {{ $product->stock_quantity }} {{ $product->unit ?? 'pcs' }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('product_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <small class="text-secondary-light d-block mt-4" style="font-size: 12px;" id="product-info"></small>
+                                    </div>
 
-                                <!-- Date -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Date Received <span class="text-danger">*</span></label>
-                                    <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date', $stock->date->format('Y-m-d')) }}" required>
-                                    @error('date')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                    <!-- Date -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">Date Received <span class="text-danger-600">*</span></label>
+                                        <input type="date" name="date" class="form-control radius-8 @error('date') is-invalid @enderror" value="{{ old('date', $stock->date->format('Y-m-d')) }}" required>
+                                        @error('date')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
-                                <!-- Quantity -->
-                                <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Quantity <span class="text-danger">*</span></label>
-                                    <input type="number" name="quantity" id="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="0" value="{{ old('quantity', $stock->quantity) }}" min="1" required>
-                                    @error('quantity')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    <small class="text-secondary-light">
-                                        <i class="bi bi-circle-fill"></i>
-                                        <span id="unit-label">Units received</span>
-                                    </small>
-                                </div>
+                                    <!-- Quantity -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">Quantity <span class="text-danger-600">*</span></label>
+                                        <input type="number" name="quantity" id="quantity" class="form-control radius-8 @error('quantity') is-invalid @enderror" placeholder="0" value="{{ old('quantity', $stock->quantity) }}" min="1" required>
+                                        @error('quantity')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <small class="text-secondary-light d-block mt-4" style="font-size: 12px;">
+                                            <span id="unit-label">Units received</span>
+                                        </small>
+                                    </div>
 
-                                <!-- Cost Per Unit -->
-                                <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Cost Per Unit <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-warning-50 text-warning-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
-                                        <input type="number" name="cost_per_unit" id="cost_per_unit" step="0.01" class="form-control @error('cost_per_unit') is-invalid @enderror" placeholder="0.00" value="{{ old('cost_per_unit', $stock->cost_per_unit) }}" min="0" required>
-                                        @error('cost_per_unit')
+                                    <!-- Reference Number -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">Reference / PO Number</label>
+                                        <input type="text" name="reference_number" class="form-control radius-8 @error('reference_number') is-invalid @enderror" placeholder="PO-12345, INV-67890..." value="{{ old('reference_number', $stock->reference_number) }}">
+                                        @error('reference_number')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Supplier -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">Supplier</label>
+                                        <input type="text" name="supplier" class="form-control radius-8 @error('supplier') is-invalid @enderror" placeholder="Supplier name or company" value="{{ old('supplier', $stock->supplier) }}">
+                                        @error('supplier')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Total Cost (Auto-calculated) -->
-                                <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Total Cost</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-success-50 text-success-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
-                                        <input type="text" id="total_cost_display" class="form-control fw-semibold text-success-600" placeholder="0.00" readonly>
+                            <!-- Cost Information Section -->
+                            <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                                <div class="d-flex align-items-center gap-2 mb-16">
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                        <i class="bi bi-currency-dollar text-white"></i>
                                     </div>
-                                    <small class="text-secondary-light">
-                                        <i class="bi bi-circle-fill"></i>
-                                        Automatically calculated
-                                    </small>
+                                    <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Cost Information</h6>
                                 </div>
+                                
+                                <div class="row gy-3">
+                                    <!-- Cost Per Unit -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">Cost Per Unit <span class="text-danger-600">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-warning-50 text-warning-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
+                                            <input type="number" name="cost_per_unit" id="cost_per_unit" step="0.01" class="form-control radius-8 @error('cost_per_unit') is-invalid @enderror" placeholder="0.00" value="{{ old('cost_per_unit', $stock->cost_per_unit) }}" min="0" required>
+                                            @error('cost_per_unit')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
 
-                                <!-- Reference Number -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Reference / PO Number</label>
-                                    <input type="text" name="reference_number" class="form-control @error('reference_number') is-invalid @enderror" placeholder="PO-12345, INV-67890, etc." value="{{ old('reference_number', $stock->reference_number) }}">
-                                    @error('reference_number')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <!-- Total Cost (Auto-calculated) -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">Total Cost</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-success-50 text-success-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
+                                            <input type="text" id="total_cost_display" class="form-control radius-8 fw-semibold text-success-600" placeholder="0.00" readonly>
+                                        </div>
+                                        <small class="text-secondary-light d-block mt-4" style="font-size: 12px;">Auto-calculated (Quantity × Cost Per Unit)</small>
+                                    </div>
                                 </div>
+                            </div>
 
-                                <!-- Supplier -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Supplier</label>
-                                    <input type="text" name="supplier" class="form-control @error('supplier') is-invalid @enderror" placeholder="Supplier name or company" value="{{ old('supplier', $stock->supplier) }}">
-                                    @error('supplier')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                            <!-- Notes Section -->
+                            <div class="pt-24" style="border-top: 1px solid #e5e7eb;">
+                                <div class="d-flex align-items-center gap-2 mb-16">
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                        <i class="bi bi-sticky text-white"></i>
+                                    </div>
+                                    <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Additional Notes</h6>
                                 </div>
-
-                                <!-- Notes -->
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Notes</label>
-                                    <textarea name="notes" rows="3" class="form-control @error('notes') is-invalid @enderror" placeholder="Additional information about this stock entry...">{{ old('notes', $stock->notes) }}</textarea>
+                                
+                                <div>
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">Notes (Optional)</label>
+                                    <textarea name="notes" rows="3" class="form-control radius-8 @error('notes') is-invalid @enderror" style="resize: vertical;" placeholder="Additional information about this stock entry...">{{ old('notes', $stock->notes) }}</textarea>
                                     @error('notes')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -172,16 +193,16 @@
                         <div class="card-body p-24">
                             <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
                                 <div class="text-secondary-light">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-info-circle text-primary"></i>
                                     <span class="ms-2">Fields marked with <span class="text-danger fw-semibold">*</span> are required</span>
                                 </div>
                                 <div class="d-flex align-items-center gap-3">
-                                    <a href="{{ route('stock.show', $stock->id) }}" class="btn bg-neutral-200 text-neutral-900 hover-bg-neutral-300 radius-8 px-32 py-14 d-flex align-items-center gap-2 fw-semibold">
-                                        <i class="bi bi-circle-fill"></i>
+                                    <a href="{{ route('stock.show', $stock->id) }}" class="btn btn-outline-secondary radius-8 px-20 py-11">
+                                        <i class="bi bi-x-circle"></i>
                                         Cancel
                                     </a>
-                                    <button type="submit" class="btn btn-primary-600 hover-bg-primary-700 radius-8 px-32 py-14 d-flex align-items-center gap-2 fw-semibold shadow-sm">
-                                        <i class="bi bi-circle-fill"></i>
+                                    <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                                        <i class="bi bi-check-circle"></i>
                                         Update Stock Entry
                                     </button>
                                 </div>
@@ -368,8 +389,8 @@
                 // Show product info
                 if (selectedOption.val()) {
                     $("#product-info").html(
-                        '<i class="bi bi-circle-fill"></i>' +
-                        'Current stock: <strong>' + currentStock + ' ' + unit + '</strong> | Current cost: <strong>₱ ' + currentCost.toFixed(2) + '</strong>'
+                        '<i class="bi bi-info-circle text-primary"></i>' +
+                        ' Current stock: <strong>' + currentStock + ' ' + unit + '</strong> | Current cost: <strong>₱ ' + currentCost.toFixed(2) + '</strong>'
                     );
                 } else {
                     $("#product-info").html("");

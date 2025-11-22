@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
     // Products Module
     Route::middleware('module.permission:products')->group(function () {
         Route::get('products/create-form', [ProductController::class, 'createForm'])->name('products.create.form');
+        Route::get('products/{product}/edit-form', [ProductController::class, 'editForm'])->name('products.edit.form');
         Route::resource('products', ProductController::class);
     });
     

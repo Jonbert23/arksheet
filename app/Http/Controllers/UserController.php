@@ -42,10 +42,10 @@ class UserController extends Controller
         }
 
         // Filter by status
-        if ($request->filled('is_active')) {
+        if ($request->filled('is_active') && $request->is_active !== 'all') {
             if ($request->is_active === '1' || $request->is_active === 'active') {
                 $query->where('is_active', true);
-            } else {
+            } else if ($request->is_active === '0' || $request->is_active === 'inactive') {
                 $query->where('is_active', false);
             }
         }

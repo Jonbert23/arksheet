@@ -55,18 +55,18 @@ class SalesChannelSeeder extends Seeder
         foreach ($businesses as $business) {
             $this->command->info("Seeding sales channels for: {$business->name}");
 
-            foreach ($channels as $channel) {
+        foreach ($channels as $channel) {
                 SalesChannel::firstOrCreate(
                     [
-                        'business_id' => $business->id,
+                'business_id' => $business->id,
                         'name' => $channel['name'],
                     ],
                     [
                         'description' => $channel['description'],
-                        'is_active' => true,
+                'is_active' => true,
                     ]
                 );
-            }
+        }
 
             $this->command->info("  ✓ Created " . count($channels) . " sales channels");
         }

@@ -1,5 +1,40 @@
 <x-layout.master>
 
+    @push('styles')
+    <style>
+        /* Custom Select Dropdown Styling */
+        .form-select-custom {
+            width: 220px;
+            height: 42px;
+            padding: 12px 36px 12px 16px;
+            border: none;
+            background-color: #ffffff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1f2937;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231f2937' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        
+        .form-select-custom:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-select-custom:focus {
+            box-shadow: 0 0 0 3px rgba(236, 55, 55, 0.1);
+        }
+    </style>
+    @endpush
+
     <div class="dashboard-main-body">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
             <h6 class="fw-semibold mb-0">Stock Management</h6>
@@ -17,7 +52,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-check-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -25,11 +60,37 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-exclamation-circle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+
+        <!-- Date Range and Filters -->
+        <form method="GET" action="{{ route('stock.index') }}" id="stockFilterForm" class="mb-24 pb-24" style="border-bottom: 2px solid #e5e7eb;">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <!-- Date Range Filter -->
+                <x-filters.date-range 
+                    form-id="stockFilterForm"
+                    :date-from="request('date_from', now()->startOfMonth()->format('Y-m-d'))"
+                    :date-to="request('date_to', now()->format('Y-m-d'))"
+                    :auto-submit="false"
+                />
+
+                <!-- Product Filter -->
+                <select name="product_id" class="form-select-custom">
+                    <option value="all">All Products</option>
+                    @foreach($products as $product)
+                    <option value="{{ $product->id }}" {{ request('product_id') == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
+                    @endforeach
+                </select>
+
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn text-white d-flex align-items-center justify-content-center gap-2" style="background-color: #ec3737; height: 42px; padding: 0 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    Apply Filter
+                </button>
+            </div>
+        </form>
 
         <!-- Summary Stats (Dashboard Style) -->
         <div class="row gy-4 mb-24">
@@ -42,7 +103,7 @@
                                 <h6 class="mb-0 fw-bold" style="color: #ec3737; font-size: 1.5rem;">{{ $stockIns->count() }}</h6>
                             </div>
                             <div class="w-50-px h-50-px rounded-circle d-flex justify-content-center align-items-center" style="background-color: #ec3737;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-boxes text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -57,7 +118,7 @@
                                 <h6 class="mb-0">{{ number_format($stockIns->sum('quantity')) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-arrow-down-circle text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -72,7 +133,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($stockIns->sum('total_cost'), 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-warning-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-currency-dollar text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -87,7 +148,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ $stockIns->count() > 0 ? number_format($stockIns->avg('cost_per_unit'), 2) : '0.00' }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-calculator text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -110,12 +171,12 @@
                     <div class="icon-field">
                         <input type="text" name="search" class="form-control form-control-sm w-auto" placeholder="Search stock entries..." id="search-input">
                         <span class="icon" style="color: #ec3737;">
-                            <i class="bi bi-circle-fill"></i>
+                            <i class="bi bi-search"></i>
                         </span>
                     </div>
                 </div>
                 <a href="{{ route('stock.create') }}" class="btn text-white text-sm btn-sm px-20 py-12 radius-8 d-flex align-items-center gap-2 fw-bold shadow-sm" style="background-color: #ec3737; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                    <i class="bi bi-circle-fill"></i>
+                    <i class="bi bi-plus-circle"></i>
                     Add Stock
                 </a>
             </div>
@@ -183,17 +244,32 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="d-flex align-items-center gap-6 justify-content-center">
-                                        <a href="{{ route('stock.show', $stockIn->id) }}" class="bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle" title="View">
-                                            <i class="bi bi-circle-fill"></i>
-                                        </a>
+                                        <button type="button" class="view-stock-btn bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" 
+                                            title="View"
+                                            data-stock-id="{{ $stockIn->id }}"
+                                            data-product-name="{{ $stockIn->product->name }}"
+                                            data-product-sku="{{ $stockIn->product->sku ?? 'N/A' }}"
+                                            data-product-unit="{{ $stockIn->product->unit ?? 'pcs' }}"
+                                            data-date="{{ $stockIn->date->format('F d, Y') }}"
+                                            data-quantity="{{ $stockIn->quantity }}"
+                                            data-reference="{{ $stockIn->reference_number ?? 'N/A' }}"
+                                            data-supplier="{{ $stockIn->supplier ?? 'N/A' }}"
+                                            data-cost-per-unit="{{ $stockIn->cost_per_unit }}"
+                                            data-total-cost="{{ $stockIn->total_cost }}"
+                                            data-shipping="{{ $stockIn->shipping_cost ?? 0 }}"
+                                            data-duties="{{ $stockIn->import_duties ?? 0 }}"
+                                            data-other-costs="{{ $stockIn->other_costs ?? 0 }}"
+                                            data-notes="{{ $stockIn->notes ?? 'No notes' }}">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
                                         <button type="button" class="edit-stock-btn bg-success-focus text-success-600 bg-hover-success-200 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle border-0" title="Edit">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-pencil-square"></i>
                                         </button>
                                         <form action="{{ route('stock.destroy', $stockIn->id) }}" method="POST" class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-32-px h-32-px d-flex justify-content-center align-items-center rounded-circle delete-btn border-0" title="Delete">
-                                                <i class="bi bi-circle-fill"></i>
+                                                <i class="bi bi-trash3"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -222,24 +298,21 @@
 
     <!-- Edit Stock Modal -->
     <div class="modal fade" id="editStockModal" tabindex="-1" aria-labelledby="editStockModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content radius-12">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
                 <form action="" method="POST" id="editStockForm">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="product_id" id="edit_product_id">
                     
-                    <div class="modal-header border-bottom py-16 px-24">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="w-40-px h-40-px bg-success-100 text-success-600 rounded-circle d-flex align-items-center justify-content-center">
-                                <i class="bi bi-circle-fill"></i>
-                            </div>
-                            <div>
-                                <h5 class="modal-title fw-bold mb-0" id="editStockModalLabel">Edit Stock Entry</h5>
-                                <p class="text-secondary-light mb-0" style="font-size: 13px;" id="edit_product_name_display">-</p>
-                            </div>
+                    <div class="modal-header" style="background: linear-gradient(135deg, #ec3737 0%, #d42f2f 100%);">
+                        <div>
+                            <h5 class="modal-title text-white fw-bold mb-1" id="editStockModalLabel" style="font-size: 18px !important;">
+                                Edit Stock Entry
+                            </h5>
+                            <p class="text-white mb-0" style="font-size: 13px; opacity: 0.9;" id="edit_product_name_display">-</p>
                         </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
                     <div class="modal-body px-24 py-24">
@@ -267,122 +340,159 @@
                             </div>
                         </div>
 
-                        <!-- Stock Entry Form -->
-                        <div class="row g-4">
-                            <!-- Date -->
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                    Date Received <span class="text-danger">*</span>
-                                </label>
-                                <input type="date" name="date" id="edit_date" class="form-control" style="height: 44px;" required>
+                        <!-- Stock Entry Details Section -->
+                        <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                            <div class="d-flex align-items-center gap-2 mb-16">
+                                <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                    <i class="bi bi-box-seam text-white"></i>
+                                </div>
+                                <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Stock Details</h6>
                             </div>
+                            
+                            <div class="row g-4">
+                                <!-- Date -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                        Date Received <span class="text-danger-600">*</span>
+                                    </label>
+                                    <input type="date" name="date" id="edit_date" class="form-control radius-8" required>
+                                </div>
 
-                            <!-- Quantity -->
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                    Quantity <span class="text-danger">*</span>
-                                </label>
-                                <input type="number" name="quantity" id="edit_quantity" class="form-control" style="height: 44px;" placeholder="0" min="1" required>
-                                <small class="text-secondary-light d-block mt-4" style="font-size: 12px;" id="edit_unit_label">Units</small>
-                            </div>
+                                <!-- Quantity -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                        Quantity <span class="text-danger-600">*</span>
+                                    </label>
+                                    <input type="number" name="quantity" id="edit_quantity" class="form-control radius-8" placeholder="0" min="1" required>
+                                    <small class="text-secondary-light d-block mt-4" style="font-size: 12px;" id="edit_unit_label">Units</small>
+                                </div>
 
-                            <!-- Reference Number -->
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                    Reference / PO Number
-                                </label>
-                                <input type="text" name="reference_number" id="edit_reference" class="form-control" style="height: 44px;" placeholder="PO-12345, INV-67890...">
-                            </div>
+                                <!-- Reference Number -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                        Reference / PO Number
+                                    </label>
+                                    <input type="text" name="reference_number" id="edit_reference" class="form-control radius-8" placeholder="PO-12345, INV-67890...">
+                                </div>
 
-                            <!-- Supplier -->
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                    Supplier
-                                </label>
-                                <input type="text" name="supplier" id="edit_supplier" class="form-control" style="height: 44px;" placeholder="Supplier name or company">
-                            </div>
-
-                            <!-- Cost Per Unit -->
-                            <div class="col-md-12">
-                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                    Cost Per Unit <span class="text-danger">*</span>
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-warning-50 text-warning-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
-                                    <input type="number" name="cost_per_unit" id="edit_cost_per_unit" step="0.01" class="form-control" style="height: 44px;" placeholder="0.00" min="0" required>
+                                <!-- Supplier -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                        Supplier
+                                    </label>
+                                    <input type="text" name="supplier" id="edit_supplier" class="form-control radius-8" placeholder="Supplier name or company">
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Additional Costs Section -->
-                            <div class="col-12">
-                                <div class="p-16 bg-white border radius-8">
-                                    <h6 class="fw-bold mb-12" style="font-size: 18px !important; color: #212529;">Additional Costs (Optional)</h6>
-                                    <div class="row g-3">
-                                        <!-- Shipping/Freight Cost -->
-                                        <div class="col-md-4">
-                                            <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                                Shipping/Freight
-                                            </label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
-                                                <input type="number" name="shipping_cost" id="edit_shipping_cost" step="0.01" class="form-control" style="height: 44px;" placeholder="0.00" value="0" min="0">
-                                            </div>
-                                        </div>
+                        <!-- Cost Information Section -->
+                        <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                            <div class="d-flex align-items-center gap-2 mb-16">
+                                <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                    <i class="bi bi-currency-dollar text-white"></i>
+                                </div>
+                                <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Cost Information</h6>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <!-- Cost Per Unit -->
+                                <div class="col-md-12">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                        Cost Per Unit <span class="text-danger-600">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-warning-50 text-warning-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
+                                        <input type="number" name="cost_per_unit" id="edit_cost_per_unit" step="0.01" class="form-control radius-8" placeholder="0.00" min="0" required>
+                                    </div>
+                                </div>
 
-                                        <!-- Import Duties/Taxes -->
-                                        <div class="col-md-4">
-                                            <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                                Import Duties/Taxes
-                                            </label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
-                                                <input type="number" name="import_duties" id="edit_import_duties" step="0.01" class="form-control" style="height: 44px;" placeholder="0.00" value="0" min="0">
-                                            </div>
-                                        </div>
+                                <!-- Additional Costs Collapsible -->
+                                <div class="col-12">
+                                    <button class="btn btn-outline-danger btn-sm radius-8 mb-12 d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#editAdditionalCostsCollapse" aria-expanded="false" style="border-color: #ec3737; color: #ec3737;">
+                                        <i class="bi bi-plus-circle"></i>
+                                        <span>Add Additional Costs (Optional)</span>
+                                    </button>
+                                    
+                                    <div class="collapse" id="editAdditionalCostsCollapse">
+                                        <div class="p-16 bg-neutral-50 radius-8">
+                                            <div class="row g-3">
+                                                <!-- Shipping/Freight Cost -->
+                                                <div class="col-md-4">
+                                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                                        Shipping/Freight
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
+                                                        <input type="number" name="shipping_cost" id="edit_shipping_cost" step="0.01" class="form-control radius-8" placeholder="0.00" value="0" min="0">
+                                                    </div>
+                                                </div>
 
-                                        <!-- Other Transaction Costs -->
-                                        <div class="col-md-4">
-                                            <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                                Other Costs
-                                            </label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
-                                                <input type="number" name="other_transaction_costs" id="edit_other_costs" step="0.01" class="form-control" style="height: 44px;" placeholder="0.00" value="0" min="0">
+                                                <!-- Import Duties/Taxes -->
+                                                <div class="col-md-4">
+                                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                                        Import Duties/Taxes
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
+                                                        <input type="number" name="import_duties" id="edit_import_duties" step="0.01" class="form-control radius-8" placeholder="0.00" value="0" min="0">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Other Transaction Costs -->
+                                                <div class="col-md-4">
+                                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                                        Other Costs
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">{{ auth()->user()->business->currency }}</span>
+                                                        <input type="number" name="other_transaction_costs" id="edit_other_costs" step="0.01" class="form-control radius-8" placeholder="0.00" value="0" min="0">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Total Cost -->
-                            <div class="col-md-12">
-                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                    Total Cost
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-success-50 text-success-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
-                                    <input type="text" id="edit_total_cost" class="form-control fw-semibold text-success-600" style="height: 44px;" placeholder="0.00" readonly>
+                                <!-- Total Cost -->
+                                <div class="col-md-12">
+                                    <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                        Total Cost
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-success-50 text-success-600 fw-semibold">{{ auth()->user()->business->currency }}</span>
+                                        <input type="text" id="edit_total_cost" class="form-control radius-8 fw-semibold text-success-600" placeholder="0.00" readonly>
+                                    </div>
+                                    <small class="text-secondary-light d-block mt-4" style="font-size: 12px;">Auto-calculated (Base Cost + Additional Costs)</small>
                                 </div>
-                                <small class="text-secondary-light d-block mt-4" style="font-size: 12px;">Auto-calculated (Base Cost + Additional Costs)</small>
                             </div>
+                        </div>
 
-                            <!-- Notes -->
-                            <div class="col-12">
-                                <label class="form-label fw-semibold text-dark mb-8" style="font-size: 14px;">
-                                    Notes
+                        <!-- Notes Section -->
+                        <div class="pt-24" style="border-top: 1px solid #e5e7eb;">
+                            <div class="d-flex align-items-center gap-2 mb-16">
+                                <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                    <i class="bi bi-sticky text-white"></i>
+                                </div>
+                                <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Additional Notes</h6>
+                            </div>
+                            
+                            <div>
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Notes (Optional)
                                 </label>
-                                <textarea name="notes" id="edit_notes" rows="3" class="form-control" style="resize: vertical;" placeholder="Additional information..."></textarea>
+                                <textarea name="notes" id="edit_notes" rows="3" class="form-control radius-8" style="resize: vertical;" placeholder="Additional information about this stock entry..."></textarea>
                             </div>
                         </div>
                     </div>
                     
                     <div class="modal-footer border-top py-16 px-24 bg-white">
                         <div class="d-flex align-items-center justify-content-end gap-3 w-100">
-                            <button type="button" class="btn text-secondary-light border border-neutral-200 hover-bg-neutral-100 radius-8 px-20 py-11" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11" data-bs-dismiss="modal">
+                                <i class="bi bi-x-circle"></i>
                                 Cancel
                             </button>
-                            <button type="submit" class="btn btn-success-600 radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                                <i class="bi bi-circle-fill"></i>
+                            <button type="submit" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                                <i class="bi bi-check-circle"></i>
                                 Update Stock Entry
                             </button>
                         </div>
@@ -392,10 +502,150 @@
         </div>
     </div>
 
+    <!-- View Stock Modal -->
+    <div class="modal fade" id="viewStockModal" tabindex="-1" aria-labelledby="viewStockModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #ec3737 0%, #d42f2f 100%);">
+                    <div>
+                        <h5 class="modal-title text-white fw-bold mb-1" id="viewStockModalLabel" style="font-size: 18px !important;">
+                            Stock Entry Details
+                        </h5>
+                        <p class="text-white mb-0" style="font-size: 13px; opacity: 0.9;" id="view_product_name_display">-</p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body px-24 py-24">
+                    <!-- Product Info Display -->
+                    <div class="mb-24">
+                        <div class="row g-3">
+                            <div class="col-md-4 col-6">
+                                <div class="p-16 bg-neutral-50 radius-8 h-100">
+                                    <span class="d-block text-secondary-light mb-8" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;">Product</span>
+                                    <p class="text-dark fw-bold mb-0" style="font-size: 18px !important;" id="view-product-name">-</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6">
+                                <div class="p-16 bg-neutral-50 radius-8 h-100">
+                                    <span class="d-block text-secondary-light mb-8" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;">SKU</span>
+                                    <p class="text-dark fw-bold mb-0" style="font-size: 16px !important;" id="view-product-sku">-</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6">
+                                <div class="p-16 bg-neutral-50 radius-8 h-100">
+                                    <span class="d-block text-secondary-light mb-8" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;">Unit</span>
+                                    <p class="text-dark fw-bold mb-0" style="font-size: 18px !important;" id="view-product-unit">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stock Details Section -->
+                    <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                        <div class="d-flex align-items-center gap-2 mb-16">
+                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-box-seam text-white"></i>
+                            </div>
+                            <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Stock Information</h6>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Date Received</label>
+                                <p class="text-dark mb-0" id="view-date">-</p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Quantity Received</label>
+                                <p class="text-success-600 fw-bold mb-0" id="view-quantity">-</p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Reference / PO Number</label>
+                                <p class="text-dark mb-0" id="view-reference">-</p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Supplier</label>
+                                <p class="text-dark mb-0" id="view-supplier">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cost Information Section -->
+                    <div class="mb-24 pt-24" style="border-top: 1px solid #e5e7eb;">
+                        <div class="d-flex align-items-center gap-2 mb-16">
+                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-currency-dollar text-white"></i>
+                            </div>
+                            <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Cost Details</h6>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Cost Per Unit</label>
+                                <p class="text-dark fw-bold mb-0" id="view-cost-per-unit">-</p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Total Cost</label>
+                                <p class="text-success-600 fw-bold mb-0" id="view-total-cost">-</p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Shipping Cost</label>
+                                <p class="text-dark mb-0" id="view-shipping">-</p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Import Duties</label>
+                                <p class="text-dark mb-0" id="view-duties">-</p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Other Costs</label>
+                                <p class="text-dark mb-0" id="view-other-costs">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notes Section -->
+                    <div class="pt-24" style="border-top: 1px solid #e5e7eb;">
+                        <div class="d-flex align-items-center gap-2 mb-16">
+                            <div class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #ec3737; border-radius: 8px;">
+                                <i class="bi bi-sticky text-white"></i>
+                            </div>
+                            <h6 class="mb-0 fw-bold" style="color: #4b5563; font-size: 18px !important;">Additional Notes</h6>
+                        </div>
+                        
+                        <div>
+                            <p class="text-dark mb-0" id="view-notes" style="white-space: pre-wrap;">-</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer border-top py-16 px-24 bg-white">
+                    <div class="d-flex align-items-center justify-content-end gap-3 w-100">
+                        <button type="button" class="btn btn-outline-secondary radius-8 px-20 py-11" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Close
+                        </button>
+                        <a href="#" id="view-edit-link" class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                            <i class="bi bi-pencil-square"></i>
+                            Edit Stock
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @php
         $hasStockEntries = $stockIns->count() > 0;
         $script = '<script>
-            $(document).ready(function() {';
+            $(document).ready(function() {
+';
         
         if ($hasStockEntries) {
             $script .= '
@@ -493,6 +743,51 @@
 
                 // Edit Stock Modal Handler
                 function bindEditHandlers() {
+                    // View stock button click handler
+                    $(".view-stock-btn").off("click").on("click", function(e) {
+                        e.preventDefault();
+                        
+                        var $btn = $(this);
+                        var stockId = $btn.data("stock-id");
+                        var productName = $btn.data("product-name");
+                        var productSku = $btn.data("product-sku");
+                        var productUnit = $btn.data("product-unit");
+                        var date = $btn.data("date");
+                        var quantity = $btn.data("quantity");
+                        var reference = $btn.data("reference");
+                        var supplier = $btn.data("supplier");
+                        var costPerUnit = parseFloat($btn.data("cost-per-unit"));
+                        var totalCost = parseFloat($btn.data("total-cost"));
+                        var shipping = parseFloat($btn.data("shipping"));
+                        var duties = parseFloat($btn.data("duties"));
+                        var otherCosts = parseFloat($btn.data("other-costs"));
+                        var notes = $btn.data("notes");
+                        
+                        var currency = "' . auth()->user()->business->currency . '";
+                        
+                        // Populate modal fields
+                        $("#view_product_name_display").text(productName + " - " + productSku);
+                        $("#view-product-name").text(productName);
+                        $("#view-product-sku").text(productSku);
+                        $("#view-product-unit").text(productUnit);
+                        $("#view-date").text(date);
+                        $("#view-quantity").text(quantity + " " + productUnit);
+                        $("#view-reference").text(reference);
+                        $("#view-supplier").text(supplier);
+                        $("#view-cost-per-unit").text(currency + " " + costPerUnit.toFixed(2));
+                        $("#view-total-cost").text(currency + " " + totalCost.toFixed(2));
+                        $("#view-shipping").text(currency + " " + shipping.toFixed(2));
+                        $("#view-duties").text(currency + " " + duties.toFixed(2));
+                        $("#view-other-costs").text(currency + " " + otherCosts.toFixed(2));
+                        $("#view-notes").text(notes);
+                        
+                        // Set edit link
+                        $("#view-edit-link").attr("href", "/stock/" + stockId + "/edit");
+                        
+                        // Show modal
+                        $("#viewStockModal").modal("show");
+                    });
+                    
                     $(".edit-stock-btn").off("click").on("click", function(e) {
                         e.preventDefault();
                         
@@ -569,8 +864,6 @@
                 }, 5000);
             });
         </script>';
-        
-        echo $script;
     @endphp
         
         <style>
@@ -578,6 +871,24 @@
             #edit-product-name,
             #edit-product-sku,
             #edit-product-unit {
+                font-size: 18px !important;
+            }
+            
+            /* Edit Stock Modal Scrollable Fix */
+            #editStockModal .modal-body {
+                max-height: 70vh;
+                overflow-y: auto !important;
+            }
+            
+            /* View Stock Modal Scrollable Fix */
+            #viewStockModal .modal-body {
+                max-height: 70vh;
+                overflow-y: auto !important;
+            }
+            
+            #viewStockModal #view-product-name,
+            #viewStockModal #view-product-sku,
+            #viewStockModal #view-product-unit {
                 font-size: 18px !important;
             }
             

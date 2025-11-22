@@ -2,6 +2,38 @@
 
     @push('styles')
     <style>
+        /* Custom Select Dropdown Styling */
+        .form-select-custom {
+            width: 220px;
+            height: 42px;
+            padding: 12px 36px 12px 16px;
+            border: none;
+            background-color: #ffffff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1f2937;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231f2937' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        
+        .form-select-custom:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-select-custom:focus {
+            box-shadow: 0 0 0 3px rgba(236, 55, 55, 0.1);
+        }
+        
+    <style>
         @media print {
             /* Hide everything except the table */
             .sidebar,
@@ -98,7 +130,7 @@
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-check-circle-fill"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -106,11 +138,37 @@
 
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-circle-fill"></i>
+                <i class="bi bi-exclamation-triangle-fill"></i>
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+
+        <!-- Date Range and Filters -->
+        <form method="GET" action="{{ route('invoices.index') }}" id="invoiceFilterForm" class="mb-24 pb-24" style="border-bottom: 2px solid #e5e7eb;">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <!-- Date Range Filter -->
+                <x-filters.date-range 
+                    form-id="invoiceFilterForm"
+                    :date-from="request('date_from')"
+                    :date-to="request('date_to')"
+                    :auto-submit="false"
+                />
+
+                <!-- Customer Filter -->
+                <select name="customer_id" class="form-select-custom">
+                    <option value="all">All Customers</option>
+                    @foreach($customers as $customer)
+                    <option value="{{ $customer->id }}" {{ request('customer_id') == $customer->id ? 'selected' : '' }}>{{ $customer->name }}</option>
+                    @endforeach
+                </select>
+
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn text-white d-flex align-items-center justify-content-center gap-2" style="background-color: #ec3737; height: 42px; padding: 0 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    Apply Filter
+                </button>
+            </div>
+        </form>
 
         <!-- Summary Metrics -->
         <div class="row gy-4 mb-24">
@@ -121,7 +179,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #ec3737;">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-file-earmark-text"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Total Invoices</span>
                             </div>
@@ -139,7 +197,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-success-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-currency-dollar"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Total Amount</span>
                             </div>
@@ -157,7 +215,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-info-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-check-circle"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Paid</span>
                             </div>
@@ -175,7 +233,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-warning-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-hourglass-split"></i>
                                 </span>
                                 <span class="text-secondary-light text-lg fw-medium">Pending</span>
                             </div>
@@ -203,13 +261,13 @@
                     <div class="icon-field">
                         <input type="text" class="form-control form-control-sm w-auto" placeholder="Search invoices..." id="invoice-search-input" style="min-width: 250px;">
                         <span class="icon" style="color: #ec3737;">
-                            <i class="bi bi-circle-fill"></i>
+                            <i class="bi bi-search"></i>
                         </span>
                     </div>
                 </div>
                 <div class="d-flex flex-wrap align-items-center gap-3">
                     <button type="button" id="printBtn" class="btn text-white text-sm btn-sm px-20 py-11 radius-8 d-flex align-items-center gap-2 fw-semibold shadow-sm" style="background-color: #ec3737; border: none; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#d42f2f'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(236, 55, 55, 0.35)'" onmouseout="this.style.backgroundColor='#ec3737'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(236, 55, 55, 0.25)'">
-                        <i class="bi bi-circle-fill"></i>
+                        <i class="bi bi-printer"></i>
                         Print List
                     </button>
                 </div>
@@ -241,7 +299,7 @@
                                 <td>{{ \Carbon\Carbon::parse($invoice->date)->format('M d, Y') }}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
-                                        <i class="bi bi-circle-fill"></i>
+                                        <i class="bi bi-person-circle" style="font-size: 18px; color: #6b7280;"></i>
                                         <span class="fw-medium">{{ $invoice->customer->name ?? 'Walk-in Customer' }}</span>
                                     </div>
                                 </td>
@@ -281,18 +339,18 @@
                                            class="btn btn-sm px-12 py-8 text-white radius-4" 
                                            style="background-color: #ec3737;"
                                            title="View Invoice">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-eye-fill"></i>
                                         </a>
                                         <a href="{{ route('invoices.show', $invoice->id) }}" 
                                            target="_blank"
                                            class="btn btn-sm px-12 py-8 bg-info-600 text-white radius-4"
                                            title="Print Invoice">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-printer-fill"></i>
                                         </a>
                                         <a href="{{ route('invoices.download', $invoice->id) }}" 
                                            class="btn btn-sm px-12 py-8 bg-success-600 text-white radius-4"
                                            title="Download PDF">
-                                            <i class="bi bi-circle-fill"></i>
+                                            <i class="bi bi-download"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -301,8 +359,10 @@
                             <tr>
                                 <td colspan="10" class="text-center py-5">
                                     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px;">
-                                        <i class="bi bi-circle-fill"></i>
-                                        <p class="text-secondary-light mb-0">No invoices found</p>
+                                        <div class="d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: #fff5f5; border-radius: 50%; margin-bottom: 16px;">
+                                            <i class="bi bi-file-earmark-text" style="font-size: 2.5rem; color: #ec3737;"></i>
+                                        </div>
+                                        <p class="text-secondary-light fw-semibold mb-0">No invoices found</p>
                                     </div>
                                 </td>
                             </tr>
