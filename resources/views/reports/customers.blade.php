@@ -21,55 +21,23 @@
             </ul>
         </div>
 
-        <!-- Filters -->
-        <div class="card mb-24 border-0 shadow-sm">
-            <div class="card-body">
-                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                    <div class="d-flex flex-wrap align-items-center gap-2">
-                        <!-- Add Filter Dropdown -->
-                        <div class="dropdown">
-                            <button class="btn text-white radius-8 px-20 py-11 d-flex align-items-center gap-2" 
-                                    style="background-color: #ec3737;" 
-                                    onmouseover="this.style.backgroundColor='#d42f2f'" 
-                                    onmouseout="this.style.backgroundColor='#ec3737'"
-                                    type="button" 
-                                    data-bs-toggle="dropdown" 
-                                    aria-expanded="false">
-                                <i class="bi bi-circle-fill"></i>
-                                Add Filter
-                            </button>
-                            <ul class="dropdown-menu" style="min-width: 200px;">
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeModal">
-                                        <i class="bi bi-circle-fill"></i>
-                                        Date Range
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+        <!-- Filters Section -->
+        <form method="GET" action="{{ route('reports.customers') }}" id="customerReportFilterForm" class="mb-24 pb-24" style="border-bottom: 2px solid #e5e7eb;">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <!-- Date Range Filter -->
+                <x-filters.date-range 
+                    formId="customerReportFilterForm"
+                    :dateFrom="request('date_from', now()->startOfYear()->format('Y-m-d'))"
+                    :dateTo="request('date_to', now()->format('Y-m-d'))"
+                    :autoSubmit="false"
+                />
 
-                        <!-- Clear All Filters -->
-                        <a href="{{ route('reports.customers') }}" class="btn btn-outline-secondary radius-8 px-20 py-11 d-flex align-items-center gap-2">
-                            <i class="bi bi-circle-fill"></i>
-                            Clear All Filters
-                        </a>
-                    </div>
-
-                    <!-- Active Filters Display -->
-                    <div class="d-flex flex-wrap align-items-center gap-2">
-                        @if($dateFrom != \Carbon\Carbon::now()->startOfYear()->format('Y-m-d') || $dateTo != \Carbon\Carbon::now()->format('Y-m-d'))
-                            <div class="d-flex align-items-center gap-2 px-3 py-2 rounded" style="background-color: #fef2f2; border: 1px solid #fecaca;">
-                                <i class="bi bi-circle-fill"></i>
-                                <span class="text-sm" style="color: #991b1b;">{{ $dateFrom }} to {{ $dateTo }}</span>
-                                <a href="{{ route('reports.customers') }}" class="text-decoration-none" style="color: #991b1b;">
-                                    <i class="bi bi-circle-fill"></i>
-                                </a>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn text-white d-flex align-items-center justify-content-center gap-2" style="background-color: #ec3737; height: 42px; padding: 0 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    Apply Filter
+                </button>
             </div>
-        </div>
+        </form>
 
         <!-- Dashboard-style Metrics -->
         <div class="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4 mb-24">
@@ -82,7 +50,7 @@
                                 <h6 class="mb-0">{{ number_format($summary['total_customers']) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-people text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -98,7 +66,7 @@
                                 <h6 class="mb-0">{{ number_format($summary['active_customers']) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-person-check text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -114,7 +82,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($summary['total_revenue'], 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-info rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-currency-dollar text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -130,7 +98,7 @@
                                 <h6 class="mb-0">{{ number_format($summary['total_transactions']) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-receipt text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -146,7 +114,7 @@
                                 <h6 class="mb-0">{{ auth()->user()->business->currency }} {{ number_format($summary['avg_transaction_value'], 2) }}</h6>
                             </div>
                             <div class="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-calculator text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -203,32 +171,32 @@
                             type="button" 
                             data-bs-toggle="dropdown" 
                             aria-expanded="false">
-                        <i class="bi bi-circle-fill"></i>
+                        <i class="bi bi-download"></i>
                         Export
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="exportTableToExcel('customers-report-table', 'Customer_Report'); return false;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-file-earmark-excel"></i>
                                 Export to Excel
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="exportTableToPDF('Customer Report', 'customers-report-table'); return false;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-file-earmark-pdf"></i>
                                 Export to PDF
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="exportTableToCSV('customers-report-table', 'Customer_Report.csv'); return false;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-file-earmark-spreadsheet"></i>
                                 Export to CSV
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="window.print(); return false;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-printer"></i>
                                 Print
                             </a>
                         </li>
@@ -282,7 +250,7 @@
                             @empty
                             <tr>
                                 <td colspan="8" class="text-center py-24">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-inbox" style="font-size: 48px; color: #9ca3af;"></i>
                                     <p class="text-secondary-light mb-0">No customer data available for the selected period</p>
                                 </td>
                             </tr>
@@ -290,39 +258,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Date Range Filter Modal -->
-    <div class="modal fade" id="dateRangeModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="bi bi-circle-fill"></i>
-                        Filter by Date Range
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="GET" action="{{ route('reports.customers') }}">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Date From</label>
-                            <input type="date" name="date_from" class="form-control" value="{{ $dateFrom }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Date To</label>
-                            <input type="date" name="date_to" class="form-control" value="{{ $dateTo }}" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn text-white" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            Apply Filter
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

@@ -1,5 +1,40 @@
 <x-layout.master>
 
+    @push('styles')
+    <style>
+        /* Custom Select Dropdown - Match Customer Module */
+        .form-select-custom {
+            width: 220px;
+            height: 42px;
+            padding: 12px 36px 12px 16px;
+            border: none;
+            background-color: #ffffff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1f2937;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231f2937' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        
+        .form-select-custom:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-select-custom:focus {
+            box-shadow: 0 0 0 3px rgba(236, 55, 55, 0.1);
+        }
+    </style>
+    @endpush
+
     <div class="dashboard-main-body">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
             <h6 class="fw-semibold mb-0">Expense Report</h6>
@@ -21,69 +56,33 @@
             </ul>
         </div>
 
-        <!-- Filters Card -->
-        <div class="card mb-24 border-0 shadow-sm">
-            <div class="card-body p-20">
-                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                    <div class="d-flex flex-wrap align-items-center gap-3">
-                        <!-- Add Filter Dropdown -->
-                        <div class="dropdown">
-                            <button class="btn text-white d-flex align-items-center gap-2 fw-semibold radius-8 px-20 py-11 dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ec3737; border: none; box-shadow: 0 2px 4px rgba(236, 55, 55, 0.2);" onmouseover="this.style.backgroundColor='#d42f2f'; this.style.boxShadow='0 4px 8px rgba(236, 55, 55, 0.3)'" onmouseout="this.style.backgroundColor='#ec3737'; this.style.boxShadow='0 2px 4px rgba(236, 55, 55, 0.2)'">
-                                <i class="bi bi-circle-fill"></i>
-                                <span>Add Filter</span>
-                            </button>
-                            <ul class="dropdown-menu radius-8 shadow border-0 mt-2" aria-labelledby="filterDropdown" style="min-width: 220px;">
-                                <li>
-                                    <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeModal" style="transition: all 0.2s;">
-                                        <i class="bi bi-circle-fill"></i>
-                                        <span>Date Range</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#categoryFilterModal" style="transition: all 0.2s;">
-                                        <i class="bi bi-circle-fill"></i>
-                                        <span>Category</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Clear All Filters Button -->
-                        @if(request()->has('date_from') || request()->has('category_id'))
-                        <a href="{{ route('reports.expenses') }}" class="btn btn-outline-secondary d-flex align-items-center gap-2 radius-8 px-20 py-11">
-                            <i class="bi bi-circle-fill"></i>
-                            <span>Clear All Filters</span>
-                        </a>
-                        @endif
-                    </div>
+        <!-- Filters Section -->
+        <form method="GET" action="{{ route('reports.expenses') }}" id="expenseReportFilterForm" class="mb-24 pb-24" style="border-bottom: 2px solid #e5e7eb;">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+                <!-- Date Range Filter -->
+                <x-filters.date-range 
+                    formId="expenseReportFilterForm"
+                    :dateFrom="request('date_from', now()->startOfMonth()->format('Y-m-d'))"
+                    :dateTo="request('date_to', now()->format('Y-m-d'))"
+                    :autoSubmit="false"
+                />
 
-                    <!-- Active Filters Display -->
-                    @if(request()->has('date_from') || request()->has('category_id'))
-                    <div class="d-flex flex-wrap gap-2 align-items-center">
-                        <span class="text-sm text-secondary-light fw-medium">Active Filters:</span>
-                        @if(request('date_from'))
-                            <span class="badge bg-primary-100 text-primary-600 px-12 py-6 d-inline-flex align-items-center gap-2" style="padding-right: 8px !important;">
-                                <i class="bi bi-circle-fill"></i>
-                                <span>{{ \Carbon\Carbon::parse(request('date_from'))->format('M d, Y') }} - {{ \Carbon\Carbon::parse(request('date_to'))->format('M d, Y') }}</span>
-                                <a href="{{ route('reports.expenses', request()->except(['date_from', 'date_to'])) }}" class="text-primary-600 d-inline-flex align-items-center" style="text-decoration: none; margin-left: 4px;" title="Remove date filter">
-                                    <i class="bi bi-circle-fill"></i>
-                                </a>
-                            </span>
-                        @endif
-                        @if(request('category_id'))
-                            <span class="badge bg-success-100 text-success-600 px-12 py-6 d-inline-flex align-items-center gap-2" style="padding-right: 8px !important;">
-                                <i class="bi bi-circle-fill"></i>
-                                <span>{{ $categories->firstWhere('id', request('category_id'))?->name }}</span>
-                                <a href="{{ route('reports.expenses', request()->except('category_id')) }}" class="text-success-600 d-inline-flex align-items-center" style="text-decoration: none; margin-left: 4px;" title="Remove category filter">
-                                    <i class="bi bi-circle-fill"></i>
-                                </a>
-                            </span>
-                        @endif
-                    </div>
-                    @endif
-                </div>
+                <!-- Category Filter -->
+                <select name="category_id" class="form-select-custom">
+                    <option value="">All Categories</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                    @endforeach
+                </select>
+
+                <!-- Apply Filter Button -->
+                <button type="submit" class="btn text-white d-flex align-items-center justify-content-center gap-2" style="background-color: #ec3737; height: 42px; padding: 0 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
+                    Apply Filter
+                </button>
             </div>
-        </div>
+        </form>
 
         <!-- Summary Cards -->
         <div class="row gy-4 mb-24">
@@ -94,7 +93,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0" style="background-color: #ec3737;">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-wallet2"></i>
                                 </span>
                                 <div>
                                     <span class="mb-2 fw-medium text-secondary-light text-sm">Total Expenses</span>
@@ -114,7 +113,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-pink text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-list-ul"></i>
                                 </span>
                                 <div>
                                     <span class="mb-2 fw-medium text-secondary-light text-sm">Transactions</span>
@@ -134,7 +133,7 @@
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
                             <div class="d-flex align-items-center gap-2">
                                 <span class="mb-0 w-48-px h-48-px bg-yellow text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
-                                    <i class="bi bi-circle-fill"></i>
+                                    <i class="bi bi-calculator"></i>
                                 </span>
                                 <div>
                                     <span class="mb-2 fw-medium text-secondary-light text-sm">Average Expense</span>
@@ -224,32 +223,32 @@
                 <h6 class="fw-bold mb-0" style="font-size: 18px !important; color: #4b5563;">Expense Transactions</h6>
                 <div class="dropdown">
                     <button class="btn text-white d-flex align-items-center gap-2 fw-semibold radius-8 px-20 py-11 dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ec3737; border: none; box-shadow: 0 2px 4px rgba(236, 55, 55, 0.2);" onmouseover="this.style.backgroundColor='#d42f2f'; this.style.boxShadow='0 4px 8px rgba(236, 55, 55, 0.3)'" onmouseout="this.style.backgroundColor='#ec3737'; this.style.boxShadow='0 2px 4px rgba(236, 55, 55, 0.2)'">
-                        <i class="bi bi-circle-fill"></i>
+                        <i class="bi bi-download"></i>
                         <span>Export</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end radius-8 shadow border-0 mt-2" aria-labelledby="exportDropdown" style="min-width: 180px;">
                         <li>
                             <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" onclick="exportToExcel(); return false;" style="transition: all 0.2s;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-file-earmark-excel"></i>
                                 <span>Export to Excel</span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" onclick="exportToPDF(); return false;" style="transition: all 0.2s;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-file-earmark-pdf"></i>
                                 <span>Export to PDF</span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" onclick="exportToCSV(); return false;" style="transition: all 0.2s;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-file-earmark-spreadsheet"></i>
                                 <span>Export to CSV</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider my-2"></li>
                         <li>
                             <a class="dropdown-item py-10 px-16 d-flex align-items-center gap-2" href="#" onclick="printTable(); return false;" style="transition: all 0.2s;">
-                                <i class="bi bi-circle-fill"></i>
+                                <i class="bi bi-printer"></i>
                                 <span>Print</span>
                             </a>
                         </li>
@@ -301,135 +300,7 @@
         </div>
     </div>
 
-    <!-- Date Range Filter Modal -->
-    <div class="modal fade" id="dateRangeModal" tabindex="-1" aria-labelledby="dateRangeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content radius-12">
-                <div class="modal-header border-bottom py-16 px-24" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);">
-                    <h5 class="modal-title fw-bold" style="color: #ec3737;" id="dateRangeModalLabel">
-                        Filter by Date Range
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="GET" action="{{ route('reports.expenses') }}">
-                    <div class="modal-body px-24 py-20">
-                        <div class="row gy-3">
-                            <div class="col-12">
-                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Date From</label>
-                                <input type="date" name="date_from" class="form-control radius-8" value="{{ request('date_from', $dateFrom) }}" required>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">Date To</label>
-                                <input type="date" name="date_to" class="form-control radius-8" value="{{ request('date_to', $dateTo) }}" required>
-                            </div>
-                        </div>
-                        <input type="hidden" name="category_id" value="{{ request('category_id') }}">
-                    </div>
-                    <div class="modal-footer border-top px-24 py-16">
-                        <button type="button" class="btn btn-secondary-600 radius-8 px-20 py-11" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            Apply Filter
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Category Filter Modal -->
-    <div class="modal fade" id="categoryFilterModal" tabindex="-1" aria-labelledby="categoryFilterModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content radius-12">
-                <div class="modal-header border-bottom py-16 px-24" style="background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);">
-                    <h5 class="modal-title fw-bold" style="color: #ec3737;" id="categoryFilterModalLabel">
-                        Filter by Category
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="GET" action="{{ route('reports.expenses') }}">
-                    <div class="modal-body px-24 py-20">
-                        <label class="form-label fw-semibold text-primary-light text-sm mb-8">Select Category</label>
-                        <select name="category_id" class="form-select radius-8" required>
-                            <option value="">All Categories</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <input type="hidden" name="date_from" value="{{ request('date_from') }}">
-                        <input type="hidden" name="date_to" value="{{ request('date_to') }}">
-                    </div>
-                    <div class="modal-footer border-top px-24 py-16">
-                        <button type="button" class="btn btn-secondary-600 radius-8 px-20 py-11" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn text-white radius-8 px-20 py-11" style="background-color: #ec3737;" onmouseover="this.style.backgroundColor='#d42f2f'" onmouseout="this.style.backgroundColor='#ec3737'">
-                            Apply Filter
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     @push('scripts')
-    <style>
-        /* Custom dropdown styling */
-        #filterDropdown::after {
-            margin-left: 8px;
-        }
-        
-        .dropdown-menu .dropdown-item {
-            border-radius: 6px;
-            margin: 2px 8px;
-            padding: 10px 16px;
-        }
-        
-        .dropdown-menu .dropdown-item:hover {
-            background-color: #fff5f5;
-            color: #ec3737;
-            transform: translateX(4px);
-        }
-        
-        .dropdown-menu .dropdown-item:hover i {
-            transform: scale(1.1);
-        }
-        
-        .dropdown-menu {
-            padding: 8px 0;
-        }
-        
-        /* Active filter badges animation */
-        .badge {
-            animation: fadeInUp 0.3s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Filter badge close button hover effects */
-        .badge a {
-            transition: all 0.2s ease;
-            opacity: 0.7;
-        }
-        
-        .badge a:hover {
-            opacity: 1;
-            transform: scale(1.15);
-        }
-        
-        .badge:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-    </style>
     <script>
         $(document).ready(function() {
             // Initialize DataTable
